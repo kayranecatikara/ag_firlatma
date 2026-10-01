@@ -1,0 +1,30 @@
+=== 1) ATIS PENCERESI (drone & hedef 100 km/h, ayni yon) ===
+  v_cikis 37.6 m/s,  ag en acik 1.08 m @ 179 ms, drone'a gore 5.05 m
+  PENCERE: hedef 3.56 – 6.02 m arasindayken ag ACIK ulasir (genislik 2.46 m)
+
+=== 2) HAVA SURUKLEMESI AGI NE KADAR GERI CEKIYOR? ===
+     t  suruklemeli  suruklemesiz  GERI CEKME  yerde yol  hava hizi      R
+  50ms       1.80 m        1.82 m      0.03 m     3.19 m     62.7 m/s  0.44
+ 100ms       3.37 m        3.65 m      0.28 m     6.15 m     55.5 m/s  0.82
+ 150ms       4.54 m        5.47 m      0.93 m     8.71 m     47.2 m/s  1.05
+ 200ms       5.33 m        7.30 m      1.97 m    10.88 m     40.3 m/s  1.07
+ 250ms       5.83 m        9.12 m      3.29 m    12.77 m     35.8 m/s  0.95
+ 300ms       6.16 m       11.04 m      4.88 m    14.49 m     32.6 m/s  0.78
+ 400ms       6.44 m       14.68 m      8.25 m    17.55 m     28.9 m/s  0.66
+
+=== 3) HEDEFE KAPANMA HIZI (hedef 100 km/h) ===
+  drone 100 km/h (fark  +0) -> tetik penceresi 3.56 – 6.02 m (gen 2.46 m)
+  drone 110 km/h (fark +10) -> tetik penceresi 3.86 – 6.44 m (gen 2.58 m)
+  drone 120 km/h (fark +20) -> tetik penceresi 4.14 – 6.86 m (gen 2.72 m)
+  drone 130 km/h (fark +30) -> tetik penceresi 4.44 – 7.24 m (gen 2.80 m)
+
+=== 4) TETIK GECIKMESI (servo ~120 ms) ===
+  Esit hizda (takip) hedef drone'a gore hareket etmez -> gecikme mesafeyi
+  DEGISTIRMEZ. Kapanirken hedef gecikme boyunca yaklasir:
+   drone 110 km/h: 120 ms'de 0.33 m yaklasir -> tetigi bu kadar ONCE (uzakta) ver
+   drone 120 km/h: 120 ms'de 0.67 m yaklasir -> tetigi bu kadar ONCE (uzakta) ver
+   drone 130 km/h: 120 ms'de 1.00 m yaklasir -> tetigi bu kadar ONCE (uzakta) ver
+
+=== 5) GURBUZLUK (Monte Carlo, n=40) ===
+  tetik @ 4.79 m, mesafeolcer sig=0.25 m -> yakalama %85
+  tetik @ 4.79 m, mesafeolcer sig=0.10 m -> yakalama %95

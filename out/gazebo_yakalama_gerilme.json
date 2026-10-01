@@ -1,0 +1,5 @@
+{"_aciklama": "Gazebo yakalama kosulari: tepe iplik gerilmesi [N]",
+ "_eksen": "d_iplik [mm] x tetikleme mesafesi [m]",
+ "0.165": {"4.50": 15.08, "4.65": 9.92, "4.80": 8.79},
+ "0.140": {"4.50": 17.17, "4.65": 16.97, "4.80": 9.17},
+ "0.120": {"4.65": 13.10}}

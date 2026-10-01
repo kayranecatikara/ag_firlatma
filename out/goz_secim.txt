@@ -1,0 +1,12 @@
+Ag SABIT: kose-kose 2.80 m, alan 5.09 m2
+Pervane 230 mm | namlu 180 mm, 4x300 N bant
+
+   goz   iplik  dugum  kutle   kati  hazne@%20  kesilen ip  garanti  R_tepe       pencere    gen
+   90mm    122m   628  2.90g  2.96cc      13.7mm        5.1     EVET  0.986    3.57- 4.95  1.37
+  100mm    110m   509  2.66g  2.71cc      12.6mm        4.6     EVET  1.008    3.61- 5.16  1.55
+  110mm    101m   420  2.47g  2.52cc      11.6mm        4.2     EVET  1.027    3.59- 5.36  1.77
+  120mm     93m   353  2.30g  2.35cc      10.9mm        3.8     EVET  1.044    3.61- 5.55  1.94
+  140mm     81m   259  2.05g  2.09cc       9.7mm        3.3     EVET  1.075    3.59- 5.88  2.30
+
+  R_ger = 0.859 m (Talon 1718 mm) — R_tepe bunun USTUNDE olmali
+  'kesilen ip' = pervane diskini kesen iplik sayisi (~2D/goz)

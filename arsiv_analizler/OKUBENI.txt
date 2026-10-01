@@ -1,0 +1,12 @@
+GECMIS ANALIZLER (arsiv) — tasarim kararlarinin gerekcesi burada.
+Bunlar calisir durumda ama GUNCEL DEGIL: bazilari duzeltilmeden onceki
+surukleme modelini veya eski tasarimi (yay, 2 bant, R_ger=0.75) kullanir.
+Sayilari referans almayin; gerekce/yontem icin bakin.
+
+Onemli olanlar:
+  run_dse.py, run_pareto2.py   ilk tasarim uzayi taramasi (Sobol + Pareto)
+  run_mc_tam.py                yay mimarisini kurtaran MC (ROM yerine tam model)
+  run_cerceve.py               referans cercevesi / hava yolu dogrulamasi
+  run_bagil_hiz.py             bagil hiz toleransi
+  run_hizlanma.py              drone hizlanmasinin etkisi
+  run_tetik.py                 ilk tetik kuvvet hesabi (pim yuku eski)
