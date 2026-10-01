@@ -1,0 +1,31 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+
+# ---- Derleme ciktisi (kaynaktan uretiliyor: gazebo/plugin/AgFizik.cc) ----
+gazebo/plugin/build/
+
+# ---- Ham simulasyon ciktilari (buyuk, kos.sh ile yeniden uretilir) ----
+out/gazebo_*.csv
+out/gazebo_poz.txt
+out/gazebo_v5_poz.txt
+out/*.npy
+out/*.npz
+out/*.log
+
+# ---- FreeCAD ----
+*.FCStd1
+# .brep FreeCAD ara formatidir; .step zaten var ve tasinabilir
+cad/*.brep
+
+# ---- ARSIV: uretilen geometri ----
+# cad/eski_tasarimlar/ icindeki .py KAYNAK dosyalari REPO'DA KALIYOR.
+# Asagidakiler o kaynaklardan freecadcmd ile yeniden uretilebilir (24 MB).
+cad/eski_tasarimlar/**/*.step
+cad/eski_tasarimlar/**/*.brep
+cad/eski_tasarimlar/**/*.npz
+
+# ---- Isletim sistemi ----
+.DS_Store
+Thumbs.db
