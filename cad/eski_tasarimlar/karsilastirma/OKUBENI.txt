@@ -1,0 +1,1 @@
+Ara donem karsilastirma modelleri (18 derece koni + helis yiv, yay donemi). Guncel tasarim: ../../lastik_montaj_v2.py

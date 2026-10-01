@@ -1,0 +1,90 @@
+[
+ {
+  "ad": "01_namlu",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 173.8,
+  "filament_g": 170.0,
+  "x": 88.4,
+  "y": 104.0,
+  "z": 180.5,
+  "gecerli": true
+ },
+ {
+  "ad": "02_kapsul",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 28.22,
+  "filament_g": 29.4,
+  "x": 43.1,
+  "y": 43.1,
+  "z": 40.0,
+  "gecerli": true
+ },
+ {
+  "ad": "03_tetik_kapagi_sag",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 0.73,
+  "filament_g": 0.9,
+  "x": 18.0,
+  "y": 18.0,
+  "z": 3.0,
+  "gecerli": true
+ },
+ {
+  "ad": "04_tetik_kapagi_sol",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 0.73,
+  "filament_g": 0.9,
+  "x": 18.0,
+  "y": 18.0,
+  "z": 3.0,
+  "gecerli": true
+ },
+ {
+  "ad": "05_servo_makarasi",
+  "malzeme": "PETG",
+  "adet": 2,
+  "hacim_cm3": 0.52,
+  "filament_g": 1.3,
+  "x": 14.0,
+  "y": 14.0,
+  "z": 8.0,
+  "gecerli": true
+ },
+ {
+  "ad": "06_toz_kapagi",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 9.15,
+  "filament_g": 6.4,
+  "x": 49.1,
+  "y": 49.1,
+  "z": 6.0,
+  "gecerli": true
+ },
+ {
+  "ad": "07_tampon_ust",
+  "malzeme": "TPU 95A",
+  "adet": 1,
+  "hacim_cm3": 0.19,
+  "filament_g": 0.1,
+  "x": 9.2,
+  "y": 7.0,
+  "z": 3.0,
+  "gecerli": true
+ },
+ {
+  "ad": "08_tampon_alt",
+  "malzeme": "TPU 95A",
+  "adet": 1,
+  "hacim_cm3": 0.19,
+  "filament_g": 0.1,
+  "x": 9.2,
+  "y": 7.0,
+  "z": 3.0,
+  "gecerli": true
+ }
+]

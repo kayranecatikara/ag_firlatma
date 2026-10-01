@@ -1,0 +1,1 @@
+v2: 162 mm namlu, 2 bant, 1.5 m kanat varsayimi. Talon (1718 mm) icin yetersiz.

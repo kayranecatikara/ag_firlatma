@@ -1,0 +1,13 @@
+ESKI TASARIMLAR — karsilastirma amacli, IMALAT ICIN KULLANMAYIN
+================================================================
+
+kapsul_ESKI_0deg.*   : bilye yuvasi ekseni 0 derece (mevcut CAD'deki hâl).
+                       Bilyeler paralel cikar -> radyal hiz SIFIR -> AG ACILMAZ.
+namlu_agiz_ESKI.*    : duz delik, yiv yok, agiz duz.
+
+Bunlar out/cad_kapsul.png ve out/cad_namlu.png karsilastirma gorsellerinde
+"MEVCUT" olarak gosterilen referans modellerdir.
+
+Guncel (imalat) dosyalari bir ust klasorde:
+  M_namlu.step  M_kapsul.step  M_bilye.step  M_yay.step  M_pim.step
+  MONTAJ.step   (yalnizca oturma kontrolu; parcalar kaynasmis)

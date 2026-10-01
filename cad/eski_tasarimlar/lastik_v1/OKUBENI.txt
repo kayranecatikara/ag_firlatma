@@ -1,0 +1,8 @@
+LASTIK BANT v1 (arsiv) — v2 ile degistirildi (cad/lastik_montaj_v2.py).
+
+v1'in HATALARI:
+  1) Namlu icindeki durdurma omuzu (ic yaricap 18.7 mm) bilyelerin dis
+     kenarindan (~19.9 mm) kucuktu: kapsul durduktan sonra bilyeler omuza
+     CARPIYORDU. v2'de omuz yok; kapsul capraz pimin yarik sonuna carparak durur.
+  2) Namlu 260 mm (uzun). v2: 161.8 mm.
+  3) Performans rakamlari surukleme hatali modelle hesaplanmisti.

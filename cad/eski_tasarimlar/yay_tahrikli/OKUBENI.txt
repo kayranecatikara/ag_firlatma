@@ -1,0 +1,8 @@
+YAY TAHRIKLI TASARIM (arsiv) — lastik bant tahrikine gecildi.
+
+Neden birakildi: taret icinde namlu boyu kisitli. Celik baski yayinin blok
+boyu kullanilabilir uzunlugun ~%55'ini yiyor; kisa namluda kurma kuvveti
+1000 N'u asiyor ve atis penceresi 0.8-1.1 m'ye daraliyor. Ayrica yay 335 g
+(tail-sitter'in burnunda agirlik merkezi icin kotu).
+
+montaj.py bu klasorden calistirilirsa ciktilari BURAYA yazar.
