@@ -1,0 +1,2641 @@
+<?xml version="1.0" ?>
+<!-- URETILMIS DOSYA — gazebo/scripts/ag_sdf_uret.py ile uretildi, elle duzenlemeyin.
+     Cerceve: DRONE cercevesi. Drone ve hedef 100 km/h ayni yonde gittigi icin
+     ikisi de bu cercevede DURAGAN; hava 27.8 m/s karsi ruzgar olarak
+     plugin'e veriliyor.
+     dt = 34 us  (iplik periyodunun 1/15'i -> acik entegrasyon KARARLI)
+     carpisma/hedef: VAR (yakalama kosusu) -->
+<sdf version="1.9">
+  <world name="ag_atis">
+    <physics name="hizli" type="dart">
+      <max_step_size>0.000034</max_step_size>
+      <!-- 0 = sinir yok: mumkun oldugunca hizli kos -->
+      <real_time_factor>0</real_time_factor>
+    </physics>
+    <!-- Python modeli de yercekimini ucus eksenine DIK uygular -->
+    <gravity>0 0 -9.81</gravity>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system"
+            name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-contact-system"
+            name="gz::sim::systems::Contact"/>
+
+    <scene><ambient>0.85 0.85 0.85</ambient>
+      <background>0.75 0.83 0.92</background><grid>false</grid></scene>
+    <light type="directional" name="gunes">
+      <pose>0 0 10 0 0 0</pose><diffuse>0.9 0.9 0.9 1</diffuse>
+      <direction>-0.4 0.3 -0.9</direction></light>
+
+    <model name="m_dugum_0">
+      <pose>2.07824 -0.50839 1.85029 0 0 0</pose>
+      <link name="dugum_0">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>4.919371e-06</mass><inertia>
+          <ixx>2.410492e-11</ixx><iyy>2.410492e-11</iyy><izz>2.410492e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_1">
+      <pose>2.18222 -0.49825 1.92251 0 0 0</pose>
+      <link name="dugum_1">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.002209e-06</mass><inertia>
+          <ixx>3.921082e-11</ixx><iyy>3.921082e-11</iyy><izz>3.921082e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_2">
+      <pose>2.10844 -0.51770 1.97742 0 0 0</pose>
+      <link name="dugum_2">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.771648e-06</mass><inertia>
+          <ixx>4.298108e-11</ixx><iyy>4.298108e-11</iyy><izz>4.298108e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_3">
+      <pose>2.19508 -0.48038 2.03103 0 0 0</pose>
+      <link name="dugum_3">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.002209e-06</mass><inertia>
+          <ixx>3.921082e-11</ixx><iyy>3.921082e-11</iyy><izz>3.921082e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_4">
+      <pose>2.09446 -0.50043 2.10023 0 0 0</pose>
+      <link name="dugum_4">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>4.919371e-06</mass><inertia>
+          <ixx>2.410492e-11</ixx><iyy>2.410492e-11</iyy><izz>2.410492e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_5">
+      <pose>2.08785 -0.32733 1.57798 0 0 0</pose>
+      <link name="dugum_5">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>4.879748e-06</mass><inertia>
+          <ixx>2.391077e-11</ixx><iyy>2.391077e-11</iyy><izz>2.391077e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_6">
+      <pose>2.00968 -0.34691 1.61323 0 0 0</pose>
+      <link name="dugum_6">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.725290e-06</mass><inertia>
+          <ixx>3.785392e-11</ixx><iyy>3.785392e-11</iyy><izz>3.785392e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_7">
+      <pose>1.91669 -0.41516 1.77689 0 0 0</pose>
+      <link name="dugum_7">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.049795e-05</mass><inertia>
+          <ixx>5.143998e-11</ixx><iyy>5.143998e-11</iyy><izz>5.143998e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_8">
+      <pose>2.00701 -0.43054 1.85043 0 0 0</pose>
+      <link name="dugum_8">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_9">
+      <pose>1.92782 -0.43416 1.95522 0 0 0</pose>
+      <link name="dugum_9">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_10">
+      <pose>2.01796 -0.42364 2.10733 0 0 0</pose>
+      <link name="dugum_10">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_11">
+      <pose>1.93183 -0.41274 2.17730 0 0 0</pose>
+      <link name="dugum_11">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.049795e-05</mass><inertia>
+          <ixx>5.143998e-11</ixx><iyy>5.143998e-11</iyy><izz>5.143998e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_12">
+      <pose>2.00249 -0.32902 2.34484 0 0 0</pose>
+      <link name="dugum_12">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.725290e-06</mass><inertia>
+          <ixx>3.785392e-11</ixx><iyy>3.785392e-11</iyy><izz>3.785392e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_13">
+      <pose>2.08045 -0.33330 2.37194 0 0 0</pose>
+      <link name="dugum_13">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>4.879748e-06</mass><inertia>
+          <ixx>2.391077e-11</ixx><iyy>2.391077e-11</iyy><izz>2.391077e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_14">
+      <pose>2.44107 -0.30879 1.45677 0 0 0</pose>
+      <link name="dugum_14">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.409160e-06</mass><inertia>
+          <ixx>2.650489e-11</ixx><iyy>2.650489e-11</iyy><izz>2.650489e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_15">
+      <pose>2.24808 -0.29375 1.51035 0 0 0</pose>
+      <link name="dugum_15">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.020561e-05</mass><inertia>
+          <ixx>5.000751e-11</ixx><iyy>5.000751e-11</iyy><izz>5.000751e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_16">
+      <pose>2.05681 -0.30775 1.56945 0 0 0</pose>
+      <link name="dugum_16">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_17">
+      <pose>1.87055 -0.32643 1.64126 0 0 0</pose>
+      <link name="dugum_17">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_18">
+      <pose>1.81143 -0.39660 1.81908 0 0 0</pose>
+      <link name="dugum_18">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_19">
+      <pose>1.77271 -0.30779 1.96399 0 0 0</pose>
+      <link name="dugum_19">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_20">
+      <pose>1.82475 -0.37882 2.14012 0 0 0</pose>
+      <link name="dugum_20">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_21">
+      <pose>1.87316 -0.30075 2.31805 0 0 0</pose>
+      <link name="dugum_21">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_22">
+      <pose>2.05261 -0.26855 2.40193 0 0 0</pose>
+      <link name="dugum_22">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_23">
+      <pose>2.24631 -0.27674 2.45403 0 0 0</pose>
+      <link name="dugum_23">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.020561e-05</mass><inertia>
+          <ixx>5.000751e-11</ixx><iyy>5.000751e-11</iyy><izz>5.000751e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_24">
+      <pose>2.44316 -0.29020 2.49257 0 0 0</pose>
+      <link name="dugum_24">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.409160e-06</mass><inertia>
+          <ixx>2.650489e-11</ixx><iyy>2.650489e-11</iyy><izz>2.650489e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_25">
+      <pose>2.25984 -0.24424 1.48412 0 0 0</pose>
+      <link name="dugum_25">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.489365e-06</mass><inertia>
+          <ixx>3.669789e-11</ixx><iyy>3.669789e-11</iyy><izz>3.669789e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_26">
+      <pose>2.06789 -0.24392 1.50272 0 0 0</pose>
+      <link name="dugum_26">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.143772e-05</mass><inertia>
+          <ixx>5.604481e-11</ixx><iyy>5.604481e-11</iyy><izz>5.604481e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_27">
+      <pose>1.87593 -0.23375 1.55831 0 0 0</pose>
+      <link name="dugum_27">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_28">
+      <pose>1.68377 -0.26546 1.60331 0 0 0</pose>
+      <link name="dugum_28">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_29">
+      <pose>1.64601 -0.28496 1.79820 0 0 0</pose>
+      <link name="dugum_29">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_30">
+      <pose>1.57624 -0.34595 1.96631 0 0 0</pose>
+      <link name="dugum_30">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_31">
+      <pose>1.64587 -0.28745 2.13969 0 0 0</pose>
+      <link name="dugum_31">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_32">
+      <pose>1.67749 -0.25859 2.32663 0 0 0</pose>
+      <link name="dugum_32">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_33">
+      <pose>1.85796 -0.22462 2.39765 0 0 0</pose>
+      <link name="dugum_33">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_34">
+      <pose>2.05449 -0.22244 2.43535 0 0 0</pose>
+      <link name="dugum_34">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.139144e-05</mass><inertia>
+          <ixx>5.581805e-11</ixx><iyy>5.581805e-11</iyy><izz>5.581805e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_35">
+      <pose>2.24969 -0.24140 2.47282 0 0 0</pose>
+      <link name="dugum_35">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.376919e-06</mass><inertia>
+          <ixx>3.614690e-11</ixx><iyy>3.614690e-11</iyy><izz>3.614690e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_36">
+      <pose>2.08453 -0.14818 1.49093 0 0 0</pose>
+      <link name="dugum_36">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.560548e-06</mass><inertia>
+          <ixx>3.704669e-11</ixx><iyy>3.704669e-11</iyy><izz>3.704669e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_37">
+      <pose>1.88864 -0.15981 1.53014 0 0 0</pose>
+      <link name="dugum_37">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_38">
+      <pose>1.69716 -0.14873 1.52902 0 0 0</pose>
+      <link name="dugum_38">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_39">
+      <pose>1.51452 -0.15936 1.61002 0 0 0</pose>
+      <link name="dugum_39">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_40">
+      <pose>1.46747 -0.19374 1.80005 0 0 0</pose>
+      <link name="dugum_40">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_41">
+      <pose>1.46540 -0.17936 1.97362 0 0 0</pose>
+      <link name="dugum_41">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_42">
+      <pose>1.46529 -0.20070 2.15091 0 0 0</pose>
+      <link name="dugum_42">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_43">
+      <pose>1.49405 -0.17920 2.33899 0 0 0</pose>
+      <link name="dugum_43">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_44">
+      <pose>1.67493 -0.14491 2.41063 0 0 0</pose>
+      <link name="dugum_44">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_45">
+      <pose>1.87207 -0.15785 2.42030 0 0 0</pose>
+      <link name="dugum_45">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_46">
+      <pose>2.06932 -0.15573 2.45450 0 0 0</pose>
+      <link name="dugum_46">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.344173e-06</mass><inertia>
+          <ixx>3.598645e-11</ixx><iyy>3.598645e-11</iyy><izz>3.598645e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_47">
+      <pose>1.95619 0.00535 1.48817 0 0 0</pose>
+      <link name="dugum_47">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.641740e-06</mass><inertia>
+          <ixx>3.744453e-11</ixx><iyy>3.744453e-11</iyy><izz>3.744453e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_48">
+      <pose>1.77177 -0.00110 1.56509 0 0 0</pose>
+      <link name="dugum_48">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_49">
+      <pose>1.57246 -0.00031 1.54698 0 0 0</pose>
+      <link name="dugum_49">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_50">
+      <pose>1.43837 0.00083 1.69544 0 0 0</pose>
+      <link name="dugum_50">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_51">
+      <pose>1.41754 -0.00063 1.77967 0 0 0</pose>
+      <link name="dugum_51">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_52">
+      <pose>1.37975 0.00177 1.96987 0 0 0</pose>
+      <link name="dugum_52">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_53">
+      <pose>1.44390 -0.00147 2.14480 0 0 0</pose>
+      <link name="dugum_53">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_54">
+      <pose>1.44037 0.00354 2.27738 0 0 0</pose>
+      <link name="dugum_54">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_55">
+      <pose>1.54800 0.00260 2.43967 0 0 0</pose>
+      <link name="dugum_55">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_56">
+      <pose>1.74655 -0.00211 2.41440 0 0 0</pose>
+      <link name="dugum_56">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_57">
+      <pose>1.94205 -0.00109 2.45774 0 0 0</pose>
+      <link name="dugum_57">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.333070e-06</mass><inertia>
+          <ixx>3.593204e-11</ixx><iyy>3.593204e-11</iyy><izz>3.593204e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_58">
+      <pose>2.08453 0.15792 1.50494 0 0 0</pose>
+      <link name="dugum_58">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.560548e-06</mass><inertia>
+          <ixx>3.704669e-11</ixx><iyy>3.704669e-11</iyy><izz>3.704669e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_59">
+      <pose>1.88563 0.15768 1.52120 0 0 0</pose>
+      <link name="dugum_59">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_60">
+      <pose>1.68952 0.15429 1.53869 0 0 0</pose>
+      <link name="dugum_60">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_61">
+      <pose>1.50409 0.16070 1.61325 0 0 0</pose>
+      <link name="dugum_61">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_62">
+      <pose>1.46741 0.19186 1.80543 0 0 0</pose>
+      <link name="dugum_62">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_63">
+      <pose>1.48477 0.16687 1.95039 0 0 0</pose>
+      <link name="dugum_63">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_64">
+      <pose>1.46894 0.19741 2.14604 0 0 0</pose>
+      <link name="dugum_64">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_65">
+      <pose>1.49713 0.18694 2.33389 0 0 0</pose>
+      <link name="dugum_65">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_66">
+      <pose>1.67623 0.15148 2.41588 0 0 0</pose>
+      <link name="dugum_66">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_67">
+      <pose>1.87608 0.15025 2.42043 0 0 0</pose>
+      <link name="dugum_67">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_68">
+      <pose>2.07275 0.15074 2.45765 0 0 0</pose>
+      <link name="dugum_68">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.344173e-06</mass><inertia>
+          <ixx>3.598645e-11</ixx><iyy>3.598645e-11</iyy><izz>3.598645e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_69">
+      <pose>2.25659 0.25035 1.48004 0 0 0</pose>
+      <link name="dugum_69">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.489365e-06</mass><inertia>
+          <ixx>3.669789e-11</ixx><iyy>3.669789e-11</iyy><izz>3.669789e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_70">
+      <pose>2.06661 0.24336 1.51522 0 0 0</pose>
+      <link name="dugum_70">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.143772e-05</mass><inertia>
+          <ixx>5.604481e-11</ixx><iyy>5.604481e-11</iyy><izz>5.604481e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_71">
+      <pose>1.87122 0.23546 1.55819 0 0 0</pose>
+      <link name="dugum_71">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_72">
+      <pose>1.67759 0.25995 1.60279 0 0 0</pose>
+      <link name="dugum_72">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_73">
+      <pose>1.64498 0.28513 1.79861 0 0 0</pose>
+      <link name="dugum_73">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_74">
+      <pose>1.56061 0.33303 1.96822 0 0 0</pose>
+      <link name="dugum_74">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_75">
+      <pose>1.64684 0.28970 2.14084 0 0 0</pose>
+      <link name="dugum_75">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_76">
+      <pose>1.68110 0.26398 2.32368 0 0 0</pose>
+      <link name="dugum_76">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_77">
+      <pose>1.86038 0.22714 2.39443 0 0 0</pose>
+      <link name="dugum_77">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_78">
+      <pose>2.05415 0.23250 2.43872 0 0 0</pose>
+      <link name="dugum_78">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.139144e-05</mass><inertia>
+          <ixx>5.581805e-11</ixx><iyy>5.581805e-11</iyy><izz>5.581805e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_79">
+      <pose>2.25031 0.24192 2.47695 0 0 0</pose>
+      <link name="dugum_79">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.376919e-06</mass><inertia>
+          <ixx>3.614690e-11</ixx><iyy>3.614690e-11</iyy><izz>3.614690e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_80">
+      <pose>2.44245 0.30476 1.46427 0 0 0</pose>
+      <link name="dugum_80">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.409160e-06</mass><inertia>
+          <ixx>2.650489e-11</ixx><iyy>2.650489e-11</iyy><izz>2.650489e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_81">
+      <pose>2.24775 0.29210 1.51170 0 0 0</pose>
+      <link name="dugum_81">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.020561e-05</mass><inertia>
+          <ixx>5.000751e-11</ixx><iyy>5.000751e-11</iyy><izz>5.000751e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_82">
+      <pose>2.05316 0.31334 1.55589 0 0 0</pose>
+      <link name="dugum_82">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_83">
+      <pose>1.86754 0.31589 1.63170 0 0 0</pose>
+      <link name="dugum_83">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_84">
+      <pose>1.81719 0.38766 1.81158 0 0 0</pose>
+      <link name="dugum_84">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_85">
+      <pose>1.75928 0.32175 1.98792 0 0 0</pose>
+      <link name="dugum_85">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_86">
+      <pose>1.82006 0.39075 2.13617 0 0 0</pose>
+      <link name="dugum_86">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_87">
+      <pose>1.87570 0.30748 2.30937 0 0 0</pose>
+      <link name="dugum_87">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_88">
+      <pose>2.05487 0.27510 2.39282 0 0 0</pose>
+      <link name="dugum_88">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_89">
+      <pose>2.24680 0.28207 2.45102 0 0 0</pose>
+      <link name="dugum_89">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.020561e-05</mass><inertia>
+          <ixx>5.000751e-11</ixx><iyy>5.000751e-11</iyy><izz>5.000751e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_90">
+      <pose>2.44359 0.29444 2.48874 0 0 0</pose>
+      <link name="dugum_90">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.409160e-06</mass><inertia>
+          <ixx>2.650489e-11</ixx><iyy>2.650489e-11</iyy><izz>2.650489e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_91">
+      <pose>2.08357 0.32429 1.57905 0 0 0</pose>
+      <link name="dugum_91">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>4.879748e-06</mass><inertia>
+          <ixx>2.391077e-11</ixx><iyy>2.391077e-11</iyy><izz>2.391077e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_92">
+      <pose>2.01052 0.35081 1.61612 0 0 0</pose>
+      <link name="dugum_92">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.725290e-06</mass><inertia>
+          <ixx>3.785392e-11</ixx><iyy>3.785392e-11</iyy><izz>3.785392e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_93">
+      <pose>1.91482 0.42645 1.77486 0 0 0</pose>
+      <link name="dugum_93">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.049795e-05</mass><inertia>
+          <ixx>5.143998e-11</ixx><iyy>5.143998e-11</iyy><izz>5.143998e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_94">
+      <pose>2.01155 0.43080 1.83950 0 0 0</pose>
+      <link name="dugum_94">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_95">
+      <pose>1.92662 0.43113 1.99530 0 0 0</pose>
+      <link name="dugum_95">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_96">
+      <pose>2.01487 0.42501 2.10186 0 0 0</pose>
+      <link name="dugum_96">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.082377e-06</mass><inertia>
+          <ixx>3.960365e-11</ixx><iyy>3.960365e-11</iyy><izz>3.960365e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_97">
+      <pose>1.92637 0.40729 2.17651 0 0 0</pose>
+      <link name="dugum_97">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.049795e-05</mass><inertia>
+          <ixx>5.143998e-11</ixx><iyy>5.143998e-11</iyy><izz>5.143998e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_98">
+      <pose>2.00477 0.33000 2.34372 0 0 0</pose>
+      <link name="dugum_98">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>7.725290e-06</mass><inertia>
+          <ixx>3.785392e-11</ixx><iyy>3.785392e-11</iyy><izz>3.785392e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_99">
+      <pose>2.07850 0.33280 2.38578 0 0 0</pose>
+      <link name="dugum_99">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>4.879748e-06</mass><inertia>
+          <ixx>2.391077e-11</ixx><iyy>2.391077e-11</iyy><izz>2.391077e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_100">
+      <pose>2.08869 0.50320 1.83810 0 0 0</pose>
+      <link name="dugum_100">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>4.919371e-06</mass><inertia>
+          <ixx>2.410492e-11</ixx><iyy>2.410492e-11</iyy><izz>2.410492e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_101">
+      <pose>2.19194 0.47942 1.91410 0 0 0</pose>
+      <link name="dugum_101">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.002209e-06</mass><inertia>
+          <ixx>3.921082e-11</ixx><iyy>3.921082e-11</iyy><izz>3.921082e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_102">
+      <pose>2.10033 0.52486 1.96200 0 0 0</pose>
+      <link name="dugum_102">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.771648e-06</mass><inertia>
+          <ixx>4.298108e-11</ixx><iyy>4.298108e-11</iyy><izz>4.298108e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_103">
+      <pose>2.19120 0.48903 2.03032 0 0 0</pose>
+      <link name="dugum_103">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.002209e-06</mass><inertia>
+          <ixx>3.921082e-11</ixx><iyy>3.921082e-11</iyy><izz>3.921082e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_104">
+      <pose>2.08183 0.50618 2.09795 0 0 0</pose>
+      <link name="dugum_104">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>4.919371e-06</mass><inertia>
+          <ixx>2.410492e-11</ixx><iyy>2.410492e-11</iyy><izz>2.410492e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_105">
+      <pose>2.57194 0.62176 1.96918 0 0 0</pose>
+      <link name="dugum_105">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.216250e-02</mass><inertia>
+          <ixx>1.961690e-07</ixx><iyy>1.961690e-07</iyy><izz>1.961690e-07</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <material><ambient>0.25 0.25 0.22 1</ambient><diffuse>0.25 0.25 0.22 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_106">
+      <pose>2.36121 0.57595 2.00418 0 0 0</pose>
+      <link name="dugum_106">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>9.028246e-06</mass><inertia>
+          <ixx>4.423840e-11</ixx><iyy>4.423840e-11</iyy><izz>4.423840e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_107">
+      <pose>2.16000 0.53809 2.07677 0 0 0</pose>
+      <link name="dugum_107">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.256137e-06</mass><inertia>
+          <ixx>2.575507e-11</ixx><iyy>2.575507e-11</iyy><izz>2.575507e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_108">
+      <pose>2.06252 0.41362 2.22523 0 0 0</pose>
+      <link name="dugum_108">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.793532e-06</mass><inertia>
+          <ixx>3.328831e-11</ixx><iyy>3.328831e-11</iyy><izz>3.328831e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_109">
+      <pose>2.15919 0.33209 2.40144 0 0 0</pose>
+      <link name="dugum_109">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.880022e-06</mass><inertia>
+          <ixx>3.371211e-11</ixx><iyy>3.371211e-11</iyy><izz>3.371211e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_110">
+      <pose>2.36242 0.31891 2.47698 0 0 0</pose>
+      <link name="dugum_110">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.501191e-06</mass><inertia>
+          <ixx>3.185584e-11</ixx><iyy>3.185584e-11</iyy><izz>3.185584e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_111">
+      <pose>2.57702 0.31269 2.51011 0 0 0</pose>
+      <link name="dugum_111">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.216250e-02</mass><inertia>
+          <ixx>1.961690e-07</ixx><iyy>1.961690e-07</iyy><izz>1.961690e-07</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <material><ambient>0.25 0.25 0.22 1</ambient><diffuse>0.25 0.25 0.22 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_112">
+      <pose>2.36444 0.27183 2.49695 0 0 0</pose>
+      <link name="dugum_112">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>9.002153e-06</mass><inertia>
+          <ixx>4.411055e-11</ixx><iyy>4.411055e-11</iyy><izz>4.411055e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_113">
+      <pose>2.16661 0.18306 2.49947 0 0 0</pose>
+      <link name="dugum_113">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.660344e-06</mass><inertia>
+          <ixx>2.773569e-11</ixx><iyy>2.773569e-11</iyy><izz>2.773569e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_114">
+      <pose>2.06060 0.00424 2.43783 0 0 0</pose>
+      <link name="dugum_114">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.649242e-06</mass><inertia>
+          <ixx>2.768128e-11</ixx><iyy>2.768128e-11</iyy><izz>2.768128e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_115">
+      <pose>2.16749 -0.17565 2.49462 0 0 0</pose>
+      <link name="dugum_115">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.660344e-06</mass><inertia>
+          <ixx>2.773569e-11</ixx><iyy>2.773569e-11</iyy><izz>2.773569e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_116">
+      <pose>2.36568 -0.26360 2.49798 0 0 0</pose>
+      <link name="dugum_116">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>9.002153e-06</mass><inertia>
+          <ixx>4.411055e-11</ixx><iyy>4.411055e-11</iyy><izz>4.411055e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_117">
+      <pose>2.57659 -0.31262 2.51002 0 0 0</pose>
+      <link name="dugum_117">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.216250e-02</mass><inertia>
+          <ixx>1.961690e-07</ixx><iyy>1.961690e-07</iyy><izz>1.961690e-07</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <material><ambient>0.25 0.25 0.22 1</ambient><diffuse>0.25 0.25 0.22 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_118">
+      <pose>2.36416 -0.31987 2.46552 0 0 0</pose>
+      <link name="dugum_118">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.501191e-06</mass><inertia>
+          <ixx>3.185584e-11</ixx><iyy>3.185584e-11</iyy><izz>3.185584e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_119">
+      <pose>2.15501 -0.32417 2.40724 0 0 0</pose>
+      <link name="dugum_119">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.880022e-06</mass><inertia>
+          <ixx>3.371211e-11</ixx><iyy>3.371211e-11</iyy><izz>3.371211e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_120">
+      <pose>2.06406 -0.40409 2.22736 0 0 0</pose>
+      <link name="dugum_120">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.793532e-06</mass><inertia>
+          <ixx>3.328831e-11</ixx><iyy>3.328831e-11</iyy><izz>3.328831e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_121">
+      <pose>2.17312 -0.53729 2.09549 0 0 0</pose>
+      <link name="dugum_121">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.256137e-06</mass><inertia>
+          <ixx>2.575507e-11</ixx><iyy>2.575507e-11</iyy><izz>2.575507e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_122">
+      <pose>2.36167 -0.57023 1.99315 0 0 0</pose>
+      <link name="dugum_122">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.318380e-06</mass><inertia>
+          <ixx>3.096006e-11</ixx><iyy>3.096006e-11</iyy><izz>3.096006e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_123">
+      <pose>2.57222 -0.62186 1.96944 0 0 0</pose>
+      <link name="dugum_123">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.216250e-02</mass><inertia>
+          <ixx>1.961690e-07</ixx><iyy>1.961690e-07</iyy><izz>1.961690e-07</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <material><ambient>0.25 0.25 0.22 1</ambient><diffuse>0.25 0.25 0.22 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_124">
+      <pose>2.36247 -0.56684 1.93693 0 0 0</pose>
+      <link name="dugum_124">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>9.028246e-06</mass><inertia>
+          <ixx>4.423840e-11</ixx><iyy>4.423840e-11</iyy><izz>4.423840e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_125">
+      <pose>2.15564 -0.54019 1.87474 0 0 0</pose>
+      <link name="dugum_125">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.256137e-06</mass><inertia>
+          <ixx>2.575507e-11</ixx><iyy>2.575507e-11</iyy><izz>2.575507e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_126">
+      <pose>2.07377 -0.40617 1.72521 0 0 0</pose>
+      <link name="dugum_126">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.793532e-06</mass><inertia>
+          <ixx>3.328831e-11</ixx><iyy>3.328831e-11</iyy><izz>3.328831e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_127">
+      <pose>2.15439 -0.34209 1.53438 0 0 0</pose>
+      <link name="dugum_127">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.880022e-06</mass><inertia>
+          <ixx>3.371211e-11</ixx><iyy>3.371211e-11</iyy><izz>3.371211e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_128">
+      <pose>2.36189 -0.32051 1.47399 0 0 0</pose>
+      <link name="dugum_128">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.501191e-06</mass><inertia>
+          <ixx>3.185584e-11</ixx><iyy>3.185584e-11</iyy><izz>3.185584e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_129">
+      <pose>2.57423 -0.31168 1.42912 0 0 0</pose>
+      <link name="dugum_129">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.216250e-02</mass><inertia>
+          <ixx>1.961690e-07</ixx><iyy>1.961690e-07</iyy><izz>1.961690e-07</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <material><ambient>0.25 0.25 0.22 1</ambient><diffuse>0.25 0.25 0.22 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_130">
+      <pose>2.39499 -0.26546 1.44877 0 0 0</pose>
+      <link name="dugum_130">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.535454e-06</mass><inertia>
+          <ixx>4.182373e-11</ixx><iyy>4.182373e-11</iyy><izz>4.182373e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_131">
+      <pose>2.22186 -0.20235 1.47473 0 0 0</pose>
+      <link name="dugum_131">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.251298e-06</mass><inertia>
+          <ixx>2.573136e-11</ixx><iyy>2.573136e-11</iyy><izz>2.573136e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_132">
+      <pose>2.07710 -0.08653 1.48843 0 0 0</pose>
+      <link name="dugum_132">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>3.752532e-06</mass><inertia>
+          <ixx>1.838741e-11</ixx><iyy>1.838741e-11</iyy><izz>1.838741e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_133">
+      <pose>2.07268 0.09862 1.50417 0 0 0</pose>
+      <link name="dugum_133">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.332490e-06</mass><inertia>
+          <ixx>2.612920e-11</ixx><iyy>2.612920e-11</iyy><izz>2.612920e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_134">
+      <pose>2.22360 0.20524 1.48382 0 0 0</pose>
+      <link name="dugum_134">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.251298e-06</mass><inertia>
+          <ixx>2.573136e-11</ixx><iyy>2.573136e-11</iyy><izz>2.573136e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_135">
+      <pose>2.39141 0.27804 1.45016 0 0 0</pose>
+      <link name="dugum_135">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>8.535454e-06</mass><inertia>
+          <ixx>4.182373e-11</ixx><iyy>4.182373e-11</iyy><izz>4.182373e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_136">
+      <pose>2.57371 0.31163 1.42939 0 0 0</pose>
+      <link name="dugum_136">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>1.216250e-02</mass><inertia>
+          <ixx>1.961690e-07</ixx><iyy>1.961690e-07</iyy><izz>1.961690e-07</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <material><ambient>0.25 0.25 0.22 1</ambient><diffuse>0.25 0.25 0.22 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00635</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_137">
+      <pose>2.36288 0.32257 1.48019 0 0 0</pose>
+      <link name="dugum_137">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.501191e-06</mass><inertia>
+          <ixx>3.185584e-11</ixx><iyy>3.185584e-11</iyy><izz>3.185584e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_138">
+      <pose>2.15313 0.33384 1.53518 0 0 0</pose>
+      <link name="dugum_138">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.880022e-06</mass><inertia>
+          <ixx>3.371211e-11</ixx><iyy>3.371211e-11</iyy><izz>3.371211e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_139">
+      <pose>2.07237 0.39645 1.72641 0 0 0</pose>
+      <link name="dugum_139">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.793532e-06</mass><inertia>
+          <ixx>3.328831e-11</ixx><iyy>3.328831e-11</iyy><izz>3.328831e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_140">
+      <pose>2.16399 0.54165 1.85891 0 0 0</pose>
+      <link name="dugum_140">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>5.256137e-06</mass><inertia>
+          <ixx>2.575507e-11</ixx><iyy>2.575507e-11</iyy><izz>2.575507e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+    <model name="m_dugum_141">
+      <pose>2.36122 0.56692 1.94677 0 0 0</pose>
+      <link name="dugum_141">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial><mass>6.318380e-06</mass><inertia>
+          <ixx>3.096006e-11</ixx><iyy>3.096006e-11</iyy><izz>3.096006e-11</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <material><ambient>0.16 0.47 0.84 1</ambient><diffuse>0.16 0.47 0.84 1</diffuse></material></visual>
+        <collision name="c"><geometry><sphere><radius>0.00350</radius></sphere></geometry>
+          <surface><friction><ode><mu>1.2</mu><mu2>1.2</mu2></ode></friction>
+            <contact><collide_bitmask>0x02</collide_bitmask>
+              <ode><kp>1e5</kp><kd>10</kd></ode></contact></surface></collision>
+      </link>
+    </model>
+
+    <plugin filename="AgFizik" name="ag::AgFizik">
+        <dugum_on_ek>dugum_</dugum_on_ek>
+        <bilye_on_ek>__yok__</bilye_on_ek>
+        <bilye_indis>105 111 117 123 129 136</bilye_indis>
+        <log_dosya>/home/kayra/Masaüstü/ag_firlatma/out/gazebo_ag.csv</log_dosya>
+        <log_dt>0.004</log_dt>
+        <poz_dosya>/home/kayra/Masaüstü/ag_firlatma/out/gazebo_poz.txt</poz_dosya>
+        <poz_dt>0.010</poz_dt>
+        <EA>96.2211</EA>
+        <zeta>0.30</zeta>
+        <!-- sonumleme olcegi: Python c = zeta*2*sqrt(k*m_ag/nN) ile AYNI -->
+        <m_dugum>7.552567e-06</m_dugum>
+        <d_iplik>1.650000e-04</d_iplik>
+        <Cdn>1.10</Cdn><Cdt>0.03</Cdt>
+        <aero_olcek>0.9742</aero_olcek>
+        <rho>1.225</rho>
+        <ruzgar>-27.7778 0 0</ruzgar>
+        <bilye_Cd>0.47</bilye_Cd><bilye_D>0.0127</bilye_D>
+        <firlatma_t>0.02</firlatma_t>
+        <devir_t>0.08</devir_t>
+        <v_eksenel>33.6197</v_eksenel>
+        <!-- radyal hiz YALNIZCA bilyelere verilir (Python modeliyle ayni) -->
+        <v_radyal>7.9660</v_radyal>
+        <!-- sadece sayisal guvenlik: fiziksel yuklerin cok uzerinde -->
+        <F_sinir>200.0</F_sinir>
+        <T_kopma>64.15</T_kopma>
+        <!-- elle dugumlenmis Dyneema agin GERCEK kopma yuku (~%55) -->
+        <T_dugum>35.28</T_dugum>
+        <hedef_ad>govde</hedef_ad>
+        <perv_x>-0.47</perv_x><perv_r>0.115</perv_r>
+        <hiz>0 35.2187 -2.0885 -5.3555</hiz>
+        <hiz>1 33.0915 0.5070 1.2080</hiz>
+        <hiz>2 22.5886 -0.0738 -7.7179</hiz>
+        <hiz>3 38.5436 -3.5022 6.5900</hiz>
+        <hiz>4 30.2545 -11.0731 -1.9956</hiz>
+        <hiz>5 31.5546 1.0351 -2.6184</hiz>
+        <hiz>6 26.9068 -5.2361 -7.2538</hiz>
+        <hiz>7 32.7557 -5.1983 -3.8202</hiz>
+        <hiz>8 38.6009 -14.3207 -22.9501</hiz>
+        <hiz>9 13.9401 -14.8504 8.1986</hiz>
+        <hiz>10 37.8228 -16.3353 11.5717</hiz>
+        <hiz>11 34.4526 -6.3962 0.7799</hiz>
+        <hiz>12 28.9066 -8.6980 4.2677</hiz>
+        <hiz>13 28.9046 -3.2307 3.7975</hiz>
+        <hiz>14 27.7549 -6.3018 -13.8711</hiz>
+        <hiz>15 29.1648 -3.2809 -9.0346</hiz>
+        <hiz>16 31.8964 -3.8362 -1.8429</hiz>
+        <hiz>17 33.6167 -6.7803 -0.0017</hiz>
+        <hiz>18 36.7542 -5.6065 1.1097</hiz>
+        <hiz>19 24.2663 -2.5179 7.6052</hiz>
+        <hiz>20 39.0416 -4.0623 -2.3035</hiz>
+        <hiz>21 33.0551 -3.7034 -1.1628</hiz>
+        <hiz>22 34.0286 -7.8273 -3.0387</hiz>
+        <hiz>23 30.1338 -8.7335 8.5600</hiz>
+        <hiz>24 30.8320 -5.5192 0.3190</hiz>
+        <hiz>25 30.6047 -1.0849 -5.0884</hiz>
+        <hiz>26 30.0902 -4.3109 -6.0224</hiz>
+        <hiz>27 30.6033 -4.2821 -4.9250</hiz>
+        <hiz>28 33.5217 -3.3673 7.5578</hiz>
+        <hiz>29 29.3726 -14.9659 5.5742</hiz>
+        <hiz>30 24.6878 -4.6234 -1.1412</hiz>
+        <hiz>31 30.4651 -21.4109 1.4481</hiz>
+        <hiz>32 35.2907 6.2285 -6.3572</hiz>
+        <hiz>33 32.0383 2.1757 6.1260</hiz>
+        <hiz>34 31.8867 -3.4579 7.9175</hiz>
+        <hiz>35 32.2867 -1.9531 -1.6074</hiz>
+        <hiz>36 29.5038 -3.0652 -11.7395</hiz>
+        <hiz>37 29.5466 -2.1389 -11.3658</hiz>
+        <hiz>38 28.5637 -9.9535 -6.5091</hiz>
+        <hiz>39 27.8626 -12.1555 -8.9852</hiz>
+        <hiz>40 38.1977 5.0504 -8.2867</hiz>
+        <hiz>41 0.1554 -19.8499 -0.4726</hiz>
+        <hiz>42 43.7683 5.9749 5.5660</hiz>
+        <hiz>43 29.9357 -8.3391 3.7209</hiz>
+        <hiz>44 28.7180 -3.8366 -1.6774</hiz>
+        <hiz>45 34.1538 0.5727 4.5195</hiz>
+        <hiz>46 31.6699 -0.7774 14.5351</hiz>
+        <hiz>47 33.0042 -0.2018 -3.6492</hiz>
+        <hiz>48 35.8563 -0.0926 0.9566</hiz>
+        <hiz>49 37.2052 -1.3740 -15.1152</hiz>
+        <hiz>50 26.8164 -0.0445 -24.4915</hiz>
+        <hiz>51 9.6275 -1.0169 -9.9354</hiz>
+        <hiz>52 31.0791 -5.7102 -13.8645</hiz>
+        <hiz>53 5.4823 2.5478 12.7387</hiz>
+        <hiz>54 26.2106 -1.6235 27.4960</hiz>
+        <hiz>55 38.0433 -0.5954 16.9832</hiz>
+        <hiz>56 34.8514 -0.3382 -3.7388</hiz>
+        <hiz>57 33.0672 0.8887 5.8145</hiz>
+        <hiz>58 30.1075 2.6367 -7.8667</hiz>
+        <hiz>59 31.2082 0.4858 -10.8062</hiz>
+        <hiz>60 28.1212 8.8197 -2.3339</hiz>
+        <hiz>61 25.6295 9.1684 -9.2241</hiz>
+        <hiz>62 46.4885 -9.3903 -7.1222</hiz>
+        <hiz>63 2.8579 17.5206 -2.2181</hiz>
+        <hiz>64 39.7631 -1.2695 3.6371</hiz>
+        <hiz>65 29.0299 5.5276 1.0258</hiz>
+        <hiz>66 29.6191 5.7414 -0.8304</hiz>
+        <hiz>67 34.9978 -1.7033 5.4734</hiz>
+        <hiz>68 33.8629 0.2608 6.0648</hiz>
+        <hiz>69 29.3650 2.3533 -9.9468</hiz>
+        <hiz>70 29.4559 5.9373 -4.0031</hiz>
+        <hiz>71 29.0699 5.5300 -6.7452</hiz>
+        <hiz>72 30.9302 1.9645 5.5215</hiz>
+        <hiz>73 29.8526 24.6570 2.7870</hiz>
+        <hiz>74 22.6652 4.0055 2.5111</hiz>
+        <hiz>75 28.7992 20.2391 2.0993</hiz>
+        <hiz>76 31.6062 -1.7676 -5.2192</hiz>
+        <hiz>77 32.5726 -1.2866 5.8777</hiz>
+        <hiz>78 29.3782 2.9422 8.1040</hiz>
+        <hiz>79 30.4335 4.9860 3.5594</hiz>
+        <hiz>80 26.3236 5.2161 -15.7688</hiz>
+        <hiz>81 28.0559 0.8668 -6.3934</hiz>
+        <hiz>82 28.7095 4.6742 -5.5909</hiz>
+        <hiz>83 31.0553 3.7564 -0.9514</hiz>
+        <hiz>84 39.3381 9.9048 -1.3990</hiz>
+        <hiz>85 22.1005 -4.6868 3.3352</hiz>
+        <hiz>86 36.0441 7.4010 -3.5392</hiz>
+        <hiz>87 31.6275 0.3279 -5.2294</hiz>
+        <hiz>88 29.2085 9.1980 5.0500</hiz>
+        <hiz>89 28.3108 4.3484 9.3463</hiz>
+        <hiz>90 30.4362 2.2584 1.7527</hiz>
+        <hiz>91 29.9943 1.7608 -3.3043</hiz>
+        <hiz>92 26.2138 7.8407 -10.9794</hiz>
+        <hiz>93 38.6106 3.6195 -1.4057</hiz>
+        <hiz>94 39.3976 14.3273 -10.4438</hiz>
+        <hiz>95 11.2969 14.0815 -6.7271</hiz>
+        <hiz>96 38.8501 10.6620 19.1370</hiz>
+        <hiz>97 34.5075 7.1528 2.3626</hiz>
+        <hiz>98 29.3828 3.3959 2.9429</hiz>
+        <hiz>99 28.9994 2.4120 2.2927</hiz>
+        <hiz>100 34.9811 9.6723 -0.1608</hiz>
+        <hiz>101 38.6393 2.1297 -3.4885</hiz>
+        <hiz>102 22.5336 2.6049 2.0839</hiz>
+        <hiz>103 34.5862 1.4179 4.3631</hiz>
+        <hiz>104 35.0445 3.1245 0.2215</hiz>
+        <hiz>105 28.3584 6.5340 -0.7605</hiz>
+        <hiz>106 27.7727 5.3181 -8.9519</hiz>
+        <hiz>107 33.7613 4.4823 0.2817</hiz>
+        <hiz>108 33.6489 11.3969 5.3845</hiz>
+        <hiz>109 29.2955 1.6353 3.1604</hiz>
+        <hiz>110 30.2857 -1.4900 -0.2003</hiz>
+        <hiz>111 29.5385 3.4993 5.2837</hiz>
+        <hiz>112 29.1264 5.5391 5.4607</hiz>
+        <hiz>113 28.5011 6.8482 3.4181</hiz>
+        <hiz>114 36.9205 -0.3362 9.7340</hiz>
+        <hiz>115 29.0874 -5.5462 8.0058</hiz>
+        <hiz>116 28.9231 -6.0361 5.1680</hiz>
+        <hiz>117 29.5155 -3.4839 5.2861</hiz>
+        <hiz>118 30.6482 -1.4052 -0.7512</hiz>
+        <hiz>119 30.2074 -0.4662 0.5242</hiz>
+        <hiz>120 30.7129 -10.1968 4.7336</hiz>
+        <hiz>121 37.4288 5.0196 -4.6551</hiz>
+        <hiz>122 28.8225 -10.0856 -13.6202</hiz>
+        <hiz>123 28.3749 -6.5314 -0.7309</hiz>
+        <hiz>124 28.1603 -6.9956 9.9694</hiz>
+        <hiz>125 31.3774 -8.0121 -1.0648</hiz>
+        <hiz>126 33.2509 -13.5832 -7.1291</hiz>
+        <hiz>127 28.6891 2.2149 -3.7943</hiz>
+        <hiz>128 30.0486 -6.4588 -3.1876</hiz>
+        <hiz>129 29.4760 -3.4628 -6.7877</hiz>
+        <hiz>130 30.5568 -2.4662 -3.3072</hiz>
+        <hiz>131 29.2180 -5.3916 -6.0240</hiz>
+        <hiz>132 33.2028 0.5805 -14.6080</hiz>
+        <hiz>133 31.9823 -0.3926 -3.1516</hiz>
+        <hiz>134 30.1034 0.7213 -12.2860</hiz>
+        <hiz>135 28.6648 6.5106 -7.8669</hiz>
+        <hiz>136 29.5191 3.4784 -6.7949</hiz>
+        <hiz>137 30.7732 5.3067 -1.4644</hiz>
+        <hiz>138 30.0209 0.4329 -2.8904</hiz>
+        <hiz>139 32.7437 9.4591 -4.7232</hiz>
+        <hiz>140 38.5628 2.6958 -1.4494</hiz>
+        <hiz>141 29.6341 9.2167 13.9515</hiz>
+        <eleman>0 1 0.200000</eleman>
+        <eleman>0 7 0.200000</eleman>
+        <eleman>1 2 0.200000</eleman>
+        <eleman>1 8 0.200000</eleman>
+        <eleman>2 9 0.200000</eleman>
+        <eleman>2 3 0.200000</eleman>
+        <eleman>3 10 0.200000</eleman>
+        <eleman>3 4 0.200000</eleman>
+        <eleman>4 11 0.200000</eleman>
+        <eleman>5 15 0.200000</eleman>
+        <eleman>5 6 0.200000</eleman>
+        <eleman>6 7 0.200000</eleman>
+        <eleman>6 16 0.200000</eleman>
+        <eleman>7 8 0.200000</eleman>
+        <eleman>7 17 0.200000</eleman>
+        <eleman>8 18 0.200000</eleman>
+        <eleman>8 9 0.200000</eleman>
+        <eleman>9 10 0.200000</eleman>
+        <eleman>9 19 0.200000</eleman>
+        <eleman>10 20 0.200000</eleman>
+        <eleman>10 11 0.200000</eleman>
+        <eleman>11 21 0.200000</eleman>
+        <eleman>11 12 0.200000</eleman>
+        <eleman>12 22 0.200000</eleman>
+        <eleman>12 13 0.200000</eleman>
+        <eleman>13 23 0.200000</eleman>
+        <eleman>14 25 0.200000</eleman>
+        <eleman>14 15 0.200000</eleman>
+        <eleman>15 16 0.200000</eleman>
+        <eleman>15 26 0.200000</eleman>
+        <eleman>16 17 0.200000</eleman>
+        <eleman>16 27 0.200000</eleman>
+        <eleman>17 18 0.200000</eleman>
+        <eleman>17 28 0.200000</eleman>
+        <eleman>18 29 0.200000</eleman>
+        <eleman>18 19 0.200000</eleman>
+        <eleman>19 20 0.200000</eleman>
+        <eleman>19 30 0.200000</eleman>
+        <eleman>20 21 0.200000</eleman>
+        <eleman>20 31 0.200000</eleman>
+        <eleman>21 32 0.200000</eleman>
+        <eleman>21 22 0.200000</eleman>
+        <eleman>22 33 0.200000</eleman>
+        <eleman>22 23 0.200000</eleman>
+        <eleman>23 24 0.200000</eleman>
+        <eleman>23 34 0.200000</eleman>
+        <eleman>24 35 0.200000</eleman>
+        <eleman>25 36 0.200000</eleman>
+        <eleman>25 26 0.200000</eleman>
+        <eleman>26 27 0.200000</eleman>
+        <eleman>26 37 0.200000</eleman>
+        <eleman>27 28 0.200000</eleman>
+        <eleman>27 38 0.200000</eleman>
+        <eleman>28 29 0.200000</eleman>
+        <eleman>28 39 0.200000</eleman>
+        <eleman>29 30 0.200000</eleman>
+        <eleman>29 40 0.200000</eleman>
+        <eleman>30 41 0.200000</eleman>
+        <eleman>30 31 0.200000</eleman>
+        <eleman>31 42 0.200000</eleman>
+        <eleman>31 32 0.200000</eleman>
+        <eleman>32 43 0.200000</eleman>
+        <eleman>32 33 0.200000</eleman>
+        <eleman>33 34 0.200000</eleman>
+        <eleman>33 44 0.200000</eleman>
+        <eleman>34 35 0.200000</eleman>
+        <eleman>34 45 0.200000</eleman>
+        <eleman>35 46 0.200000</eleman>
+        <eleman>36 47 0.200000</eleman>
+        <eleman>36 37 0.200000</eleman>
+        <eleman>37 48 0.200000</eleman>
+        <eleman>37 38 0.200000</eleman>
+        <eleman>38 49 0.200000</eleman>
+        <eleman>38 39 0.200000</eleman>
+        <eleman>39 50 0.200000</eleman>
+        <eleman>39 40 0.200000</eleman>
+        <eleman>40 41 0.200000</eleman>
+        <eleman>40 51 0.200000</eleman>
+        <eleman>41 42 0.200000</eleman>
+        <eleman>41 52 0.200000</eleman>
+        <eleman>42 53 0.200000</eleman>
+        <eleman>42 43 0.200000</eleman>
+        <eleman>43 54 0.200000</eleman>
+        <eleman>43 44 0.200000</eleman>
+        <eleman>44 55 0.200000</eleman>
+        <eleman>44 45 0.200000</eleman>
+        <eleman>45 46 0.200000</eleman>
+        <eleman>45 56 0.200000</eleman>
+        <eleman>46 57 0.200000</eleman>
+        <eleman>47 58 0.200000</eleman>
+        <eleman>47 48 0.200000</eleman>
+        <eleman>48 49 0.200000</eleman>
+        <eleman>48 59 0.200000</eleman>
+        <eleman>49 50 0.200000</eleman>
+        <eleman>49 60 0.200000</eleman>
+        <eleman>50 61 0.200000</eleman>
+        <eleman>50 51 0.200000</eleman>
+        <eleman>51 62 0.200000</eleman>
+        <eleman>51 52 0.200000</eleman>
+        <eleman>52 63 0.200000</eleman>
+        <eleman>52 53 0.200000</eleman>
+        <eleman>53 54 0.200000</eleman>
+        <eleman>53 64 0.200000</eleman>
+        <eleman>54 65 0.200000</eleman>
+        <eleman>54 55 0.200000</eleman>
+        <eleman>55 56 0.200000</eleman>
+        <eleman>55 66 0.200000</eleman>
+        <eleman>56 57 0.200000</eleman>
+        <eleman>56 67 0.200000</eleman>
+        <eleman>57 68 0.200000</eleman>
+        <eleman>58 69 0.200000</eleman>
+        <eleman>58 59 0.200000</eleman>
+        <eleman>59 60 0.200000</eleman>
+        <eleman>59 70 0.200000</eleman>
+        <eleman>60 71 0.200000</eleman>
+        <eleman>60 61 0.200000</eleman>
+        <eleman>61 62 0.200000</eleman>
+        <eleman>61 72 0.200000</eleman>
+        <eleman>62 63 0.200000</eleman>
+        <eleman>62 73 0.200000</eleman>
+        <eleman>63 64 0.200000</eleman>
+        <eleman>63 74 0.200000</eleman>
+        <eleman>64 65 0.200000</eleman>
+        <eleman>64 75 0.200000</eleman>
+        <eleman>65 76 0.200000</eleman>
+        <eleman>65 66 0.200000</eleman>
+        <eleman>66 67 0.200000</eleman>
+        <eleman>66 77 0.200000</eleman>
+        <eleman>67 68 0.200000</eleman>
+        <eleman>67 78 0.200000</eleman>
+        <eleman>68 79 0.200000</eleman>
+        <eleman>69 80 0.200000</eleman>
+        <eleman>69 70 0.200000</eleman>
+        <eleman>70 71 0.200000</eleman>
+        <eleman>70 81 0.200000</eleman>
+        <eleman>71 72 0.200000</eleman>
+        <eleman>71 82 0.200000</eleman>
+        <eleman>72 83 0.200000</eleman>
+        <eleman>72 73 0.200000</eleman>
+        <eleman>73 84 0.200000</eleman>
+        <eleman>73 74 0.200000</eleman>
+        <eleman>74 75 0.200000</eleman>
+        <eleman>74 85 0.200000</eleman>
+        <eleman>75 86 0.200000</eleman>
+        <eleman>75 76 0.200000</eleman>
+        <eleman>76 87 0.200000</eleman>
+        <eleman>76 77 0.200000</eleman>
+        <eleman>77 78 0.200000</eleman>
+        <eleman>77 88 0.200000</eleman>
+        <eleman>78 79 0.200000</eleman>
+        <eleman>78 89 0.200000</eleman>
+        <eleman>79 90 0.200000</eleman>
+        <eleman>80 81 0.200000</eleman>
+        <eleman>81 82 0.200000</eleman>
+        <eleman>81 91 0.200000</eleman>
+        <eleman>82 92 0.200000</eleman>
+        <eleman>82 83 0.200000</eleman>
+        <eleman>83 84 0.200000</eleman>
+        <eleman>83 93 0.200000</eleman>
+        <eleman>84 85 0.200000</eleman>
+        <eleman>84 94 0.200000</eleman>
+        <eleman>85 95 0.200000</eleman>
+        <eleman>85 86 0.200000</eleman>
+        <eleman>86 96 0.200000</eleman>
+        <eleman>86 87 0.200000</eleman>
+        <eleman>87 97 0.200000</eleman>
+        <eleman>87 88 0.200000</eleman>
+        <eleman>88 89 0.200000</eleman>
+        <eleman>88 98 0.200000</eleman>
+        <eleman>89 90 0.200000</eleman>
+        <eleman>89 99 0.200000</eleman>
+        <eleman>91 92 0.200000</eleman>
+        <eleman>92 93 0.200000</eleman>
+        <eleman>93 100 0.200000</eleman>
+        <eleman>93 94 0.200000</eleman>
+        <eleman>94 95 0.200000</eleman>
+        <eleman>94 101 0.200000</eleman>
+        <eleman>95 102 0.200000</eleman>
+        <eleman>95 96 0.200000</eleman>
+        <eleman>96 97 0.200000</eleman>
+        <eleman>96 103 0.200000</eleman>
+        <eleman>97 104 0.200000</eleman>
+        <eleman>97 98 0.200000</eleman>
+        <eleman>98 99 0.200000</eleman>
+        <eleman>100 101 0.200000</eleman>
+        <eleman>101 102 0.200000</eleman>
+        <eleman>102 103 0.200000</eleman>
+        <eleman>103 104 0.200000</eleman>
+        <eleman>105 106 0.216667</eleman>
+        <eleman>106 107 0.216667</eleman>
+        <eleman>107 108 0.216667</eleman>
+        <eleman>108 109 0.216667</eleman>
+        <eleman>109 110 0.216667</eleman>
+        <eleman>110 111 0.216667</eleman>
+        <eleman>111 112 0.216667</eleman>
+        <eleman>112 113 0.216667</eleman>
+        <eleman>113 114 0.216667</eleman>
+        <eleman>114 115 0.216667</eleman>
+        <eleman>115 116 0.216667</eleman>
+        <eleman>116 117 0.216667</eleman>
+        <eleman>117 118 0.216667</eleman>
+        <eleman>118 119 0.216667</eleman>
+        <eleman>119 120 0.216667</eleman>
+        <eleman>120 121 0.216667</eleman>
+        <eleman>121 122 0.216667</eleman>
+        <eleman>122 123 0.216667</eleman>
+        <eleman>123 124 0.216667</eleman>
+        <eleman>124 125 0.216667</eleman>
+        <eleman>125 126 0.216667</eleman>
+        <eleman>126 127 0.216667</eleman>
+        <eleman>127 128 0.216667</eleman>
+        <eleman>128 129 0.216667</eleman>
+        <eleman>129 130 0.185714</eleman>
+        <eleman>130 131 0.185714</eleman>
+        <eleman>131 132 0.185714</eleman>
+        <eleman>132 133 0.185714</eleman>
+        <eleman>133 134 0.185714</eleman>
+        <eleman>134 135 0.185714</eleman>
+        <eleman>135 136 0.185714</eleman>
+        <eleman>136 137 0.216667</eleman>
+        <eleman>137 138 0.216667</eleman>
+        <eleman>138 139 0.216667</eleman>
+        <eleman>139 140 0.216667</eleman>
+        <eleman>140 141 0.216667</eleman>
+        <eleman>141 105 0.216667</eleman>
+        <eleman>0 125 0.086923</eleman>
+        <eleman>1 124 0.192065</eleman>
+        <eleman>2 124 0.268225</eleman>
+        <eleman>3 122 0.192065</eleman>
+        <eleman>4 121 0.086923</eleman>
+        <eleman>5 127 0.083001</eleman>
+        <eleman>6 127 0.164655</eleman>
+        <eleman>7 126 0.239096</eleman>
+        <eleman>11 120 0.239096</eleman>
+        <eleman>12 119 0.164655</eleman>
+        <eleman>13 119 0.083001</eleman>
+        <eleman>14 129 0.135403</eleman>
+        <eleman>15 128 0.210160</eleman>
+        <eleman>23 118 0.210160</eleman>
+        <eleman>24 117 0.135403</eleman>
+        <eleman>25 130 0.141303</eleman>
+        <eleman>26 130 0.332114</eleman>
+        <eleman>34 116 0.327534</eleman>
+        <eleman>35 116 0.130173</eleman>
+        <eleman>36 131 0.148349</eleman>
+        <eleman>46 115 0.126932</eleman>
+        <eleman>47 133 0.156385</eleman>
+        <eleman>57 114 0.125833</eleman>
+        <eleman>58 134 0.148349</eleman>
+        <eleman>68 113 0.126932</eleman>
+        <eleman>69 135 0.141303</eleman>
+        <eleman>70 135 0.332114</eleman>
+        <eleman>78 112 0.327534</eleman>
+        <eleman>79 112 0.130173</eleman>
+        <eleman>80 136 0.135403</eleman>
+        <eleman>81 137 0.210160</eleman>
+        <eleman>89 110 0.210160</eleman>
+        <eleman>90 111 0.135403</eleman>
+        <eleman>91 138 0.083001</eleman>
+        <eleman>92 138 0.164655</eleman>
+        <eleman>93 139 0.239096</eleman>
+        <eleman>97 108 0.239096</eleman>
+        <eleman>98 109 0.164655</eleman>
+        <eleman>99 109 0.083001</eleman>
+        <eleman>100 140 0.086923</eleman>
+        <eleman>101 141 0.192065</eleman>
+        <eleman>102 106 0.268225</eleman>
+        <eleman>103 106 0.192065</eleman>
+        <eleman>104 107 0.086923</eleman>
+    </plugin>
+
+    <model name="talon">
+      <pose>4.200 0 2.0 0 0 0</pose>
+      <link name="govde">
+        <inertial><mass>1.8</mass><inertia>
+          <ixx>0.30</ixx><iyy>0.12</iyy><izz>0.38</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <visual name="v_govde"><geometry>
+            <box><size>0.9 0.085 0.095</size></box></geometry>
+          <material><ambient>0.75 0.34 0.23 1</ambient>
+                    <diffuse>0.75 0.34 0.23 1</diffuse></material></visual>
+        <collision name="c_govde"><geometry>
+            <box><size>0.9 0.085 0.095</size></box></geometry>
+          <surface><contact><collide_bitmask>0x02</collide_bitmask></contact></surface></collision>
+        <visual name="v_kanat"><pose>-0.05 0 0.03 0 0 0</pose><geometry>
+            <box><size>0.22 1.718 0.014</size></box></geometry>
+          <material><ambient>0.75 0.34 0.23 1</ambient>
+                    <diffuse>0.75 0.34 0.23 1</diffuse></material></visual>
+        <collision name="c_kanat"><pose>-0.05 0 0.03 0 0 0</pose><geometry>
+            <box><size>0.22 1.718 0.014</size></box></geometry></collision>
+        <visual name="v_kuyruk"><pose>-0.40 0 0.10 0 0 0</pose><geometry>
+            <box><size>0.16 0.52 0.012</size></box></geometry>
+          <material><ambient>0.75 0.34 0.23 1</ambient>
+                    <diffuse>0.75 0.34 0.23 1</diffuse></material></visual>
+        <collision name="c_kuyruk"><pose>-0.40 0 0.10 0 0 0</pose><geometry>
+            <box><size>0.16 0.52 0.012</size></box></geometry></collision>
+        <visual name="v_pervane"><pose>-0.47 0 0 0 1.5708 0</pose><geometry>
+            <cylinder><radius>0.115</radius><length>0.012</length></cylinder>
+          </geometry><material><ambient>0.2 0.2 0.2 0.45</ambient>
+                    <diffuse>0.2 0.2 0.2 0.45</diffuse></material></visual>
+        <collision name="c_pervane"><pose>-0.47 0 0 0 1.5708 0</pose><geometry>
+            <cylinder><radius>0.115</radius><length>0.012</length></cylinder>
+          </geometry></collision>
+      </link>
+    </model>
+  </world>
+</sdf>
