@@ -25,11 +25,24 @@
 //   <bilye_indis>   bilye olan DUGUM indisleri, bosluklu liste (kure suruklemesi)
 //   <log_dosya>     CSV kayit yolu (bos = kapali)
 //   <log_dt>        kayit araligi [s]
-//   <firlatma_t>    atis ani [s]
+//   <firlatma_t>    atis ani [s].  <=0 ise ZAMANA GOMULU ATIS YOK;
+//                   yalnizca DISARIDAN tetiklenir (bkz. <tetik_konu>).
+//   <tetik_konu>    Gazebo topic adi (gz.msgs.Boolean). Bu konuya true
+//                   gelince ag firlatilir. Varsayilan: /ag_firlatici/ates
+//                     gz topic -t /ag_firlatici/ates -m gz.msgs.Boolean -p "data: true"
+//   <firlatici_link>  Firlaticinin TASIYICI LINK adi (orn. "namlu").
+//                   Verilirse:
+//                     * atis ONCESINDE ag dugumleri bu linke KINEMATIK
+//                       OLARAK TASINIR (drone ucarken ag onunla gider)
+//                     * atis aninda hizlar linkin O ANKI YONELIMINE gore
+//                       uygulanir (dunya eksenine gore DEGIL)
+//                   Verilmezse eski davranis: dunya +X yonune firlatir.
 //   <v_eksenel>     namlu cikis hizi [m/s] (+X yonunde)
 //   <v_radyal>      bilyelerin radyal acilma hizi [m/s]
 
 #include <gz/plugin/Register.hh>
+#include <gz/transport/Node.hh>
+#include <gz/msgs/boolean.pb.h>
 #include <gz/sim/System.hh>
 #include <gz/sim/Link.hh>
 #include <gz/sim/Model.hh>
@@ -41,9 +54,11 @@
 #include <gz/sim/components/Name.hh>
 #include <gz/sim/components/ParentEntity.hh>
 #include <gz/sim/components/Pose.hh>
+#include <gz/sim/components/PoseCmd.hh>
 #include <gz/math/Vector3.hh>
 #include <sdf/Element.hh>
 
+#include <atomic>
 #include <fstream>
 #include <map>
 #include <sstream>
@@ -120,6 +135,8 @@ public:
     }
 
     this->hedefAd = getS("hedef_ad", "");
+    this->tetikKonu  = getS("tetik_konu", "/ag_firlatici/ates");
+    this->firlaticiAd = getS("firlatici_link", "");
     this->dugumOn = getS("dugum_on_ek", "dugum_");
     this->bilyeOn = getS("bilye_on_ek", "bilye_");
 
@@ -130,8 +147,20 @@ public:
       Eleman el; ss >> el.i >> el.j >> el.L0;
       if (el.L0 > 1e-9) this->elemanlar.push_back(el);
     }
-    gzmsg << "[AgFizik] yuklendi: " << this->elemanlar.size()
-          << " eleman, firlatma t=" << this->firlatmaT << "s\n";
+    // --- DISARIDAN TETIKLEME
+    if (!this->tetikKonu.empty())
+    {
+      this->dugum.Subscribe(this->tetikKonu, &AgFizik::TetikGeldi, this);
+      gzmsg << "[AgFizik] tetik konusu: " << this->tetikKonu
+            << "  (gz topic -t " << this->tetikKonu
+            << " -m gz.msgs.Boolean -p \"data: true\")\n";
+    }
+    gzmsg << "[AgFizik] yuklendi: " << this->elemanlar.size() << " eleman, "
+          << (this->firlatmaT > 0
+                ? "zamanli atis t=" + std::to_string(this->firlatmaT) + "s"
+                : std::string("atis YALNIZCA disaridan tetiklenir"))
+          << (this->firlaticiAd.empty() ? "" : ", firlatici=" + this->firlaticiAd)
+          << "\n";
   }
 
   // Dunya seviyesindeki plugin Configure'da calistiginda modeller HENUZ
@@ -152,6 +181,8 @@ public:
             return true; }
           return false; };
         if (!this->hedefAd.empty() && ad == this->hedefAd) this->hedef = lE;
+        if (!this->firlaticiAd.empty() && ad == this->firlaticiAd)
+          this->firlatici = lE;
         if (!al(this->dugumOn, dugumMap)) al(this->bilyeOn, bilyeMap);
         return true;
       });
@@ -187,6 +218,18 @@ public:
             << " @ x=" << this->hedefP0.X() << "\n";
     }
 
+    if (this->firlatici != kNullEntity)
+    {
+      Link(this->firlatici).EnableVelocityChecks(_ecm, true);
+      auto fp = Link(this->firlatici).WorldPose(_ecm);
+      if (fp) this->firlaticiP0 = *fp;
+      gzmsg << "[AgFizik] firlatici link bulundu: " << this->firlaticiAd
+            << " — ag atisa kadar KINEMATIK TASINACAK\n";
+    }
+    else if (!this->firlaticiAd.empty())
+      gzwarn << "[AgFizik] firlatici link '" << this->firlaticiAd
+             << "' BULUNAMADI — ag dunya eksenine gore firlatilacak\n";
+
     if (!this->logYol.empty())
     {
       this->log.open(this->logYol);
@@ -220,9 +263,22 @@ public:
     this->HedefTrim(_ecm);
 
     // ---------- FIRLATMA: bilyelere ve dugumlere baslangic hizi ----------
-    if (!this->atildi && t >= this->firlatmaT)
+    // ---------- ATIS ONCESI: agi firlaticiyla birlikte TASI ----------
+    // Drone ucarken ag onunla gitmeli. Dugumler serbest <model>'ler
+    // oldugu icin, atisa kadar poz komutuyla firlaticiya kilitlenirler.
+    if (!this->atildi && this->firlatici != kNullEntity)
+      this->AgiTasi(_ecm);
+
+    const bool zamanli = (this->firlatmaT > 0.0 && t >= this->firlatmaT);
+    if (!this->atildi && (zamanli || this->tetikIstendi.load()))
     {
       this->atildi = true;
+      // ONEMLI: poz komutu AYNI ADIMDA kaldirilmali. Bir adim beklersek
+      // WorldPoseCmd ile SetLinearVelocity ayni adimda CAKISIR; dugumler
+      // once poza kilitlenip sonra serbest kalir ve ag sahte bir gerilme
+      // sicramasi yasar (olculdu: tepe gerilme 16 -> 31 N).
+      for (auto e : this->dugumlar)
+        if (e != kNullEntity) _ecm.RemoveComponent<components::WorldPoseCmd>(e);
       auto merkez = this->OrtaKonum(_ecm);
       // PYTHON MODELIYLE AYNI: eksenel hiz TUM dugumlere, radyal acilma
       // hizi YALNIZCA bilyelere (agi onlar cekip acar).
@@ -252,6 +308,16 @@ public:
             if (rn > 1e-6) v += r / rn * this->vRad;
           }
         }
+        // FIRLATICI CERCEVESI: hizlar namlunun O ANKI yonelimine gore
+        // dondurulur; ayrica firlaticinin kendi hizi eklenir (drone
+        // ucuyorsa ag onun hiziyla birlikte cikar).
+        if (this->firlatici != kNullEntity)
+        {
+          auto fp = Link(this->firlatici).WorldPose(_ecm);
+          if (fp) v = fp->Rot().RotateVector(v);
+          auto fv = Link(this->firlatici).WorldLinearVelocity(_ecm);
+          if (fv) v += *fv;
+        }
         L.SetLinearVelocity(_ecm, v);
       }
       if (this->devirHiz.empty())
@@ -275,7 +341,10 @@ public:
       auto temizle = [&](Entity e) {
         if (e == kNullEntity) return;
         _ecm.RemoveComponent<components::LinearVelocityCmd>(e);
-        _ecm.RemoveComponent<components::AngularVelocityCmd>(e); };
+        _ecm.RemoveComponent<components::AngularVelocityCmd>(e);
+        // WorldPoseCmd de KALICI KINEMATIK KISITTIR -- tasima bittiginde
+        // kaldirilmazsa dugumler firlaticiya kilitli kalir.
+        _ecm.RemoveComponent<components::WorldPoseCmd>(e); };
       for (auto e : this->dugumlar) temizle(e);
       for (auto e : this->bilyeler) temizle(e);
       gzmsg << "[AgFizik] hiz komutlari kaldirildi, govdeler serbest\n";
@@ -474,6 +543,43 @@ public:
   }
 
 private:
+  /// Tetik konusundan mesaj geldiginde cagrilir (transport is parcacigi).
+  void TetikGeldi(const msgs::Boolean &_m)
+  {
+    if (_m.data() && !this->tetikIstendi.exchange(true))
+      gzmsg << "[AgFizik] DISARIDAN TETIK alindi\n";
+  }
+
+  /// Atis oncesi: ag dugumlerini firlaticiya gore KINEMATIK tasir.
+  /// Dugumler serbest <model>'ler oldugu icin kendiliginden takip etmezler.
+  void AgiTasi(EntityComponentManager &_ecm)
+  {
+    auto fp = Link(this->firlatici).WorldPose(_ecm);
+    if (!fp) return;
+    if (!this->baslangicAlindi)
+    {
+      // ilk adimda dugumlerin firlaticiya GORE konumlarini kaydet
+      this->baslangicAlindi = true;
+      this->yerel.assign(this->dugumlar.size(), math::Pose3d::Zero);
+      for (size_t k = 0; k < this->dugumlar.size(); ++k)
+      {
+        if (this->dugumlar[k] == kNullEntity) continue;
+        auto p = Link(this->dugumlar[k]).WorldPose(_ecm);
+        if (p) this->yerel[k] = fp->Inverse() * (*p);
+      }
+      return;
+    }
+    for (size_t k = 0; k < this->dugumlar.size(); ++k)
+    {
+      if (this->dugumlar[k] == kNullEntity) continue;
+      const math::Pose3d hedefPoz = (*fp) * this->yerel[k];
+      auto *c = _ecm.Component<components::WorldPoseCmd>(this->dugumlar[k]);
+      if (c) c->Data() = hedefPoz;
+      else _ecm.CreateComponent(this->dugumlar[k],
+                                components::WorldPoseCmd(hedefPoz));
+    }
+  }
+
   void HedefTrim(EntityComponentManager &_ecm)
   {
     if (this->hedef == kNullEntity || this->hedefM <= 0.0) return;
@@ -507,7 +613,13 @@ private:
   std::vector<bool> pervGordu;
   long nPervToplam{0};
   bool iraksadi{false};
-  Entity hedef{kNullEntity};
+  Entity hedef{kNullEntity}, firlatici{kNullEntity};
+  std::string tetikKonu, firlaticiAd;
+  math::Pose3d firlaticiP0;
+  std::vector<math::Pose3d> yerel;
+  bool baslangicAlindi{false};
+  std::atomic<bool> tetikIstendi{false};
+  transport::Node dugum;
   std::string hedefAd;
   std::map<int, math::Vector3d> devirHiz;
   double devirT{0.0};

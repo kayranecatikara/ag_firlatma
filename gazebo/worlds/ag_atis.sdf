@@ -29,6 +29,19 @@
       <pose>0 0 10 0 0 0</pose><diffuse>0.9 0.9 0.9 1</diffuse>
       <direction>-0.4 0.3 -0.9</direction></light>
 
+    <!-- MONTE EDILEBILIR FIRLATICI MODELI
+         Gercek kullanimda bu <include> SENIN dunyanda olur ve kendi
+         govdene bir <joint> ile baglanir. Burada serbest duruyor. -->
+    <include>
+      <uri>model://ag_firlatici</uri>
+      <name>ag_firlatici</name>
+      <pose>-0.1498 0 2.0 0 0 0</pose>
+    </include>
+    <!-- firlaticiyi havada sabitle (test icin; gercekte drona baglanir) -->
+    <joint name="firlatici_sabit" type="fixed">
+      <parent>world</parent><child>ag_firlatici::namlu</child>
+    </joint>
+
     <model name="m_dugum_0">
       <pose>1.84047 -0.43294 1.87624 0 0 0</pose>
       <link name="dugum_0">
@@ -2178,7 +2191,9 @@
         <rho>1.225</rho>
         <ruzgar>-27.7778 0 0</ruzgar>
         <bilye_Cd>0.47</bilye_Cd><bilye_D>0.0127</bilye_D>
-        <firlatma_t>0.02</firlatma_t>
+        <firlatma_t>-1</firlatma_t>
+        <tetik_konu>/ag_firlatici/ates</tetik_konu>
+        <firlatici_link>namlu</firlatici_link>
         <devir_t>0.08</devir_t>
         <v_eksenel>33.6197</v_eksenel>
         <!-- radyal hiz YALNIZCA bilyelere verilir (Python modeliyle ayni) -->

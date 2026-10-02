@@ -13,6 +13,8 @@ find_package(gz-sim8 REQUIRED)
 find_package(gz-math7 REQUIRED)
 find_package(gz-common5 REQUIRED)
 find_package(sdformat14 REQUIRED)
+find_package(gz-transport13 REQUIRED)
+find_package(gz-msgs10 REQUIRED)
 
 add_library(AgFizik SHARED AgFizik.cc)
 target_link_libraries(AgFizik
@@ -20,4 +22,6 @@ target_link_libraries(AgFizik
   PRIVATE gz-sim8::gz-sim8
   PRIVATE gz-math7::gz-math7
   PRIVATE gz-common5::gz-common5
-  PRIVATE sdformat14::sdformat14)
+  PRIVATE sdformat14::sdformat14
+  PRIVATE gz-transport13::gz-transport13
+  PRIVATE gz-msgs10::gz-msgs10)

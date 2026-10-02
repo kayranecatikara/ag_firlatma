@@ -31,6 +31,14 @@ N_SPOKE = int(os.environ.get("AG_NSPOKE", 12))
 #               DOGRULAMA kosusu, Python ile birebir karsilastirma icin)
 # CARPISMA=1 -> temas + hedef var (YAKALAMA/dolanma kosusu)
 CARPISMA = os.environ.get("AG_CARPISMA", "1") != "0"
+# HEDEF: Talon modeli dunyaya konsun mu (CARPISMA'dan BAGIMSIZ)
+HEDEF_VAR = os.environ.get("AG_HEDEF", "1" if CARPISMA else "0") != "0"
+# FIRLATICI: monte edilebilir model paketini dunyaya ekle ve agi onun
+#   AGZINDA dogur. Ag, atisa kadar firlaticiyla birlikte KINEMATIK tasinir.
+FIRLATICI = os.environ.get("AG_FIRLATICI", "0") != "0"
+# TETIK: "zamanli" (firlatma_t) | "harici" (gz topic)
+TETIK = os.environ.get("AG_TETIK", "zamanli")
+TETIK_KONU = os.environ.get("AG_TETIK_KONU", "/ag_firlatici/ates")
 # ORGU: "orumcek" = kaba halka/parmaklik (hizli, ag ACILMASI icin yeterli)
 #       "hex"     = GERCEK altigen kafes, goz = 140 mm
 #   DOLANMA ancak "hex" ile gorunur: kaba orgunun goz acikligi 0.73 m iken
@@ -117,6 +125,23 @@ if DEVIR > 0:
 # onlari dis halka yaricapinda baslatir; birebir karsilastirma icin ayni.
 
 
+# Firlatici modeli: agzi X_AGIZ'da olacak sekilde yerlestirilir; ag da
+# oradan dogar. Boylece ag firlaticinin O ANKI konumuna gore baslar.
+X_AGIZ = 0.0
+L_NAMLU_M = 0.1498
+firlatici_blok = ("" if not FIRLATICI else f"""    <!-- MONTE EDILEBILIR FIRLATICI MODELI
+         Gercek kullanimda bu <include> SENIN dunyanda olur ve kendi
+         govdene bir <joint> ile baglanir. Burada serbest duruyor. -->
+    <include>
+      <uri>model://ag_firlatici</uri>
+      <name>ag_firlatici</name>
+      <pose>{-L_NAMLU_M:.4f} 0 2.0 0 0 0</pose>
+    </include>
+    <!-- firlaticiyi havada sabitle (test icin; gercekte drona baglanir) -->
+    <joint name="firlatici_sabit" type="fixed">
+      <parent>world</parent><child>ag_firlatici::namlu</child>
+    </joint>""")
+
 X_OFS = X_DEVIR if DEVIR > 0 else 0.0
 
 
@@ -186,7 +211,9 @@ ag_model = f"""{chr(10).join(linkler)}
         <rho>1.225</rho>
         <ruzgar>{-V_DRONE:.4f} 0 0</ruzgar>
         <bilye_Cd>0.47</bilye_Cd><bilye_D>0.0127</bilye_D>
-        <firlatma_t>{FIRLATMA_T}</firlatma_t>
+        <firlatma_t>{FIRLATMA_T if TETIK == "zamanli" else -1}</firlatma_t>
+        <tetik_konu>{TETIK_KONU}</tetik_konu>
+        <firlatici_link>{"namlu" if FIRLATICI else ""}</firlatici_link>
         <devir_t>{DEVIR}</devir_t>
         <v_eksenel>{V_EKS*np.cos(ALPHA):.4f}</v_eksenel>
         <!-- radyal hiz YALNIZCA bilyelere verilir (Python modeliyle ayni) -->
@@ -196,7 +223,7 @@ ag_model = f"""{chr(10).join(linkler)}
         <T_kopma>{ag.F_kopma:.2f}</T_kopma>
         <!-- elle dugumlenmis Dyneema agin GERCEK kopma yuku (~%55) -->
         <T_dugum>{ag.F_kopma*0.55:.2f}</T_dugum>
-        <hedef_ad>{"govde" if CARPISMA else ""}</hedef_ad>
+        <hedef_ad>{"govde" if HEDEF_VAR else ""}</hedef_ad>
         <perv_x>-0.47</perv_x><perv_r>{PERVANE/2}</perv_r>
 {hizlar}
 {elemanlar}
@@ -270,9 +297,11 @@ dunya = f"""<?xml version="1.0" ?>
       <pose>0 0 10 0 0 0</pose><diffuse>0.9 0.9 0.9 1</diffuse>
       <direction>-0.4 0.3 -0.9</direction></light>
 
+{firlatici_blok}
+
 {ag_model}
 
-{hedef if CARPISMA else "    <!-- hedef yok: AG_CARPISMA=0 dogrulama kosusu -->"}
+{hedef if HEDEF_VAR else "    <!-- hedef yok (AG_HEDEF=0) -->"}
   </world>
 </sdf>
 """
@@ -292,7 +321,11 @@ if __name__ == "__main__":
     print(f"   hedef {MENZIL0} m'de, atis t={FIRLATMA_T}s")
     print(f"   k_el = {K_EL:.0f} N/m, m_dugum = {M_NOM*1e6:.1f} mg")
     print(f"   dt = {DT*1e6:.0f} us  (kararli sinir {DT_KARARLI*1e6:.0f} us)")
-    print(f"   carpisma + hedef: {'VAR' if CARPISMA else 'YOK (dogrulama)'}")
+    print(f"   carpisma: {'VAR' if CARPISMA else 'YOK'} | hedef: "
+          f"{'VAR' if HEDEF_VAR else 'YOK'} | firlatici modeli: "
+          f"{'VAR' if FIRLATICI else 'YOK'}")
+    print(f"   tetik: {TETIK}" + (f" -> {TETIK_KONU}" if TETIK == "harici" else
+          f" (t={FIRLATMA_T}s)"))
     print(f"   ORGU: {ORGU}" + (f"  (gercek goz {GOZ*1e3:.0f} mm, kenar "
           f"{L0.mean()*1e3:.1f} mm)" if ORGU == "hex" else
           f"  (kaba: dis cevre goz acikligi "

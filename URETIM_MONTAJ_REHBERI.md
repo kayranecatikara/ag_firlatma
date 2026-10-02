@@ -481,9 +481,18 @@ karşılasın.
 
 ## 10. UÇUŞ TESTİ
 
+> **Simülasyonda önce dene.** Fırlatıcının monte edilebilir Gazebo model
+> paketi hazır: `gazebo/models/ag_firlatici/`. Kendi drone modeline tek
+> `<include>` + tek `<joint>` ile eklenir, ateşleme `gz topic` ile
+> tetiklenir. Montaj arayüzü, ortam değişkenleri ve bilinen tuzaklar için
+> **README §9 "Başka bir araca entegrasyon"**.
+
 ### Sıra
 1. **Taret/gövde montajı** — namlu drona bağlanır (taret tasarımı henüz
    yapılmadı; şimdilik sabit, aşağı-ileri bakan bir yatak yeterli).
+   Model paketindeki **`montaj`** çerçevesi (namlu ortası, üst yüzey)
+   bağlantı referansıdır; **`agiz`** çerçevesi tetikleme mesafesinin
+   ölçüldüğü noktadır.
 2. **Boş atış** (ağsız, tek bant) — uçuşta geri tepmenin dronu nasıl
    etkilediğini gör. Geri tepme toplam **~75 N·s**.
 3. **Ağlı atış, hedefsiz** — havada açılmayı doğrula.
@@ -492,6 +501,8 @@ karşılasın.
 ### Geri tepme hakkında
 Kapsül namluda durduğu için momentum kapsülle birlikte namluya geri döner.
 Net dışarı atılan momentum = ağ + bilyeler = 74 g × 31.1 m/s ≈ **2.3 kg·m/s**.
+2 kg'lık bir dronda ~1.2 m/s hız değişimi — uçuş kontrolcüsü bunu bir
+bozucu olarak görecek.
 Tail-sitter için tek atışlık bir itme; nişan kayması önemsiz (tek atış
 yapılıp inilecek).
 

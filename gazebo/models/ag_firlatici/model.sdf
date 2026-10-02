@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!-- URETILMIS DOSYA — gazebo/scripts/model_paketi_uret.py ile uretildi.
+     AG FIRLATICI v6 — baska bir araca monte edilebilir model paketi.
+
+     EKSEN: +X namlu ekseni (agiz yonu), +Z yukari.
+     ORIJIN: namlunun ARKA yuzunun merkezi.
+     MONTAJ: <frame name="montaj"> — namlu ortasi, ust yuzey.
+
+     KULLANIM (bkz. README "Baska bir araca entegrasyon"):
+       <include><uri>model://ag_firlatici</uri>
+         <pose relative_to="govdem">0 0 -0.08 0 0 0</pose></include>
+       <joint name="firlatici_baglanti" type="fixed">
+         <parent>govdem</parent><child>ag_firlatici::namlu</child></joint>
+-->
+<sdf version="1.9">
+  <model name="ag_firlatici">
+
+    <!-- ===== TASIYICI GOVDE (namlu + bantlar + tetik donanimi) ===== -->
+    <link name="namlu">
+      <inertial>
+        <pose>0.07492 0.00000 0.00000 0 0 0</pose>
+        <mass>0.21620</mass>
+        <inertia><ixx>1.338e-04</ixx><iyy>4.714e-04</iyy><izz>4.714e-04</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
+      <visual name="v_namlu">
+        <pose>0 0 0 0 1.5708 0</pose>
+        <geometry><mesh><uri>model://ag_firlatici/meshes/namlu.stl</uri>
+          <scale>0.001 0.001 0.001</scale></mesh></geometry>
+        <material><ambient>0.18 0.20 0.24 1</ambient>
+                  <diffuse>0.22 0.25 0.30 1</diffuse></material>
+      </visual>
+      <!-- Carpisma: STL yerine SILINDIR. Ucus simulasyonunda namlunun
+           ic detayi gereksiz; silindir hem hizli hem kararli. -->
+      <collision name="c_namlu">
+        <pose>0.07492 0 0 0 1.5708 0</pose>
+        <geometry><cylinder><radius>0.02770</radius>
+          <length>0.14983</length></cylinder></geometry>
+      </collision>
+    </link>
+
+    <!-- ===== KAPSUL (ag + 6 bilye icinde) =====
+         Dinlenmede strok sonunda; atista ileri kayip tamponlara carpar.
+         Prizmatik eklem NAMLU EKSENINDE (+X). -->
+    <link name="kapsul">
+      <pose>0.02500 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00000 0.00000 0.00000 0 0 0</pose>
+        <mass>0.13800</mass>
+        <inertia><ixx>3.204e-05</ixx><iyy>3.442e-05</iyy><izz>3.442e-05</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
+      <visual name="v_kapsul">
+        <pose>-0.02000 0 0 0 1.5708 0</pose>
+        <geometry><mesh><uri>model://ag_firlatici/meshes/kapsul.stl</uri>
+          <scale>0.001 0.001 0.001</scale></mesh></geometry>
+        <material><ambient>0.65 0.30 0.12 1</ambient>
+                  <diffuse>0.80 0.38 0.16 1</diffuse></material>
+      </visual>
+    </link>
+    <joint name="kapsul_kayit" type="prismatic">
+      <parent>namlu</parent><child>kapsul</child>
+      <axis><xyz>1 0 0</xyz>
+        <limit><lower>0</lower><upper>0.0910</upper></limit>
+        <dynamics><damping>0.5</damping></dynamics></axis>
+    </joint>
+
+    <!-- ===== SERVOLAR (mikro, metal disli, ~14 g) ===== -->
+    <link name="servo_sag">
+      <pose>0.07492 0.03570 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00000 0.00000 0.00000 0 0 0</pose>
+        <mass>0.01430</mass>
+        <inertia><ixx>1.378e-06</ixx><iyy>2.293e-06</iyy><izz>1.525e-06</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
+      <visual name="v_servo_sag"><geometry><box><size>
+        0.0320 0.0160 0.0300</size></box></geometry>
+        <material><ambient>0.08 0.08 0.09 1</ambient>
+                  <diffuse>0.12 0.12 0.14 1</diffuse></material></visual>
+    </link>
+    <joint name="servo_sag_baglanti" type="fixed">
+      <parent>namlu</parent><child>servo_sag</child>
+    </joint>
+    <link name="servo_sol">
+      <pose>0.07492 -0.03570 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00000 0.00000 0.00000 0 0 0</pose>
+        <mass>0.01430</mass>
+        <inertia><ixx>1.378e-06</ixx><iyy>2.293e-06</iyy><izz>1.525e-06</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
+      <visual name="v_servo_sol"><geometry><box><size>
+        0.0320 0.0160 0.0300</size></box></geometry>
+        <material><ambient>0.08 0.08 0.09 1</ambient>
+                  <diffuse>0.12 0.12 0.14 1</diffuse></material></visual>
+    </link>
+    <joint name="servo_sol_baglanti" type="fixed">
+      <parent>namlu</parent><child>servo_sol</child>
+    </joint>
+
+    <!-- ===== MONTAJ ARAYUZU =====
+         Kendi govdene baglarken BU cerceveyi referans al.
+         Namlu ortasi, ust yuzey. -->
+    <frame name="montaj" attached_to="namlu">
+      <pose>0.07492 0 0.02770 0 0 0</pose>
+    </frame>
+    <!-- Agiz ucu: ag buradan cikar; tetikleme mesafesi buradan olculur -->
+    <frame name="agiz" attached_to="namlu">
+      <pose>0.14983 0 0 0 0 0</pose>
+    </frame>
+
+  </model>
+</sdf>

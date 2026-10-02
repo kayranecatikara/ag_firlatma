@@ -198,6 +198,11 @@ ağın uçağın üzerinden **değip geçtiğini** gösterdi:
 **DOĞRUSU: 4.0 – 4.5 m'den ateşle.**
 
 ### Gazebo / yazılım
+- **`WorldPoseCmd` kaldırma zamanlaması.** Kinematik taşımayı eklerken poz
+  komutunu atıştan bir adım sonra kaldırıyordum; ateşleme adımında poz komutu
+  ile hız komutu çakışıp **sahte gerilme sıçraması** yarattı (16 → 31 N).
+  Entegrasyon testinde yakalandı; komut artık ateşleme adımında, hızlar
+  verilmeden önce kaldırılıyor.
 - **`SetLinearVelocity` kalıcı bir KİNEMATİK KISIT bırakıyor.**
   `LinearVelocityCmd` bileşeni her adımda yeniden uygulanıyor → gövdeler
   o hıza kilitleniyor ve hiçbir kuvvete tepki vermiyor. Serbest düşme
@@ -342,8 +347,12 @@ cad/
   eski_tasarimlar/          arşiv (.py kaynaklar; .step'ler üretilebilir)
 
 gazebo/
-  plugin/AgFizik.cc       ★ özel C++ system plugin (ağ fiziği)
+  models/ag_firlatici/    ★ MONTE EDİLEBİLİR MODEL PAKETİ (bkz. §9)
+                            model.config + model.sdf + meshes/
+                            4 link, 389 g, montaj çerçeveleri
+  plugin/AgFizik.cc       ★ özel C++ system plugin (ağ fiziği + tetik topic'i)
   scripts/ag_sdf_uret.py  ★ dünya üreteci
+  scripts/model_paketi_uret.py  model paketini üretir
   scripts/karsilastir.py    Gazebo ↔ Python doğrulaması
   scripts/ciz_yakalama.py   3B yakalama görselleştirmesi
   kos.sh                    koşu betiği
@@ -358,6 +367,7 @@ arsiv_analizler/          süperseded analizler (OKUBENI.txt uyarısıyla)
 **Nereden başlamalı:** üretecekseniz `ALISVERIS.md` → `baski/` →
 `URETIM_MONTAJ_REHBERI.md`. Modeli anlamak istiyorsanız §5 (hatalar) →
 `agsim/netfull.py` → `out/GAZEBO_sonuc.md`.
+**Kendi dronuna entegre edecekseniz doğrudan §9.**
 
 ---
 
@@ -383,6 +393,14 @@ AG_ORGU=kare ./gazebo/kos.sh yakalama       # gerçek örgü + hedef
 AG_ORGU=kare ./gazebo/kos.sh yakalama gui   # üstüne GUI
 
 python3 gazebo/scripts/karsilastir.py       # Gazebo ↔ Python doğrulaması
+
+# --- Monte edilebilir model paketi + harici tetikle atış (bkz. §9) ---
+python3 gazebo/scripts/model_paketi_uret.py        # gazebo/models/ag_firlatici/
+export GZ_SIM_RESOURCE_PATH=$PWD/gazebo/models
+AG_FIRLATICI=1 AG_TETIK=harici AG_ORGU=kare AG_RAG=1.3 AG_GOZ=0.20 \
+  python3 gazebo/scripts/ag_sdf_uret.py
+gz sim -r gazebo/worlds/ag_atis.sdf &
+gz topic -t /ag_firlatici/ates -m gz.msgs.Boolean -p "data: true"
 ```
 
 ### Ortam değişkenleri
@@ -408,7 +426,198 @@ gz-cmake3, gz-plugin2, gz-math7, gz-common5, sdformat14, CMake 3.16+
 
 ---
 
-## 9. Model sınırları
+## 9. Başka bir araca entegrasyon
+
+> Bu bölüm, fırlatıcıyı **kendi drone modeline** eklemek isteyenler için.
+> `gazebo/worlds/ag_atis.sdf` bir **test dünyasıdır**, monte edilebilir model
+> değildir — onu kullanma. Monte edilecek paket: `gazebo/models/ag_firlatici/`
+
+### 9.1 Model paketi
+
+```
+gazebo/models/ag_firlatici/
+  model.config          paket tanımı, kütle dağılımı, açıklama
+  model.sdf             4 link + 3 eklem + 2 montaj çerçevesi
+  meshes/namlu.stl      görsel (çarpışma = silindir, daha hızlı)
+  meshes/kapsul.stl
+```
+
+**Eksen düzeni:** `+X` namlu ekseni (ağız yönü), `+Z` yukarı.
+**Orijin:** namlunun **arka yüzünün merkezi** (yükleme ağzı).
+
+| link | kütle | içerik |
+|---|---|---|
+| `namlu` | **216.2 g** | gövde + 4 lateks bant + tetik donanımı + kablolar |
+| `kapsul` | **138.0 g** | kapsül + çapraz pim + **ağ + 6 kurşun bilye** |
+| `servo_sag` / `servo_sol` | **14.3 g** ×2 | mikro metal dişli servo |
+| **TOPLAM** | **389.4 g** | |
+
+`kapsul` link'i `namlu`ya **prizmatik eklemle** bağlı (eksen +X, strok 0–91 mm).
+Servolar sabit eklemle. Atalet tensörleri gerçek geometriden hesaplandı
+(içi boş silindir / kutu).
+
+İki montaj çerçevesi var:
+- **`montaj`** — namlu ortası, üst yüzey. Kendi gövdene bağlarken bunu referans al.
+- **`agiz`** — namlu ucu. **Tetikleme mesafesi buradan ölçülür.**
+
+### 9.2 Kendi dünyana ekleme — kopyala-yapıştır
+
+```bash
+export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/yol/ag_firlatma/gazebo/models
+```
+
+```xml
+<model name="benim_dronum">
+  <link name="govde"> ... </link>
+
+  <!-- FIRLATICIYI EKLE -->
+  <include>
+    <uri>model://ag_firlatici</uri>
+    <name>firlatici</name>
+    <!-- gövdenin 8 cm altına, burun yönünde -->
+    <pose relative_to="govde">0.10 0 -0.08 0 0 0</pose>
+  </include>
+
+  <!-- TEK EKLEMLE SABITLE -->
+  <joint name="firlatici_baglanti" type="fixed">
+    <parent>govde</parent>
+    <child>firlatici::namlu</child>
+  </joint>
+</model>
+```
+
+Tail-sitter'da namlu **ileri-aşağı** bakmalı; `<pose>`'un son üç değeriyle
+(roll pitch yaw) eğ.
+
+### 9.3 Ağ fiziği — model paketinde DEĞİLDİR
+
+Ağ düğümleri **ayrı `<model>`'ler** olarak üretilir ve dünya seviyesindeki
+`AgFizik` plugin'i ile çözülür. Bu kasıtlı — §9.6'daki ilk maddeye bak.
+
+```bash
+# plugin derle
+cd gazebo/plugin && mkdir -p build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release && make -j4
+export GZ_SIM_SYSTEM_PLUGIN_PATH=/yol/ag_firlatma/gazebo/plugin/build
+
+# ag + plugin blogunu uret (kendi dunyana kopyalayacagin parca)
+AG_FIRLATICI=1 AG_TETIK=harici AG_ORGU=kare AG_RAG=1.3 AG_GOZ=0.20 \
+  python3 gazebo/scripts/ag_sdf_uret.py
+```
+
+Üretilen `gazebo/worlds/ag_atis.sdf` içinden **ağ düğümleri + `<plugin>`
+bloğunu** kendi dünyana kopyala. Plugin'de şu iki alanı kendi modeline göre
+ayarla:
+
+```xml
+<plugin filename="AgFizik" name="ag::AgFizik">
+  <firlatici_link>namlu</firlatici_link>      <!-- taşıyıcı link adı -->
+  <tetik_konu>/ag_firlatici/ates</tetik_konu>
+  <firlatma_t>-1</firlatma_t>                 <!-- -1 = yalnızca harici tetik -->
+  ...
+</plugin>
+```
+
+`<firlatici_link>` verilince plugin:
+- atıştan **önce** ağ düğümlerini o linke **kinematik olarak taşır**
+  (drone uçarken ağ onunla gider),
+- atış anında hızları linkin **o anki yönelimine** göre uygular ve
+  **linkin kendi hızını ekler**.
+
+### 9.4 Ateşleme
+
+```bash
+gz topic -t /ag_firlatici/ates -m gz.msgs.Boolean -p "data: true"
+```
+
+Kendi kontrolcünden `gz-transport` ile de yayınlayabilirsin:
+
+```cpp
+gz::transport::Node node;
+auto pub = node.Advertise<gz::msgs::Boolean>("/ag_firlatici/ates");
+gz::msgs::Boolean m; m.set_data(true); pub.Publish(m);
+```
+
+### 9.5 Ortam değişkenleri
+
+| Değişken | Varsayılan | Ne yapar |
+|---|---|---|
+| `AG_FIRLATICI` | `0` | `1` = fırlatıcı modelini dünyaya ekle, ağı ağzında doğur |
+| `AG_TETIK` | `zamanli` | `harici` = yalnızca topic ile ateşle |
+| `AG_TETIK_KONU` | `/ag_firlatici/ates` | tetik topic adı |
+| `AG_HEDEF` | `1` | `0` = Talon hedefini koyma |
+| `AG_CARPISMA` | `1` | `0` = çarpışma geometrisi yok (hızlı doğrulama) |
+| `AG_ORGU` | `orumcek` | `kare` (üretilecek tasarım) \| `hex` \| `orumcek` |
+| `AG_RAG` / `AG_GOZ` / `AG_DIP` | config | ağ yarıçapı / göz açıklığı / iplik çapı [m] |
+| `AG_MENZIL` | `4.65` | hedefin atış anındaki mesafesi [m] |
+| `AG_DEVIR` | hex/kare: `0.08` | hibrit devir anı [s] — §9.6 |
+| `AG_SURE` | `0.75` | simüle edilecek sim-zamanı [s] |
+
+### 9.6 ⚠️ ENTEGRASYONDA DİKKAT — bunlar olmadan çalışmaz
+
+**1. Her ağ düğümü AYRI `<model>` olmak ZORUNDA.**
+Tek model içindeki eklemsiz linkleri gz-physics/DART **tek gövdeye kaynaklar**
+ve hiçbiri hareket etmez. Bu yüzden ağ, fırlatıcı modelinin *içinde* değil,
+dünya seviyesinde ayrı modeller olarak duruyor.
+
+**2. Zaman adımı iplik periyodundan TÜRETİLMELİ.**
+```
+dt ≤ (1/15) · 2π·√(m_düğüm / k_eleman)
+```
+Sabit dt kullanırsan sayısal patlama ve **ODE AABB taşması** alırsın
+(`aabbBound >= dMinIntExact` assertion). Üreteç bunu otomatik hesaplıyor;
+mevcut tasarımda **34 µs**. `<max_step_size>`'ı elle büyütme.
+
+**3. Paketten açılma rijit-cisim çözücüyle YAPILAMAZ → hibrit devir ZORUNLU.**
+Paketli halde 709 çarpışma küresi 16 mm'lik hazneye tıkılıdır; DART'ın LCP
+çözücüsü yüz binlerce temas kısıtıyla **çöker**. Bu yüzden paketten açılma
+doğrulanmış Python modelinde yapılır, Gazebo ağı **t = 80 ms**'de açık halde
+devralır (`AG_DEVIR`). `AG_DEVIR=0` yapma.
+
+**4. Geri tepme ~2.3 kg·m/s.**
+Ağ + bilyeler 74 g, çıkış 31.1 m/s. Kapsül namlu içinde kalır, yani dışarı
+atılan momentum bu. 2 kg'lık bir drone için **~1.2 m/s** hız değişimi —
+tail-sitter'da tek atış yapılıp inileceği için nişan kayması önemsiz, ama
+uçuş kontrolcüsü bunu bir bozucu olarak görecek.
+
+**5. Tetikleme mesafesi 4.0–4.5 m.**
+Geometrik pencere 3.56–6.54 m ama **uzakta ağ uçağın üzerinden değip geçiyor**
+(7.0 m'de ağın yalnızca %24'ü uçağa değiyor). Servo gecikmesi ~120 ms;
+100 km/h'te bu 0.77 m, yani hedef **5.0 m**'deyken tetikle.
+
+### 9.7 ⚠️ BİLİNEN TUZAKLAR — aynı hatalara düşme
+
+**`SetLinearVelocity` KALICI KİNEMATİK KISIT bırakır.**
+`LinearVelocityCmd` bileşeni fizik sistemi tarafından **her adımda yeniden
+uygulanır** → gövde o hıza kilitlenir ve hiçbir kuvvete tepki vermez. Serbest
+düşme testiyle yakaladık: hız −0.006 m/s'de sabit kaldı, −2.0 olmalıydı.
+Aynısı **`WorldPoseCmd`** için de geçerli (kinematik taşımada kullanılıyor).
+Kendi kodunda hız/poz komutu kullanırsan **sen de kaldırmalısın**.
+
+> **Kaldırma ZAMANLAMASI da önemli.** `WorldPoseCmd`'yi atıştan *bir adım
+> sonra* kaldırınca, ateşleme adımında poz komutu ile `SetLinearVelocity`
+> **aynı adımda çakışıyor**: düğümler önce poza kilitleniyor, sonra serbest
+> kalıyor ve ağ sahte bir gerilme sıçraması yaşıyor. Entegrasyon testinde
+> ölçüldü: **tepe gerilme 16 → 31 N**. Poz komutu ateşleme adımında,
+> hızlar verilmeden **önce** kaldırılmalı. Plugin artık böyle yapıyor.
+
+**Ağın DOLANMASI modellenmiyor.**
+İpin ipe takılması rijit-cisim + LCP ile çözülemez; ip/kumaş çözücüsü
+(Cosserat çubuk veya konum-tabanlı dinamik) gerekir. Simülasyon ağın temiz
+açıldığını **varsayar**. Bu projenin en kritik doğrulanmamış varsayımı;
+yer testiyle çözülecek.
+
+**Pervane SABİT DİSK.**
+Dönerek ipi sarma modellenmiyor. Plugin yalnızca diskten **kaç iplik geçtiğini**
+sayar (`n_perv_toplam`). Asıl kilitleme mekanizması olan sarılma simülasyonun
+dışında.
+
+**Çalışma koşulu doğrulandı:** gz-sim 8 (Harmonic), DART, gz-plugin2,
+gz-math7, gz-common5, gz-transport13, gz-msgs10, sdformat14, CMake 3.16+.
+
+---
+
+## 10. Model sınırları
 
 - Ağ–ağ ve ağ–hava etkileşiminde ipin ipe takılması **modellenmiyor** (§6).
 - Pervane Gazebo'da **sabit disk**; dönerek sarma modellenmiyor.
