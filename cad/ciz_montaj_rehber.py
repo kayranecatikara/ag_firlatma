@@ -16,8 +16,8 @@ INK, INK2, GRID = "#0b0b0b", "#52514e", "#d8d7d2"
 CELIK, ALU, TPU = "#4a4a46", "#9aa3ad", "#c0563a"
 plt.rcParams.update({"figure.facecolor": "#fcfcfb", "axes.facecolor": "#fcfcfb",
                      "text.color": INK, "font.size": 9.5})
-D = np.load("cad/v4_mesh.npz")
-P = json.load(open("cad/v4_olcu.json"))
+D = np.load(vyol(__file__, "cad", "v4_mesh.npz"))
+P = json.load(open(vyol(__file__, "cad", "v4_olcu.json")))
 
 # parca -> (renk, patlatma vektoru [mm], etiket, malzeme/adet)
 PARCA = {
@@ -146,5 +146,5 @@ ax.text(0.0, y - 0.065, "TOPLAM ~469 g", fontsize=11, fontweight="bold",
 fig.suptitle("AĞ FIRLATICI NAMLU v4 — MONTAJ REHBERİ   (namlu 180.5 mm · "
              "4 lateks bant · atış penceresi 3.6–5.9 m)",
              fontsize=13.5, fontweight="bold", x=.02, ha="left", y=.965)
-plt.savefig("out/REHBER_montaj.png", dpi=120)
+plt.savefig(vyol(__file__, "out", "REHBER_montaj.png"), dpi=120)
 print("-> out/REHBER_montaj.png")

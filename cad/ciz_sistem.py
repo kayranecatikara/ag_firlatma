@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 """SISTEM REHBERI — calisma prensibi + angajman + performans ozeti."""
 import sys, os, json
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
+from agsim.yollar import vyol
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np, matplotlib
 matplotlib.use("Agg")
@@ -166,5 +171,5 @@ ax.legend(fontsize=8.5, frameon=False, loc="lower right"); ax.grid(alpha=.3)
 
 fig.suptitle("AĞ FIRLATMA SİSTEMİ v4 — GENEL BAKIŞ", fontsize=14,
              fontweight="bold", x=.05, ha="left", y=.965)
-plt.savefig("out/REHBER_sistem.png", dpi=120)
+plt.savefig(vyol(__file__, "out", "REHBER_sistem.png"), dpi=120)
 print(f"-> out/REHBER_sistem.png  (pencere {lo:.2f}-{hi:.2f} m)")

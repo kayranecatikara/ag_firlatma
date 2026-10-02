@@ -9,8 +9,12 @@ Namlu yerlesimi (L_NAMLU = 260 mm, arkasi ACIK = yukleme agzi):
 Capraz pim kapsulun 4.5 mm'sinde -> kurulu y=9.5, strok sonu y=188.5.
 Bant ankraji agiz bileziginde y=256.
 """
-import sys
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
+from agsim.yollar import vyol
 import numpy as np
 from agsim.dse import vektor_to_tasarim
 from agsim.lastik import Bant, firlat_lastik, cekme_testi_tablosu
@@ -21,7 +25,7 @@ STROK = (L_NAMLU - ARKA - L_KAP - UC) * 1e-3          # 0.179 m
 Y_PIM0 = (ARKA + 4.5) * 1e-3                          # capraz pim, kurulu
 Y_ANK = (L_NAMLU - 4.0) * 1e-3                        # agiz bilezigi ankraji
 L_KURULU = Y_ANK - Y_PIM0                              # 0.2465 m
-X = np.load("out/x_final.npy")
+X = np.load(vyol(__file__, "out", "x_final.npy"))
 
 
 def tasarim(alpha_deg=18.0, yivli=True, m_kapsul=0.030):

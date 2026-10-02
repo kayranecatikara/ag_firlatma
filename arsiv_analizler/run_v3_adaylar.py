@@ -1,6 +1,9 @@
 """v3 NIHAI ADAYLAR — Talon (R_ger 0.859 m), hedef uzak kenar 5-6 m."""
-import sys
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 import run_v3_tarama as V
 

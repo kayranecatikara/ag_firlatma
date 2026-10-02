@@ -1,5 +1,9 @@
 """Hava suruklemesi agi ne kadar geri cekiyor — nihai tasarim (v2)."""
-import sys; sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np, matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import run_menzil_nihai as M

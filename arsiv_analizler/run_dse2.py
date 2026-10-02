@@ -4,7 +4,11 @@ R_eff'i amac almak hataliydi: cok yavas acilan bir ag paket halinde uzaga gidip
 R_eff'i buyuk gosterir, ama her gercekci tetikleme mesafesinde hala kapalidir
 (Monte Carlo: %0 yakalama). Dogru amac, agin HEDEFE VARDIGINDA acik olmasidir.
 """
-import sys; sys.path.insert(0,'/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 from scipy.optimize import differential_evolution
 from agsim.dse import degerlendir_vektor, ALT, UST, ADLAR, BILYE_SET

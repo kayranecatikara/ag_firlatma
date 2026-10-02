@@ -10,7 +10,12 @@ Cikti:
   5) gurbuzluk (Monte Carlo)
 """
 import sys, json
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
+from agsim.yollar import vyol
 import numpy as np
 from agsim.lastik import Bant, firlat_lastik
 from agsim.netfull import simule
@@ -18,7 +23,7 @@ from run_lastik import tasarim
 
 R_GER = 0.859     # X-UAV Talon: 1718 mm kanat acikligi
 V100 = 100 / 3.6
-K = json.load(open(sys.argv[1] if len(sys.argv) > 1 else "out/nihai_konfig.json"))
+K = json.load(open(sys.argv[1] if len(sys.argv) > 1 else vyol(__file__, "out", "nihai_konfig.json")))
 
 
 def kur(V_drone=V100, rng=None):

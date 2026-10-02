@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """AGIN TAM ACILMIS HALI — 2B, topoloji secenekleri yan yana."""
-import sys
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
+from agsim.yollar import vyol
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -76,5 +80,5 @@ fig.suptitle("AĞ SADELEŞTİRME — tek ip pervaneye yeterse düğüm şartı k
              "Daha az iplik + daha az bağ = daha az dolanma riski VE daha uzun "
              "menzil (az sürükleme)",
              fontsize=13.5, fontweight="bold", x=.03, ha="left", y=.965)
-plt.savefig("out/AG_2B_topoloji.png", dpi=118)
+plt.savefig(vyol(__file__, "out", "AG_2B_topoloji.png"), dpi=118)
 print("-> out/AG_2B_topoloji.png")

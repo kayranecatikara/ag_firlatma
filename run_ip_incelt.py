@@ -4,7 +4,12 @@ Gercek ALTIGEN orgu (agsim.hexag) ile kosar; orumcek topolojisi tasarim
 sayilarini %6.7 yanlis veriyordu (bkz. out/GAZEBO_sonuc.md).
 """
 import sys, json
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
+from agsim.yollar import vyol
 import numpy as np
 import run_menzil_nihai as M
 from agsim.hexag import altigen_ag, bilye_dugumleri
@@ -47,5 +52,5 @@ if __name__ == "__main__":
               f"{r['F_kopma']/r['T_max']:5.1f}x {pk:8.0f}")
     json.dump([{**{'d_mm': d, 'p_kenar_MPa': pk},
                 **{k: float(v) for k, v in r.items()}} for d, r, pk in sat],
-              open('out/ip_capi_tarama.json', 'w'), indent=1)
+              open(vyol(__file__, "out", "ip_capi_tarama.json"), 'w'), indent=1)
     print("\n-> out/ip_capi_tarama.json")

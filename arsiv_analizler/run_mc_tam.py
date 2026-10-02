@@ -3,7 +3,11 @@
 ROM yaricapta dogru ama menzilde yaniltici: agir bilyelerin hafif agi
 pesinden cekmesini goremiyor. Yay rejiminde bu fark karar degistiriyor.
 """
-import sys; sys.path.insert(0,'/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 from agsim.dse import vektor_to_tasarim
 from agsim.launcher import firlat_genel

@@ -4,8 +4,8 @@ Cikti: malzeme_listesi.md + malzeme_listesi.csv
 """
 import json, csv, math
 
-P = json.load(open("cad/v4_olcu.json"))
-V = json.load(open("cad/v4_hacim.json"))
+P = json.load(open(vyol(__file__, "cad", "v4_olcu.json")))
+V = json.load(open(vyol(__file__, "cad", "v4_hacim.json")))
 g = lambda ad, rho: V[ad]["V"] * rho                       # cm3 * g/cm3
 
 # ag: altigen, kose yaricapi 1.1 m, goz 130 mm

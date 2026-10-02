@@ -8,7 +8,11 @@ Paketleme: dugumlu Dyneema ag, hacimsel doluluk ~0.30 (dugumler dahil).
 Hazne kesiti: kapsul ic yaricapi 18.55 mm -> 1081 mm2.
 """
 import sys, itertools
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 from agsim.lastik import Bant, firlat_lastik
 from run_lastik import tasarim, STROK

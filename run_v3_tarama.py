@@ -9,7 +9,12 @@ Kaldirac'lar:
 Kisit: bant basina kurma kuvveti <= F_BANT_MAX (elle tek tek cekilecek).
 """
 import sys, itertools, json
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
+from agsim.yollar import vyol
 import numpy as np
 from agsim.lastik import Bant, firlat_lastik
 from run_lastik import tasarim
@@ -89,7 +94,7 @@ if __name__ == "__main__":
         print(f"{r['L_namlu']:6.0f}mm {r['strok']:5.0f} {bant:>13} {F:6.0f}N "
               f"{alpha:3d} O{2*R_ag:.1f}m/{r['goz']:.0f}mm {r['v']:5.1f} "
               f"{r['R_max']:5.2f} {pen:>14} {r['w']:5.2f}", flush=True)
-    np.save("out/v3_tarama.npy", sonuc, allow_pickle=True)
+    np.save(vyol(__file__, "out", "v3_tarama.npy"), sonuc, allow_pickle=True)
     uygun = [r for r in sonuc if np.isfinite(r["hi"]) and r["hi"] >= 5.5]
     print(f"\n=== UZAK KENAR >= 5.5 m OLANLAR ({len(uygun)} adet) ===")
     for r in sorted(uygun, key=lambda r: (r["L_namlu"], -r["w"]))[:15]:

@@ -4,7 +4,11 @@ Deterministik optimum, imalat/nisan/zamanlama sacilmasi altinda cokebilir.
 Bir tasarimi SECMEDEN once bu kosulmalidir: aranan sey en yuksek R_eff degil,
 en yuksek YAKALAMA OLASILIGI'dir.
 """
-import sys; sys.path.insert(0,'/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 from agsim.dse import vektor_to_tasarim
 from agsim.launcher import firlat

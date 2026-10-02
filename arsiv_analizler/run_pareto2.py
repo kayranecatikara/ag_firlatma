@@ -4,7 +4,11 @@ Tek amac olarak kapsamayi maksimize etmek kaba kuvvete kacar (DE cozumu:
 Ø20 mm tungsten, 452 g bilye, 12.7 N.s geri tepme). Drone icin asil soru
 "ne kadar geri tepmeye razisin" -> her butce icin en iyi kapsama.
 """
-import sys; sys.path.insert(0,'/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 from agsim.dse import sobol_ornekle, degerlendir_vektor, pareto_front, ADLAR, BILYE_SET
 

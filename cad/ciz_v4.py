@@ -16,8 +16,8 @@ RENK = {"V4_namlu": "#8fa3b8", "V4_kapsul": S1, "V4_bilye": "#4a4a46",
         "V4_kapak_sol": "#5f6f82", "V4_tampon_ust": "#c0563a", "V4_tampon_alt": "#c0563a"}
 plt.rcParams.update({"figure.facecolor": "#fcfcfb", "axes.facecolor": "#fcfcfb",
                      "text.color": INK, "font.size": 9.5})
-D = np.load("cad/v4_mesh.npz")
-P = json.load(open("cad/v4_olcu.json"))
+D = np.load(vyol(__file__, "cad", "v4_mesh.npz"))
+P = json.load(open(vyol(__file__, "cad", "v4_olcu.json")))
 AD = list(RENK)
 
 
@@ -108,5 +108,5 @@ ax.set_title("(c) Tetik kartuşu kesiti", loc="left", fontweight="bold", fontsiz
 
 fig.suptitle("AĞ FIRLATICI NAMLU v4 — namlu 180 mm, 4 lastik bant, Talon hedefi",
              fontsize=13.5, fontweight="bold", x=.02, ha="left", y=.965)
-plt.savefig("out/cad_v4.png", dpi=120)
+plt.savefig(vyol(__file__, "out", "cad_v4.png"), dpi=120)
 print("-> out/cad_v4.png")

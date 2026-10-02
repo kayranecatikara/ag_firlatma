@@ -7,7 +7,11 @@ Kisa strok = ayni enerji icin daha buyuk kuvvet.
 Kisit: bant basina el kuvveti <= 360 N (~37 kg), 4 bant (kenar basina 2).
 """
 import sys, itertools
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 import run_v3_tarama as V
 

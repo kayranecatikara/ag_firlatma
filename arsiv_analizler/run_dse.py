@@ -1,6 +1,10 @@
 """Tasarim uzayi kesfi: Sobol taramasi + duyarlilik + Pareto + optimizasyon."""
 import sys, time, json
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np, pandas as pd
 from scipy.stats import spearmanr
 from scipy.optimize import differential_evolution

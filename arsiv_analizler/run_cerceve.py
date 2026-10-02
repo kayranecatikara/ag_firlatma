@@ -9,8 +9,11 @@ netfull.simule DRONE CERCEVESINDE calisir:
   - z_sim dogrudan DRONE'A GORE ileri mesafedir
 Yer cercevesindeki yol:  s_yer = z_sim + V_drone * t
 """
-import sys
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 from agsim.dse import vektor_to_tasarim
 from agsim.launcher import firlat_genel

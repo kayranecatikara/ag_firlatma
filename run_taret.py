@@ -10,8 +10,12 @@ hesaplar.
 Yerlesim:  L_namlu = L_yay_kurulu + L_kapsul + STROK + (omuz 4 + koni 22)
 Pnomatikte L_yay_kurulu yoktur -> ayni boyda COK DAHA UZUN strok.
 """
-import sys
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
+from agsim.yollar import vyol
 import numpy as np
 from scipy.optimize import differential_evolution
 from agsim.dse import vektor_to_tasarim
@@ -23,7 +27,7 @@ from agsim.netfull import simule
 L_KAPSUL, L_UC = 50.0, 26.0      # kapsul + (omuz + agiz konisi)
 SF_MIN = 1.25
 R_GER = 0.75
-X = np.load("out/x_final.npy")
+X = np.load(vyol(__file__, "out", "x_final.npy"))
 
 
 def tasarim(L_namlu_mm):

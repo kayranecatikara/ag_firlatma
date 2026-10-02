@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """IPLIK CAPI KARARI — menzil kazanci vs uc kesilme/kopma mekanizmasi."""
 import sys, json, os
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
+from agsim.yollar import vyol
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -16,7 +21,7 @@ plt.rcParams.update({"figure.facecolor": "#fcfcfb", "axes.facecolor": "#fcfcfb",
     "ytick.color": INK2, "axes.edgecolor": GRID, "grid.color": GRID,
     "font.size": 9.5})
 
-D = json.load(open("out/ip_capi_tarama.json"))
+D = json.load(open(vyol(__file__, "out", "ip_capi_tarama.json")))
 d = np.array([r["d_mm"] for r in D])
 hi = np.array([r["hi"] for r in D]); lo = np.array([r["lo"] for r in D])
 Rt = np.array([r["R_tepe"] for r in D])
@@ -78,7 +83,7 @@ Fl = np.array([Ag(d_iplik=x*1e-3).F_kopma for x in dd])
 a.plot(dd, Fl*DUGUMSUZ_VERIM, color=S3, lw=2.8, label="düğümsüz ağ dayanımı (%90)")
 a.plot(dd, Fl*DUGUM_VERIMI["Dyneema_SK78"], color=S2, lw=2.8,
        label="düğümlü ağ dayanımı (%55)")
-GZ = json.load(open("out/gazebo_yakalama_gerilme.json"))
+GZ = json.load(open(vyol(__file__, "out", "gazebo_yakalama_gerilme.json")))
 mk = {"4.50": "v", "4.65": "o", "4.80": "^"}
 for dk, mes in GZ.items():
     if dk.startswith("_"): continue
@@ -98,5 +103,5 @@ a.legend(fontsize=7.2, frameon=False); a.grid(alpha=.3)
 fig.suptitle("İPLİK İNCELTME KARARI — üç kesilme mekanizmasının çapa "
              "bağımlılığı FARKLI", fontsize=13.5, fontweight="bold",
              x=.045, ha="left", y=.945)
-plt.savefig("out/ip_capi_karar.png", dpi=118)
+plt.savefig(vyol(__file__, "out", "ip_capi_karar.png"), dpi=118)
 print("-> out/ip_capi_karar.png")

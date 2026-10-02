@@ -8,8 +8,11 @@ Yeni yerlesim (omuz YOK — omuz bilyelerin yolunu kesiyordu):
   Namlu boyu:  L = 5 + 4.5 + s + D_son + 3   (ve kapsul agzi <= namlu agzi)
 Bant kesiti kurma kuvveti sinirindan (servo secimi) belirlenir.
 """
-import sys
-sys.path.insert(0, '/home/kayra/Masaüstü/ag_firlatma')
+import os, sys
+_K = os.path.abspath(__file__)
+while _K != os.path.dirname(_K) and not os.path.isdir(os.path.join(_K, "agsim")):
+    _K = os.path.dirname(_K)
+sys.path.insert(0, _K)
 import numpy as np
 from agsim.lastik import Bant, firlat_lastik
 from run_lastik import tasarim
