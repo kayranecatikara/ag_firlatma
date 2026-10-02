@@ -84,7 +84,7 @@ açılma            : 200 ms'de R = 1.14 m      (gereken 0.859 m — Talon yarı
 geometrik pencere : 3.58 – 6.80 m
 EN İYİ TETİKLEME  : 4.0 – 4.5 m               (§5 — Gazebo bunu tersine çevirdi)
 ip tepe yükü      : 19 N                      (kopan eleman: 0)
-sistem kütlesi    : ~492 g
+sistem kütlesi    : ~410 g
 ağ                : Ø2.6 m altıgen dış hat, KARE göz 200 mm,
                     142 bağ, ~2.5 saat el emeği
 ```
@@ -103,8 +103,8 @@ ağ                : Ø2.6 m altıgen dış hat, KARE göz 200 mm,
 | Strok | 114 mm |
 | v_çıkış | 34.5 m/s |
 | Atış penceresi | **3.58 – 6.80 m** geometrik · **EN İYİ 4.0–4.5 m** (bkz. §5) |
-| Kütle | **~492 g** (servolar + ağ + bilyeler dahil) — yaylı tasarım ~730 g idi |
-| Tetik | 2 karşılıklı pim, kapaklı kartuş + geri-getirme yayı; **PTFE burç ŞART**; 2 × MG996R sınıfı servo, makara r=4 mm |
+| Kütle | **~410 g** (servolar + ağ + bilyeler dahil) — MG996R ile 492 g idi |
+| Tetik | 2 karşılıklı pim, kapaklı kartuş + geri-getirme yayı; **PTFE burç ŞART**; 2 × **MİKRO** metal dişli servo (~14 g), makara r=2.2 mm |
 
 Yaylı tasarım `cad/eski_tasarimlar/yay_tahrikli/` altında arşivlendi (kısa namluda
 blok boyu stroku yiyor, kurma kuvveti 1000 N'u aşıyordu).
@@ -238,8 +238,17 @@ ağın uçağın üzerinden **değip geçtiğini** gösterdi:
 
   Bedeli: +23 g (sistem 469 → 492 g).
 - **TR'deki MG996R'lerin hepsi "half metal"** (iç dişliler plastik).
-  Pahalı servo almak yerine **makara r = 6 → 4 mm** küçültüldü: gereken
-  tork 5.9 → **3.9 kg·cm**, pay 1.9× → **2.8×**.
+  Pahalı servo almak yerine makara küçültüldü — ama asıl düzeltme aşağıda.
+- **MG996R çok ağırdı (110 g = sistemin %22'si).** Servo seçimini
+  **iş korunumunu** gözden kaçırarak yapmıştım: `tork × açı = F_pim × strok`
+  sabittir ve r=4 mm makara servonun dönüş aralığının yalnızca **86°**'sini
+  kullanıyordu. Makara r=2.2 mm + kanal derinliği 5→4 mm ile **130°**
+  kullanılıyor, gereken tork **3.9 → 2.15 kg·cm**'ye düşüyor.
+  Sonuç: 2 × MG996R (110 g) yerine 2 × mikro metal dişli servo (28 g),
+  **1.81× pay** ve **−82 g**. Namlunun servo yatağı zaten M2/mikro servo
+  için tasarlanmıştı; sadece delik aralığı 18 → 28 mm'ye düzeltildi (oval,
+  marka farkını tolere etsin diye).
+
 
 ### Üç ayrı yerde kullanıcının fiziksel sezgisi analizi yendi
 1. **Sürükleme büyüklüğü** — "bu etki çok daha fazla olmalı" dedi, haklıydı.

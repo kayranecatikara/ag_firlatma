@@ -10,7 +10,9 @@ v1'den farklar:
     (D_son = L0 + H: bant, capraz pim durdugu anda tam gevsek olur).
   * Tetik kartusu kapaklari AYRI parca (M2 ile vidalanir) — pim+yay
     montajdan sonra takilabilsin diye.
-  * Servo yataklari M2 (mikro servo), bilye O12.7 (standart 1/2").
+  * Servo yataklari: MIKRO SERVO (Savox SH-0255MG / MG92B sinifi, ~14 g),
+    M2 oval delik, 28 mm aralik. MG996R DEGIL -- bkz. README.
+  * Bilye O12.7 (standart 1/2").
 Koordinatlar: +Y ileri (agiz), y=0 acik arka agiz, bantlar +/-Z, tetik +/-X.
 """
 import FreeCAD as App, Part, math, os, json
@@ -32,7 +34,8 @@ P = dict(
     kulak_R=42.0, bilezik_R=32.0, bilezik_L=14.0, d_ankraj=6.5,
     # tetik kartusu
     d_pim=5.0, boss_d=18.0, boss_h=16.5, d_yuva_pim=10.6, kapak_t=3.0, d_ip=2.0,
-    d_M2=1.7, pad_l=24.0, pad_w=14.0, pad_t=4.0, pad_ofset=30.0,
+    d_M2=1.7, pad_l=36.0, pad_w=15.0, pad_t=4.0, pad_ofset=30.0,
+    servo_delik=14.0, servo_slot=2.0,   # +-14 mm (28 mm aralik), oval
 )
 if os.path.exists(KONFIG):
     P.update(json.load(open(KONFIG)))
@@ -104,8 +107,18 @@ def namlu(p):
                    -p["pad_w"] / 2, p["pad_w"] / 2)
         pad.translate(V(s * (Ro + 1.0), y_t + p["pad_ofset"], 0))
         g = g.fuse(pad)
-        for dy in (-9.0, 9.0):
-            g = g.cut(sil(p["d_M2"] / 2, 10, V(s * (Ro - 3), y_t + p["pad_ofset"] + dy, 0), u))
+        # MIKRO SERVO baglanti delikleri: 28 mm aralik (+-14), OVAL.
+        # Oval olmasi marka farkini (26-30 mm) tolere eder.
+        for dy in (-p["servo_delik"], p["servo_delik"]):
+            yk = y_t + p["pad_ofset"] + dy
+            for ds in (-p["servo_slot"] / 2, p["servo_slot"] / 2):
+                g = g.cut(sil(p["d_M2"] / 2, 10, V(s * (Ro - 3), yk + ds, 0), u))
+            g = g.cut(kutu(s * (Ro - 3) - 0.1, s * (Ro - 3) + 10 * s,
+                           yk - p["servo_slot"] / 2, yk + p["servo_slot"] / 2,
+                           -p["d_M2"] / 2, p["d_M2"] / 2) if s > 0 else
+                      kutu(s * (Ro - 3) + 10 * s, s * (Ro - 3) + 0.1,
+                           yk - p["servo_slot"] / 2, yk + p["servo_slot"] / 2,
+                           -p["d_M2"] / 2, p["d_M2"] / 2))
     # gobek ust yuzunde kapak icin 2x M2 delik (Z yonunde kaydirilmis)
     for s in (+1, -1):
         for dz in (-6.0, 6.0):

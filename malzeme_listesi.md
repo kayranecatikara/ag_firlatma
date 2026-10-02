@@ -10,7 +10,7 @@ Namlu 180.5 mm · strok 114 mm · kapsul 38 mm · 4x lateks O15.2/4 · **ag O2.6
 | A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x 180.5 mm, 2 duz yarik 6.4 mm | 172.0 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
 | A2 | Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi) | 1 | PETG | O43.1 x 38 mm, hazne O37.1 x 14 mm, yuva acisi 13 derece | 27.5 | Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu. |
 | A3 | Tetik kartus kapagi | 2 | PETG | O18 x 3 mm, ortada O2 ip deligi, 2x O2.2 vida deligi | 1.9 | %100 dolgu. |
-| A4 | Servo ip makarasi | 2 | PETG | **tambur r=4 mm** (O8), flans O14, servonun KENDI KOLUNA 2x M2 ile oturur, O1.5 ip deligi | 0.7 | **r=4 mm KRITIK**: gereken tork = 96 N x 4 mm = 3.9 kg.cm -> MG996R'de **2.8x pay**. r=6 mm'de pay 1.9x'e duser. Turkiye'de satilan MG996R'lerin IC DISLILERI PLASTIKTIR; 2.8x pay plastik dislinin kaldirabilecegi seviyedir. 6 mm pim stroku icin 86 derece donus yeter. Spline'a gecmez, her servoya uyar. |
+| A4 | Servo ip makarasi | 2 | PETG | **tambur r=2.2 mm**, flans O10, servonun KENDI KOLUNA 2x M2 ile oturur, O1.5 ip deligi | 0.7 | **r=2.2 mm KRITIK**: gereken tork = 96 N x 2.2 mm = **2.15 kg.cm**. 5 mm pim stroku icin 130 derece donus (servo araligi 180). Makarayi BUYUTME -- r=4'te tork 3.9 kg.cm'ye cikar ve mikro servo yetmez. Spline'a gecmez, her servoya uyar. |
 | A5 | Yarik sonu durdurma tamponu | 2 | TPU 95A | 6.2 x 3 x 7 mm | 0.5 | Yarik on ucuna CA ile yapistir. Kapsulun carpma yukunu yumusatir (~450 N). |
 | A6 | Arka toz kapagi (opsiyonel) | 1 | PETG | O43 tapa, ortada O10 havalandirma | 2.0 | Arka agiz yukleme agzidir; ucusta toz/kir girmesin diye. |
 
@@ -46,7 +46,7 @@ Namlu 180.5 mm · strok 114 mm · kapsul 38 mm · 4x lateks O15.2/4 · **ag O2.6
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| E1 | Servo | 2 | MG996R sinifi (>=11 kg.cm @6V) | 40 x 20 x 37 mm | 110.0 | Makara r=4 mm ile gereken tork 3.9 kg.cm -> **2.8x pay**. **UYARI: Turkiye'de satilan MG996R'lerin tamami 'half metal' klondur** (sadece cikis dislisi metal, ic disliler plastik). r=4 makara ile yine de yeterli. Butce varsa DS3218 (19 kg.cm, aluminyum disli) daha guvenli ama GEREKLI DEGIL. Mikro servo YETMEZ. Iki servo AYNI sinyal. |
+| E1 | Servo | 2 | **MIKRO servo, METAL DISLI, >=3.5 kg.cm @6V** (Savox SH-0255MG / MG92B sinifi) | ~32 x 16 x 30 mm, baglanti deligi 28 mm aralik | **28.0** | **MG996R'DEN MIKRO SERVOYA GECILDI: -82 g.** Is korunumlu (tork x aci = F_pim x strok): r=4 mm makara servonun yalnizca 86 derecesini kullaniyordu. r=2.2 mm + kanal 4 mm ile 130 derece kullaniliyor, gereken tork 3.9 -> **2.15 kg.cm**. Savox SH-0255MG (3.9 kg.cm, 14 g) ile **1.81x pay**. Metal disli SART (mikro servolarin plastik dislileri sıyirir). Stall akimi ~0.9 A (MG996R 2.5 A) -> BEC yuku de hafifledi. Iki servo AYNI sinyal. |
 | E2 | Servo Y-kablosu (1 giris -> 2 servo) | 1 | JR/Futaba 3 pin | ~15-30 cm | 4.0 | **GUC UYARISI**: iki servonun stall akimi ~2.5 A/adet = **5 A toplam**. 22AWG Y-kablo ve alici regulatoru bunu kaldirmaz. Y-kabloyu **YALNIZCA SINYAL** icin kullan; +5V/GND'yi her iki servoya **dogrudan BEC'ten** cek. |
 | E3 | Servo uzatma kablosu | 1 | JR/Futaba 3 pin | gerekli boy (tarete gore) | 5.0 | Ucus kontrolcusundeki bir PWM cikisina. |
 | E4 | Tetik ipi | 2 | PE/Dyneema orgu, PE #6 (~0.40 mm, ~30 kg) | her biri ~120 mm | 0.0 | Pim deliginden -> kapak deliginden -> yonlendirme piminden -> servo tamburuna. |
@@ -82,4 +82,7 @@ Namlu 180.5 mm · strok 114 mm · kapsul 38 mm · 4x lateks O15.2/4 · **ag O2.6
 | H3 | Yedek bant seti | 1 | D1-D3 |  | 0.0 | Lateks yaslanir; testlerde surekli yedek bulundur. |
 | H4 | Yuksek hizli kamera (telefon 240 fps) | 1 |  |  | 0.0 | Yer atisinda acilma suresi/cap olcumu. |
 
-**Toplam (A-F, test ekipmani haric): ~492 g**  (capraz pim celik oldugu icin +23 g)
+**Toplam (A-F, test ekipmani haric): ~410 g**
+
+> Kutle gecmisi: 492 g (MG996R) -> **410 g** (mikro servo, -82 g).
+> Capraz pim celik oldugu icin +23 g iceriyor (7075 TR'de yok).

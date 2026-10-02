@@ -144,8 +144,8 @@ Online: "heat set insert M2", "ısıl gömme somun M2", "M2 civata seti".
 | E4 | ⚪ Dyneema örgü ip (tetik ipi) | 50 cm | PE #6, ~0.40 mm, 30 kg |
 | E5 | ⚪ Kablo bağı | 10 | 2.5 mm |
 
-**🔴 MİKRO SERVO YETMEZ.** Pim başına ~96 N çekme gerekiyor (PTFE burçla).
-Plastik dişli servo da olmaz — dişli sıyırır.
+**🔴 METAL DİŞLİ ŞART** — plastik dişli sıyırır. Ama **MG996R gereksiz ağır** (55 g):
+makara r=2.2 mm ile gereken tork 2.15 kg·cm, mikro servo (~14 g) 1.81× payla yetiyor.
 
 **İki servo AYNI sinyali alacak** (Y-kablo) — asimetrik çekiş kapsülü
 yana kaydırır.

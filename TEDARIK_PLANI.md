@@ -23,14 +23,18 @@ Tasarım gerilmesini hesapladım: kapsül kenarında M = 10170 N·mm → **202 M
 | 6063 *(piyasada bulunan Al)* | 170 MPa | **0.84×** | ❌ KIRILIR |
 | 304 paslanmaz | 210 MPa | **1.04×** | ❌ yetersiz |
 
-**Bedeli:** pim 13 g yerine 36 g → sistem 469 → **492 g** (+%5). Paslanır,
+**Bedeli:** pim 13 g yerine 36 g (+23 g). Paslanır,
 yağlanmalı (zaten pimleri yağlıyoruz).
 
-### 2. Servo makarası: r=6 mm → **r=4 mm**
-Türkiye'deki MG996R'lerin **tamamı "half metal"** — iç dişliler plastik
-(7 satıcının sayfasından doğrulandı). Makarayı küçültünce gereken tork
-5.9 → **3.9 kg·cm**, MG996R payı 1.9× → **2.8×**. Plastik dişli bunu kaldırır.
-**963 TL'lik DS3218'e gerek yok.** STL güncellendi.
+### 2. Servo: MG996R → **MİKRO servo** (makara r=2.2 mm)
+MG996R **110 g = sistemin %22'si** idi. İş korunumlu: `tork × açı =
+F_pim × strok`. r=4 mm makara servonun dönüş aralığının yalnızca 86°'sini
+kullanıyordu; **r=2.2 mm + kanal 4 mm** ile 130° kullanılıyor ve gereken
+tork **3.9 → 2.15 kg·cm**'ye düşüyor.
+→ **mikro metal dişli servo** (Savöx SH-0255MG / MG92B sınıfı, ~14 g,
+≥3.5 kg·cm) **1.81× payla** yetiyor. **−82 g → sistem 410 g.**
+Namlunun servo yatağı zaten M2/mikro için tasarlanmıştı; delik aralığı
+18 → 28 mm'ye düzeltildi (oval, marka farkını tolere eder).
 
 ---
 
@@ -81,6 +85,11 @@ https://metalavm.com · yerli, TR içi kargo, sepet indirimi %2-4
 | DFT Bojin Dyneema **0,30 mm / 22,67 kg / 100 m** ✅ | [link](https://www.avmarketi.com/urun/dft-bojin-dyneema-ip-misina-100-m-0-30mm-yesil) | 415,32 TL |
 
 ## 📦 SİPARİŞ 4 — Robot Sepeti (servo + civata)
+
+> ⚠️ **SERVO SEÇİMİ DEĞİŞTİ.** Aşağıdaki MG996R linki **artık geçerli değil** —
+> 110 g gereksiz ağırdı. Makara r=2.2 mm'ye küçültülünce gereken tork
+> 2.15 kg·cm'ye düştü ve **mikro metal dişli servo** (~14 g, ≥3.5 kg·cm,
+> delik aralığı 28 mm) yetiyor. **−82 g.** Yeni servo için arama gerekli.
 | Ne | Link | Fiyat |
 |---|---|---|
 | Tower Pro MG996R ×2 (11 kg·cm @6V) | [link](https://www.robotsepeti.com/tower-pro-mg996-r-servo-motor-180) | 257,17 ×2 = 514 TL |

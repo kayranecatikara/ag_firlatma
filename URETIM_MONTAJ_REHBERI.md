@@ -139,7 +139,7 @@ Tam liste: `malzeme_listesi.md`. Özet alışveriş:
 - [ ] **D3** Sargı ipliği (naylon dikiş) — 2 m
 
 ### Elektrik
-- [ ] **E1** MG996R sınıfı servo (≥11 kg·cm, metal dişli) — 2 ad
+- [ ] **E1** **MİKRO** metal dişli servo (≥3.5 kg·cm @6V, ~14 g, delik aralığı 28 mm) — 2 ad
 - [ ] **E2** Servo Y-kablosu  **E3** uzatma kablosu
 
 ### Ağ
@@ -323,11 +323,12 @@ Sıra: PTFE burç → pim → yay → mil bileziği → kapak
 > **Y-kabloyu yalnızca SİNYAL için kullan; +5V ve GND'yi her iki servoya
 > doğrudan BEC'ten çek.**
 
-> **Servo dişlisi hakkında:** Türkiye'de satılan MG996R'lerin tamamı
-> "half metal" klon — sadece çıkış dişlisi metal, iç dişliler plastik.
-> Makara yarıçapını **4 mm** tuttuğumuz için gereken tork 3.9 kg·cm
-> (servo 11 kg·cm → **2.8× pay**) ve plastik dişli bunu kaldırır.
-> Makarayı büyütme — r=6 mm'de pay 1.9×'e düşer.
+> **Servo seçimi:** **MİKRO metal dişli servo** kullanılıyor (Savöx
+> SH-0255MG / MG92B sınıfı, ~14 g, ≥3.5 kg·cm). MG996R (55 g) gereksiz
+> ağırdı. Makara **r=2.2 mm** ve kanal derinliği 4 mm olduğu için gereken
+> tork **2.15 kg·cm** → **1.81× pay**.
+> **Makarayı büyütme** — r=4 mm'de tork 3.9 kg·cm'ye çıkar ve mikro servo yetmez.
+> **METAL DİŞLİ ŞART** — mikro servoların plastik dişlileri sıyırır.
 
 ### 6.3 Servo ayarı (bantlar TAKILI DEĞİLKEN)
 1. Uçuş kontrolcüsünden servoya **"dinlenme"** konumu ver → iki pim de
@@ -335,7 +336,7 @@ Sıra: PTFE burç → pim → yay → mil bileziği → kapak
 2. **"Ateş"** konumu ver → iki pim de **tam dışarıda** (kanaldan çıkmış).
 3. İkisi **aynı anda** çıkıyor mu? Gecikme varsa servo kollarının
    açısını eşitle. **Asimetrik çekiş kapsülü yana kaydırır.**
-4. Pim stroku: en az **6 mm** (kanal derinliği 5 mm + pay).
+4. Pim stroku: en az **5 mm** (kanal derinliği 4 mm + pay). Servo dönüşü ~130°.
 
 ### 6.4 Tampon ve çapraz pim
 1. **A5 TPU tamponlarını** namlunun iki yarığının **ön ucuna** CA ile yapıştır.
@@ -523,7 +524,7 @@ TETİK      : 2 karşılıklı çelik pim, PTFE burç, 2 × MG996R servo, Y-kabl
 AĞ         : altıgen Ø2.6 m, KARE göz 200 mm, Dyneema örgü Ø0.165
              + çevre halatı Ø0.285, ~142 bağ, ~26 sürekli ip
 BİLYE      : 6 × Ø12.7 delikli kurşun, ~12 g
-KÜTLE      : ~469 g (servolar dahil)
+KÜTLE      : ~410 g (servolar dahil)
 
 PERFORMANS (Gazebo + Python, doğrulanmış)
   çıkış hızı       : 34.5 m/s

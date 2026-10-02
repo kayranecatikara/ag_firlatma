@@ -33,10 +33,13 @@ Tasarım **Ø12.7 mm = tam 12.16 g** küre istiyor. Piyasadaki zeytin kurşun
 → **.50 kalibre yuvarlak kurşun al, 2 mm matkapla kendin del.** Kurşun çok
 yumuşak, el matkabıyla 1 dakika.
 
-**5. SERVO — "metal dişli" yazısına aldanma**
-Türkiye'deki MG996R'lerin **tamamı "half metal"** (sadece çıkış dişlisi metal,
-iç dişliler plastik). **Sorun değil** — makara r=4 mm olduğu için gereken tork
-3.9 kg·cm, servo 11 kg·cm → **2.8× pay**. ❌ **963 TL'lik DS3218'e GEREK YOK.**
+**5. SERVO — MG996R ALMA, MİKRO SERVO AL**
+**MG996R 110 g = sistemin %22'si.** Makara r=2.2 mm + kanal 4 mm ile gereken
+tork **2.15 kg·cm**'ye düştü; **mikro metal dişli servo** (Savöx SH-0255MG /
+MG92B sınıfı, **~14 g**, ≥3.5 kg·cm) **1.81× payla** yetiyor.
+→ **−82 g** (sistem 492 → 410 g). ❌ MG996R ve DS3218'e GEREK YOK.
+⚠️ **METAL DİŞLİ ŞART** — mikro servoların plastik dişlileri sıyırır.
+⚠️ Bağlantı deliği aralığı **28 mm** olmalı (namludaki yatak buna göre).
 
 **6. Y-KABLO — yalnızca SİNYAL**
 İki servonun stall akımı 2.5 A/adet = **5 A**. 22AWG Y-kablo ve alıcı
@@ -98,7 +101,7 @@ https://metalavm.com · yerli, TR içi kargo
 
 | ☐ | Parça | Spec (kritik olan) | Adet | Satıcı | Link | Fiyat | Not |
 |---|---|---|---|---|---|---|---|
-| ☐ | **E1 Servo** | **≥11 kg·cm @6V** — sayfada "11kg/cm @6V" ✅, 40,7×19,7×42,9 mm | **2** | Robot Sepeti | [link](https://www.robotsepeti.com/tower-pro-mg996-r-servo-motor-180) | 257,17 ×2 = **514 TL** | "Half metal" — **sorun değil**, bkz. Uyarı 5 |
+| ☐ | **E1 Servo** | **MİKRO, METAL DİŞLİ, ≥3.5 kg·cm @6V** — Savöx SH-0255MG / MG92B sınıfı, ~14 g, delik aralığı 28 mm | **2** | RC hobi mağazası | *(TEDARIK_PLANI'nda MG996R linki vardı — ARTIK GEÇERSİZ, yeni arama gerekli)* | — | **MG996R ALMA** — 110 g, gereksiz ağır. Mikro servo 28 g, −82 g kazanç |
 | ☐ | **C2 M2×6 civata** | DIN 912, A2 304 inox, silindir baş ✅ | 10'lu | Robot Sepeti | [link](https://www.robotsepeti.com/m2x6-imbus-civata-paslanmaz) | 43,36 TL | 4 lazım (kapak) |
 | ☐ | **C3 M2×8 civata** | DIN 912, A2 304 inox ✅ | 10'lu | Robot Sepeti | [link](https://www.robotsepeti.com/m2x8-imbus-civata-10lu) | 37,34 TL | 4 lazım (servo) |
 
@@ -209,7 +212,7 @@ https://metalavm.com · yerli, TR içi kargo
 | **Hazır PTFE burç 5/7×10** | TR'de online stoktan yok, hepsi teklif usulü | **PTFE çubuktan tornada** yaptır |
 | **Ø5 mil bileziği (DIN 705)** | Tek kaynak RS, 305 TL/ad + stok teyidi | **Ø10 çubuktan tornada** yaptır |
 | **12 g delikli kurşun bilye** | Misket 8 g'da bitiyor, zeytin oval | **.50 kalibre yuvarlak kurşun + kendin del** |
-| **Tam metal dişli MG996R** | TR'dekilerin hepsi "half metal" | **Gerek yok** — makara r=4 mm, 2.8× pay |
+| **Tam metal dişli MG996R** | TR'dekilerin hepsi "half metal" | **Zaten gerekmiyor** — MİKRO metal dişli servoya geçildi (r=2.2 mm makara, 1.81× pay, −82 g) |
 | **Ø4/Ø3 hazır paslanmaz pim** | Civata sitelerinin hiçbirinde fiyat doğrulanamadı | **Çubuktan kes** (Sipariş 1'e dahil) |
 
 ---

@@ -28,21 +28,26 @@ def servo_makarasi():
 
     Spline marka marka degisir; bu yuzden spline'a gecmez, servonun
     standart koluna vidalanir. Boylece her servoya uyar.
-      tambur r = 4 mm. Gereken tork = F*r = 96 N * 4 mm = 3.9 kg.cm
-      -> MG996R (11 kg.cm @6V) ile 2.8x PAY.
-      TURKIYE'DE SATILAN MG996R'LERIN IC DISLILERI PLASTIKTIR ("half metal");
-      r=6 mm'de pay 1.9x'e dusuyordu, r=4'te 2.8x -> plastik disli kaldirir.
-      6 mm pim stroku icin 86 derece donus yeter (servo araligi 120-180).
+      tambur r = 2.2 mm  (MIKRO SERVO ICIN KUCULTULDU).
+
+      IS KORUNUMLU: tork x aci = F_pim x strok = SABIT. Onceki r=4 mm
+      servonun donus araliginin yalnizca 86 derecesini kullaniyordu;
+      r=2.2'de 130 derece kullanilip gereken tork 3.9 -> 2.15 kg.cm'ye
+      duser. Kanal derinligi de 5 -> 4 mm indirildigi icin strok 6 -> 5 mm.
+
+      Sonuc: 2 x MG996R (110 g) yerine 2 x mikro metal disli servo
+      (Savox SH-0255MG sinifi, 14 g, 3.9 kg.cm) -> PAY 1.81x.
+      Sistem kutlesi 492 -> 410 g.
     """
-    r_t, w_t, r_f, t_f = 4.0, 5.0, 7.0, 1.5
+    r_t, w_t, r_f, t_f = 2.2, 4.0, 5.0, 1.2
     g = sil(r_t, w_t, V(0, 0, t_f), V(0, 0, 1))                 # tambur
     g = g.fuse(sil(r_f, t_f, V(0, 0, 0), V(0, 0, 1)))           # alt flans
     g = g.fuse(sil(r_f, t_f, V(0, 0, t_f + w_t), V(0, 0, 1)))   # ust flans
-    g = g.cut(sil(2.6, 20, V(0, 0, -1), V(0, 0, 1)))            # kol vidasi bosu
+    g = g.cut(sil(1.8, 20, V(0, 0, -1), V(0, 0, 1)))            # kol vidasi bosu
     for s in (+1, -1):                                          # 2x M2 vida
-        g = g.cut(sil(1.1, 20, V(s * 5.2, 0, -1), V(0, 0, 1)))
+        g = g.cut(sil(1.1, 20, V(s * 3.6, 0, -1), V(0, 0, 1)))
     # ip deligi: tambura teget, ipi iceri alip dugumlemek icin
-    g = g.cut(sil(0.75, 30, V(0, -r_t + 1.0, t_f + w_t / 2), V(0, 1, 0)))
+    g = g.cut(sil(0.6, 30, V(0, -r_t + 0.8, t_f + w_t / 2), V(0, 1, 0)))
     return g
 
 
