@@ -2194,6 +2194,10 @@
         <firlatma_t>-1</firlatma_t>
         <tetik_konu>/ag_firlatici/ates</tetik_konu>
         <firlatici_link>namlu</firlatici_link>
+        <!-- Dugum pozlari MUTLAK yazili; bu, uretim anindaki varsayilan
+             firlatici pozu. Plugin agi firlaticinin GERCEK pozuna tasir,
+             yani firlaticiyi dunyada istedigin yere koyabilirsin. -->
+        <uretim_firlatici_poz>-0.1498 0 2.0 0 0 0</uretim_firlatici_poz>
         <devir_t>0.08</devir_t>
         <v_eksenel>33.6197</v_eksenel>
         <!-- radyal hiz YALNIZCA bilyelere verilir (Python modeliyle ayni) -->
@@ -2619,7 +2623,7 @@
     </plugin>
 
     <model name="talon">
-      <pose>4.200 0 2.0 0 0 0</pose>
+      <pose>4.650 0 2.0 0 0 0</pose>
       <link name="talon_govde">
         <inertial><mass>1.8</mass><inertia>
           <ixx>0.30</ixx><iyy>0.12</iyy><izz>0.38</izz>

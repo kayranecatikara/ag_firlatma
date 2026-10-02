@@ -10,6 +10,12 @@
      NASIL:
        1) Asagidaki her seyi kendi dunyandaki <world> ... </world>
           arasina kopyala.
+       1b) !! KENDI DUNYANDAKI <physics> BLOGUNU DA AYARLA !!
+           <max_step_size>0.000034</max_step_size>
+           Gazebo varsayilani 1 ms'dir; bu tasarim 34 us ister.
+           OLCULDU: 1 ms ile ag 1.08 m yerine 0.57 m aciliyor ve
+           HIC HATA VERMIYOR -- yani sessizce YANLIS sonuc alirsin.
+           Bu blok BURADA DEGILDIR, kendi dunyanda ayarlaman gerekir.
        2) <plugin> blogundaki <firlatici_link> degerini KENDI tasiyici
           link adinla degistir (varsayilan: namlu).
        3) GZ_SIM_SYSTEM_PLUGIN_PATH'i plugin build klasorune ayarla.
@@ -2175,6 +2181,10 @@
         <firlatma_t>-1</firlatma_t>
         <tetik_konu>/ag_firlatici/ates</tetik_konu>
         <firlatici_link>namlu</firlatici_link>
+        <!-- Dugum pozlari MUTLAK yazili; bu, uretim anindaki varsayilan
+             firlatici pozu. Plugin agi firlaticinin GERCEK pozuna tasir,
+             yani firlaticiyi dunyada istedigin yere koyabilirsin. -->
+        <uretim_firlatici_poz>-0.1498 0 2.0 0 0 0</uretim_firlatici_poz>
         <devir_t>0.08</devir_t>
         <v_eksenel>33.6197</v_eksenel>
         <!-- radyal hiz YALNIZCA bilyelere verilir (Python modeliyle ayni) -->

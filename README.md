@@ -198,6 +198,11 @@ ağın uçağın üzerinden **değip geçtiğini** gösterdi:
 **DOĞRUSU: 4.0 – 4.5 m'den ateşle.**
 
 ### Gazebo / yazılım
+- **Ağ düğümlerinin pozları mutlak yazılıydı.** Entegrasyon risk analizinde
+  yakalandı: fırlatıcı başka bir yere konduğunda ağ ondan kopuk, yanlış bir
+  ofsette taşınıyordu — doğru yönde ama yanlış yerden çıkan, sessiz bir hata.
+  Plugin'e `<uretim_firlatici_poz>` eklendi; ağ artık fırlatıcının gerçek
+  pozuna taşınıyor.
 - **Hedef link adı `govde` çok yaygındı.** Entegrasyon testinde plugin,
   test dronunun kendi gövdesini hedef sanıp üzerine trim kuvveti uyguladı.
   Hedef link `talon_govde` olarak yeniden adlandırıldı.
@@ -564,7 +569,55 @@ kendi modeline göre ayarla:
 - atış anında hızları linkin **o anki yönelimine** göre uygular ve
   **linkin kendi hızını ekler**.
 
-### 9.3.1 Entegrasyon kontrol listesi
+`<uretim_firlatici_poz>` ise ağı **fırlatıcının gerçek pozuna taşır.**
+Ağ düğümlerinin pozları SDF'te *mutlak* yazılıdır ve üretim anındaki
+varsayılan fırlatıcı pozunu temel alır; bu alan sayesinde plugin farkı
+hesaplayıp ağı doğru yere kaydırır. **Yani fırlatıcıyı dünyada istediğin
+yere ve açıya koyabilirsin** — üreteci yeniden çalıştırman gerekmez.
+
+Doğrulandı: fırlatıcı `(3.0, 1.5, 2.0)` + 0.5 rad yaw'a konduğunda plugin
+`ag, firlaticinin GERCEK pozuna tasiniyor (uretim -0.1498 0 2 -> gercek
+3 1.5 2)` diyerek ağı taşıdı ve atış normal çalıştı (R_tepe 1.08 m).
+
+### 9.3.1 ⚠️ `<physics>` AYARINI DA TAŞI — en sinsi hata
+
+`ag_eklentisi.sdf` **ağ ve plugin'i** taşır ama `<physics>` bloğunu
+**taşımaz**. Kendi dünyanın `<max_step_size>` değeri ne ise o kullanılır.
+
+Gazebo'nun varsayılanı **1 ms**; bu tasarımın gerektirdiği **34 µs**'nin
+**29 katı**.
+
+**Ölçüldü — ve çökmekten daha kötüsü oluyor:**
+
+| | doğru dt (34 µs) | yanlış dt (1 ms) |
+|---|---|---|
+| ağ açılması R_tepe | **1.08 m** | **0.57 m** |
+| tepe iplik yükü | 16.4 N | 9.6 N |
+| çökme / NaN | — | **YOK** |
+
+Ağ, gereken **0.859 m**'nin *altında* açılıyor ve simülasyon hiç hata
+vermiyor. Yani "bu ağ Talon'u yakalayamıyor" gibi **tamamen yanlış bir
+sonuca** varır ve ona inanırsın. Çökseydi fark ederdin.
+
+> Daha ince örgülerde (709 düğümlü hex) aynı hata **gerçekten çökertiyor**:
+> ODE AABB taşması (`aabbBound >= dMinIntExact` assertion). Yani belirti
+> örgüye göre değişiyor — ama ikisi de yanlış.
+
+```xml
+<physics name="ag_icin" type="dart">
+  <max_step_size>0.000034</max_step_size>   <!-- üretecin yazdığı değer -->
+  <real_time_factor>0</real_time_factor>
+</physics>
+```
+
+Üreteç doğru değeri her koşuda ekrana yazar (`dt = 34 us`) ve
+`ag_eklentisi.sdf` başlığına da koyar. **Kendi dünyanda bu değeri kullan.**
+
+> Bu, dronun geri kalanı için gereksiz yere küçük bir adım. Ağ fiziği
+> gerçekten bunu istiyor; ağı simüle etmediğin koşularda eklentiyi çıkarıp
+> normal dt'ye dönebilirsin.
+
+### 9.3.2 Entegrasyon kontrol listesi
 
 - [ ] `GZ_SIM_RESOURCE_PATH` → `gazebo/models` (gz sim modeli bulsun)
 - [ ] `SDF_PATH` → `gazebo/models` (`gz sdf -k` ile doğrulayacaksan)
@@ -572,8 +625,9 @@ kendi modeline göre ayarla:
 - [ ] `<include>` ve `<joint>` **dünya seviyesinde** (model içinde değil)
 - [ ] **`ag_eklentisi.sdf` içeriği `<world>` içine yapıştırıldı**
 - [ ] `<firlatici_link>` kendi taşıyıcı link adınla eşleşiyor
-- [ ] Kendi aracının hiçbir linki `<hedef_ad>` ile aynı ada sahip değil
-- [ ] `<max_step_size>` üretecin verdiği değerde (elle büyütülmedi)
+- [ ] Kendi aracının hiçbir linki `<hedef_ad>` (`talon_govde`) ile aynı adda değil
+- [ ] Kendi aracının hiçbir modeli `m_dugum_*` adını kullanmıyor
+- [ ] **`<max_step_size>` = 0.000034** (üretecin yazdığı değer; varsayılan 1 ms PATLAR)
 - [ ] `gz sdf -k dunyam.sdf` → **"Valid."**
 
 ### 9.4 Ateşleme
@@ -616,9 +670,11 @@ dünya seviyesinde ayrı modeller olarak duruyor.
 ```
 dt ≤ (1/15) · 2π·√(m_düğüm / k_eleman)
 ```
-Sabit dt kullanırsan sayısal patlama ve **ODE AABB taşması** alırsın
-(`aabbBound >= dMinIntExact` assertion). Üreteç bunu otomatik hesaplıyor;
-mevcut tasarımda **34 µs**. `<max_step_size>`'ı elle büyütme.
+Üreteç bunu otomatik hesaplıyor; mevcut tasarımda **34 µs**.
+`<max_step_size>`'ı elle büyütme — belirtisi örgüye göre değişiyor:
+ince örgüde **ODE AABB taşması** (`aabbBound >= dMinIntExact` assertion),
+kaba örgüde **sessizce yanlış sonuç** (§9.3.1'deki ölçüm). İkincisi daha
+tehlikeli, çünkü fark etmezsin.
 
 **3. Paketten açılma rijit-cisim çözücüyle YAPILAMAZ → hibrit devir ZORUNLU.**
 Paketli halde 709 çarpışma küresi 16 mm'lik hazneye tıkılıdır; DART'ın LCP

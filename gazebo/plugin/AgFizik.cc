@@ -37,6 +37,12 @@
 //                     * atis aninda hizlar linkin O ANKI YONELIMINE gore
 //                       uygulanir (dunya eksenine gore DEGIL)
 //                   Verilmezse eski davranis: dunya +X yonune firlatir.
+//   <uretim_firlatici_poz>  "x y z roll pitch yaw" -- ag dugum pozlarinin
+//                   URETILIRKEN varsayilan firlatici pozu. Dugum pozlari
+//                   SDF'te MUTLAK yazilidir; bu alan sayesinde plugin
+//                   onlari firlaticinin GERCEK pozuna tasiyabilir.
+//                   Boylece firlaticiyi dunyada ISTEDIGIN YERE koyabilirsin.
+//                   Verilmezse dugumler bulunduklari yerde kabul edilir.
 //   <v_eksenel>     namlu cikis hizi [m/s] (+X yonunde)
 //   <v_radyal>      bilyelerin radyal acilma hizi [m/s]
 
@@ -137,6 +143,14 @@ public:
     this->hedefAd = getS("hedef_ad", "");
     this->tetikKonu  = getS("tetik_konu", "/ag_firlatici/ates");
     this->firlaticiAd = getS("firlatici_link", "");
+    if (sdfp->HasElement("uretim_firlatici_poz"))
+    {
+      std::istringstream ss(sdfp->Get<std::string>("uretim_firlatici_poz"));
+      double x, y, z, r, p, w;
+      if (ss >> x >> y >> z >> r >> p >> w)
+      { this->uretimPoz = math::Pose3d(x, y, z, r, p, w);
+        this->uretimPozVar = true; }
+    }
     this->dugumOn = getS("dugum_on_ek", "dugum_");
     this->bilyeOn = getS("bilye_on_ek", "bilye_");
 
@@ -561,13 +575,22 @@ private:
       // ilk adimda dugumlerin firlaticiya GORE konumlarini kaydet
       this->baslangicAlindi = true;
       this->yerel.assign(this->dugumlar.size(), math::Pose3d::Zero);
+      // Dugum pozlari SDF'te MUTLAK yazili ve URETIM anindaki firlatici
+      // pozunu varsayiyorlar. Yerel ofseti O POZA gore hesaplarsak,
+      // asagidaki (*fp) * yerel[k] agi firlaticinin GERCEK pozuna tasir
+      // -- yani firlatici dunyada nerede olursa olsun ag dogru yerden cikar.
+      const math::Pose3d ref = this->uretimPozVar ? this->uretimPoz : *fp;
       for (size_t k = 0; k < this->dugumlar.size(); ++k)
       {
         if (this->dugumlar[k] == kNullEntity) continue;
         auto p = Link(this->dugumlar[k]).WorldPose(_ecm);
-        if (p) this->yerel[k] = fp->Inverse() * (*p);
+        if (p) this->yerel[k] = ref.Inverse() * (*p);
       }
-      return;
+      if (this->uretimPozVar && (this->uretimPoz.Pos() - fp->Pos()).Length() > 1e-3)
+        gzmsg << "[AgFizik] ag, firlaticinin GERCEK pozuna tasiniyor "
+              << "(uretim " << this->uretimPoz.Pos()
+              << " -> gercek " << fp->Pos() << ")\n";
+      // ilk adimda da tasimayi uygula (return etme)
     }
     for (size_t k = 0; k < this->dugumlar.size(); ++k)
     {
@@ -615,7 +638,8 @@ private:
   bool iraksadi{false};
   Entity hedef{kNullEntity}, firlatici{kNullEntity};
   std::string tetikKonu, firlaticiAd;
-  math::Pose3d firlaticiP0;
+  math::Pose3d firlaticiP0, uretimPoz;
+  bool uretimPozVar{false};
   std::vector<math::Pose3d> yerel;
   bool baslangicAlindi{false};
   std::atomic<bool> tetikIstendi{false};

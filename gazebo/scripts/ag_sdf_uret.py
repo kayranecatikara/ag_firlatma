@@ -214,6 +214,10 @@ ag_model = f"""{chr(10).join(linkler)}
         <firlatma_t>{FIRLATMA_T if TETIK == "zamanli" else -1}</firlatma_t>
         <tetik_konu>{TETIK_KONU}</tetik_konu>
         <firlatici_link>{"namlu" if FIRLATICI else ""}</firlatici_link>
+        <!-- Dugum pozlari MUTLAK yazili; bu, uretim anindaki varsayilan
+             firlatici pozu. Plugin agi firlaticinin GERCEK pozuna tasir,
+             yani firlaticiyi dunyada istedigin yere koyabilirsin. -->
+        <uretim_firlatici_poz>{-L_NAMLU_M:.4f} 0 2.0 0 0 0</uretim_firlatici_poz>
         <devir_t>{DEVIR}</devir_t>
         <v_eksenel>{V_EKS*np.cos(ALPHA):.4f}</v_eksenel>
         <!-- radyal hiz YALNIZCA bilyelere verilir (Python modeliyle ayni) -->
@@ -318,6 +322,12 @@ PARCA_BASLIK = f"""<!-- ========================================================
      NASIL:
        1) Asagidaki her seyi kendi dunyandaki <world> ... </world>
           arasina kopyala.
+       1b) !! KENDI DUNYANDAKI <physics> BLOGUNU DA AYARLA !!
+           <max_step_size>{{dt_s}}</max_step_size>
+           Gazebo varsayilani 1 ms'dir; bu tasarim {{dt}} us ister.
+           OLCULDU: 1 ms ile ag 1.08 m yerine 0.57 m aciliyor ve
+           HIC HATA VERMIYOR -- yani sessizce YANLIS sonuc alirsin.
+           Bu blok BURADA DEGILDIR, kendi dunyanda ayarlaman gerekir.
        2) <plugin> blogundaki <firlatici_link> degerini KENDI tasiyici
           link adinla degistir (varsayilan: namlu).
        3) GZ_SIM_SYSTEM_PLUGIN_PATH'i plugin build klasorune ayarla.
@@ -341,6 +351,7 @@ if __name__ == "__main__":
     # --- YAPISTIRILABILIR PARCA: ag dugumleri + plugin (namlu HARIC)
     parca_yol = os.path.join(KOK, "gazebo", "worlds", "ag_eklentisi.sdf")
     basl = PARCA_BASLIK.replace("{n_dugum}", str(len(P0))) \
+                       .replace("{dt_s}", f"{DT:.6f}") \
                        .replace("{dt}", f"{DT*1e6:.0f}")
     open(parca_yol, "w").write(basl + "\n" + ag_model + "\n")
 
