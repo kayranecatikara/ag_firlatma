@@ -482,9 +482,15 @@ karşılasın.
 ## 10. UÇUŞ TESTİ
 
 > **Simülasyonda önce dene.** Fırlatıcının monte edilebilir Gazebo model
-> paketi hazır: `gazebo/models/ag_firlatici/`. Kendi drone modeline tek
-> `<include>` + tek `<joint>` ile eklenir, ateşleme `gz topic` ile
-> tetiklenir. Montaj arayüzü, ortam değişkenleri ve bilinen tuzaklar için
+> paketi hazır: `gazebo/models/ag_firlatici/`. Ateşleme `gz topic` ile
+> tetiklenir.
+>
+> ⚠️ **İKİ PARÇA gerekiyor:** (1) `<include>` ile model paketi,
+> (2) `gazebo/worlds/ag_eklentisi.sdf` içeriğini kendi `<world>`'üne
+> **yapıştır** — ağ ve plugin model paketinin İÇİNDE DEĞİL. Sadece
+> `<include>` yaparsan namlu görünür ama **ateş etmez**.
+>
+> Montaj arayüzü, ortam değişkenleri, kontrol listesi ve bilinen tuzaklar:
 > **README §9 "Başka bir araca entegrasyon"**.
 
 ### Sıra

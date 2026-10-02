@@ -223,7 +223,7 @@ ag_model = f"""{chr(10).join(linkler)}
         <T_kopma>{ag.F_kopma:.2f}</T_kopma>
         <!-- elle dugumlenmis Dyneema agin GERCEK kopma yuku (~%55) -->
         <T_dugum>{ag.F_kopma*0.55:.2f}</T_dugum>
-        <hedef_ad>{"govde" if HEDEF_VAR else ""}</hedef_ad>
+        <hedef_ad>{"talon_govde" if HEDEF_VAR else ""}</hedef_ad>
         <perv_x>-0.47</perv_x><perv_r>{PERVANE/2}</perv_r>
 {hizlar}
 {elemanlar}
@@ -232,7 +232,7 @@ ag_model = f"""{chr(10).join(linkler)}
 # ------------------------------------------------------------------ HEDEF
 hedef = f"""    <model name="talon">
       <pose>{MENZIL0:.3f} 0 2.0 0 0 0</pose>
-      <link name="govde">
+      <link name="talon_govde">
         <inertial><mass>1.8</mass><inertia>
           <ixx>0.30</ixx><iyy>0.12</iyy><izz>0.38</izz>
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
@@ -306,11 +306,46 @@ dunya = f"""<?xml version="1.0" ?>
 </sdf>
 """
 
+PARCA_BASLIK = f"""<!-- ======================================================================
+     AG EKLENTISI — KENDI DUNYANA YAPISTIRILACAK PARCA
+     gazebo/scripts/ag_sdf_uret.py ile uretildi. ELLE DUZENLEME.
+
+     NE ISE YARAR: <include> ile eklenen ag_firlatici modeli SADECE
+     NAMLUDUR -- icinde ag da plugin de YOKTUR, tek basina ATES ETMEZ.
+     Ates edebilmesi icin BU PARCAYI da kendi <world> etiketinin icine
+     yapistirmalisin.
+
+     NASIL:
+       1) Asagidaki her seyi kendi dunyandaki <world> ... </world>
+          arasina kopyala.
+       2) <plugin> blogundaki <firlatici_link> degerini KENDI tasiyici
+          link adinla degistir (varsayilan: namlu).
+       3) GZ_SIM_SYSTEM_PLUGIN_PATH'i plugin build klasorune ayarla.
+       4) Atesle:
+          gz topic -t {TETIK_KONU} -m gz.msgs.Boolean -p "data: true"
+
+     DIKKAT: ag dugumlerinin her biri AYRI <model> olmak ZORUNDADIR.
+     Tek model icine toplarsan DART hepsini tek govdeye kaynaklar ve
+     hicbiri hareket etmez. Bkz. README "Baska bir araca entegrasyon".
+
+     Bu parca: {{n_dugum}} ag dugumu + 1 AgFizik plugin.
+     Uretim: ORGU={ORGU}, R_ag={R_AG} m, goz={GOZ*1e3:.0f} mm, dt={{dt}} us
+====================================================================== -->"""
+
+
 if __name__ == "__main__":
     yol = os.path.join(KOK, "gazebo", "worlds", "ag_atis.sdf")
     os.makedirs(os.path.dirname(yol), exist_ok=True)
     open(yol, "w").write(dunya)
+
+    # --- YAPISTIRILABILIR PARCA: ag dugumleri + plugin (namlu HARIC)
+    parca_yol = os.path.join(KOK, "gazebo", "worlds", "ag_eklentisi.sdf")
+    basl = PARCA_BASLIK.replace("{n_dugum}", str(len(P0))) \
+                       .replace("{dt}", f"{DT*1e6:.0f}")
+    open(parca_yol, "w").write(basl + "\n" + ag_model + "\n")
+
     print(f"-> {yol}")
+    print(f"-> {parca_yol}   (kendi dunyana YAPISTIRILACAK parca)")
     print(f"   {len(P0)} dugum ({len(BILYE_DUG)} bilye), {len(E)} eleman")
     print(f"   ag: O{2*R_AG:.2f} m, goz {GOZ*1e3:.0f} mm, {ag.L_iplik:.0f} m iplik, "
           f"{ag.m_ag*1e3:.2f} g")

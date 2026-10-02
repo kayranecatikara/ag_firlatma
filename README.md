@@ -198,6 +198,9 @@ ağın uçağın üzerinden **değip geçtiğini** gösterdi:
 **DOĞRUSU: 4.0 – 4.5 m'den ateşle.**
 
 ### Gazebo / yazılım
+- **Hedef link adı `govde` çok yaygındı.** Entegrasyon testinde plugin,
+  test dronunun kendi gövdesini hedef sanıp üzerine trim kuvveti uyguladı.
+  Hedef link `talon_govde` olarak yeniden adlandırıldı.
 - **`WorldPoseCmd` kaldırma zamanlaması.** Kinematik taşımayı eklerken poz
   komutunu atıştan bir adım sonra kaldırıyordum; ateşleme adımında poz komutu
   ile hız komutu çakışıp **sahte gerilme sıçraması** yarattı (16 → 31 N).
@@ -353,6 +356,9 @@ gazebo/
   plugin/AgFizik.cc       ★ özel C++ system plugin (ağ fiziği + tetik topic'i)
   scripts/ag_sdf_uret.py  ★ dünya üreteci
   scripts/model_paketi_uret.py  model paketini üretir
+  worlds/ag_atis.sdf        ÜRETİLMİŞ test dünyası (monte edilecek model DEĞİL)
+  worlds/ag_eklentisi.sdf ★ ÜRETİLMİŞ — kendi dünyana yapıştırılacak
+                            ağ + plugin parçası (§9.2)
   scripts/karsilastir.py    Gazebo ↔ Python doğrulaması
   scripts/ciz_yakalama.py   3B yakalama görselleştirmesi
   kos.sh                    koşu betiği
@@ -460,30 +466,63 @@ Servolar sabit eklemle. Atalet tensörleri gerçek geometriden hesaplandı
 - **`montaj`** — namlu ortası, üst yüzey. Kendi gövdene bağlarken bunu referans al.
 - **`agiz`** — namlu ucu. **Tetikleme mesafesi buradan ölçülür.**
 
-### 9.2 Kendi dünyana ekleme — kopyala-yapıştır
+### 9.2 ⚠️ İKİ PARÇA GEREKİYOR — tek `<include>` yetmez
 
-```bash
-export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/yol/ag_firlatma/gazebo/models
+Bu en sık yapılacak hata, baştan söyleyeyim:
+
+| | ne içerir | `<include>` ile gelir mi? |
+|---|---|---|
+| **1. Model paketi** `ag_firlatici` | namlu + kapsül + servolar, 389 g, montaj çerçeveleri | ✅ evet |
+| **2. Ağ eklentisi** `ag_eklentisi.sdf` | **142 ağ düğümü + AgFizik plugin'i** | ❌ **HAYIR — elle yapıştır** |
+
+**Model paketinin içinde ağ da plugin de YOKTUR** (`model.sdf`'te 0 plugin,
+0 düğüm). Sadece `<include>` yaparsan: doğru kütleli, doğru görünen, ama
+**hiç ateş etmeyen** bir namlu elde edersin.
+
+Sebebi §9.6'daki ilk madde: ağ düğümlerinin her biri **ayrı `<model>`**
+olmak zorunda, bu yüzden fırlatıcı modelinin *içine* konamıyorlar.
+
+Üreteç ikinci parçayı **yapıştırmaya hazır** olarak yazıyor:
+```
+gazebo/worlds/ag_eklentisi.sdf    <- bunu kendi <world>'üne kopyala
 ```
 
-```xml
-<model name="benim_dronum">
-  <link name="govde"> ... </link>
+### 9.2.1 Kendi dünyana ekleme — kopyala-yapıştır
 
-  <!-- FIRLATICIYI EKLE -->
+```bash
+# gz sim modeli bulsun diye:
+export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/yol/ag_firlatma/gazebo/models
+# gz sdf -k ile DOGRULAMA yapacaksan AYRICA (farkli degisken!):
+export SDF_PATH=$SDF_PATH:/yol/ag_firlatma/gazebo/models
+```
+
+> ⚠️ `<include>` ve `<joint>` **DÜNYA SEVİYESİNDE** olmalı — `<model>`
+> etiketinin *içine* koyup `firlatici::namlu`ya joint atarsan SDF çözemez
+> (`child frame ... not found`). Aşağıdaki biçim doğrulandı.
+
+```xml
+<world name="benim_dunyam">
+
+  <model name="benim_dronum">
+    <link name="govde"> ... </link>
+  </model>
+
+  <!-- 1. PARCA: FIRLATICI MODELI — dünya seviyesinde -->
   <include>
     <uri>model://ag_firlatici</uri>
     <name>firlatici</name>
-    <!-- gövdenin 8 cm altına, burun yönünde -->
-    <pose relative_to="govde">0.10 0 -0.08 0 0 0</pose>
+    <pose>0 0 2.0 0 0 0</pose>
   </include>
 
-  <!-- TEK EKLEMLE SABITLE -->
+  <!-- Dünya seviyesinde sabit eklemle gövdene bağla -->
   <joint name="firlatici_baglanti" type="fixed">
-    <parent>govde</parent>
+    <parent>benim_dronum::govde</parent>
     <child>firlatici::namlu</child>
   </joint>
-</model>
+
+  <!-- 2. PARCA: ag_eklentisi.sdf içeriğini BURAYA yapıştır (§9.3) -->
+
+</world>
 ```
 
 Tail-sitter'da namlu **ileri-aşağı** bakmalı; `<pose>`'un son üç değeriyle
@@ -505,9 +544,10 @@ AG_FIRLATICI=1 AG_TETIK=harici AG_ORGU=kare AG_RAG=1.3 AG_GOZ=0.20 \
   python3 gazebo/scripts/ag_sdf_uret.py
 ```
 
-Üretilen `gazebo/worlds/ag_atis.sdf` içinden **ağ düğümleri + `<plugin>`
-bloğunu** kendi dünyana kopyala. Plugin'de şu iki alanı kendi modeline göre
-ayarla:
+Üreteç **`gazebo/worlds/ag_eklentisi.sdf`** dosyasını yazar — içinde yalnızca
+ağ düğümleri + `<plugin>` bloğu vardır, başlığında ne yapılacağı yazılıdır.
+**Tamamını** kendi `<world>` etiketinin içine yapıştır. Plugin'de şu iki alanı
+kendi modeline göre ayarla:
 
 ```xml
 <plugin filename="AgFizik" name="ag::AgFizik">
@@ -523,6 +563,18 @@ ayarla:
   (drone uçarken ağ onunla gider),
 - atış anında hızları linkin **o anki yönelimine** göre uygular ve
   **linkin kendi hızını ekler**.
+
+### 9.3.1 Entegrasyon kontrol listesi
+
+- [ ] `GZ_SIM_RESOURCE_PATH` → `gazebo/models` (gz sim modeli bulsun)
+- [ ] `SDF_PATH` → `gazebo/models` (`gz sdf -k` ile doğrulayacaksan)
+- [ ] `GZ_SIM_SYSTEM_PLUGIN_PATH` → `gazebo/plugin/build`
+- [ ] `<include>` ve `<joint>` **dünya seviyesinde** (model içinde değil)
+- [ ] **`ag_eklentisi.sdf` içeriği `<world>` içine yapıştırıldı**
+- [ ] `<firlatici_link>` kendi taşıyıcı link adınla eşleşiyor
+- [ ] Kendi aracının hiçbir linki `<hedef_ad>` ile aynı ada sahip değil
+- [ ] `<max_step_size>` üretecin verdiği değerde (elle büyütülmedi)
+- [ ] `gz sdf -k dunyam.sdf` → **"Valid."**
 
 ### 9.4 Ateşleme
 
@@ -606,6 +658,14 @@ Kendi kodunda hız/poz komutu kullanırsan **sen de kaldırmalısın**.
 (Cosserat çubuk veya konum-tabanlı dinamik) gerekir. Simülasyon ağın temiz
 açıldığını **varsayar**. Bu projenin en kritik doğrulanmamış varsayımı;
 yer testiyle çözülecek.
+
+**`<hedef_ad>` İSİM ÇAKIŞMASI.**
+Plugin hedefi **link adıyla arayarak** bulur. Kendi aracının bir linki aynı
+ada sahipse **plugin onu hedef sanar** ve üzerine seyir trim kuvveti (m·g)
+uygular — yani dronunu havalandırır. Entegrasyon testinde tam olarak bu oldu:
+hedef adı `govde` idi, test dronunun gövdesi de `govde`. Hedef link artık
+`talon_govde` olarak adlandırılıyor. **Hedef istemiyorsan `AG_HEDEF=0`
+kullan veya `<hedef_ad>` alanını boş bırak.**
 
 **Pervane SABİT DİSK.**
 Dönerek ipi sarma modellenmiyor. Plugin yalnızca diskten **kaç iplik geçtiğini**
