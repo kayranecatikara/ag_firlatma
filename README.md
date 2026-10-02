@@ -79,12 +79,12 @@ uyum. İki ayrı yoldan hesaplanan büyüklükler örtüşüyor.
 ## 3. Sonuçlar
 
 ```
-çıkış hızı        : 34.5 m/s
-açılma            : 200 ms'de R = 1.14 m      (gereken 0.859 m — Talon yarı açıklığı)
-geometrik pencere : 3.58 – 6.80 m
+çıkış hızı        : 31.1 m/s
+açılma            : 200 ms'de R = 1.13 m      (gereken 0.859 m — Talon yarı açıklığı)
+geometrik pencere : 3.56 – 6.54 m
 EN İYİ TETİKLEME  : 4.0 – 4.5 m               (§5 — Gazebo bunu tersine çevirdi)
 ip tepe yükü      : 19 N                      (kopan eleman: 0)
-sistem kütlesi    : ~410 g
+sistem kütlesi    : ~390 g
 ağ                : Ø2.6 m altıgen dış hat, KARE göz 200 mm,
                     142 bağ, ~2.5 saat el emeği
 ```
@@ -95,15 +95,15 @@ ağ                : Ø2.6 m altıgen dış hat, KARE göz 200 mm,
 
 | | Değer |
 |---|---|
-| Namlu | Ø52 × **180.5 mm**, DÜZ delik (yiv yok), arkası açık (yükleme ağzı) |
-| Tahrik | **4 × Ø15.2/4 mm saf lateks tüp**, 38 mm kauçuk boyu, ×4.0 kurulu |
+| Namlu | Ø52 × **149.8 mm**, DÜZ delik (yiv yok), arkası açık (yükleme ağzı) |
+| Tahrik | **4 × Ø15.2/4 mm saf lateks tüp**, **30.3 mm** kauçuk boyu, ×4.0 kurulu |
 | Bant bağlantısı | ağız bileziği kulakları (±Z) → kapsüldeki **Ø8 civa çeliği** çapraz pim (düz yarıklardan çıkar) |
 | Yuva koni açısı | **13°** |
 | Bilye / ağ | Ø12.7 **kurşun** × 6 / **Ø2.6 m, KARE göz 200 mm** + çevre halatı, Dyneema **örgü** Ø0.165 |
-| Strok | 114 mm |
-| v_çıkış | 34.5 m/s |
-| Atış penceresi | **3.58 – 6.80 m** geometrik · **EN İYİ 4.0–4.5 m** (bkz. §5) |
-| Kütle | **~410 g** (servolar + ağ + bilyeler dahil) — MG996R ile 492 g idi |
+| Strok | **91 mm** |
+| v_çıkış | **31.1 m/s** |
+| Atış penceresi | **3.56 – 6.54 m** geometrik · **EN İYİ 4.0–4.5 m** (bkz. §5) |
+| Kütle | **~390 g** (servolar + ağ + bilyeler dahil) — MG996R ile 492 g idi |
 | Tetik | 2 karşılıklı pim, kapaklı kartuş + geri-getirme yayı; **PTFE burç ŞART**; 2 × **MİKRO** metal dişli servo (~14 g), makara r=2.2 mm |
 
 Yaylı tasarım `cad/eski_tasarimlar/yay_tahrikli/` altında arşivlendi (kısa namluda
@@ -223,6 +223,29 @@ ağın uçağın üzerinden **değip geçtiğini** gösterdi:
 - Pim kapsüle teğetti → geçersiz katı; profil 0.8 mm gömüldü.
 - **Tetik tek geçme çubuktu.** Kullanıcı asimetrik çekiş itirazı yaptı:
   **HAKLIYDI.** İki ayrı pime bölündü.
+
+
+### Namlu kısaltma — menzil beklenenden az etkilendi
+Namlu 180.5 → **149.8 mm**'ye indirildi (strok 114 → 91 mm).
+
+| namlu | strok | enerji | v_çıkış | pencere |
+|---|---|---|---|---|
+| 180.5 mm | 114 mm | 78.2 J | 34.6 m/s | 3.58 – 6.80 m |
+| **149.8 mm** | **91 mm** | **62.4 J** | **31.1 m/s** | **3.56 – 6.54 m** |
+| 140 mm | 84 mm | 57.3 J | 29.9 m/s | 3.56 – 6.46 m |
+
+Çıkış hızından **%10** verildi ama pencerenin uzak kenarı sadece **26 cm**
+kısaldı. Sebep §4'teki balistik uzunluk: ağı durduran sürüklemedir ve
+`Δx ∝ λ·[ln(v₀/V) − 1 + V/v₀]` — **logaritmik**, hıza doymuş davranır.
+Kazanç: namlu −31 mm, **−20 g**, filament 210 → 190 g.
+Kurma kuvveti **değişmedi** (30.6 kg/bant) çünkü λ=4.0 korundu; sadece
+bant daha kısa kesiliyor (38 → 30.3 mm).
+
+Gazebo ile doğrulandı (tetikleme 4.2 m): tepe iplik yükü **16.4 N**,
+kopan eleman **0**, pervaneden geçen **14 iplik**, ağın uçağa serilme
+oranı **%47**, aktarılan momentum **1.30 kg·m/s**. Yakalama 180 mm'ye
+göre bir miktar zayıfladı (53 → 14 iplik, momentum 1.64 → 1.30) ama
+"tek ip yeter" kriterinin **14 katı** üzerinde.
 
 ### Tedarik — araştırmanın değiştirdiği tasarım kararları
 - **7075-T6 Ø8 Türkiye'de SATILMIYOR** (çekme 7075 Ø13'ten başlıyor).

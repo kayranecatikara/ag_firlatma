@@ -3,11 +3,11 @@
   "ad": "01_namlu",
   "malzeme": "PETG",
   "adet": 1,
-  "hacim_cm3": 175.11,
-  "filament_g": 171.2,
+  "hacim_cm3": 154.57,
+  "filament_g": 151.2,
   "x": 88.4,
   "y": 104.0,
-  "z": 180.5,
+  "z": 149.8,
   "gecerli": true
  },
  {

@@ -12,7 +12,7 @@ depolar. Kurulu haldeki kapsül bir mermidir.
 
 | Kural | Neden |
 |---|---|
-| **Kurulu namluyu asla kimseye doğrultma** | Kapsül 34.5 m/s ile çıkar |
+| **Kurulu namluyu asla kimseye doğrultma** | Kapsül 31.1 m/s ile çıkar |
 | **Kurarken koruyucu gözlük tak** | Bant kopması yüze gelir |
 | **Kurma sırasında namlu ağzının önüne elini sokma** | Pim kayarsa kapsül fırlar |
 | **Lateks yaşlanır** — 6 ayda bir değiştir, çatlak görürsen hemen | Kopan bant kırbaç gibi savrulur |
@@ -47,14 +47,14 @@ GÜN 3  : mekanizma montajı + kuru deneme (banttsız)
 
 | Dosya | Parça | Adet | Filament | Filament | Süre |
 |---|---|---|---|---|---|
-| `01_namlu` | Namlu gövdesi | 1 | **PETG** | ~170 g | ~14 sa |
+| `01_namlu` | Namlu gövdesi | 1 | **PETG** | ~151 g | ~12 sa |
 | `02_kapsul` | Kapsül | 1 | **PETG** | ~29 g | ~3 sa |
 | `03/04_tetik_kapagi` | Tetik kartuş kapağı | 2 | **PETG** | ~2 g | 15 dk |
 | `05_servo_makarasi` | Servo ip makarası | 2 | **PETG** | ~2 g | 15 dk |
 | `06_toz_kapagi` | Arka toz kapağı (ops.) | 1 | **PETG** | ~6 g | 20 dk |
 | `07/08_tampon` | Yarık sonu tamponu | 2 | **TPU 95A** | ~0.2 g | 10 dk |
 
-**TOPLAM: PETG ~210 g · TPU ~0.2 g.** Yazıcı Z yüksekliği **≥185 mm** olmalı.
+**TOPLAM: PETG ~190 g · TPU ~0.2 g.** Yazıcı Z yüksekliği **≥155 mm** olmalı.
 
 > `cad/V4_bilye`, `V4_capraz_pim`, `V4_bant_*`, `V4_pim_*` **BASILMAZ** —
 > bunlar satın alınan parçaların CAD'deki temsilleridir (kurşun bilye,
@@ -133,7 +133,7 @@ Tam liste: `malzeme_listesi.md`. Özet alışveriş:
 - [ ] **C2** M2×6 civata — 4 ad   **C3** M2×8 civata — 4 ad
 
 ### Tahrik
-- [ ] **D1** Zıpkın lastiği, **SAF DOĞAL KAUÇUK**, Ø15.2 dış / Ø4 iç — 4 × 58 mm
+- [ ] **D1** Zıpkın lastiği, **SAF DOĞAL KAUÇUK**, Ø15.2 dış / Ø4 iç — 4 × 50 mm
       (silikon veya EPDM **OLMAZ** — enerji yoğunluğu çok düşük)
 - [ ] **D2** Dyneema örgü halat Ø1.5 mm — 60 cm
 - [ ] **D3** Sargı ipliği (naylon dikiş) — 2 m
@@ -265,8 +265,8 @@ Dyneema'da constrictor iyi tutar.
 ### 5.1 Ölçü
 ```
 tüp        : Ø15.2 dış / Ø4 iç, SAF DOĞAL KAUÇUK
-kesim boyu : 58 mm   =  çalışma 38 mm (L0) + 2 × 10 mm uç bağlantısı
-kurulu boy : 152 mm  (λ = 4.0 uzama)
+kesim boyu : 50 mm   =  çalışma 30.3 mm (L0) + 2 × 10 mm uç bağlantısı
+kurulu boy : 135.3 mm  (λ = 4.0 uzama)
 ```
 
 ### 5.2 Uç halkası (her tüpün iki ucuna, toplam 8 halka)
@@ -282,8 +282,8 @@ kurulu boy : 152 mm  (λ = 4.0 uzama)
 ### 5.3 Bant testi — ATLAMA
 Her bandı tek tek, **bagaj kantarıyla (H1)** çek:
 ```
-boy 114 mm (λ=3.0) → ~184 N (18.8 kg) beklenir
-boy 152 mm (λ=4.0) → ~300 N (30.6 kg) beklenir
+boy 101 mm (λ=3.0) → ~184 N (18.8 kg) beklenir
+boy 135 mm (λ=4.0) → ~300 N (30.6 kg) beklenir
 ```
 - Ölçtüğün değer beklenenin **%25 altındaysa** tüp saf lateks değildir, kullanma.
 - Çekerken **uç bağlantısı kayıyorsa** sargıyı yenile.
@@ -355,7 +355,7 @@ yarıklarda takılmadan gidiyor mu? Tamponlara temas ediyor mu?
 
 ### 7.1 Sıra
 1. **Ağ yüklü kapsülü** namluya arkadan sok (§4.8'deki gibi paketlenmiş).
-2. Kapsülü **strok sonuna kadar** (114 mm) geriye it — çapraz pim
+2. Kapsülü **strok sonuna kadar** (91 mm) geriye it — çapraz pim
    arka konuma gelsin.
 3. **Servoları "dinlenme"ye al** → iki pim kapsül kanalına girsin.
    **Pimlerin girdiğini GÖZLE DOĞRULA.** Kapsülü elle ileri itmeye çalış,
@@ -383,7 +383,7 @@ yarıklarda takılmadan gidiyor mu? Tamponlara temas ediyor mu?
 
 ### 7.3 Ateşleme
 Uçuş kontrolcüsünden servolara **"ateş"** sinyali → iki pim aynı anda
-çekilir → kapsül 34.5 m/s ile çıkar → çapraz pim tamponlara çarpıp durur →
+çekilir → kapsül 31.1 m/s ile çıkar → çapraz pim tamponlara çarpıp durur →
 ağ ve bilyeler devam eder.
 
 > **Kapsül namlu içinde kalır** — dışarı çıkan sadece ağ + 6 bilyedir.
@@ -491,7 +491,7 @@ karşılasın.
 
 ### Geri tepme hakkında
 Kapsül namluda durduğu için momentum kapsülle birlikte namluya geri döner.
-Net dışarı atılan momentum = ağ + bilyeler = 74 g × 34.5 m/s ≈ **2.6 kg·m/s**.
+Net dışarı atılan momentum = ağ + bilyeler = 74 g × 31.1 m/s ≈ **2.3 kg·m/s**.
 Tail-sitter için tek atışlık bir itme; nişan kayması önemsiz (tek atış
 yapılıp inilecek).
 
@@ -516,20 +516,20 @@ yapılıp inilecek).
 ## 12. SİSTEM ÖZETİ — ne ürettiğin
 
 ```
-NAMLU      : Ø55.4 dış × 180.5 mm, PETG, düz delik, arkadan yüklemeli
+NAMLU      : Ø55.4 dış × 149.8 mm, PETG, düz delik, arkadan yüklemeli
 TAHRİK     : 4 × lateks tüp Ø15.2/4, kurulu λ=4.0, toplam ~1200 N
-STROK      : 114 mm
+STROK      : 91 mm
 KAPSÜL     : Ø43.1 × 38 mm, 6 bilye yuvası (13° koni), ağ haznesi Ø37.1 × 14
 TETİK      : 2 karşılıklı çelik pim, PTFE burç, 2 × MG996R servo, Y-kablo
 AĞ         : altıgen Ø2.6 m, KARE göz 200 mm, Dyneema örgü Ø0.165
              + çevre halatı Ø0.285, ~142 bağ, ~26 sürekli ip
 BİLYE      : 6 × Ø12.7 delikli kurşun, ~12 g
-KÜTLE      : ~410 g (servolar dahil)
+KÜTLE      : ~390 g (servolar dahil)
 
 PERFORMANS (Gazebo + Python, doğrulanmış)
-  çıkış hızı       : 34.5 m/s
-  açılma           : 200 ms'de R = 1.14 m  (gereken 0.859)
-  geometrik pencere: 3.6 – 6.8 m
+  çıkış hızı       : 31.1 m/s
+  açılma           : 200 ms'de R = 1.13 m  (gereken 0.859)
+  geometrik pencere: 3.56 – 6.54 m
   EN İYİ TETİKLEME : 4.0 – 4.5 m
   ip tepe yükü     : 19 N  (lacing ile pay 3.4×, düğümle 1.9×)
   kopan eleman     : 0

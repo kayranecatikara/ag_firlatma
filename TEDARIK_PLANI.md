@@ -32,7 +32,7 @@ F_pim × strok`. r=4 mm makara servonun dönüş aralığının yalnızca 86°'s
 kullanıyordu; **r=2.2 mm + kanal 4 mm** ile 130° kullanılıyor ve gereken
 tork **3.9 → 2.15 kg·cm**'ye düşüyor.
 → **mikro metal dişli servo** (Savöx SH-0255MG / MG92B sınıfı, ~14 g,
-≥3.5 kg·cm) **1.81× payla** yetiyor. **−82 g → sistem 410 g.**
+≥3.5 kg·cm) **1.81× payla** yetiyor. **−82 g.** Namlu 150 mm ile birlikte sistem **390 g**.
 Namlunun servo yatağı zaten M2/mikro için tasarlanmıştı; delik aralığı
 18 → 28 mm'ye düzeltildi (oval, marka farkını tolere eder).
 
@@ -153,7 +153,7 @@ yumuşak, el matkabıyla 1 dakika. Alternatif: kurşun döküm kalıbı.
 | Insert + kantar + sprey + Loctite + yay seti | ~1.730 TL |
 | PTFE + kurşun + yerel sarf | ~400 TL |
 | **ARA TOPLAM** | **~5.500 TL** |
-| 3D baskı filament (~210 g PETG) | ~150-250 TL |
+| 3D baskı filament (~190 g PETG) | ~150-250 TL |
 | **Torna işçiliği** | **fiyat alınacak** |
 
 > Torna işçiliği için rakam vermiyorum — güncel atölye fiyatlarını

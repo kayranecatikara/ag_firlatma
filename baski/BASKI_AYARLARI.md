@@ -13,7 +13,7 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 
 | Dosya | Parça | Adet | Filament | Ölçü (X×Y×Z mm) | Filament |
 |---|---|---|---|---|---|
-| `01_namlu` | Namlu gövdesi | 1 | **PETG** | 88 × 104 × **180.5** | ~170 g |
+| `01_namlu` | Namlu gövdesi | 1 | **PETG** | 88 × 104 × **149.8** | ~151 g |
 | `02_kapsul` | Kapsül | 1 | **PETG** | 43 × 43 × 40 | ~29 g |
 | `03_tetik_kapagi_sag` | Tetik kartuş kapağı (sağ) | 1 | **PETG** | 18 × 18 × 3 | ~1 g |
 | `04_tetik_kapagi_sol` | Tetik kartuş kapağı (sol) | 1 | **PETG** | 18 × 18 × 3 | ~1 g |
@@ -22,13 +22,13 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 | `07_tampon_ust` | Yarık sonu tamponu (üst) | 1 | **TPU 95A** | 9 × 7 × 3 | ~0.1 g |
 | `08_tampon_alt` | Yarık sonu tamponu (alt) | 1 | **TPU 95A** | 9 × 7 × 3 | ~0.1 g |
 
-**TOPLAM: PETG ~210 g · TPU ~0.2 g**
+**TOPLAM: PETG ~190 g · TPU ~0.2 g**
 
 Her parça hem `.stl` (baskı) hem `.step` (CAD, ölçü almak/değiştirmek için)
 olarak var. Ölçüler `parcalar.json`'da.
 
 ### Yazıcı şartı
-**Z yüksekliği ≥ 185 mm** gerekli (namlu 180.5 mm dik basılıyor).
+**Z yüksekliği ≥ 155 mm** gerekli (namlu 149.8 mm dik basılıyor).
 Tabla ≥ 110 × 110 mm. Ender 3 / Prusa MK3 / Bambu P1 sınıfı yeterli.
 
 ---
@@ -65,7 +65,7 @@ z-hop              : 0.2 mm   (PETG sicim yapar)
 
 ### 3.2 Parça bazlı
 
-**`01_namlu` — en kritik parça (~14 saat)**
+**`01_namlu` — en kritik parça (~12 saat)**
 ```
 duvar (perimeter)  : 4 çevre     → 1.6 mm katı kabuk
 üst/alt katman     : 5

@@ -1,6 +1,6 @@
 # SATIN ALMA LİSTESİ — Ağ Fırlatıcı v5
 
-3D baskı parçaları **bu listede yok** (onlar `baski/` klasöründe, ~210 g PETG
+3D baskı parçaları **bu listede yok** (onlar `baski/` klasöründe, ~190 g PETG
 + 0.2 g TPU). Burada **satın alman gereken her şey** var.
 
 ## Nasıl okunacak
@@ -17,7 +17,7 @@
 
 | # | Ne | Adet | Spec |
 |---|---|---|---|
-| D1 | 🔴 **Zıpkın lastiği (speargun rubber)** | 4 × 58 mm → **1 metre al** | Ø15.2 (veya Ø16) dış / Ø4 iç |
+| D1 | 🔴 **Zıpkın lastiği (speargun rubber)** | 4 × 50 mm → **1 metre al** | Ø15.2 (veya Ø16) dış / Ø4 iç |
 
 **🔴 MUTLAKA SAF DOĞAL KAUÇUK (natural latex).**
 Silikon, EPDM, SBR, "sentetik kauçuk" **OLMAZ** — enerji yoğunlukları
@@ -33,7 +33,7 @@ Ucuz olanların çoğu sentetiktir. Marka olarak dalış sektöründe bilinen
 kullanır; isimsiz ucuz lastiklerde risk var.
 
 **Doğrulama (şart):** aldıktan sonra **bagaj kantarıyla test et** —
-152 mm'ye gerdiğinde **~30 kg** çekmeli. %25 altındaysa sentetiktir, kullanma.
+135 mm'ye gerdiğinde **~30 kg** çekmeli. %25 altındaysa sentetiktir, kullanma.
 
 | # | Ne | Miktar |
 |---|---|---|
@@ -208,7 +208,7 @@ servo 11kg", "servo y kablosu".
 ## 11. TOPLAM
 
 ```
-3D baskı     : PETG ~210 g + TPU ~0.2 g        (baski/ klasörü)
+3D baskı     : PETG ~190 g + TPU ~0.2 g        (baski/ klasörü)
 satın alınan : ~45 kalem, sistem kütlesi ~469 g
 işleme işi   : 1 torna ziyareti (B1 olukları + B2 pim)
 ```

@@ -1,13 +1,13 @@
 # Ag Firlatici Namlu — Malzeme Listesi (v2, lastik bant)
 
-Namlu 180.5 mm · strok 114 mm · kapsul 38 mm · 4x lateks O15.2/4 · **ag O2.6 m altigen dis hat, KARE goz 200 mm**
+Namlu **149.8 mm** · strok **91 mm** · kapsul 40 mm · 4x lateks O15.2/4 · **ag O2.6 m altigen dis hat, KARE goz 200 mm**
 
 
 ## A. 3D BASKI
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x 180.5 mm, 2 duz yarik 6.4 mm | 172.0 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
+| A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x **149.8 mm**, 2 duz yarik 6.4 mm | 151.2 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
 | A2 | Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi) | 1 | PETG | O43.1 x 38 mm, hazne O37.1 x 14 mm, yuva acisi 13 derece | 27.5 | Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu. |
 | A3 | Tetik kartus kapagi | 2 | PETG | O18 x 3 mm, ortada O2 ip deligi, 2x O2.2 vida deligi | 1.9 | %100 dolgu. |
 | A4 | Servo ip makarasi | 2 | PETG | **tambur r=2.2 mm**, flans O10, servonun KENDI KOLUNA 2x M2 ile oturur, O1.5 ip deligi | 0.7 | **r=2.2 mm KRITIK**: gereken tork = 96 N x 2.2 mm = **2.15 kg.cm**. 5 mm pim stroku icin 130 derece donus (servo araligi 180). Makarayi BUYUTME -- r=4'te tork 3.9 kg.cm'ye cikar ve mikro servo yetmez. Spline'a gecmez, her servoya uyar. |
@@ -38,7 +38,7 @@ Namlu 180.5 mm · strok 114 mm · kapsul 38 mm · 4x lateks O15.2/4 · **ag O2.6
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| D1 | Lateks tup (zipkin lastigi) | 4 | SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ) | O15.2 dis / O4 ic; kesim boyu ~58 mm (calisma 38 mm + 2x10 mm uc) | 37.2 | KENAR BASINA 2 ADET. Kurulu uzama x4, 300 N/bant (31 kg). O14 bulunursa o da olur (kuvvet ~%7 duser). |
+| D1 | Lateks tup (zipkin lastigi) | 4 | SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ) | O15.2 dis / O4 ic; **kesim boyu ~50 mm** (calisma **30.3 mm** + 2x10 mm uc) | 37.2 | KENAR BASINA 2 ADET. Kurulu uzama x4 (kurulu boy **135.3 mm**), 300 N/bant (31 kg). O14 bulunursa o da olur (kuvvet ~%7 duser). |
 | D2 | Bant uc halkasi (Dyneema) | 8 | Dyneema/UHMWPE orgu halat | O1.5 mm, her biri ~60 mm | 0.8 | Tup ucuna ic dugumle gomulur, disi sarilir. Arka halka capraz pim oluguna, on halka ankraj pimine. |
 | D3 | Bant ucu sargi ipi | 1 | Naylon/Dyneema iplik (dikis/sargi) | ~2 m | 0.2 | Tup uclarini halka dugumu uzerine sikica sarmak icin. Uc basina donanim <= 7 mm olmali! |
 
@@ -82,7 +82,8 @@ Namlu 180.5 mm · strok 114 mm · kapsul 38 mm · 4x lateks O15.2/4 · **ag O2.6
 | H3 | Yedek bant seti | 1 | D1-D3 |  | 0.0 | Lateks yaslanir; testlerde surekli yedek bulundur. |
 | H4 | Yuksek hizli kamera (telefon 240 fps) | 1 |  |  | 0.0 | Yer atisinda acilma suresi/cap olcumu. |
 
-**Toplam (A-F, test ekipmani haric): ~410 g**
+**Toplam (A-F, test ekipmani haric): ~390 g**
 
-> Kutle gecmisi: 492 g (MG996R) -> **410 g** (mikro servo, -82 g).
+> Kutle gecmisi: 492 g (MG996R, namlu 180.5) -> 410 g (mikro servo, -82 g)
+> -> **390 g** (namlu 149.8 mm, -20 g).
 > Capraz pim celik oldugu icin +23 g iceriyor (7075 TR'de yok).

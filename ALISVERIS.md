@@ -12,7 +12,7 @@
 **1. LASTİK — en kolay kazık yiyeceğin kalem**
 Ambalajda/sayfada **"doğal lateks / natural latex"** geçmeli.
 Silikon, EPDM, SBR **OLMAZ** — enerji yoğunluğu üçte biri, menzil yarıya iner.
-→ **Aldıktan sonra MUTLAKA test et:** bagaj kantarıyla **152 mm**'ye ger,
+→ **Aldıktan sonra MUTLAKA test et:** bagaj kantarıyla **135 mm**'ye ger,
 **~30 kg** çekmeli. %25 altındaysa sentetiktir, **kullanma**.
 → *İç çapın sayfada yazmaması SORUN DEĞİL* — iç çap ±1 mm kuvveti sadece
 **%4** değiştiriyor. Kritik olan dış çap (Ø15-16) ve doğal lateks.
@@ -37,7 +37,7 @@ yumuşak, el matkabıyla 1 dakika.
 **MG996R 110 g = sistemin %22'si.** Makara r=2.2 mm + kanal 4 mm ile gereken
 tork **2.15 kg·cm**'ye düştü; **mikro metal dişli servo** (Savöx SH-0255MG /
 MG92B sınıfı, **~14 g**, ≥3.5 kg·cm) **1.81× payla** yetiyor.
-→ **−82 g** (sistem 492 → 410 g). ❌ MG996R ve DS3218'e GEREK YOK.
+→ **−82 g** (sistem 492 → 410 g; namlu 150 mm ile **390 g**). ❌ MG996R ve DS3218'e GEREK YOK.
 ⚠️ **METAL DİŞLİ ŞART** — mikro servoların plastik dişlileri sıyırır.
 ⚠️ Bağlantı deliği aralığı **28 mm** olmalı (namludaki yatak buna göre).
 
@@ -73,7 +73,7 @@ https://metalavm.com · yerli, TR içi kargo
 
 | ☐ | Parça | Spec (kritik olan) | Adet | Satıcı | Link | Fiyat | Not |
 |---|---|---|---|---|---|---|---|
-| ☐ | **D1 Zıpkın lastiği** | Ø16 dış, metraj — sayfada **"%100 doğal lateks kauçuk"** yazıyor ✅ | 1 m | mertsubonline | [link](https://www.mertsubonline.com/urun/o-m-e-r-performer-2-o16mm-metraj-lastik) | 1.367,80 TL | O.M.E.R Performer 2. **1 m seç.** 4 adet × 58 mm kesilecek |
+| ☐ | **D1 Zıpkın lastiği** | Ø16 dış, metraj — sayfada **"%100 doğal lateks kauçuk"** yazıyor ✅ | 1 m | mertsubonline | [link](https://www.mertsubonline.com/urun/o-m-e-r-performer-2-o16mm-metraj-lastik) | 1.367,80 TL | O.M.E.R Performer 2. **1 m seç.** 4 adet × **50 mm** kesilecek |
 
 **ARA TOPLAM ≈ 1.370 TL**
 
@@ -197,7 +197,7 @@ https://metalavm.com · yerli, TR içi kargo
 | Sipariş 6 — tek kalemlikler | ~1.730 TL |
 | Yerel (kurşun, sarf, güvenlik) | ~400 TL |
 | **ARA TOPLAM** | **≈ 5.500 TL** |
-| 3D baskı filament (~210 g PETG + TPU) | ~150-250 TL |
+| 3D baskı filament (~190 g PETG + TPU) | ~150-250 TL |
 | **Torna işçiliği** | **teklif alınacak** |
 
 *(Ekim 2026, değişebilir)*
