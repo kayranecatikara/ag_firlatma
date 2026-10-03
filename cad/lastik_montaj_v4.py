@@ -32,6 +32,15 @@ P = dict(
     t_govde=3.0,
     yarik_w=9.4, tampon=3.0, r_bant=33.0, dz_bant=11.0,
     kulak_R=42.0, bilezik_R=32.0, bilezik_L=14.0, d_ankraj=6.5,
+    # BANT ANKRAJI: bant deligin icinden gecer, tasiyici pim banti DELER.
+    # Dyneema halka YOK. Bilezik y_ankraj'da biter -> pim tam tasarim
+    # noktasina oturur, boylece L0/H/lam degismez.
+    kulak_w=11.0,          # kulak yari kalinligi (X) — O14 delige 4 mm cidar
+    d_bant_delik=14.0,     # banttan 1 mm buyuk gecis deligi
+    d_pim_bant=5.0,        # banti delen tasiyici pim
+    oluk_pim_d=2.8,        # pimin oturdugu on yuz olugu derinligi
+    bilezik_geri=16.0,     # bilezigin y_ankraj'dan geriye uzanimi
+    n_ankraj_yan=1,        # kenar basina bant (O13 ile 1 tane sigar)
     # tetik kartusu
     d_pim=5.0, boss_d=18.0, boss_h=16.5, d_yuva_pim=10.6, kapak_t=3.0, d_ip=2.0,
     d_M2=1.7, pad_l=36.0, pad_w=15.0, pad_t=4.0, pad_ofset=30.0,
@@ -72,17 +81,26 @@ def namlu(p):
     R2 = Rb + Lk * math.tan(math.radians(p["koni_acisi"]))
     # agiz bilezigi + bant kulaklari: SADECE on ucta (bant arkada namlu
     # borusunun ustunden gecer). Delik bilezik boyunca TAMAMEN acilir.
-    y0 = p["y_ankraj"] - 9.0; y1 = L
+    ya = p["y_ankraj"]
+    kw = p["kulak_w"]
+    y0 = ya - p["bilezik_geri"]; y1 = ya        # bilezik ANKRAJDA biter
     bil = sil(p["bilezik_R"], y1 - y0, V(0, y0, 0), V(0, 1, 0))
     for s in (+1, -1):
         z0, z1 = (Ro - 1, p["kulak_R"]) if s > 0 else (-p["kulak_R"], -(Ro - 1))
-        bil = bil.fuse(kutu(-7, 7, y0, y1, z0, z1))
+        bil = bil.fuse(kutu(-kw, kw, y0, y1, z0, z1))
     bil = bil.cut(sil(Rb, y1 - y0 + 2, V(0, y0 - 1, 0), V(0, 1, 0)))
-    ya = p["y_ankraj"]
-    for s in (+1, -1):    # her kenarda 2 ankraj (2 bant)
-        for zc in (s * p["r_bant"], s * (p["r_bant"] + p["dz_bant"])):
-            bil = bil.cut(kutu(-2.8, 2.8, ya - 7, y1 + 1, zc - 4.5, zc + 4.5))
-            bil = bil.cut(sil(2.05, 24, V(-12, ya, zc), V(1, 0, 0)))
+    db = p["d_bant_delik"]; wp = p["d_pim_bant"] + 0.4
+    for s in (+1, -1):
+        for i in range(int(p["n_ankraj_yan"])):
+            zc = s * (p["r_bant"] + i * p["dz_bant"])
+            # bant gecis deligi (Y ekseninde, bilezigi bastan sona deler)
+            bil = bil.cut(sil(db / 2, y1 - y0 + 6, V(0, y0 - 3, zc), V(0, 1, 0)))
+            # arka agizda pah: gergin bant kenarda kesilmesin
+            bil = bil.cut(Part.makeCone(db / 2 + 2.5, db / 2, 2.5,
+                                        V(0, y0 - 0.1, zc), V(0, 1, 0)))
+            # on yuzde tasiyici pim olugu (X boyunca)
+            bil = bil.cut(kutu(-(kw + 2), kw + 2, y1 - p["oluk_pim_d"], y1 + 2,
+                               zc - wp / 2, zc + wp / 2))
     g = g.fuse(bil)
     # iraksak koni en son: bilezik dahil her seyi keser
     g = g.cut(Part.makeCone(Rb, R2, Lk + 0.5, V(0, yk, 0), V(0, 1, 0)))
@@ -237,10 +255,12 @@ def capraz_pim(p):
     """O8 pim; her ucta IKI bant olugu (kenar basina 2 bant)."""
     y = p["y_capraz0"]; h = p["capraz_uzun"]
     c = sil(p["d_capraz"] / 2, h, V(0, y, -h / 2), V(0, 0, 1))
+    w = p["d_bant_delik"]                      # bant O13 -> 14 mm genis oluk
     for s in (+1, -1):
-        for zc in (s * p["r_bant"], s * (p["r_bant"] + p["dz_bant"])):
-            c = c.cut(sil(p["d_capraz"] / 2 + 1, 2.4, V(0, y, zc - 1.2), V(0, 0, 1)).cut(
-                sil(p["d_capraz"] / 2 - 1.0, 3.4, V(0, y, zc - 1.7), V(0, 0, 1))))
+        for i in range(int(p["n_ankraj_yan"])):
+            zc = s * (p["r_bant"] + i * p["dz_bant"])
+            c = c.cut(sil(p["d_capraz"] / 2 + 1, w, V(0, y, zc - w / 2), V(0, 0, 1)).cut(
+                sil(p["d_capraz"] / 2 - 1.0, w + 2, V(0, y, zc - w / 2 - 1), V(0, 0, 1))))
     return c
 
 

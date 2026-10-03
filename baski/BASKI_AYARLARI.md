@@ -14,7 +14,7 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 | Dosya | Parça | Adet | Filament | Ölçü (X×Y×Z mm) | Filament |
 |---|---|---|---|---|---|
 | `01a_namlu_govde` | Namlu gövdesi (arka parça) | 1 | **PETG** | 88 × 55 × **142.0** | ~119.9 g |
-| `01b_agiz_basligi` | Ağız başlığı (ıraksak koni) | 1 | **PETG** | 68 × 104 × **21.8** | ~30.8 g |
+| `01b_agiz_basligi` | Ağız başlığı (ıraksak koni) | 1 | **PETG** | 68 × 104 × **20.6** | ~36.9 g |
 | `02_kapsul` | Kapsül | 1 | **PETG** | 43 × 43 × **45.0** | ~33.8 g |
 | `03_tetik_kapagi_sag` | Tetik kartuş kapağı (sağ) | 1 | **PETG** | 18 × 18 × **3.0** | ~0.9 g |
 | `04_tetik_kapagi_sol` | Tetik kartuş kapağı (sol) | 1 | **PETG** | 18 × 18 × **3.0** | ~0.9 g |
@@ -23,7 +23,7 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 | `07_tampon_ust` | Yarık sonu tamponu (üst) | 1 | **TPU 95A** | 9 × 7 × **3.0** | ~0.1 g |
 | `08_tampon_alt` | Yarık sonu tamponu (alt) | 1 | **TPU 95A** | 9 × 7 × **3.0** | ~0.1 g |
 
-**TOPLAM: PETG ~194 g · TPU ~0.2 g**
+**TOPLAM: PETG ~200 g · TPU ~0.2 g**
 
 Her parça hem `.stl` (baskı) hem `.step` (CAD, ölçü almak/değiştirmek için)
 olarak var. Ölçüler `parcalar.json`'da.

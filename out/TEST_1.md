@@ -41,35 +41,60 @@ Ağ **~90 ms**'de tam açılır, ~50 ms açık kalır, sonra çevre halatı bonc
 
 ---
 
-## 3. BANDI NASIL BAĞLAYACAKSIN — SORDUĞUN YER
+## 3. BANDI NASIL BAĞLAYACAKSIN — DYNEEMA YOK, PİM VAR
 
-**Ø13 bant o yuvaya girmez.** Ağız bileziğindeki yuva **5.6 × 9.0 mm**;
-Ø13 tüp yassılaşınca ~20 × 9 mm olur. Sıkıştırarak da olmaz.
+Ankraj yeniden tasarlandı: **bant deliğin içinden geçer, tailini bir pim deler.**
+Eski 5.6 × 9 mm yuva ve Dyneema halka kaldırıldı.
 
-O yuva bandın kendisi için değil, **bandın ucuna bağlanan Dyneema halka** için.
-Yuvanın içinden geçen Ø4 pim, halkanın takıldığı ankrajdır.
+### Ağız bileziği (ön uç)
+- Her kenarda **Ø14 mm delik**, namlu ekseni boyunca, bilezikten baştan sona (16 mm).
+- Deliğin arka ağzında **2.5 mm pah** — gergin bant kenarda kesilmesin.
+- Bileziğin ön yüzünde **5.4 mm genişlik × 2.8 mm derinlik oluk**, taşıyıcı pim oraya oturur.
+- Kulak kalınlığı 14 → **22 mm** (Ø14 deliğe her yandan 4 mm cidar).
+- Ankraj yarıçapı 33 → **36 mm** (delik ıraksak koniyi delmesin diye).
 
-### Bağlama (her bant ucu için, toplam 4 uç)
+**Bilezik artık y = 144.8'de bitiyor** (eskiden namlu ağzına kadar gidiyordu).
+Bu kasıtlı: pim tam tasarımın ankraj noktasına oturuyor, böylece **L0, H ve λ
+değişmiyor** — yukarıdaki hız/menzil tablosu aynen geçerli.
 
-1. Bandın ucundan **15 mm** içeride, banda sıkı bir **tek düğüm** at
-   (veya ucu 20 mm geri katla). Bu, lashing'in sıyrılmasını engelleyen stoperdir.
-2. **0.60 mm Dyneema'dan 300 mm** kes, ikiye katla → ~120 mm'lik halka.
-3. Halkanın iki ucunu, düğümün **arkasına** gelecek şekilde bandın üstüne koy;
-   üzerine **constrictor düğümü** at, sonra aynı iple **15–20 mm boyunca sıkıca sar**
-   (tur aralığı bırakma). Sonu iki yarım düğüm + 1 damla japon yapıştırıcı.
-4. Halkayı ağız bileziğindeki yuvadan geçir, **Ø4 ankraj pimine** tak.
-5. Arka uç aynı şekilde, **çapraz pimin oluğuna**.
+**Takma:**
+1. Bandı arkadan Ø14 delikten geçir, ön yüzden **45 mm** çıkar.
+2. Çıkan tailin ucundan **25 mm** içeride, bandı çapraz **del** (Ø5 matkap veya sivri mil).
+3. **Ø5 × 30 mm çelik pimi** delikten geçir, oluğa yatır.
+4. Bandı geri çek — pim oluğa oturur, kilitlenir.
 
-Yük kontrolü: 0.45 MPa'da bant başına 213 N. Çift kat 0.60 mm Dyneema
-890 N, düğüm verimi %55 → **490 N. Emniyet payı 2.3×.**
+### Çapraz pim (arka uç)
+- Oluk 2.4 mm → **14 mm genişliğe** açıldı, Ø13 bant oturuyor.
+- Çapraz pim 92 → **100 mm** uzatıldı (oluk sonuna pay).
+
+**Takma:**
+1. Bandı çapraz pimin oluğuna sar.
+2. Tail'i **30 mm** geri katla, ana kolun yanına yatır.
+3. Çapraz pimin ~15 mm arkasında, **ana kol + tail'i birlikte del**.
+4. **Ø4 × 25 mm pimi** geçir.
+
+### Dayanım kontrolü
+
+| | 0.45 MPa (213 N/bant) | 0.65 MPa (308 N) |
+|---|---|---|
+| Ø5 pim eğilme (en kötü: nokta yük) | 61 MPa — **SF 6.6×** | 88 MPa — SF 4.6× |
+| PETG oluk yatak basıncı | 5.3 MPa — **SF 9.4×** | 7.7 MPa — SF 6.5× |
+| Lastik yırtılma (25 mm kenar mesafesi) | 0.47 MPa — kauçuk ~3–5 MPa | 0.68 MPa |
+
+Bant sıyrılmaz: tail gergin değil, Ø13 kalır; pim 30 mm > delik 14 mm.
+(Gergin kol λ=4'te Ø6.5'e incelir, delikten rahat geçer.)
+
+**Riskli olan tek şey:** pim deliği lastikte çentik yaratır, kauçuk çentiğe
+duyarlıdır. Birkaç atış için sorun yok; **her kurmadan önce pim bölgesine bak**,
+yırtık başlangıcı görürsen tail'i kesip yeniden del.
+
+### Bant kesim boyu
+Kol başına **130 mm** (30 çalışma + 45 ön + 55 arka pay). **2 kol = 260 mm.**
 
 ### 2 bant nereye
-
-Dört ankraj yuvası var: z = ±33 ve ±44 mm.
-**İç çifti kullan: z = +33 ve z = −33.** Simetri şart — tek tarafa takarsan
-kapsül namluda yan basar.
-
----
+Kenar başına **1 bant**: z = **+36** ve **−36** mm. Simetri şart.
+(Ø13 bant + Ø14 delikle kenar başına ikinci ankraj sığmıyor; 4 bant istersen
+çapraz pim ve kulaklar büyümeli.)
 
 ## 4. TESTTE MUTLAKA ÖLÇ
 
@@ -112,8 +137,9 @@ Eski 30°/12 boncuk STL'leri geçersiz.
 | Dosya | Değişti mi |
 |---|---|
 | `01a_namlu_govde.stl` | hayır (gövde aynı) |
-| `01b_agiz_basligi.stl` | **EVET** — ıraksak koni 30°→40° |
+| `01b_agiz_basligi.stl` | **EVET** — koni 30°→40° **+ yeni bant ankrajı** |
 | `02_kapsul.stl` | **EVET** — yuva 40°, R_pitch 15.5, tek boncuk |
+| `V4_capraz_pim` (alüminyum, torna) | **EVET** — oluk 14 mm, boy 100 mm |
 | diğerleri | hayır |
 
 Gövdeyi zaten bastıysan tekrar basmana gerek yok; **başlık + kapsül** yeter.

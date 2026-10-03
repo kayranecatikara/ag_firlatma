@@ -11,8 +11,8 @@
  "bilezik_R": 34.0,
  "kulak_R": 52.0,
  "d_capraz": 8.0,
- "capraz_uzun": 92.0,
- "r_bant": 33.0,
+ "capraz_uzun": 100.0,
+ "r_bant": 36.0,
  "dz_bant": 11.0,
  "yarik_w": 9.4,
  "kanal_d": 4.0,
@@ -21,5 +21,6 @@
  "derinlik": 9.0,
  "t_kapak": 9.0,
  "D_bore": 43.4,
- "n_boncuk": 1
+ "n_boncuk": 1,
+ "n_ankraj_yan": 1
 }

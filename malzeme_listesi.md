@@ -7,7 +7,7 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm | 153.5 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
+| A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm | 159.5 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
 | A2 | Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi) | 1 | PETG | O43.1 x 45 mm, hazne O37.1 x 20 mm, yuva acisi 40 derece | 32.5 | Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu. |
 | A3 | Tetik kartus kapagi | 2 | PETG | O18 x 3 mm, ortada O2 ip deligi, 2x O2.2 vida deligi | 1.9 | %100 dolgu. |
 | A4 | Servo ip makarasi | 2 | PETG | O8 mm (r=4 mm) tambur, servo dislisine oturur, O1.5 ip deligi | 0.8 | Servonun kendi kol vidasiyla sabitlenir. |
@@ -18,7 +18,7 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| B1 | Capraz pim | 1 | Aluminyum 7075-T6 cubuk (alternatif: gumus celigi) | O8 x 92 mm; her ucta IKI oluk: r=33 ve r=44 mm, 2.4 mm genislik x 1 mm derinlik | 12.4 | 4 bant icin 4 oluk. Egilme SF 4.1 @ 1080 N. O6 YETERSIZ (SF 1.7). |
+| B1 | Capraz pim | 1 | Aluminyum 7075-T6 cubuk (alternatif: gumus celigi) | O8 x 100 mm; her ucta IKI oluk: r=36 ve r=47 mm, 2.4 mm genislik x 1 mm derinlik | 12.4 | 4 bant icin 4 oluk. Egilme SF 4.1 @ 1080 N. O6 YETERSIZ (SF 1.7). |
 | B2 | Tetik pimi | 2 | Gumus celigi / paslanmaz cubuk | O5 x 20.7 mm, ust uctan 1 mm'de O1.5 enine ip deligi, uc hafif pahli | 6.6 | Uc kapsul kanalina girer; yuzey puruzsuz olmali. |
 | B3 | Mil bilezigi (pim yakasi / yay tablasi) | 2 | Celik, set vidali (DIN 705) | O5 ic / O10 dis / 5 mm genislik, M3 set vida | 4.4 | Pim ucundan 12.2 mm'ye sabitlenir (dinlenmede uc kanal dibine 0.3 mm pay). |
 | B4 | Geri getirme yayi (basma) | 2 | Yay celigi | ic O>=5.3, dis O<=10.2, tel ~0.5-0.6 mm, serbest boy ~13 mm, blok boy <=4 mm | 0.6 | Dinlenmede 10 mm (on yuk), cekilince 4 mm. Hazir yay setlerinden secilebilir. |
@@ -39,9 +39,9 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| D1 | Lateks tup (zipkin lastigi) | 2 | SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ) | O13 dis / O4 ic (ELDEKI ZIPKIN LASTIGI); kesim boyu ~50 mm (calisma 30 mm + 2x10 mm uc) | 11.5 | KENAR BASINA 1 ADET. Kurulu uzama x4. SERTLIK OLCULMEDI — tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da 213 N/bant (22 kg), toplam kurma 426 N. |
-| D2 | Bant uc halkasi (Dyneema) | 4 | Dyneema/UHMWPE orgu halat | O1.5 mm, her biri ~60 mm | 0.4 | Tup ucuna ic dugumle gomulur, disi sarilir. Arka halka capraz pim oluguna, on halka ankraj pimine. |
-| D3 | Bant ucu sargi ipi | 1 | Naylon/Dyneema iplik (dikis/sargi) | ~2 m | 0.2 | Tup uclarini halka dugumu uzerine sikica sarmak icin. Uc basina donanim <= 7 mm olmali! |
+| D1 | Lateks tup (zipkin lastigi) | 2 | SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ) | O13 dis / O4 ic (ELDEKI ZIPKIN LASTIGI); kesim boyu ~130 mm (calisma 30 mm + on 45 + arka 55 mm delme/katlama payi) | 29.8 | KENAR BASINA 1 ADET. Kurulu uzama x4. SERTLIK OLCULMEDI — tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da 213 N/bant (22 kg), toplam kurma 426 N. |
+| D2 | On tasiyici pim (BANTI DELER) | 2 | Celik mil veya M5 civata govdesi | O5.0 x 30 mm | 9.2 | Bant O14 delikten gecer, disari cikan tail'i bu pim DELER; pim agiz bileziginin on yuzundeki 5.4 mm oluga oturur. Dyneema halka YOK. |
+| D3 | Arka kilit pimi (BANTI DELER) | 2 | Celik mil | O4.0 x 25 mm | 5.0 | Bant capraz pimin 14 mm oluguna sarilir, tail 30 mm geri katlanir; bu pim ana kolu ve tail'i BIRLIKTE deler. Capraz pimin ~15 mm arkasina. |
 
 ## E. TETIK TAHRIK — ELEKTRIK
 
@@ -80,4 +80,4 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 | H3 | Yedek bant seti | 1 | D1-D3 |  | 0.0 | Lateks yaslanir; testlerde surekli yedek bulundur. |
 | H4 | Yuksek hizli kamera (telefon 240 fps) | 1 |  |  | 0.0 | Yer atisinda acilma suresi/cap olcumu. |
 
-**Toplam (A-F, test ekipmani haric): ~392 g**
+**Toplam (A-F, test ekipmani haric): ~429 g**

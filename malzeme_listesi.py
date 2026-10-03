@@ -24,7 +24,7 @@ A = 1.5 * math.sqrt(3) * R ** 2
 L_goz = 2 * A / GOZ                                        # m
 L_cevre = 6 * R
 dugum = int(A / GOZ ** 2)
-bant_kesim = P["L0"] + 2 * 10.0
+bant_kesim = P["L0"] + 100.0   # calisma + on 45 + arka 55 mm pay (delme + katlama)
 N_BANT = _KF.get("n_bant", 4)         # out/v4_konfig.json (ILK TEST: 2)
 pim_boy = 37.5 - (21.7 - 5.0 + 0.15)
 # Kurma kuvveti: Gmod 0.45 MPa (varsayim) -> 852 N toplam, 4 kol.
@@ -86,15 +86,19 @@ OD_BANT = P.get("bant_OD", 13.0)      # cad/v4_konfig.json
 G = "D. TAHRIK — LATEKS BANT"
 ekle(G, "D1", "Lateks tup (zipkin lastigi)", N_BANT, "SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ)",
      f"O{OD_BANT:.0f} dis / O4 ic (ELDEKI ZIPKIN LASTIGI); kesim boyu ~{bant_kesim:.0f} mm "
-     f"(calisma {P['L0']:.0f} mm + 2x10 mm uc)",
+     f"(calisma {P['L0']:.0f} mm + on 45 + arka 55 mm delme/katlama payi)",
      N_BANT * math.pi / 4 * (OD_BANT ** 2 - 4 ** 2) * bant_kesim / 1000 * 0.95,
      f"KENAR BASINA {N_BANT//2} ADET. Kurulu uzama x{P['lam']:.0f}. SERTLIK OLCULMEDI — "
      f"tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da {F_BANT:.0f} N/bant "
      f"({F_BANT/9.81:.0f} kg), toplam kurma {F_TOP:.0f} N.")
-ekle(G, "D2", "Bant uc halkasi (Dyneema)", 2 * N_BANT, "Dyneema/UHMWPE orgu halat", "O1.5 mm, her biri ~60 mm",
-     2 * N_BANT * 0.1, "Tup ucuna ic dugumle gomulur, disi sarilir. Arka halka capraz pim oluguna, on halka ankraj pimine.")
-ekle(G, "D3", "Bant ucu sargi ipi", 1, "Naylon/Dyneema iplik (dikis/sargi)", "~2 m", 0.2,
-     "Tup uclarini halka dugumu uzerine sikica sarmak icin. Uc basina donanim <= 7 mm olmali!")
+ekle(G, "D2", "On tasiyici pim (BANTI DELER)", N_BANT, "Celik mil veya M5 civata govdesi",
+     "O5.0 x 30 mm", N_BANT * 4.6,
+     "Bant O14 delikten gecer, disari cikan tail'i bu pim DELER; pim agiz "
+     "bileziginin on yuzundeki 5.4 mm oluga oturur. Dyneema halka YOK.")
+ekle(G, "D3", "Arka kilit pimi (BANTI DELER)", N_BANT, "Celik mil", "O4.0 x 25 mm",
+     N_BANT * 2.5,
+     "Bant capraz pimin 14 mm oluguna sarilir, tail 30 mm geri katlanir; bu pim "
+     "ana kolu ve tail'i BIRLIKTE deler. Capraz pimin ~15 mm arkasina.")
 
 G = "E. TETIK TAHRIK — ELEKTRIK"
 ekle(G, "E1", "Servo", 2, "MG996R sinifi (>=11 kg.cm @6V, metal disli)", "40 x 20 x 37 mm",
