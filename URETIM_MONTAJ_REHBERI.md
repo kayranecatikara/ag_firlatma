@@ -54,6 +54,13 @@ GÜN 3  : mekanizma montajı + kuru deneme (banttsız)
 | `06_toz_kapagi` | Arka toz kapağı (ops.) | 1 | **PETG** | ~6 g | 20 dk |
 | `07/08_tampon` | Yarık sonu tamponu | 2 | **TPU 95A** | ~0.2 g | 10 dk |
 
+> ⚠️ **DESTEK AYARI KRİTİK.** Namlu, ağzı AŞAĞI basılır ve Ø43 delik
+> tablaya açıktır. Desteği öylece açarsan dilimleyici **deliğin içini de
+> doldurur** — parça dışarıdan doğru görünür ama içi dolu çıkar (ilk
+> baskıda bu oldu). Destek gerçekten gerekli olan tek yer tetik göbekleri
+> ve servo yataklarıdır (yüzeyin %2.4'ü). **Deliğe destek engelleyici koy**
+> ya da desteği tamamen kapat. Ayrıntı: `baski/BASKI_AYARLARI.md` §1.5.
+
 **TOPLAM: PETG ~190 g · TPU ~0.2 g.** Yazıcı Z yüksekliği **≥155 mm** olmalı.
 
 > `cad/V4_bilye`, `V4_capraz_pim`, `V4_bant_*`, `V4_pim_*` **BASILMAZ** —

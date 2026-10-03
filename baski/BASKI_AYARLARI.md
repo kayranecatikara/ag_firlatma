@@ -33,12 +33,60 @@ Tabla ≥ 110 × 110 mm. Ender 3 / Prusa MK3 / Bambu P1 sınıfı yeterli.
 
 ---
 
+## 1.5 ⚠️ DESTEK — İLK BASKIDA HATA ALINDI, OKU
+
+**Bu bölüm bir baskı denemesinden sonra düzeltildi.** İlk sürümde
+"destek: YOK" yazıyordu; bu **yanlıştı** ve namlu deliğinin destek
+malzemesiyle dolmasına yol açtı.
+
+### Gerçek durum (STL'den ölçüldü)
+Namlu yüzeyinin **%2.4'ü (1397 mm²)** 45°'den dik aşağı bakıyor ve
+destek ister:
+* **tetik kartuş göbekleri** — Ø18 mm YATAY silindir, z ≈ 133 mm'de
+  havada başlıyor
+* **servo yatakları** — 4 × 36 mm plaka, z ≈ 103 mm, yatay çıkıntı
+
+Bant ankraj kulakları tabanda (z = 0), onlara destek **gerekmez**.
+
+### Ama desteği öylece açarsan NAMLU DELİĞİ DOLAR
+Namlu, ağzı AŞAĞI basılır; yani Ø43 delik **tabana açıktır**. Dilimleyici
+"her yerde destek" ya da "sadece tabladan destek" ile bu deliği de
+doldurur — delik içine ince duvarlar örer. Parça dışarıdan doğru görünür
+ama **içi dolu çıkar**.
+
+### DOĞRU AYAR
+```
+destek            : AÇIK  (tetik göbekleri + servo yatakları için)
+destek açısı eşiği: 45°
++ NAMLU DELİĞİNE DESTEK ENGELLEYİCİ KOY        ← ŞART
+```
+| Dilimleyici | Nasıl |
+|---|---|
+| **PrusaSlicer** | Sağ tık → *Add support blocker* → silindir, Ø45 × 150 mm, deliğin içine |
+| **Cura** | *Support Blocker* küpü ekle, Ø43 deliği kaplayacak şekilde ölçekle |
+| **Bambu Studio / Orca** | *Support painting* → **Block** fırçası ile deliğin iç yüzeyini boya |
+
+**Alternatif (en basit):** desteği tamamen KAPAT. Göbeklerin ve servo
+yataklarının alt yüzeyi bir miktar sarkar ama bunlar kritik yüzey
+değildir — göbekteki Ø5 delik zaten matkapla raybalanıyor, servo yatağı
+da düz oturur. Delik temiz kalır, parça kullanılabilir.
+
+> **Elindeki baskı muhtemelen kurtarılabilir:** delikteki destek
+> malzemesi KOPARILABİLİR. Uzun bir pense/tornavida ile içeriden sök,
+> sonra Ø43'lük bir boru veya zımpara çubuğuyla temizle. Kapsül serbest
+> kayıyorsa parça kullanılır.
+
+---
+
 ## 2. NEDEN BU YÖN — namluyu YATAY basma
 
 Namlu kurulduğunda bant kulaklarına **toplam ~1200 N** çekme gelir.
 
 * **Dik basılırsa** (bu klasördeki STL): kuvvet katman düzlemine **paralel**
   olur. Yük, filamentin kendi mukavemetiyle taşınır.
+  **STL'de namlu AĞZI AŞAĞI, dibi yukarıdadır** — bant ankraj kulakları
+  (Ø104 mm) tablada oturur, geniş ve sağlam bir taban verir. (Önceki
+  sürümde "ağız yukarı" yazıyordu, yanlıştı.)
 * **Yatay basılırsa**: kuvvet katmanları **ayırmaya** çalışır. FDM'de
   katmanlar arası dayanım, katman içi dayanımın **%40-60'ıdır**.
   Kulak kopar.
@@ -73,7 +121,6 @@ dolgu              : %50 gyroid
 destek             : YOK
 brim               : 5 mm        ← 180 mm yüksek, devrilmesin
 ```
-> Yarıklar ve delikler köprü/overhang olarak kendini taşır, destek gerekmez.
 > %50'nin altına inme — bant kulakları ve tetik göbekleri dolguya oturuyor.
 
 **`02_kapsul` (~3 saat)**
