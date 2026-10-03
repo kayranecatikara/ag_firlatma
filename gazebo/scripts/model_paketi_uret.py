@@ -16,15 +16,32 @@ import numpy as np
 
 KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 MOD = os.path.join(KOK, "gazebo", "models", "ag_firlatici")
-P = json.load(open(os.path.join(KOK, "cad", "v4_konfig.json")))
+# v4_olcu.json = CAD'in yazdigi YETKILI olcu dosyasi (turetilmis degerler dahil).
+P = json.load(open(os.path.join(KOK, "cad", "v4_olcu.json")))
 
-L_NAMLU = 28.5 + P["STROK"] * (1 + 1 / (P["lam"] - 1))      # mm
+L_NAMLU = P["L_namlu"]                                       # mm (CAD)
 D_DIS, D_IC = 55.4, P.get("D_bore", 43.4)
-D_KAPSUL, L_KAPSUL = 43.1, 40.0
+D_KAPSUL = 43.1
+L_KAPSUL = P["L_kapsul"]                                     # mm (CAD)
 SERVO = (32.0, 16.0, 30.0)
 
 # --- kutleler (malzeme_listesi.md'den, bkz. model.config) ---
-M_NAMLU, M_KAPSUL, M_SERVO, M_PIM = 0.2162, 0.1380, 0.0143, 0.0033
+# Kutleler CAD hacimlerinden (cad/v4_hacim.json) turetilir — elle yazilmaz.
+_H = json.load(open(os.path.join(KOK, "cad", "v4_hacim.json")))
+_v = lambda ad: _H[ad]["V"]                                   # cm3
+RHO_PETG, RHO_LATEKS, RHO_AL = 1.27 * 0.95, 0.95, 2.70        # g/cm3
+_K2 = json.load(open(os.path.join(KOK, "out", "v4_konfig.json")))
+M_SERVO, M_PIM = 0.0143, 0.0033
+M_AG   = 0.0096                                               # 39.2 m x 0.274 g/m
+M_BONCUK = _K2["n_boncuk_top"] * _K2["m_boncuk"]              # 12 x 4 g
+# namlu link: basilan iki namlu parcasi + 4 bant + tetik kapaklari + tamponlar
+M_NAMLU = (_v("V4_namlu") * RHO_PETG
+           + sum(_v(f"V4_bant_{i}") for i in (1, 2, 3, 4)) * RHO_LATEKS
+           + (_v("V4_kapak_sag") + _v("V4_kapak_sol")) * RHO_PETG
+           + (_v("V4_pim_sag") + _v("V4_pim_sol")) * RHO_AL) / 1000.0
+# kapsul link: kapsul + capraz pim + AG + BONCUKLAR (hepsi birlikte hareket eder)
+M_KAPSUL = (_v("V4_kapsul") * RHO_PETG
+            + _v("V4_capraz_pim") * RHO_AL) / 1000.0 + M_AG + M_BONCUK
 
 
 def silindir_atalet(m, ro, ri, L):
@@ -48,10 +65,15 @@ def inertial(m, I, cx=0.0, cy=0.0, cz=0.0):
 
 
 def main():
-    os.makedirs(os.path.join(MOD, "meshes"), exist_ok=True)
-    for src, dst in (("01_namlu.stl", "namlu.stl"), ("02_kapsul.stl", "kapsul.stl")):
-        shutil.copy(os.path.join(KOK, "baski", src),
-                    os.path.join(MOD, "meshes", dst))
+    # Mesh'ler baski/'dan KOPYALANMAZ: namlu baskida iki parca (01a+01b) ve
+    # STL'ler tabla yonune dondurulmus. Gorsel mesh'leri CAD koordinatlarinda
+    # uretmek icin:  freecadcmd gazebo/scripts/mesh_uret.py
+    md = os.path.join(MOD, "meshes")
+    eksik = [f for f in ("namlu.stl", "kapsul.stl")
+             if not os.path.exists(os.path.join(md, f))]
+    if eksik:
+        raise SystemExit("Once mesh uret: freecadcmd gazebo/scripts/mesh_uret.py "
+                         f"(eksik: {', '.join(eksik)})")
 
     Ln, ro, ri = L_NAMLU*1e-3, D_DIS/2e3, D_IC/2e3
     I_namlu = silindir_atalet(M_NAMLU, ro, ri, Ln)
@@ -167,11 +189,11 @@ def main():
     Hedef: X-UAV Talon sinifi sabit kanat (1718 mm kanat acikligi).
 
     Namlu {L_NAMLU:.1f} mm, strok {P['STROK']:.0f} mm, 4 x lateks bant (lam=4.0).
-    Cikis hizi 31.1 m/s. Toplam kutle {M_NAMLU+M_KAPSUL+2*M_SERVO+2*M_PIM:.3f} kg.
+    Cikis hizi 27.7 m/s (Gmod 0.45 MPa varsayim). Toplam kutle {M_NAMLU+M_KAPSUL+2*M_SERVO+2*M_PIM:.3f} kg.
 
     KUTLE DAGILIMI:
       namlu    {M_NAMLU*1e3:.1f} g  (govde + bantlar + tetik donanimi + kablolar)
-      kapsul   {M_KAPSUL*1e3:.1f} g  (kapsul + capraz pim + AG + 6 kursun bilye)
+      kapsul   {M_KAPSUL*1e3:.1f} g  (kapsul + capraz pim + AG + 12 x O9 kursun boncuk)
       servo    {M_SERVO*1e3:.1f} g  x2 (mikro, metal disli)
 
     AG FIZIGI BU MODELDE DEGILDIR. Ag dugumleri AYRI MODEL'ler olarak

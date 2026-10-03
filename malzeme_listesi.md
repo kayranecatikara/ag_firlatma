@@ -7,8 +7,8 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm | 172.0 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
-| A2 | Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi) | 1 | PETG | O43.1 x 45 mm, hazne O37.1 x 20 mm, yuva acisi 30 derece | 27.5 | Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu. |
+| A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm | 155.0 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
+| A2 | Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi) | 1 | PETG | O43.1 x 45 mm, hazne O37.1 x 20 mm, yuva acisi 30 derece | 31.9 | Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu. |
 | A3 | Tetik kartus kapagi | 2 | PETG | O18 x 3 mm, ortada O2 ip deligi, 2x O2.2 vida deligi | 1.9 | %100 dolgu. |
 | A4 | Servo ip makarasi | 2 | PETG | O8 mm (r=4 mm) tambur, servo dislisine oturur, O1.5 ip deligi | 0.8 | Servonun kendi kol vidasiyla sabitlenir. |
 | A5 | Yarik sonu durdurma tamponu | 2 | TPU 95A | 6.2 x 3 x 7 mm | 0.5 | Yarik on ucuna CA ile yapistir. Kapsulun carpma yukunu yumusatir (~450 N). |
@@ -39,7 +39,7 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| D1 | Lateks tup (zipkin lastigi) | 4 | SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ) | O15.2 dis / O4 ic; kesim boyu ~50 mm (calisma 30 mm + 2x10 mm uc) | 32.3 | KENAR BASINA 2 ADET. Kurulu uzama x4, 300 N/bant (31 kg). O14 bulunursa o da olur (kuvvet ~%7 duser). |
+| D1 | Lateks tup (zipkin lastigi) | 4 | SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ) | O13 dis / O4 ic (ELDEKI ZIPKIN LASTIGI); kesim boyu ~50 mm (calisma 30 mm + 2x10 mm uc) | 23.0 | KENAR BASINA 2 ADET. Kurulu uzama x4. SERTLIK OLCULMEDI — tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da 213 N/bant (22 kg), toplam kurma 852 N. |
 | D2 | Bant uc halkasi (Dyneema) | 8 | Dyneema/UHMWPE orgu halat | O1.5 mm, her biri ~60 mm | 0.8 | Tup ucuna ic dugumle gomulur, disi sarilir. Arka halka capraz pim oluguna, on halka ankraj pimine. |
 | D3 | Bant ucu sargi ipi | 1 | Naylon/Dyneema iplik (dikis/sargi) | ~2 m | 0.2 | Tup uclarini halka dugumu uzerine sikica sarmak icin. Uc basina donanim <= 7 mm olmali! |
 
@@ -47,7 +47,7 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| E1 | Servo | 2 | MG996R sinifi (>=11 kg.cm @6V, metal disli) | 40 x 20 x 37 mm | 110.0 | Pim basina 600 N yuk -> PTFE burcla ~96 N cekme. Mikro servo YETMEZ. Iki servo AYNI sinyal (Y-kablo). Makara r=6 mm. |
+| E1 | Servo | 2 | MG996R sinifi (>=11 kg.cm @6V, metal disli) | 40 x 20 x 37 mm | 110.0 | Pim basina 426 N yuk -> PTFE burcla ~68 N cekme. Mikro servo YETMEZ. Iki servo AYNI sinyal (Y-kablo). Makara r=6 mm. |
 | E2 | Servo Y-kablosu (1 giris -> 2 servo) | 1 | JR/Futaba 3 pin | ~15 cm | 4.0 |  |
 | E3 | Servo uzatma kablosu | 1 | JR/Futaba 3 pin | gerekli boy (tarete gore) | 5.0 | Ucus kontrolcusundeki bir PWM cikisina. |
 | E4 | Tetik ipi | 2 | PE/Dyneema orgu, PE #6 (~0.40 mm, ~30 kg) | her biri ~120 mm | 0.0 | Pim deliginden -> kapak deliginden -> yonlendirme piminden -> servo tamburuna. |
@@ -80,4 +80,4 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 | H3 | Yedek bant seti | 1 | D1-D3 |  | 0.0 | Lateks yaslanir; testlerde surekli yedek bulundur. |
 | H4 | Yuksek hizli kamera (telefon 240 fps) | 1 |  |  | 0.0 | Yer atisinda acilma suresi/cap olcumu. |
 
-**Toplam (A-F, test ekipmani haric): ~450 g**
+**Toplam (A-F, test ekipmani haric): ~428 g**

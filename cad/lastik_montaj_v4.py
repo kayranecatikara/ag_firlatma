@@ -284,11 +284,18 @@ if __name__ == "__main__":
                 "V4_kapak_sag": k1, "V4_kapak_sol": k2,
                 "V4_tampon_ust": tp1, "V4_tampon_alt": tp2}
     tum = None
+    hacim = {}
     for ad, sh in parcalar.items():
         sh.exportBrep(os.path.join(OUT, ad + ".brep"))
         sh.exportStep(os.path.join(OUT, ad + ".step"))
+        bb = sh.BoundBox
+        hacim[ad] = {"V": sh.Volume / 1000.0, "X": bb.XLength,
+                     "Y": bb.YLength, "Z": bb.ZLength}
         print(f"{ad:15s} hacim={sh.Volume/1000:8.2f} cm3 gecerli={sh.isValid()}")
         tum = sh if tum is None else tum.fuse(sh)
+    # v4_hacim.json: malzeme_listesi.py bunu okur. Daha once HICBIR betik
+    # yazmiyordu -> BOM kutleleri eski CAD'den geliyordu.
+    json.dump(hacim, open(os.path.join(OUT, "v4_hacim.json"), "w"), indent=1)
     Part.Shape(tum).exportStep(os.path.join(OUT, "V4_MONTAJ.step"))
     json.dump({k: v for k, v in P.items() if isinstance(v, (int, float))},
               open(os.path.join(OUT, "v4_olcu.json"), "w"), indent=1)

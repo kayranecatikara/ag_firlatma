@@ -1,6 +1,6 @@
 Grup,No,Parca,Adet,Malzeme / Ozellik,Olcu,Toplam kutle [g],Not
-A. 3D BASKI,A1,Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil),1,PETG (tercih ASA - UV'ye dayanikli),"O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm",172.0,"Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez."
-A. 3D BASKI,A2,Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi),1,PETG,"O43.1 x 45 mm, hazne O37.1 x 20 mm, yuva acisi 30 derece",27.5,Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu.
+A. 3D BASKI,A1,Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil),1,PETG (tercih ASA - UV'ye dayanikli),"O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm",155.0,"Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez."
+A. 3D BASKI,A2,Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi),1,PETG,"O43.1 x 45 mm, hazne O37.1 x 20 mm, yuva acisi 30 derece",31.9,Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu.
 A. 3D BASKI,A3,Tetik kartus kapagi,2,PETG,"O18 x 3 mm, ortada O2 ip deligi, 2x O2.2 vida deligi",1.9,%100 dolgu.
 A. 3D BASKI,A4,Servo ip makarasi,2,PETG,"O8 mm (r=4 mm) tambur, servo dislisine oturur, O1.5 ip deligi",0.8,Servonun kendi kol vidasiyla sabitlenir.
 A. 3D BASKI,A5,Yarik sonu durdurma tamponu,2,TPU 95A,6.2 x 3 x 7 mm,0.5,Yarik on ucuna CA ile yapistir. Kapsulun carpma yukunu yumusatir (~450 N).
@@ -16,10 +16,10 @@ C. STANDART BAGLANTI ELEMANLARI,C1,M2 isil gomme insert (heat-set),8,Pirinc,M2 x
 C. STANDART BAGLANTI ELEMANLARI,C2,M2 x 6 civata (kapak),4,"Paslanmaz, silindir basli",M2 x 6,0.8,
 C. STANDART BAGLANTI ELEMANLARI,C3,M2 x 8 civata (servo),4,Paslanmaz,M2 x 8,1.0,Servonun kendi vidalari kisa kalirsa.
 C. STANDART BAGLANTI ELEMANLARI,C4,M3 set vida (mil bileziklerinin kendi vidasi),2,Celik,M3 x 3,0.0,Bilezikle gelir; diş sabitleyiciyle (Loctite 243).
-D. TAHRIK — LATEKS BANT,D1,Lateks tup (zipkin lastigi),4,SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ),O15.2 dis / O4 ic; kesim boyu ~50 mm (calisma 30 mm + 2x10 mm uc),32.3,"KENAR BASINA 2 ADET. Kurulu uzama x4, 300 N/bant (31 kg). O14 bulunursa o da olur (kuvvet ~%7 duser)."
+D. TAHRIK — LATEKS BANT,D1,Lateks tup (zipkin lastigi),4,SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ),O13 dis / O4 ic (ELDEKI ZIPKIN LASTIGI); kesim boyu ~50 mm (calisma 30 mm + 2x10 mm uc),23.0,"KENAR BASINA 2 ADET. Kurulu uzama x4. SERTLIK OLCULMEDI — tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da 213 N/bant (22 kg), toplam kurma 852 N."
 D. TAHRIK — LATEKS BANT,D2,Bant uc halkasi (Dyneema),8,Dyneema/UHMWPE orgu halat,"O1.5 mm, her biri ~60 mm",0.8,"Tup ucuna ic dugumle gomulur, disi sarilir. Arka halka capraz pim oluguna, on halka ankraj pimine."
 D. TAHRIK — LATEKS BANT,D3,Bant ucu sargi ipi,1,Naylon/Dyneema iplik (dikis/sargi),~2 m,0.2,Tup uclarini halka dugumu uzerine sikica sarmak icin. Uc basina donanim <= 7 mm olmali!
-E. TETIK TAHRIK — ELEKTRIK,E1,Servo,2,"MG996R sinifi (>=11 kg.cm @6V, metal disli)",40 x 20 x 37 mm,110.0,Pim basina 600 N yuk -> PTFE burcla ~96 N cekme. Mikro servo YETMEZ. Iki servo AYNI sinyal (Y-kablo). Makara r=6 mm.
+E. TETIK TAHRIK — ELEKTRIK,E1,Servo,2,"MG996R sinifi (>=11 kg.cm @6V, metal disli)",40 x 20 x 37 mm,110.0,Pim basina 426 N yuk -> PTFE burcla ~68 N cekme. Mikro servo YETMEZ. Iki servo AYNI sinyal (Y-kablo). Makara r=6 mm.
 E. TETIK TAHRIK — ELEKTRIK,E2,Servo Y-kablosu (1 giris -> 2 servo),1,JR/Futaba 3 pin,~15 cm,4.0,
 E. TETIK TAHRIK — ELEKTRIK,E3,Servo uzatma kablosu,1,JR/Futaba 3 pin,gerekli boy (tarete gore),5.0,Ucus kontrolcusundeki bir PWM cikisina.
 E. TETIK TAHRIK — ELEKTRIK,E4,Tetik ipi,2,"PE/Dyneema orgu, PE #6 (~0.40 mm, ~30 kg)",her biri ~120 mm,0.0,Pim deliginden -> kapak deliginden -> yonlendirme piminden -> servo tamburuna.

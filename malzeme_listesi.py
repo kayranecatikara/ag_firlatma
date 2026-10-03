@@ -27,7 +27,9 @@ dugum = int(A / GOZ ** 2)
 bant_kesim = P["L0"] + 2 * 10.0
 N_BANT = 4                            # calisma boyu + 2 uc
 pim_boy = 37.5 - (21.7 - 5.0 + 0.15)
-F_TOP, F_BANT = 1200.0, 300.0
+# Kurma kuvveti: Gmod 0.45 MPa (varsayim) -> 852 N toplam, 4 kol.
+# OLCULDUKTEN sonra out/v9_NIHAI.json tablosundan guncelle.
+F_TOP, F_BANT = 852.0, 213.0
 
 S = []   # (grup, no, parca, adet, malzeme/ozellik, olcu, kutle_g_toplam, not)
 def ekle(*r): S.append(r)
@@ -79,12 +81,15 @@ ekle(G, "C3", "M2 x 8 civata (servo)", 4, "Paslanmaz", "M2 x 8", 4 * 0.25,
 ekle(G, "C4", "M3 set vida (mil bileziklerinin kendi vidasi)", 2, "Celik", "M3 x 3", 0,
      "Bilezikle gelir; diş sabitleyiciyle (Loctite 243).")
 
+OD_BANT = P.get("bant_OD", 13.0)      # cad/v4_konfig.json
 G = "D. TAHRIK — LATEKS BANT"
 ekle(G, "D1", "Lateks tup (zipkin lastigi)", N_BANT, "SAF DOGAL KAUCUK LATEKS (silikon/EPDM OLMAZ)",
-     f"O15.2 dis / O4 ic; kesim boyu ~{bant_kesim:.0f} mm (calisma {P['L0']:.0f} mm + 2x10 mm uc)",
-     N_BANT * math.pi / 4 * (15.2 ** 2 - 4 ** 2) * bant_kesim / 1000 * 0.95,
-     f"KENAR BASINA 2 ADET. Kurulu uzama x{P['lam']:.0f}, {F_BANT:.0f} N/bant ({F_BANT/9.81:.0f} kg). "
-     f"O14 bulunursa o da olur (kuvvet ~%7 duser).")
+     f"O{OD_BANT:.0f} dis / O4 ic (ELDEKI ZIPKIN LASTIGI); kesim boyu ~{bant_kesim:.0f} mm "
+     f"(calisma {P['L0']:.0f} mm + 2x10 mm uc)",
+     N_BANT * math.pi / 4 * (OD_BANT ** 2 - 4 ** 2) * bant_kesim / 1000 * 0.95,
+     f"KENAR BASINA 2 ADET. Kurulu uzama x{P['lam']:.0f}. SERTLIK OLCULMEDI — "
+     f"tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da {852/N_BANT:.0f} N/bant "
+     f"({852/N_BANT/9.81:.0f} kg), toplam kurma 852 N.")
 ekle(G, "D2", "Bant uc halkasi (Dyneema)", 2 * N_BANT, "Dyneema/UHMWPE orgu halat", "O1.5 mm, her biri ~60 mm",
      2 * N_BANT * 0.1, "Tup ucuna ic dugumle gomulur, disi sarilir. Arka halka capraz pim oluguna, on halka ankraj pimine.")
 ekle(G, "D3", "Bant ucu sargi ipi", 1, "Naylon/Dyneema iplik (dikis/sargi)", "~2 m", 0.2,
