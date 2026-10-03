@@ -1,5 +1,9 @@
 # TASARIM v9 — ELDEKİ MALZEMELERLE NİHAİ REVİZYON
 
+> **GÜNCEL DEĞİL — bkz. `out/TEST_1.md`.** Bu doküman 12 boncuk / 30° / 4 bant
+> konfigürasyonunu anlatır. Test konfigürasyonu 6 boncuk / 40° / 2 bant olarak
+> değişti.
+
 Ölçülen boncuk: **Captain 1216, Ø9 mm, 4 g, ortası delikli.**
 Ø9 kurşun + Ø2 mm delik = **4.01 g** → ölçümle tutarlı.
 (Önceki Ø8 varsayımı 14921 kg/m³ sahte yoğunluk veriyordu; o ölçüm hatalıydı.)

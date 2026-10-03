@@ -25,11 +25,12 @@ L_goz = 2 * A / GOZ                                        # m
 L_cevre = 6 * R
 dugum = int(A / GOZ ** 2)
 bant_kesim = P["L0"] + 2 * 10.0
-N_BANT = 4                            # calisma boyu + 2 uc
+N_BANT = _KF.get("n_bant", 4)         # out/v4_konfig.json (ILK TEST: 2)
 pim_boy = 37.5 - (21.7 - 5.0 + 0.15)
 # Kurma kuvveti: Gmod 0.45 MPa (varsayim) -> 852 N toplam, 4 kol.
 # OLCULDUKTEN sonra out/v9_NIHAI.json tablosundan guncelle.
-F_TOP, F_BANT = 852.0, 213.0
+F_TOP = 426.0 if N_BANT == 2 else 852.0   # Gmod 0.45 MPa varsayim
+F_BANT = F_TOP / N_BANT
 
 S = []   # (grup, no, parca, adet, malzeme/ozellik, olcu, kutle_g_toplam, not)
 def ekle(*r): S.append(r)
@@ -87,9 +88,9 @@ ekle(G, "D1", "Lateks tup (zipkin lastigi)", N_BANT, "SAF DOGAL KAUCUK LATEKS (s
      f"O{OD_BANT:.0f} dis / O4 ic (ELDEKI ZIPKIN LASTIGI); kesim boyu ~{bant_kesim:.0f} mm "
      f"(calisma {P['L0']:.0f} mm + 2x10 mm uc)",
      N_BANT * math.pi / 4 * (OD_BANT ** 2 - 4 ** 2) * bant_kesim / 1000 * 0.95,
-     f"KENAR BASINA 2 ADET. Kurulu uzama x{P['lam']:.0f}. SERTLIK OLCULMEDI — "
-     f"tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da {852/N_BANT:.0f} N/bant "
-     f"({852/N_BANT/9.81:.0f} kg), toplam kurma 852 N.")
+     f"KENAR BASINA {N_BANT//2} ADET. Kurulu uzama x{P['lam']:.0f}. SERTLIK OLCULMEDI — "
+     f"tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da {F_BANT:.0f} N/bant "
+     f"({F_BANT/9.81:.0f} kg), toplam kurma {F_TOP:.0f} N.")
 ekle(G, "D2", "Bant uc halkasi (Dyneema)", 2 * N_BANT, "Dyneema/UHMWPE orgu halat", "O1.5 mm, her biri ~60 mm",
      2 * N_BANT * 0.1, "Tup ucuna ic dugumle gomulur, disi sarilir. Arka halka capraz pim oluguna, on halka ankraj pimine.")
 ekle(G, "D3", "Bant ucu sargi ipi", 1, "Naylon/Dyneema iplik (dikis/sargi)", "~2 m", 0.2,
@@ -115,7 +116,7 @@ ekle(G, "F1", "Ag ipi — goz + cevre halati + radyal baglar (HEPSI AYNI IP)", 1
      "Cevre halati icin ayri/kalin ip ALMA: ayni ip kullaniliyor.")
 ekle("F. AG VE BILYELER", "F4", "Boncuk (bilye)", N_BONCUK,
      f"DELIKLI KURSUN boncuk — Captain 1216, O{D_BONCUK*1e3:.0f} mm, {M_BONCUK*1e3:.0f} g/ad (ELDE VAR)",
-     f"O{D_BONCUK*1e3:.0f} mm, ortasi ~O2 mm delikli; yuva basina 2 ad (6 yuva)",
+     f"O{D_BONCUK*1e3:.0f} mm, ortasi ~O2 mm delikli; yuva basina {_KF['n_boncuk']} ad (6 yuva)",
      N_BONCUK * M_BONCUK * 1000,
      "ELDE VAR, satin alinacak degil. Delik sart: ip boncuklarin icinden gecer.")
 ekle(G, "F5", "Kirilgan on kapak (her atis icin 1)", 1, "Ince kagit / pelur", "O43 disk", 0.1,

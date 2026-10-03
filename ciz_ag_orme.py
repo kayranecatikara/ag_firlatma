@@ -7,7 +7,12 @@ matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, Rectangle, FancyArrowPatch
 from agsim.hexag import kare_ag, cevre_ipi_ekle
 
-R, G = 1.1, 0.22
+import json as _j
+_KF = _j.load(open(os.path.join(_K, "out", "v4_konfig.json")))
+R, G   = _KF["R_ag"], _KF["goz"]
+NB     = _KF["n_boncuk"]                 # kose basina boncuk
+NB_TOP = _KF["n_boncuk_top"]
+M_BON  = _KF["m_boncuk"] * 1000          # g
 INK,INK2,GRID = "#0b0b0b","#55534f","#d6d4d0"
 MESH,HALAT,BILYE,OLC = "#2a78d6","#1baf7a","#2b2b2b","#eb6834"
 plt.rcParams.update({"figure.facecolor":"#fcfcfb","axes.facecolor":"#fcfcfb",
@@ -69,7 +74,7 @@ a.text(0,1.08,"AĞ ÖRME PLANI — 1:1 kurulum için ölçüler mm",
 a.plot([],[],color=MESH,lw=1.7,label="göz ipi — Ø0.60 mm, SÜREKLİ (kesme!)")
 a.plot([],[],color=HALAT,lw=4,label=f"çevre halatı — aynı ip, {L_HALAT:.1f} m")
 a.plot([],[],color=HALAT,lw=1.4,ls=(0,(5,2)),label=f"radyal bağ — {N_RAD} ad, {L_RAD:.1f} m (boşluğu doldurur)")
-a.plot([],[],'o',color=BILYE,ms=9,label="boncuk 2 × Ø9 (8 g) — 6 köşe")
+a.plot([],[],'o',color=BILYE,ms=9,label=f"boncuk {NB} × Ø9 ({NB*M_BON:.0f} g) — 6 köşe")
 a.legend(loc='lower center',bbox_to_anchor=(.5,-.17),frameon=False,fontsize=9.5,ncol=1)
 a.set_xlim(-1.15,1.15); a.set_ylim(-1.2,1.15); a.axis('off')
 
@@ -121,11 +126,12 @@ e.text(.5,1.02,"④ BİLYE BAĞI  (6 köşe)",fontweight='bold',fontsize=11.5,
        ha='center',transform=e.transAxes)
 e.plot([-1.25,.35],[.6,.6],color=HALAT,lw=6)
 e.plot([.35,.95],[.6,.1],color=MESH,lw=2.6)
-e.add_patch(Circle((1.02,.02),.17,fc=BILYE,ec='white',lw=1.4))
-e.add_patch(Circle((1.22,-.14),.17,fc=BILYE,ec='white',lw=1.4))
+for _b in range(NB):          # kose basina boncuk sayisi kadar ciz
+    e.add_patch(Circle((1.02+.20*_b, .02-.16*_b), .17, fc=BILYE,
+                       ec='white', lw=1.4))
 e.annotate("",(.40,.56),(.92,.10),arrowprops=dict(arrowstyle='<->',color=OLC,lw=1.3))
 e.text(.52,.18,"40 mm",color=OLC,fontweight='bold',fontsize=9.3)
-e.text(0,-.85,"Her köşeye 2 × Ø9 boncuk (toplam 8 g).\nCaptain 1216 — ortası Ø2 delikli.\nİp boncukların deliğinden geçer,\ndışta figure-8 durdurma düğümü.\nHalat köşesine 40 mm serbest boyla bağla.\n\nTOPLAM 12 BONCUK (48 g).",
+e.text(0,-.85,f"Her köşeye {NB} × Ø9 boncuk ({NB*M_BON:.0f} g).\nCaptain 1216 — ortası Ø2 delikli.\nİp boncuğun deliğinden geçer,\ndışta figure-8 durdurma düğümü.\nHalat köşesine 40 mm serbest boyla bağla.\n\nTOPLAM {NB_TOP} BONCUK ({NB_TOP*M_BON:.0f} g).",
        ha='center',fontsize=9.2,va='top')
 e.set_xlim(-1.4,1.6); e.set_ylim(-2.3,1.0)
 
@@ -133,7 +139,7 @@ fig.suptitle(f"AĞ ÖRME KILAVUZU — Ø{2*R:.1f} m · kare göz {G*1e3:.0f} mm 
              fontsize=14.5,fontweight='bold',x=.035,ha='left',y=.985)
 fig.text(.035,.012,f"TOPLAM: {_Ltop:.1f} m iplik (elinde 90 m) · {N_KESISIM+N_CEVRE} bağ   |   "
          f"iç kafes {N_KESISIM} düğüm + çevre halatı {N_CEVRE} bağ   |   "
-         f"ağ {_Ltop*0.274:.1f} g + boncuk 48 g",
+         f"ağ {_Ltop*0.274:.1f} g + boncuk {NB_TOP*M_BON:.0f} g",
          fontsize=10,color=INK2)
 plt.savefig(os.path.join(_K,"out","AG_ORME_KILAVUZU.png"),dpi=125,
             bbox_inches='tight',facecolor="#fcfcfb")
