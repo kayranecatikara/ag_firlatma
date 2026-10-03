@@ -12,6 +12,11 @@ out/gazebo_poz.txt
 out/gazebo_v5_poz.txt
 out/*.npy
 out/*.npz
+# ISTISNA: x_final.npy TASARIM VEKTORUDUR, uretilmis bir ara cikti DEGIL.
+# run_lastik/run_taret bunsuz calismaz. Bir kez gitignore'da kaldigi icin
+# depo yeniden duzenlenirken SILINDI ve analiz zinciri kirildi; yeniden
+# kuruldu. Bir daha kaybolmasin diye TAKIP EDILIYOR.
+!out/x_final.npy
 out/*.log
 
 # ---- FreeCAD ----

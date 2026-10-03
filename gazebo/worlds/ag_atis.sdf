@@ -43,7 +43,7 @@
     </joint>
 
     <model name="m_dugum_0">
-      <pose>1.84047 -0.43294 1.87624 0 0 0</pose>
+      <pose>1.84177 -0.43183 1.87464 0 0 0</pose>
       <link name="dugum_0">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>4.919371e-06</mass><inertia>
@@ -58,7 +58,7 @@
       </link>
     </model>
     <model name="m_dugum_1">
-      <pose>1.94167 -0.46275 1.91237 0 0 0</pose>
+      <pose>1.93743 -0.47093 1.91328 0 0 0</pose>
       <link name="dugum_1">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.002209e-06</mass><inertia>
@@ -73,7 +73,7 @@
       </link>
     </model>
     <model name="m_dugum_2">
-      <pose>1.86764 -0.46856 1.98205 0 0 0</pose>
+      <pose>1.86392 -0.46262 1.98043 0 0 0</pose>
       <link name="dugum_2">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.771648e-06</mass><inertia>
@@ -88,7 +88,7 @@
       </link>
     </model>
     <model name="m_dugum_3">
-      <pose>1.94357 -0.45629 2.05096 0 0 0</pose>
+      <pose>1.94461 -0.45572 2.05493 0 0 0</pose>
       <link name="dugum_3">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.002209e-06</mass><inertia>
@@ -103,7 +103,7 @@
       </link>
     </model>
     <model name="m_dugum_4">
-      <pose>1.84719 -0.43979 2.07367 0 0 0</pose>
+      <pose>1.84614 -0.44149 2.08017 0 0 0</pose>
       <link name="dugum_4">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>4.919371e-06</mass><inertia>
@@ -118,7 +118,7 @@
       </link>
     </model>
     <model name="m_dugum_5">
-      <pose>1.82551 -0.31001 1.58979 0 0 0</pose>
+      <pose>1.82744 -0.31192 1.57714 0 0 0</pose>
       <link name="dugum_5">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>4.879748e-06</mass><inertia>
@@ -133,7 +133,7 @@
       </link>
     </model>
     <model name="m_dugum_6">
-      <pose>1.74976 -0.31791 1.64264 0 0 0</pose>
+      <pose>1.75038 -0.31785 1.64452 0 0 0</pose>
       <link name="dugum_6">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.725290e-06</mass><inertia>
@@ -148,7 +148,7 @@
       </link>
     </model>
     <model name="m_dugum_7">
-      <pose>1.65819 -0.39228 1.80430 0 0 0</pose>
+      <pose>1.65809 -0.39346 1.80520 0 0 0</pose>
       <link name="dugum_7">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.049795e-05</mass><inertia>
@@ -163,7 +163,7 @@
       </link>
     </model>
     <model name="m_dugum_8">
-      <pose>1.75030 -0.41727 1.87520 0 0 0</pose>
+      <pose>1.74820 -0.41986 1.87269 0 0 0</pose>
       <link name="dugum_8">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -178,7 +178,7 @@
       </link>
     </model>
     <model name="m_dugum_9">
-      <pose>1.69951 -0.36522 1.94744 0 0 0</pose>
+      <pose>1.69446 -0.36078 1.94924 0 0 0</pose>
       <link name="dugum_9">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -193,7 +193,7 @@
       </link>
     </model>
     <model name="m_dugum_10">
-      <pose>1.75150 -0.39963 2.04496 0 0 0</pose>
+      <pose>1.75355 -0.39656 2.04435 0 0 0</pose>
       <link name="dugum_10">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -208,7 +208,7 @@
       </link>
     </model>
     <model name="m_dugum_11">
-      <pose>1.67301 -0.38688 2.15690 0 0 0</pose>
+      <pose>1.67196 -0.38384 2.16022 0 0 0</pose>
       <link name="dugum_11">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.049795e-05</mass><inertia>
@@ -223,7 +223,7 @@
       </link>
     </model>
     <model name="m_dugum_12">
-      <pose>1.75016 -0.29373 2.30922 0 0 0</pose>
+      <pose>1.74979 -0.29214 2.31108 0 0 0</pose>
       <link name="dugum_12">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.725290e-06</mass><inertia>
@@ -238,7 +238,7 @@
       </link>
     </model>
     <model name="m_dugum_13">
-      <pose>1.82457 -0.28048 2.36004 0 0 0</pose>
+      <pose>1.82584 -0.27926 2.35709 0 0 0</pose>
       <link name="dugum_13">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>4.879748e-06</mass><inertia>
@@ -253,7 +253,7 @@
       </link>
     </model>
     <model name="m_dugum_14">
-      <pose>2.19464 -0.28124 1.51711 0 0 0</pose>
+      <pose>2.19408 -0.28358 1.51469 0 0 0</pose>
       <link name="dugum_14">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.409160e-06</mass><inertia>
@@ -268,7 +268,7 @@
       </link>
     </model>
     <model name="m_dugum_15">
-      <pose>1.99771 -0.29019 1.55220 0 0 0</pose>
+      <pose>1.99882 -0.28525 1.55931 0 0 0</pose>
       <link name="dugum_15">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.020561e-05</mass><inertia>
@@ -283,7 +283,7 @@
       </link>
     </model>
     <model name="m_dugum_16">
-      <pose>1.80765 -0.26124 1.60815 0 0 0</pose>
+      <pose>1.80302 -0.26436 1.59584 0 0 0</pose>
       <link name="dugum_16">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -298,7 +298,7 @@
       </link>
     </model>
     <model name="m_dugum_17">
-      <pose>1.61839 -0.28126 1.67033 0 0 0</pose>
+      <pose>1.61646 -0.27995 1.66680 0 0 0</pose>
       <link name="dugum_17">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -313,7 +313,7 @@
       </link>
     </model>
     <model name="m_dugum_18">
-      <pose>1.60115 -0.28410 1.86391 0 0 0</pose>
+      <pose>1.60028 -0.28525 1.86349 0 0 0</pose>
       <link name="dugum_18">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -328,7 +328,7 @@
       </link>
     </model>
     <model name="m_dugum_19">
-      <pose>1.50176 -0.34728 1.97483 0 0 0</pose>
+      <pose>1.49622 -0.35414 1.97662 0 0 0</pose>
       <link name="dugum_19">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -343,7 +343,7 @@
       </link>
     </model>
     <model name="m_dugum_20">
-      <pose>1.61513 -0.26020 2.09046 0 0 0</pose>
+      <pose>1.61656 -0.25639 2.08534 0 0 0</pose>
       <link name="dugum_20">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -358,7 +358,7 @@
       </link>
     </model>
     <model name="m_dugum_21">
-      <pose>1.61881 -0.23971 2.27490 0 0 0</pose>
+      <pose>1.61635 -0.24094 2.28325 0 0 0</pose>
       <link name="dugum_21">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -373,7 +373,7 @@
       </link>
     </model>
     <model name="m_dugum_22">
-      <pose>1.79909 -0.24730 2.36239 0 0 0</pose>
+      <pose>1.79953 -0.25218 2.36375 0 0 0</pose>
       <link name="dugum_22">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -388,7 +388,7 @@
       </link>
     </model>
     <model name="m_dugum_23">
-      <pose>1.99482 -0.24977 2.40807 0 0 0</pose>
+      <pose>1.99456 -0.25461 2.41160 0 0 0</pose>
       <link name="dugum_23">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.020561e-05</mass><inertia>
@@ -403,7 +403,7 @@
       </link>
     </model>
     <model name="m_dugum_24">
-      <pose>2.19372 -0.26025 2.43576 0 0 0</pose>
+      <pose>2.19341 -0.26143 2.43976 0 0 0</pose>
       <link name="dugum_24">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.409160e-06</mass><inertia>
@@ -418,7 +418,7 @@
       </link>
     </model>
     <model name="m_dugum_25">
-      <pose>2.00919 -0.22237 1.50803 0 0 0</pose>
+      <pose>2.00550 -0.22829 1.51232 0 0 0</pose>
       <link name="dugum_25">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.489365e-06</mass><inertia>
@@ -433,7 +433,7 @@
       </link>
     </model>
     <model name="m_dugum_26">
-      <pose>1.81807 -0.20859 1.55587 0 0 0</pose>
+      <pose>1.81802 -0.20759 1.55622 0 0 0</pose>
       <link name="dugum_26">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.143772e-05</mass><inertia>
@@ -448,7 +448,7 @@
       </link>
     </model>
     <model name="m_dugum_27">
-      <pose>1.61901 -0.20761 1.57555 0 0 0</pose>
+      <pose>1.61847 -0.20678 1.57010 0 0 0</pose>
       <link name="dugum_27">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -463,7 +463,7 @@
       </link>
     </model>
     <model name="m_dugum_28">
-      <pose>1.42997 -0.22156 1.63953 0 0 0</pose>
+      <pose>1.42858 -0.22729 1.62974 0 0 0</pose>
       <link name="dugum_28">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -478,7 +478,7 @@
       </link>
     </model>
     <model name="m_dugum_29">
-      <pose>1.40515 -0.28048 1.82336 0 0 0</pose>
+      <pose>1.40511 -0.27713 1.82005 0 0 0</pose>
       <link name="dugum_29">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -493,7 +493,7 @@
       </link>
     </model>
     <model name="m_dugum_30">
-      <pose>1.33284 -0.23954 1.97893 0 0 0</pose>
+      <pose>1.33048 -0.24177 1.98270 0 0 0</pose>
       <link name="dugum_30">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -508,7 +508,7 @@
       </link>
     </model>
     <model name="m_dugum_31">
-      <pose>1.41992 -0.29230 2.12088 0 0 0</pose>
+      <pose>1.42270 -0.29064 2.12137 0 0 0</pose>
       <link name="dugum_31">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -523,7 +523,7 @@
       </link>
     </model>
     <model name="m_dugum_32">
-      <pose>1.42111 -0.23512 2.30475 0 0 0</pose>
+      <pose>1.41851 -0.24448 2.31207 0 0 0</pose>
       <link name="dugum_32">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -538,7 +538,7 @@
       </link>
     </model>
     <model name="m_dugum_33">
-      <pose>1.60751 -0.18841 2.36313 0 0 0</pose>
+      <pose>1.60748 -0.19765 2.34865 0 0 0</pose>
       <link name="dugum_33">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -553,7 +553,7 @@
       </link>
     </model>
     <model name="m_dugum_34">
-      <pose>1.80038 -0.21664 2.37999 0 0 0</pose>
+      <pose>1.80139 -0.21116 2.38395 0 0 0</pose>
       <link name="dugum_34">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.139144e-05</mass><inertia>
@@ -568,7 +568,7 @@
       </link>
     </model>
     <model name="m_dugum_35">
-      <pose>1.99684 -0.22364 2.41941 0 0 0</pose>
+      <pose>1.99722 -0.22541 2.41762 0 0 0</pose>
       <link name="dugum_35">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.376919e-06</mass><inertia>
@@ -583,7 +583,7 @@
       </link>
     </model>
     <model name="m_dugum_36">
-      <pose>1.83339 -0.13592 1.54972 0 0 0</pose>
+      <pose>1.83472 -0.12988 1.54742 0 0 0</pose>
       <link name="dugum_36">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.560548e-06</mass><inertia>
@@ -598,7 +598,7 @@
       </link>
     </model>
     <model name="m_dugum_37">
-      <pose>1.63677 -0.13587 1.58869 0 0 0</pose>
+      <pose>1.63825 -0.13751 1.58584 0 0 0</pose>
       <link name="dugum_37">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -613,7 +613,7 @@
       </link>
     </model>
     <model name="m_dugum_38">
-      <pose>1.43784 -0.15129 1.60768 0 0 0</pose>
+      <pose>1.44161 -0.15365 1.61991 0 0 0</pose>
       <link name="dugum_38">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -628,7 +628,7 @@
       </link>
     </model>
     <model name="m_dugum_39">
-      <pose>1.24860 -0.14560 1.67304 0 0 0</pose>
+      <pose>1.25490 -0.14082 1.67847 0 0 0</pose>
       <link name="dugum_39">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -643,7 +643,7 @@
       </link>
     </model>
     <model name="m_dugum_40">
-      <pose>1.27374 -0.13020 1.80874 0 0 0</pose>
+      <pose>1.26754 -0.13281 1.80291 0 0 0</pose>
       <link name="dugum_40">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -658,7 +658,7 @@
       </link>
     </model>
     <model name="m_dugum_41">
-      <pose>1.23352 -0.06575 1.98445 0 0 0</pose>
+      <pose>1.22473 -0.07167 1.98462 0 0 0</pose>
       <link name="dugum_41">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -673,7 +673,7 @@
       </link>
     </model>
     <model name="m_dugum_42">
-      <pose>1.26272 -0.16841 2.12806 0 0 0</pose>
+      <pose>1.26251 -0.17043 2.11993 0 0 0</pose>
       <link name="dugum_42">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -688,7 +688,7 @@
       </link>
     </model>
     <model name="m_dugum_43">
-      <pose>1.24225 -0.15876 2.27435 0 0 0</pose>
+      <pose>1.24515 -0.15702 2.26447 0 0 0</pose>
       <link name="dugum_43">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -703,7 +703,7 @@
       </link>
     </model>
     <model name="m_dugum_44">
-      <pose>1.41225 -0.15673 2.37992 0 0 0</pose>
+      <pose>1.41319 -0.15646 2.37346 0 0 0</pose>
       <link name="dugum_44">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -718,7 +718,7 @@
       </link>
     </model>
     <model name="m_dugum_45">
-      <pose>1.61220 -0.14758 2.38912 0 0 0</pose>
+      <pose>1.61183 -0.14912 2.39835 0 0 0</pose>
       <link name="dugum_45">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -733,7 +733,7 @@
       </link>
     </model>
     <model name="m_dugum_46">
-      <pose>1.81056 -0.14985 2.41526 0 0 0</pose>
+      <pose>1.81185 -0.14880 2.41141 0 0 0</pose>
       <link name="dugum_46">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.344173e-06</mass><inertia>
@@ -748,7 +748,7 @@
       </link>
     </model>
     <model name="m_dugum_47">
-      <pose>1.69426 0.00485 1.58075 0 0 0</pose>
+      <pose>1.69309 0.00601 1.58740 0 0 0</pose>
       <link name="dugum_47">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.641740e-06</mass><inertia>
@@ -763,7 +763,7 @@
       </link>
     </model>
     <model name="m_dugum_48">
-      <pose>1.49572 0.00184 1.55477 0 0 0</pose>
+      <pose>1.49589 -0.00063 1.55382 0 0 0</pose>
       <link name="dugum_48">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -778,7 +778,7 @@
       </link>
     </model>
     <model name="m_dugum_49">
-      <pose>1.32662 0.00585 1.66195 0 0 0</pose>
+      <pose>1.32727 0.00531 1.66146 0 0 0</pose>
       <link name="dugum_49">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -793,7 +793,7 @@
       </link>
     </model>
     <model name="m_dugum_50">
-      <pose>1.13866 0.01024 1.73094 0 0 0</pose>
+      <pose>1.13849 0.01027 1.72832 0 0 0</pose>
       <link name="dugum_50">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -808,7 +808,7 @@
       </link>
     </model>
     <model name="m_dugum_51">
-      <pose>1.13610 0.00529 1.86129 0 0 0</pose>
+      <pose>1.13302 0.00161 1.86529 0 0 0</pose>
       <link name="dugum_51">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -823,7 +823,7 @@
       </link>
     </model>
     <model name="m_dugum_52">
-      <pose>1.04813 0.00341 1.97721 0 0 0</pose>
+      <pose>1.04025 0.00569 1.98206 0 0 0</pose>
       <link name="dugum_52">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -838,7 +838,7 @@
       </link>
     </model>
     <model name="m_dugum_53">
-      <pose>1.15403 -0.00543 2.08617 0 0 0</pose>
+      <pose>1.15659 -0.00594 2.07665 0 0 0</pose>
       <link name="dugum_53">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -853,7 +853,7 @@
       </link>
     </model>
     <model name="m_dugum_54">
-      <pose>1.12733 0.00452 2.26139 0 0 0</pose>
+      <pose>1.12320 0.00065 2.24621 0 0 0</pose>
       <link name="dugum_54">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -868,7 +868,7 @@
       </link>
     </model>
     <model name="m_dugum_55">
-      <pose>1.32392 -0.00172 2.28926 0 0 0</pose>
+      <pose>1.31800 -0.00050 2.29243 0 0 0</pose>
       <link name="dugum_55">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -883,7 +883,7 @@
       </link>
     </model>
     <model name="m_dugum_56">
-      <pose>1.48748 0.00694 2.40412 0 0 0</pose>
+      <pose>1.48577 0.00619 2.39944 0 0 0</pose>
       <link name="dugum_56">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -898,7 +898,7 @@
       </link>
     </model>
     <model name="m_dugum_57">
-      <pose>1.68541 0.00120 2.37536 0 0 0</pose>
+      <pose>1.68375 -0.00038 2.37059 0 0 0</pose>
       <link name="dugum_57">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.333070e-06</mass><inertia>
@@ -913,7 +913,7 @@
       </link>
     </model>
     <model name="m_dugum_58">
-      <pose>1.82693 0.15264 1.55589 0 0 0</pose>
+      <pose>1.82676 0.14991 1.54904 0 0 0</pose>
       <link name="dugum_58">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.560548e-06</mass><inertia>
@@ -928,7 +928,7 @@
       </link>
     </model>
     <model name="m_dugum_59">
-      <pose>1.62930 0.14704 1.58688 0 0 0</pose>
+      <pose>1.62893 0.14614 1.57988 0 0 0</pose>
       <link name="dugum_59">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -943,7 +943,7 @@
       </link>
     </model>
     <model name="m_dugum_60">
-      <pose>1.43137 0.16755 1.60827 0 0 0</pose>
+      <pose>1.43086 0.16574 1.60142 0 0 0</pose>
       <link name="dugum_60">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -958,7 +958,7 @@
       </link>
     </model>
     <model name="m_dugum_61">
-      <pose>1.25385 0.14850 1.69861 0 0 0</pose>
+      <pose>1.25437 0.14426 1.69312 0 0 0</pose>
       <link name="dugum_61">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -973,7 +973,7 @@
       </link>
     </model>
     <model name="m_dugum_62">
-      <pose>1.26688 0.14052 1.79501 0 0 0</pose>
+      <pose>1.25577 0.15033 1.81110 0 0 0</pose>
       <link name="dugum_62">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -988,7 +988,7 @@
       </link>
     </model>
     <model name="m_dugum_63">
-      <pose>1.23448 0.07588 1.98116 0 0 0</pose>
+      <pose>1.22944 0.07060 1.97972 0 0 0</pose>
       <link name="dugum_63">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1003,7 +1003,7 @@
       </link>
     </model>
     <model name="m_dugum_64">
-      <pose>1.27651 0.14503 2.13595 0 0 0</pose>
+      <pose>1.27007 0.15348 2.11975 0 0 0</pose>
       <link name="dugum_64">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1018,7 +1018,7 @@
       </link>
     </model>
     <model name="m_dugum_65">
-      <pose>1.23174 0.17226 2.29146 0 0 0</pose>
+      <pose>1.23196 0.16368 2.28730 0 0 0</pose>
       <link name="dugum_65">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1033,7 +1033,7 @@
       </link>
     </model>
     <model name="m_dugum_66">
-      <pose>1.41179 0.15514 2.37715 0 0 0</pose>
+      <pose>1.41263 0.15700 2.37195 0 0 0</pose>
       <link name="dugum_66">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1048,7 +1048,7 @@
       </link>
     </model>
     <model name="m_dugum_67">
-      <pose>1.61127 0.15939 2.39426 0 0 0</pose>
+      <pose>1.61177 0.15660 2.39370 0 0 0</pose>
       <link name="dugum_67">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1063,7 +1063,7 @@
       </link>
     </model>
     <model name="m_dugum_68">
-      <pose>1.81007 0.15188 2.41839 0 0 0</pose>
+      <pose>1.81087 0.14775 2.41595 0 0 0</pose>
       <link name="dugum_68">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.344173e-06</mass><inertia>
@@ -1078,7 +1078,7 @@
       </link>
     </model>
     <model name="m_dugum_69">
-      <pose>2.00803 0.22122 1.54034 0 0 0</pose>
+      <pose>2.00525 0.23150 1.53415 0 0 0</pose>
       <link name="dugum_69">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.489365e-06</mass><inertia>
@@ -1093,7 +1093,7 @@
       </link>
     </model>
     <model name="m_dugum_70">
-      <pose>1.81570 0.20916 1.55267 0 0 0</pose>
+      <pose>1.81633 0.20799 1.55400 0 0 0</pose>
       <link name="dugum_70">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.143772e-05</mass><inertia>
@@ -1108,7 +1108,7 @@
       </link>
     </model>
     <model name="m_dugum_71">
-      <pose>1.61759 0.20270 1.58151 0 0 0</pose>
+      <pose>1.61699 0.20724 1.57344 0 0 0</pose>
       <link name="dugum_71">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1123,7 +1123,7 @@
       </link>
     </model>
     <model name="m_dugum_72">
-      <pose>1.42447 0.22581 1.62951 0 0 0</pose>
+      <pose>1.42454 0.22247 1.62658 0 0 0</pose>
       <link name="dugum_72">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1138,7 +1138,7 @@
       </link>
     </model>
     <model name="m_dugum_73">
-      <pose>1.41561 0.27081 1.82477 0 0 0</pose>
+      <pose>1.41461 0.27214 1.81888 0 0 0</pose>
       <link name="dugum_73">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1153,7 +1153,7 @@
       </link>
     </model>
     <model name="m_dugum_74">
-      <pose>1.33079 0.25116 1.97046 0 0 0</pose>
+      <pose>1.32921 0.24397 1.97063 0 0 0</pose>
       <link name="dugum_74">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1168,7 +1168,7 @@
       </link>
     </model>
     <model name="m_dugum_75">
-      <pose>1.41554 0.28904 2.13085 0 0 0</pose>
+      <pose>1.41694 0.28951 2.12546 0 0 0</pose>
       <link name="dugum_75">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1183,7 +1183,7 @@
       </link>
     </model>
     <model name="m_dugum_76">
-      <pose>1.41849 0.23755 2.30175 0 0 0</pose>
+      <pose>1.41745 0.23763 2.30566 0 0 0</pose>
       <link name="dugum_76">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1198,7 +1198,7 @@
       </link>
     </model>
     <model name="m_dugum_77">
-      <pose>1.60626 0.19925 2.35986 0 0 0</pose>
+      <pose>1.60645 0.20524 2.35965 0 0 0</pose>
       <link name="dugum_77">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1213,7 +1213,7 @@
       </link>
     </model>
     <model name="m_dugum_78">
-      <pose>1.80252 0.20781 2.38057 0 0 0</pose>
+      <pose>1.80153 0.21020 2.38202 0 0 0</pose>
       <link name="dugum_78">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.139144e-05</mass><inertia>
@@ -1228,7 +1228,7 @@
       </link>
     </model>
     <model name="m_dugum_79">
-      <pose>1.99685 0.22532 2.41781 0 0 0</pose>
+      <pose>1.99731 0.22299 2.41579 0 0 0</pose>
       <link name="dugum_79">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.376919e-06</mass><inertia>
@@ -1243,7 +1243,7 @@
       </link>
     </model>
     <model name="m_dugum_80">
-      <pose>2.19281 0.28523 1.51491 0 0 0</pose>
+      <pose>2.19398 0.27989 1.51888 0 0 0</pose>
       <link name="dugum_80">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.409160e-06</mass><inertia>
@@ -1258,7 +1258,7 @@
       </link>
     </model>
     <model name="m_dugum_81">
-      <pose>1.99746 0.29082 1.55936 0 0 0</pose>
+      <pose>1.99779 0.29094 1.55846 0 0 0</pose>
       <link name="dugum_81">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.020561e-05</mass><inertia>
@@ -1273,7 +1273,7 @@
       </link>
     </model>
     <model name="m_dugum_82">
-      <pose>1.80403 0.25855 1.60026 0 0 0</pose>
+      <pose>1.80440 0.25629 1.59778 0 0 0</pose>
       <link name="dugum_82">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1288,7 +1288,7 @@
       </link>
     </model>
     <model name="m_dugum_83">
-      <pose>1.61338 0.28529 1.65539 0 0 0</pose>
+      <pose>1.61412 0.27735 1.65661 0 0 0</pose>
       <link name="dugum_83">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1303,7 +1303,7 @@
       </link>
     </model>
     <model name="m_dugum_84">
-      <pose>1.61337 0.26118 1.85396 0 0 0</pose>
+      <pose>1.61122 0.26499 1.85621 0 0 0</pose>
       <link name="dugum_84">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1318,7 +1318,7 @@
       </link>
     </model>
     <model name="m_dugum_85">
-      <pose>1.50093 0.35671 1.97415 0 0 0</pose>
+      <pose>1.49199 0.36048 1.97542 0 0 0</pose>
       <link name="dugum_85">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1333,7 +1333,7 @@
       </link>
     </model>
     <model name="m_dugum_86">
-      <pose>1.61073 0.27875 2.08749 0 0 0</pose>
+      <pose>1.61264 0.27578 2.08568 0 0 0</pose>
       <link name="dugum_86">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1348,7 +1348,7 @@
       </link>
     </model>
     <model name="m_dugum_87">
-      <pose>1.61583 0.25098 2.28003 0 0 0</pose>
+      <pose>1.61601 0.24512 2.27791 0 0 0</pose>
       <link name="dugum_87">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1363,7 +1363,7 @@
       </link>
     </model>
     <model name="m_dugum_88">
-      <pose>1.79690 0.26147 2.36531 0 0 0</pose>
+      <pose>1.79812 0.26270 2.36084 0 0 0</pose>
       <link name="dugum_88">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1378,7 +1378,7 @@
       </link>
     </model>
     <model name="m_dugum_89">
-      <pose>1.99622 0.25464 2.39287 0 0 0</pose>
+      <pose>1.99614 0.25354 2.39474 0 0 0</pose>
       <link name="dugum_89">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.020561e-05</mass><inertia>
@@ -1393,7 +1393,7 @@
       </link>
     </model>
     <model name="m_dugum_90">
-      <pose>2.19229 0.26656 2.43837 0 0 0</pose>
+      <pose>2.19250 0.26677 2.43735 0 0 0</pose>
       <link name="dugum_90">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.409160e-06</mass><inertia>
@@ -1408,7 +1408,7 @@
       </link>
     </model>
     <model name="m_dugum_91">
-      <pose>1.82442 0.29525 1.58284 0 0 0</pose>
+      <pose>1.82457 0.29088 1.57358 0 0 0</pose>
       <link name="dugum_91">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>4.879748e-06</mass><inertia>
@@ -1423,7 +1423,7 @@
       </link>
     </model>
     <model name="m_dugum_92">
-      <pose>1.75215 0.29853 1.64734 0 0 0</pose>
+      <pose>1.75303 0.29648 1.65059 0 0 0</pose>
       <link name="dugum_92">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.725290e-06</mass><inertia>
@@ -1438,7 +1438,7 @@
       </link>
     </model>
     <model name="m_dugum_93">
-      <pose>1.66590 0.39873 1.79759 0 0 0</pose>
+      <pose>1.66673 0.39957 1.79887 0 0 0</pose>
       <link name="dugum_93">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.049795e-05</mass><inertia>
@@ -1453,7 +1453,7 @@
       </link>
     </model>
     <model name="m_dugum_94">
-      <pose>1.75265 0.39920 1.89508 0 0 0</pose>
+      <pose>1.75305 0.39892 1.90206 0 0 0</pose>
       <link name="dugum_94">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1468,7 +1468,7 @@
       </link>
     </model>
     <model name="m_dugum_95">
-      <pose>1.69928 0.35683 2.00052 0 0 0</pose>
+      <pose>1.69103 0.36281 1.99626 0 0 0</pose>
       <link name="dugum_95">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1483,7 +1483,7 @@
       </link>
     </model>
     <model name="m_dugum_96">
-      <pose>1.75225 0.41904 2.06704 0 0 0</pose>
+      <pose>1.74852 0.42126 2.06396 0 0 0</pose>
       <link name="dugum_96">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.082377e-06</mass><inertia>
@@ -1498,7 +1498,7 @@
       </link>
     </model>
     <model name="m_dugum_97">
-      <pose>1.66235 0.39520 2.15054 0 0 0</pose>
+      <pose>1.66004 0.39225 2.15117 0 0 0</pose>
       <link name="dugum_97">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.049795e-05</mass><inertia>
@@ -1513,7 +1513,7 @@
       </link>
     </model>
     <model name="m_dugum_98">
-      <pose>1.74929 0.31803 2.30930 0 0 0</pose>
+      <pose>1.74978 0.31803 2.30900 0 0 0</pose>
       <link name="dugum_98">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>7.725290e-06</mass><inertia>
@@ -1528,7 +1528,7 @@
       </link>
     </model>
     <model name="m_dugum_99">
-      <pose>1.82760 0.28739 2.36037 0 0 0</pose>
+      <pose>1.82742 0.28841 2.35752 0 0 0</pose>
       <link name="dugum_99">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>4.879748e-06</mass><inertia>
@@ -1543,7 +1543,7 @@
       </link>
     </model>
     <model name="m_dugum_100">
-      <pose>1.84303 0.44142 1.88040 0 0 0</pose>
+      <pose>1.84507 0.43778 1.88124 0 0 0</pose>
       <link name="dugum_100">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>4.919371e-06</mass><inertia>
@@ -1558,7 +1558,7 @@
       </link>
     </model>
     <model name="m_dugum_101">
-      <pose>1.94174 0.46492 1.88405 0 0 0</pose>
+      <pose>1.94225 0.46217 1.88195 0 0 0</pose>
       <link name="dugum_101">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.002209e-06</mass><inertia>
@@ -1573,7 +1573,7 @@
       </link>
     </model>
     <model name="m_dugum_102">
-      <pose>1.86061 0.47089 1.96915 0 0 0</pose>
+      <pose>1.86035 0.46648 1.97141 0 0 0</pose>
       <link name="dugum_102">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.771648e-06</mass><inertia>
@@ -1588,7 +1588,7 @@
       </link>
     </model>
     <model name="m_dugum_103">
-      <pose>1.94225 0.47116 2.03137 0 0 0</pose>
+      <pose>1.93928 0.47338 2.03295 0 0 0</pose>
       <link name="dugum_103">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.002209e-06</mass><inertia>
@@ -1603,7 +1603,7 @@
       </link>
     </model>
     <model name="m_dugum_104">
-      <pose>1.84321 0.43314 2.07280 0 0 0</pose>
+      <pose>1.84135 0.42916 2.07446 0 0 0</pose>
       <link name="dugum_104">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>4.919371e-06</mass><inertia>
@@ -1618,7 +1618,7 @@
       </link>
     </model>
     <model name="m_dugum_105">
-      <pose>2.32714 0.56582 1.96908 0 0 0</pose>
+      <pose>2.32731 0.56581 1.96908 0 0 0</pose>
       <link name="dugum_105">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.216250e-02</mass><inertia>
@@ -1633,7 +1633,7 @@
       </link>
     </model>
     <model name="m_dugum_106">
-      <pose>2.12157 0.51456 1.98843 0 0 0</pose>
+      <pose>2.12097 0.51147 1.99185 0 0 0</pose>
       <link name="dugum_106">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>9.028246e-06</mass><inertia>
@@ -1648,7 +1648,7 @@
       </link>
     </model>
     <model name="m_dugum_107">
-      <pose>1.92795 0.44142 2.05425 0 0 0</pose>
+      <pose>1.92481 0.44194 2.05328 0 0 0</pose>
       <link name="dugum_107">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.256137e-06</mass><inertia>
@@ -1663,7 +1663,7 @@
       </link>
     </model>
     <model name="m_dugum_108">
-      <pose>1.78049 0.35877 2.18877 0 0 0</pose>
+      <pose>1.78074 0.35518 2.18884 0 0 0</pose>
       <link name="dugum_108">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.793532e-06</mass><inertia>
@@ -1678,7 +1678,7 @@
       </link>
     </model>
     <model name="m_dugum_109">
-      <pose>1.90607 0.31450 2.35981 0 0 0</pose>
+      <pose>1.90609 0.31472 2.36098 0 0 0</pose>
       <link name="dugum_109">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.880022e-06</mass><inertia>
@@ -1693,7 +1693,7 @@
       </link>
     </model>
     <model name="m_dugum_110">
-      <pose>2.11836 0.30954 2.40455 0 0 0</pose>
+      <pose>2.11806 0.31092 2.40720 0 0 0</pose>
       <link name="dugum_110">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.501191e-06</mass><inertia>
@@ -1708,7 +1708,7 @@
       </link>
     </model>
     <model name="m_dugum_111">
-      <pose>2.32663 0.28355 2.45978 0 0 0</pose>
+      <pose>2.32682 0.28356 2.45975 0 0 0</pose>
       <link name="dugum_111">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.216250e-02</mass><inertia>
@@ -1723,7 +1723,7 @@
       </link>
     </model>
     <model name="m_dugum_112">
-      <pose>2.11662 0.22971 2.46254 0 0 0</pose>
+      <pose>2.11661 0.23041 2.46218 0 0 0</pose>
       <link name="dugum_112">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>9.002153e-06</mass><inertia>
@@ -1738,7 +1738,7 @@
       </link>
     </model>
     <model name="m_dugum_113">
-      <pose>1.91033 0.16356 2.45377 0 0 0</pose>
+      <pose>1.91063 0.16269 2.46360 0 0 0</pose>
       <link name="dugum_113">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.660344e-06</mass><inertia>
@@ -1753,7 +1753,7 @@
       </link>
     </model>
     <model name="m_dugum_114">
-      <pose>1.76810 0.00186 2.42888 0 0 0</pose>
+      <pose>1.77016 0.00035 2.43344 0 0 0</pose>
       <link name="dugum_114">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.649242e-06</mass><inertia>
@@ -1768,7 +1768,7 @@
       </link>
     </model>
     <model name="m_dugum_115">
-      <pose>1.91062 -0.15991 2.45216 0 0 0</pose>
+      <pose>1.90998 -0.16354 2.45779 0 0 0</pose>
       <link name="dugum_115">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.660344e-06</mass><inertia>
@@ -1783,7 +1783,7 @@
       </link>
     </model>
     <model name="m_dugum_116">
-      <pose>2.11765 -0.22438 2.45792 0 0 0</pose>
+      <pose>2.11785 -0.22512 2.46167 0 0 0</pose>
       <link name="dugum_116">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>9.002153e-06</mass><inertia>
@@ -1798,7 +1798,7 @@
       </link>
     </model>
     <model name="m_dugum_117">
-      <pose>2.32636 -0.28354 2.45966 0 0 0</pose>
+      <pose>2.32666 -0.28359 2.45969 0 0 0</pose>
       <link name="dugum_117">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.216250e-02</mass><inertia>
@@ -1813,7 +1813,7 @@
       </link>
     </model>
     <model name="m_dugum_118">
-      <pose>2.11351 -0.29434 2.41947 0 0 0</pose>
+      <pose>2.11394 -0.29351 2.41842 0 0 0</pose>
       <link name="dugum_118">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.501191e-06</mass><inertia>
@@ -1828,7 +1828,7 @@
       </link>
     </model>
     <model name="m_dugum_119">
-      <pose>1.90271 -0.30669 2.37000 0 0 0</pose>
+      <pose>1.90304 -0.30711 2.36957 0 0 0</pose>
       <link name="dugum_119">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.880022e-06</mass><inertia>
@@ -1843,7 +1843,7 @@
       </link>
     </model>
     <model name="m_dugum_120">
-      <pose>1.77935 -0.37075 2.20371 0 0 0</pose>
+      <pose>1.77953 -0.37243 2.20386 0 0 0</pose>
       <link name="dugum_120">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.793532e-06</mass><inertia>
@@ -1858,7 +1858,7 @@
       </link>
     </model>
     <model name="m_dugum_121">
-      <pose>1.93223 -0.42692 2.06071 0 0 0</pose>
+      <pose>1.92943 -0.42966 2.05801 0 0 0</pose>
       <link name="dugum_121">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.256137e-06</mass><inertia>
@@ -1873,7 +1873,7 @@
       </link>
     </model>
     <model name="m_dugum_122">
-      <pose>2.11647 -0.52514 2.00204 0 0 0</pose>
+      <pose>2.11682 -0.52589 2.00569 0 0 0</pose>
       <link name="dugum_122">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.318380e-06</mass><inertia>
@@ -1888,7 +1888,7 @@
       </link>
     </model>
     <model name="m_dugum_123">
-      <pose>2.32734 -0.56591 1.96925 0 0 0</pose>
+      <pose>2.32741 -0.56585 1.96928 0 0 0</pose>
       <link name="dugum_123">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.216250e-02</mass><inertia>
@@ -1903,7 +1903,7 @@
       </link>
     </model>
     <model name="m_dugum_124">
-      <pose>2.12358 -0.50929 1.94946 0 0 0</pose>
+      <pose>2.12023 -0.51752 1.94928 0 0 0</pose>
       <link name="dugum_124">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>9.028246e-06</mass><inertia>
@@ -1918,7 +1918,7 @@
       </link>
     </model>
     <model name="m_dugum_125">
-      <pose>1.92502 -0.44424 1.89309 0 0 0</pose>
+      <pose>1.92541 -0.44452 1.89333 0 0 0</pose>
       <link name="dugum_125">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.256137e-06</mass><inertia>
@@ -1933,7 +1933,7 @@
       </link>
     </model>
     <model name="m_dugum_126">
-      <pose>1.77641 -0.35318 1.76439 0 0 0</pose>
+      <pose>1.77740 -0.35152 1.76522 0 0 0</pose>
       <link name="dugum_126">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.793532e-06</mass><inertia>
@@ -1948,7 +1948,7 @@
       </link>
     </model>
     <model name="m_dugum_127">
-      <pose>1.90817 -0.31013 1.59771 0 0 0</pose>
+      <pose>1.90808 -0.31168 1.59690 0 0 0</pose>
       <link name="dugum_127">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.880022e-06</mass><inertia>
@@ -1963,7 +1963,7 @@
       </link>
     </model>
     <model name="m_dugum_128">
-      <pose>2.11503 -0.30109 1.53232 0 0 0</pose>
+      <pose>2.11623 -0.30245 1.53572 0 0 0</pose>
       <link name="dugum_128">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.501191e-06</mass><inertia>
@@ -1978,7 +1978,7 @@
       </link>
     </model>
     <model name="m_dugum_129">
-      <pose>2.32481 -0.28271 1.47930 0 0 0</pose>
+      <pose>2.32498 -0.28278 1.47921 0 0 0</pose>
       <link name="dugum_129">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.216250e-02</mass><inertia>
@@ -1993,7 +1993,7 @@
       </link>
     </model>
     <model name="m_dugum_130">
-      <pose>2.14466 -0.25515 1.51772 0 0 0</pose>
+      <pose>2.14431 -0.25451 1.51566 0 0 0</pose>
       <link name="dugum_130">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.535454e-06</mass><inertia>
@@ -2008,7 +2008,7 @@
       </link>
     </model>
     <model name="m_dugum_131">
-      <pose>1.97184 -0.18776 1.53425 0 0 0</pose>
+      <pose>1.97180 -0.18608 1.53365 0 0 0</pose>
       <link name="dugum_131">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.251298e-06</mass><inertia>
@@ -2023,7 +2023,7 @@
       </link>
     </model>
     <model name="m_dugum_132">
-      <pose>1.82989 -0.07195 1.56574 0 0 0</pose>
+      <pose>1.82889 -0.07254 1.56882 0 0 0</pose>
       <link name="dugum_132">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>3.752532e-06</mass><inertia>
@@ -2038,7 +2038,7 @@
       </link>
     </model>
     <model name="m_dugum_133">
-      <pose>1.80362 0.11167 1.55419 0 0 0</pose>
+      <pose>1.80311 0.11097 1.55490 0 0 0</pose>
       <link name="dugum_133">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.332490e-06</mass><inertia>
@@ -2053,7 +2053,7 @@
       </link>
     </model>
     <model name="m_dugum_134">
-      <pose>1.96607 0.19955 1.53375 0 0 0</pose>
+      <pose>1.96732 0.19437 1.53034 0 0 0</pose>
       <link name="dugum_134">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.251298e-06</mass><inertia>
@@ -2068,7 +2068,7 @@
       </link>
     </model>
     <model name="m_dugum_135">
-      <pose>2.14315 0.25254 1.51337 0 0 0</pose>
+      <pose>2.14441 0.25032 1.51834 0 0 0</pose>
       <link name="dugum_135">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>8.535454e-06</mass><inertia>
@@ -2083,7 +2083,7 @@
       </link>
     </model>
     <model name="m_dugum_136">
-      <pose>2.32381 0.28260 1.47962 0 0 0</pose>
+      <pose>2.32389 0.28264 1.47965 0 0 0</pose>
       <link name="dugum_136">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>1.216250e-02</mass><inertia>
@@ -2098,7 +2098,7 @@
       </link>
     </model>
     <model name="m_dugum_137">
-      <pose>2.11009 0.29062 1.51684 0 0 0</pose>
+      <pose>2.11151 0.29276 1.52351 0 0 0</pose>
       <link name="dugum_137">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.501191e-06</mass><inertia>
@@ -2113,7 +2113,7 @@
       </link>
     </model>
     <model name="m_dugum_138">
-      <pose>1.90626 0.30753 1.58957 0 0 0</pose>
+      <pose>1.90447 0.30919 1.58674 0 0 0</pose>
       <link name="dugum_138">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.880022e-06</mass><inertia>
@@ -2128,7 +2128,7 @@
       </link>
     </model>
     <model name="m_dugum_139">
-      <pose>1.77404 0.36510 1.75142 0 0 0</pose>
+      <pose>1.77301 0.36662 1.74924 0 0 0</pose>
       <link name="dugum_139">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.793532e-06</mass><inertia>
@@ -2143,7 +2143,7 @@
       </link>
     </model>
     <model name="m_dugum_140">
-      <pose>1.92891 0.43029 1.88839 0 0 0</pose>
+      <pose>1.93072 0.42371 1.88659 0 0 0</pose>
       <link name="dugum_140">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>5.256137e-06</mass><inertia>
@@ -2158,7 +2158,7 @@
       </link>
     </model>
     <model name="m_dugum_141">
-      <pose>2.11490 0.53099 1.93646 0 0 0</pose>
+      <pose>2.11625 0.52466 1.93596 0 0 0</pose>
       <link name="dugum_141">
         <pose>0 0 0 0 0 0</pose>
         <inertial><mass>6.318380e-06</mass><inertia>
@@ -2209,148 +2209,148 @@
         <T_dugum>35.28</T_dugum>
         <hedef_ad>talon_govde</hedef_ad>
         <perv_x>-0.47</perv_x><perv_r>0.115</perv_r>
-        <hiz>0 22.8293 -23.4026 0.4858</hiz>
-        <hiz>1 29.4092 -5.1214 -9.9848</hiz>
-        <hiz>2 33.0913 -13.5103 5.4792</hiz>
-        <hiz>3 25.0828 -4.9918 2.5064</hiz>
-        <hiz>4 19.9035 -16.9169 13.2036</hiz>
-        <hiz>5 23.9942 -2.3421 5.0171</hiz>
-        <hiz>6 29.2092 -2.6505 2.9694</hiz>
-        <hiz>7 26.9014 -5.9916 0.1664</hiz>
-        <hiz>8 24.8740 -5.2458 13.3671</hiz>
-        <hiz>9 40.4944 -6.5024 -6.3918</hiz>
-        <hiz>10 25.6799 -5.0623 -9.2259</hiz>
-        <hiz>11 20.3485 -1.2766 4.7144</hiz>
-        <hiz>12 28.8942 0.8811 0.0362</hiz>
-        <hiz>13 24.6354 -10.7130 -4.5201</hiz>
-        <hiz>14 27.5389 1.0635 -3.0989</hiz>
-        <hiz>15 27.4083 -3.8116 -3.4567</hiz>
-        <hiz>16 25.4932 -6.6721 -8.4338</hiz>
-        <hiz>17 24.1725 1.2447 -10.3089</hiz>
-        <hiz>18 28.5792 -3.3058 -12.9968</hiz>
-        <hiz>19 42.5163 6.3182 -2.0950</hiz>
-        <hiz>20 28.8387 -7.5783 7.3950</hiz>
-        <hiz>21 28.2097 -7.0275 13.5364</hiz>
-        <hiz>22 28.7838 -8.0522 9.8270</hiz>
-        <hiz>23 29.8741 4.9181 5.5482</hiz>
-        <hiz>24 29.5827 2.0477 0.9467</hiz>
-        <hiz>25 22.9347 -6.3034 -5.4847</hiz>
-        <hiz>26 25.6590 -4.5902 -10.1532</hiz>
-        <hiz>27 26.6629 0.0875 0.1273</hiz>
-        <hiz>28 20.7805 -14.9309 -20.1571</hiz>
-        <hiz>29 27.2332 -8.5686 -7.4577</hiz>
-        <hiz>30 23.2681 -22.7397 0.7253</hiz>
-        <hiz>31 27.9148 -3.0274 6.3101</hiz>
-        <hiz>32 30.7917 -13.0862 7.8555</hiz>
-        <hiz>33 30.6737 6.7870 3.0700</hiz>
-        <hiz>34 28.5908 -9.3291 5.2633</hiz>
-        <hiz>35 30.0225 3.2572 5.1013</hiz>
-        <hiz>36 26.7977 -1.1532 -3.3096</hiz>
-        <hiz>37 26.2891 2.7259 -5.2278</hiz>
-        <hiz>38 24.4491 6.7421 -19.8668</hiz>
-        <hiz>39 29.2700 -8.5039 -5.2534</hiz>
-        <hiz>40 15.4863 -19.3138 -14.7848</hiz>
-        <hiz>41 52.7346 -5.1214 -0.1310</hiz>
-        <hiz>42 9.5823 -26.2784 8.7725</hiz>
-        <hiz>43 27.5535 7.7902 11.0660</hiz>
-        <hiz>44 27.8754 -5.0062 11.2614</hiz>
-        <hiz>45 29.3731 -0.9963 4.2400</hiz>
-        <hiz>46 27.7305 -4.5809 4.1775</hiz>
-        <hiz>47 23.9297 -1.3649 -16.0509</hiz>
-        <hiz>48 22.3772 -1.6421 -6.3481</hiz>
-        <hiz>49 15.7655 -0.0905 -16.5818</hiz>
-        <hiz>50 30.9376 3.6803 24.9495</hiz>
-        <hiz>51 40.1480 -1.9316 5.4236</hiz>
-        <hiz>52 54.8775 1.8857 0.6117</hiz>
-        <hiz>53 50.2453 -3.2389 -7.7318</hiz>
-        <hiz>54 18.9514 -0.2689 -20.5938</hiz>
-        <hiz>55 15.4140 0.6902 32.2665</hiz>
-        <hiz>56 29.0102 0.8289 16.7058</hiz>
-        <hiz>57 28.6431 -0.3494 16.2088</hiz>
-        <hiz>58 27.0817 -1.8456 -4.3694</hiz>
-        <hiz>59 26.7322 -5.9771 -7.2981</hiz>
-        <hiz>60 25.9231 -6.5157 -17.7842</hiz>
-        <hiz>61 32.0090 9.4604 -3.3309</hiz>
-        <hiz>62 9.5623 23.4605 -7.6818</hiz>
-        <hiz>63 54.3078 5.1226 -6.8333</hiz>
-        <hiz>64 14.0774 21.0450 8.8660</hiz>
-        <hiz>65 26.4543 -9.4075 10.4790</hiz>
-        <hiz>66 26.7073 5.0387 14.0292</hiz>
-        <hiz>67 27.0923 -2.3678 2.0420</hiz>
-        <hiz>68 26.4755 3.7472 4.9034</hiz>
-        <hiz>69 23.1966 6.1837 -6.8239</hiz>
-        <hiz>70 26.5676 4.5308 -8.3561</hiz>
-        <hiz>71 27.9541 1.6667 2.2039</hiz>
-        <hiz>72 24.5021 12.2262 -15.1310</hiz>
-        <hiz>73 30.1459 0.2684 -14.0471</hiz>
-        <hiz>74 20.7920 23.8352 -0.7385</hiz>
-        <hiz>75 29.6926 6.1873 5.8885</hiz>
-        <hiz>76 31.4153 13.7586 10.7336</hiz>
-        <hiz>77 30.4214 -1.7385 -1.2511</hiz>
-        <hiz>78 23.6993 8.6931 8.5137</hiz>
-        <hiz>79 28.8673 -5.7768 9.5343</hiz>
-        <hiz>80 29.0125 -2.4831 2.3180</hiz>
-        <hiz>81 27.9390 5.9848 -3.5338</hiz>
-        <hiz>82 27.4916 6.0703 -5.8424</hiz>
-        <hiz>83 25.0687 2.1575 -12.4845</hiz>
-        <hiz>84 29.9274 7.8718 -11.7535</hiz>
-        <hiz>85 38.9894 -5.5168 -0.0551</hiz>
-        <hiz>86 31.6649 5.3106 14.7296</hiz>
-        <hiz>87 28.3961 6.0791 4.5689</hiz>
-        <hiz>88 27.3740 3.6983 9.0183</hiz>
-        <hiz>89 27.9695 -1.6987 1.7851</hiz>
-        <hiz>90 26.7843 -2.1941 10.4843</hiz>
-        <hiz>91 24.9908 3.7804 5.8732</hiz>
-        <hiz>92 31.2782 5.4828 2.5977</hiz>
-        <hiz>93 22.6930 6.0364 -2.6866</hiz>
-        <hiz>94 27.7124 3.7502 7.8956</hiz>
-        <hiz>95 38.2347 4.3961 4.7329</hiz>
-        <hiz>96 25.6455 6.7429 -15.3788</hiz>
-        <hiz>97 28.8622 0.0363 4.1327</hiz>
-        <hiz>98 29.1684 0.0463 -2.8897</hiz>
-        <hiz>99 25.0226 6.3642 -3.9129</hiz>
-        <hiz>100 22.6449 19.9872 -9.7145</hiz>
-        <hiz>101 25.4211 6.6622 -6.7859</hiz>
-        <hiz>102 28.5432 14.5072 -6.2742</hiz>
-        <hiz>103 29.9944 4.4195 5.7268</hiz>
-        <hiz>104 21.9289 24.4928 2.7898</hiz>
-        <hiz>105 26.0382 6.0767 -0.7522</hiz>
-        <hiz>106 26.7499 0.6349 7.6968</hiz>
-        <hiz>107 22.3678 10.7250 1.9376</hiz>
-        <hiz>108 28.8210 3.2881 3.8224</hiz>
-        <hiz>109 26.7500 1.4482 4.7508</hiz>
-        <hiz>110 24.6639 2.9072 13.7919</hiz>
-        <hiz>111 26.8187 3.1942 4.7431</hiz>
-        <hiz>112 26.1976 5.2820 2.4106</hiz>
-        <hiz>113 27.4170 0.5108 8.3553</hiz>
-        <hiz>114 30.6987 -0.1990 -6.1648</hiz>
-        <hiz>115 27.7990 -0.5794 9.7495</hiz>
-        <hiz>116 26.6969 -4.6394 2.9307</hiz>
-        <hiz>117 26.8033 -3.1897 4.7444</hiz>
-        <hiz>118 25.7014 -0.8233 9.9269</hiz>
-        <hiz>119 26.8781 -0.4819 4.8226</hiz>
-        <hiz>120 26.9821 0.8008 4.2643</hiz>
-        <hiz>121 17.4338 -14.0607 -0.3445</hiz>
-        <hiz>122 28.5147 2.1269 5.8325</hiz>
-        <hiz>123 26.0483 -6.0810 -0.7434</hiz>
-        <hiz>124 32.7143 -0.9587 -10.0707</hiz>
-        <hiz>125 25.4924 -8.9645 -3.3589</hiz>
-        <hiz>126 31.3899 -1.2320 -4.6755</hiz>
-        <hiz>127 25.5326 -8.3494 -11.1047</hiz>
-        <hiz>128 25.5524 0.5163 -9.9133</hiz>
-        <hiz>129 26.8307 -3.1668 -6.2566</hiz>
-        <hiz>130 27.0752 -0.7772 -6.7987</hiz>
-        <hiz>131 28.0011 3.2831 -11.6200</hiz>
-        <hiz>132 25.1183 -2.2860 -4.8237</hiz>
-        <hiz>133 28.0569 -2.4913 -14.5194</hiz>
-        <hiz>134 25.9592 4.6281 0.0366</hiz>
-        <hiz>135 27.1120 -1.1302 -8.0003</hiz>
-        <hiz>136 26.8044 3.1752 -6.2655</hiz>
-        <hiz>137 26.3326 0.9235 -8.6391</hiz>
-        <hiz>138 25.8708 7.4367 -11.5093</hiz>
-        <hiz>139 29.3950 -1.5453 -5.4402</hiz>
-        <hiz>140 20.3806 9.1957 -0.1855</hiz>
-        <hiz>141 28.6147 -1.8536 -7.9177</hiz>
+        <hiz>0 24.6603 -24.2999 -0.7636</hiz>
+        <hiz>1 30.0738 -3.8790 -9.8816</hiz>
+        <hiz>2 31.9148 -12.8816 5.6612</hiz>
+        <hiz>3 24.8345 -6.0376 2.3612</hiz>
+        <hiz>4 21.3503 -16.5435 14.7169</hiz>
+        <hiz>5 22.2297 -2.5137 3.7770</hiz>
+        <hiz>6 29.5452 -1.9359 2.9734</hiz>
+        <hiz>7 28.1775 -6.5247 0.0128</hiz>
+        <hiz>8 23.6064 -7.5591 14.4271</hiz>
+        <hiz>9 40.0555 -3.9770 -6.7614</hiz>
+        <hiz>10 26.2762 -4.9375 -9.2711</hiz>
+        <hiz>11 21.4857 -0.7727 3.5288</hiz>
+        <hiz>12 28.3152 1.8102 1.0696</hiz>
+        <hiz>13 24.2469 -11.3877 -3.9298</hiz>
+        <hiz>14 28.3305 3.1020 1.0644</hiz>
+        <hiz>15 26.6759 -4.9199 -3.7995</hiz>
+        <hiz>16 25.8603 -5.3946 -5.5755</hiz>
+        <hiz>17 22.8549 -0.2419 -11.6999</hiz>
+        <hiz>18 30.1113 -1.6861 -12.6662</hiz>
+        <hiz>19 41.4988 5.3368 -1.8336</hiz>
+        <hiz>20 28.3547 -7.8755 6.5009</hiz>
+        <hiz>21 23.9050 -7.6058 13.6950</hiz>
+        <hiz>22 27.9420 -11.5798 6.7858</hiz>
+        <hiz>23 27.9873 5.8628 6.5409</hiz>
+        <hiz>24 28.7775 3.4239 -0.7110</hiz>
+        <hiz>25 24.8625 -9.5268 -6.2476</hiz>
+        <hiz>26 26.4902 -5.6450 -10.6547</hiz>
+        <hiz>27 27.3003 0.2523 -1.0509</hiz>
+        <hiz>28 22.2071 -12.1544 -22.0070</hiz>
+        <hiz>29 28.3382 -7.4427 -7.4259</hiz>
+        <hiz>30 22.2899 -23.5076 1.1039</hiz>
+        <hiz>31 27.2984 -2.1488 5.9736</hiz>
+        <hiz>32 21.6339 -13.3388 6.9428</hiz>
+        <hiz>33 33.3635 5.6507 4.8258</hiz>
+        <hiz>34 25.7293 -7.7848 2.8412</hiz>
+        <hiz>35 28.2224 4.9824 6.5696</hiz>
+        <hiz>36 28.1063 -0.7706 -4.0055</hiz>
+        <hiz>37 27.5127 4.0741 -2.8874</hiz>
+        <hiz>38 24.5674 5.1500 -19.0665</hiz>
+        <hiz>39 28.2767 -9.6323 -5.2919</hiz>
+        <hiz>40 15.6815 -19.8975 -14.1950</hiz>
+        <hiz>41 53.2709 -4.3248 -1.5612</hiz>
+        <hiz>42 9.8065 -25.3304 7.8697</hiz>
+        <hiz>43 28.7774 6.3590 8.7576</hiz>
+        <hiz>44 25.3583 -1.7868 15.5072</hiz>
+        <hiz>45 25.9024 0.9501 0.7231</hiz>
+        <hiz>46 24.5802 -4.7209 9.2293</hiz>
+        <hiz>47 25.0274 0.7127 -16.2810</hiz>
+        <hiz>48 23.4144 -0.9799 -7.0248</hiz>
+        <hiz>49 17.2069 -0.3131 -16.9259</hiz>
+        <hiz>50 32.0949 3.2768 26.0216</hiz>
+        <hiz>51 46.0841 1.8089 5.3044</hiz>
+        <hiz>52 55.2363 0.3140 -0.4780</hiz>
+        <hiz>53 52.9247 -2.5168 -11.5563</hiz>
+        <hiz>54 29.6424 2.6784 -24.2367</hiz>
+        <hiz>55 16.6866 0.5451 32.7912</hiz>
+        <hiz>56 28.1138 2.4452 13.9676</hiz>
+        <hiz>57 27.8359 -0.6476 13.9658</hiz>
+        <hiz>58 26.7309 1.9731 -7.3971</hiz>
+        <hiz>59 28.1236 -5.3811 -4.9220</hiz>
+        <hiz>60 27.3273 -6.7867 -18.3148</hiz>
+        <hiz>61 32.9078 8.6256 -5.6571</hiz>
+        <hiz>62 9.3371 25.0182 -14.3120</hiz>
+        <hiz>63 54.6976 1.8257 2.9536</hiz>
+        <hiz>64 12.2843 21.5918 7.7101</hiz>
+        <hiz>65 32.6484 -9.0987 10.7102</hiz>
+        <hiz>66 27.3669 3.7021 14.4380</hiz>
+        <hiz>67 26.9684 -2.2891 2.1858</hiz>
+        <hiz>68 25.6858 2.9225 6.8032</hiz>
+        <hiz>69 26.3910 8.6727 -8.4155</hiz>
+        <hiz>70 27.6628 4.7365 -9.8222</hiz>
+        <hiz>71 29.1326 -0.9456 2.1804</hiz>
+        <hiz>72 23.7286 11.9701 -21.5017</hiz>
+        <hiz>73 29.0942 -0.9294 -9.0965</hiz>
+        <hiz>74 19.4351 21.7761 -1.6465</hiz>
+        <hiz>75 28.9372 4.2019 5.3229</hiz>
+        <hiz>76 23.0588 13.2087 5.0894</hiz>
+        <hiz>77 31.5407 -7.4061 3.4035</hiz>
+        <hiz>78 23.4045 8.4490 7.1922</hiz>
+        <hiz>79 28.4588 -6.3092 8.6563</hiz>
+        <hiz>80 30.0530 -2.9525 3.7081</hiz>
+        <hiz>81 29.0029 4.2593 -4.3598</hiz>
+        <hiz>82 28.2384 9.4996 -4.3887</hiz>
+        <hiz>83 24.8950 -0.2381 -12.1952</hiz>
+        <hiz>84 30.0165 9.9729 -11.5578</hiz>
+        <hiz>85 38.5689 -5.2041 -0.1463</hiz>
+        <hiz>86 31.1902 6.2265 14.7205</hiz>
+        <hiz>87 24.1736 7.3274 9.4275</hiz>
+        <hiz>88 27.1120 7.1496 5.0667</hiz>
+        <hiz>89 27.3007 -3.2623 2.9583</hiz>
+        <hiz>90 25.4836 1.9575 13.0900</hiz>
+        <hiz>91 23.5074 5.5017 4.4740</hiz>
+        <hiz>92 31.9022 4.3920 2.8674</hiz>
+        <hiz>93 22.3742 6.2742 -3.9843</hiz>
+        <hiz>94 28.5648 3.9585 9.7332</hiz>
+        <hiz>95 37.7586 4.4108 4.8181</hiz>
+        <hiz>96 25.9898 7.0273 -13.2283</hiz>
+        <hiz>97 27.6466 -0.4683 4.8925</hiz>
+        <hiz>98 29.5212 -0.6966 -2.7131</hiz>
+        <hiz>99 25.7094 6.3348 -3.8870</hiz>
+        <hiz>100 22.4351 19.1753 -10.0052</hiz>
+        <hiz>101 26.1712 5.1757 -5.7752</hiz>
+        <hiz>102 29.7691 14.6780 -5.3856</hiz>
+        <hiz>103 28.9916 5.4192 2.3380</hiz>
+        <hiz>104 21.5009 23.2571 3.8449</hiz>
+        <hiz>105 26.0560 6.0788 -0.7548</hiz>
+        <hiz>106 28.0543 -2.5231 8.8724</hiz>
+        <hiz>107 22.4025 10.7784 1.8952</hiz>
+        <hiz>108 28.9943 4.1274 4.3641</hiz>
+        <hiz>109 26.9639 1.3182 5.0526</hiz>
+        <hiz>110 24.9486 2.6210 13.1992</hiz>
+        <hiz>111 26.8257 3.1921 4.7389</hiz>
+        <hiz>112 26.2015 5.4881 2.0674</hiz>
+        <hiz>113 27.8292 0.6690 9.1612</hiz>
+        <hiz>114 31.2767 0.3055 -4.9046</hiz>
+        <hiz>115 27.6082 -0.5785 9.9583</hiz>
+        <hiz>116 26.6524 -4.0688 3.3157</hiz>
+        <hiz>117 26.8439 -3.1986 4.7505</hiz>
+        <hiz>118 25.6844 -0.4217 9.6054</hiz>
+        <hiz>119 26.8479 -0.5291 4.2609</hiz>
+        <hiz>120 26.9664 0.0431 3.8282</hiz>
+        <hiz>121 17.0918 -15.3735 -0.7133</hiz>
+        <hiz>122 29.1036 3.5391 5.6237</hiz>
+        <hiz>123 26.0511 -6.0752 -0.7416</hiz>
+        <hiz>124 31.9420 -4.1011 -11.4242</hiz>
+        <hiz>125 27.6336 -10.2467 -3.0008</hiz>
+        <hiz>126 32.8991 -2.9690 -3.7697</hiz>
+        <hiz>127 25.7102 -7.0578 -10.3320</hiz>
+        <hiz>128 25.3040 -0.5777 -10.8361</hiz>
+        <hiz>129 26.8293 -3.1669 -6.2622</hiz>
+        <hiz>130 27.1307 -0.8090 -7.8823</hiz>
+        <hiz>131 28.6339 3.8024 -11.4129</hiz>
+        <hiz>132 24.6945 -2.6273 -5.5717</hiz>
+        <hiz>133 27.7455 -2.7119 -13.6338</hiz>
+        <hiz>134 26.7271 2.2218 -5.5925</hiz>
+        <hiz>135 28.5987 -2.1920 -2.4667</hiz>
+        <hiz>136 26.7865 3.1741 -6.2638</hiz>
+        <hiz>137 26.2192 0.4004 -8.6349</hiz>
+        <hiz>138 26.0118 5.5529 -10.8173</hiz>
+        <hiz>139 28.8580 -2.5030 -5.6746</hiz>
+        <hiz>140 20.4362 10.2347 -1.0786</hiz>
+        <hiz>141 28.5949 -0.9417 -7.6767</hiz>
         <eleman>0 1 0.200000</eleman>
         <eleman>0 7 0.200000</eleman>
         <eleman>1 2 0.200000</eleman>
