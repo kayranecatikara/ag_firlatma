@@ -13,22 +13,23 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 
 | Dosya | Parça | Adet | Filament | Ölçü (X×Y×Z mm) | Filament |
 |---|---|---|---|---|---|
-| `01_namlu` | Namlu gövdesi | 1 | **PETG** | 88 × 104 × **149.8** | ~151 g |
-| `02_kapsul` | Kapsül | 1 | **PETG** | 43 × 43 × 40 | ~29 g |
-| `03_tetik_kapagi_sag` | Tetik kartuş kapağı (sağ) | 1 | **PETG** | 18 × 18 × 3 | ~1 g |
-| `04_tetik_kapagi_sol` | Tetik kartuş kapağı (sol) | 1 | **PETG** | 18 × 18 × 3 | ~1 g |
-| `05_servo_makarasi` | Servo ip makarası | **2** | **PETG** | 18 × 18 × 8 | ~2 g |
-| `06_toz_kapagi` | Arka toz kapağı (opsiyonel) | 1 | **PETG** | 49 × 49 × 6 | ~6 g |
-| `07_tampon_ust` | Yarık sonu tamponu (üst) | 1 | **TPU 95A** | 9 × 7 × 3 | ~0.1 g |
-| `08_tampon_alt` | Yarık sonu tamponu (alt) | 1 | **TPU 95A** | 9 × 7 × 3 | ~0.1 g |
+| `01a_namlu_govde` | Namlu gövdesi (arka parça) | 1 | **PETG** | 88 × 55 × **142.0** | ~119.9 g |
+| `01b_agiz_basligi` | Ağız başlığı (ıraksak koni) | 1 | **PETG** | 68 × 104 × **21.8** | ~32.3 g |
+| `02_kapsul` | Kapsül | 1 | **PETG** | 43 × 43 × **45.0** | ~33.3 g |
+| `03_tetik_kapagi_sag` | Tetik kartuş kapağı (sağ) | 1 | **PETG** | 18 × 18 × **3.0** | ~0.9 g |
+| `04_tetik_kapagi_sol` | Tetik kartuş kapağı (sol) | 1 | **PETG** | 18 × 18 × **3.0** | ~0.9 g |
+| `05_servo_makarasi` | Servo ip makarası | **2** | **PETG** | 10 × 10 × **6.4** | ~0.8 g |
+| `06_toz_kapagi` | Arka toz kapağı (opsiyonel) | 1 | **PETG** | 49 × 49 × **6.0** | ~6.4 g |
+| `07_tampon_ust` | Yarık sonu tamponu (üst) | 1 | **TPU 95A** | 9 × 7 × **3.0** | ~0.1 g |
+| `08_tampon_alt` | Yarık sonu tamponu (alt) | 1 | **TPU 95A** | 9 × 7 × **3.0** | ~0.1 g |
 
-**TOPLAM: PETG ~190 g · TPU ~0.2 g**
+**TOPLAM: PETG ~195 g · TPU ~0.2 g**
 
 Her parça hem `.stl` (baskı) hem `.step` (CAD, ölçü almak/değiştirmek için)
 olarak var. Ölçüler `parcalar.json`'da.
 
 ### Yazıcı şartı
-**Z yüksekliği ≥ 155 mm** gerekli (namlu 149.8 mm dik basılıyor).
+**Z yüksekliği ≥ 147 mm** gerekli (en uzun parça 142.0 mm).
 Tabla ≥ 110 × 110 mm. Ender 3 / Prusa MK3 / Bambu P1 sınıfı yeterli.
 
 ---

@@ -1,3 +1,8 @@
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                if os.path.basename(os.path.dirname(os.path.abspath(__file__))) == "cad"
+                else os.path.dirname(os.path.abspath(__file__)))
+from agsim.yollar import vyol, kyol
 # -*- coding: utf-8 -*-
 """v2 (kisa namlu, omuzsuz) gorseli: dis gorunus, bant kesiti, tetik kesiti, ozet."""
 import sys, os, json

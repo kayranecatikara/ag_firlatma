@@ -2,6 +2,11 @@
 Olculer cad/v2_olcu.json ve cad/v2_hacim.json'dan (CAD'den) gelir.
 Cikti: malzeme_listesi.md + malzeme_listesi.csv
 """
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                if os.path.basename(os.path.dirname(os.path.abspath(__file__))) == "cad"
+                else os.path.dirname(os.path.abspath(__file__)))
+from agsim.yollar import vyol, kyol
 import json, csv, math
 
 P = json.load(open(vyol(__file__, "cad", "v4_olcu.json")))
@@ -9,7 +14,12 @@ V = json.load(open(vyol(__file__, "cad", "v4_hacim.json")))
 g = lambda ad, rho: V[ad]["V"] * rho                       # cm3 * g/cm3
 
 # ag: altigen, kose yaricapi 1.1 m, goz 130 mm
-R, GOZ = 1.4, 0.140
+# --- AG: out/v4_konfig.json'dan (nihai tasarim, eldeki 0.60 mm ip) ---
+_KF = json.load(open(vyol(__file__, "out", "v4_konfig.json")))
+R, GOZ = _KF["R_ag"], _KF["goz"]
+D_IP   = _KF["d_ip"]                                       # m
+N_BONCUK, D_BONCUK, M_BONCUK = _KF["n_boncuk_top"], _KF["D_boncuk"], _KF["m_boncuk"]
+RHO_IP = 970.0 * (math.pi/4) * D_IP**2 * 1000              # g/m
 A = 1.5 * math.sqrt(3) * R ** 2
 L_goz = 2 * A / GOZ                                        # m
 L_cevre = 6 * R
@@ -59,6 +69,8 @@ ekle(G, "B6", "Ip yonlendirme pimi", 2, "Paslanmaz celik pim", "O3 x 10 mm", 2 *
      "Kapaktan radyal cikan ipi servo tamburuna cevirir. Puruzsuz olmali (veya O6 mini makara).")
 
 G = "C. STANDART BAGLANTI ELEMANLARI"
+ekle(G, "B7", "PTFE burc (tetik pimi)", 2, "PTFE/teflon burc", "ic O5.0 / dis O7 x 10 mm", 2*0.3,
+     "Namlu delige gecer. Surtunmeyi mu=0.18'den 0.08'e dusurur - servo secimi buna bagli.")
 ekle(G, "C1", "M2 isil gomme insert (heat-set)", 8, "Pirinc", "M2 x 3 mm", 8 * 0.15,
      "4 adet kapak vidasi + 4 adet servo vidasi icin (PETG'ye havyayla).")
 ekle(G, "C2", "M2 x 6 civata (kapak)", 4, "Paslanmaz, silindir basli", "M2 x 6", 4 * 0.2, "")
@@ -90,18 +102,17 @@ ekle(G, "E4", "Tetik ipi", 2, "PE/Dyneema orgu, PE #6 (~0.40 mm, ~30 kg)", "her 
 ekle(G, "E5", "Kablo bagi / spiral", 4, "Naylon", "2.5 mm genislik", 4 * 0.1, "Kablolari namluya sabitlemek icin.")
 
 G = "F. AG VE BILYELER"
-ekle(G, "F1", "Ag gozu ipi", 1, "PE (Dyneema) orgu balik ipi, PE #1 (~0.165 mm, ~8-9 kg)",
-     f"altigen ag, kose yaricapi {R} m (O{2*R:.1f} m), goz {GOZ*1e3:.0f} mm: {L_goz:.0f} m + %20 dugum payi",
-     L_goz * 1.2 * 0.021, f"~{dugum} dugum. 100 m makara al.")
-ekle(G, "F2", "Ag cevre ipi", 1, "PE orgu, PE #3 (~0.285 mm, ~18 kg)", f"{L_cevre:.1f} m + %10",
-     L_cevre * 1.1 * 0.062, "Altigenin 6 kenari. Bilyelerin cekisini tasir.")
-ekle(G, "F3", "Bilye baglanti ipi (lider)", 6, "PE #3", "her biri ~70 mm", 6 * 0.005,
-     "Bilye deliginden gecer, dista durdurma dugumu; diger ucu ag kosesine.")
-ekle(G, "B7", "PTFE burc (tetik pimi)", 2, "PTFE/teflon burc", "ic O5.0 / dis O7 x 10 mm", 2*0.3,
-     "Namlu delige gecer. Surtunmeyi mu=0.18'den 0.08'e dusurur - servo secimi buna bagli.")
-ekle("F. AG VE BILYELER", "F4", "Bilye", 6, "DELIKLI KURSUN top (balik kurşunu), ~12 g",
-     "O12.7 mm (+/-0.2), O1.5-2 mm gecme delik", 6 * 12.1,
-     "Kursun > celik (pencere %20-30 daha genis). Delik sart: celik bilyeye ip baglanamaz.")
+ekle(G, "F1", "Ag ipi — goz + cevre halati + radyal baglar (HEPSI AYNI IP)", 1,
+     f"Hyper Dyneema orgu, O{D_IP*1e3:.2f} mm, 45.40 kg (ELDEKI IP)",
+     f"altigen O{2*R:.1f} m, kare goz {GOZ*1e3:.0f} mm: {L_goz+L_cevre:.1f} m kafes+halat "
+     f"+ radyal baglar ve baglama paylari -> ~47 m kes",
+     47.0 * RHO_IP, "ELDE 90 m VAR — yeterli, 1 kez daha deneme payi birakir. "
+     "Cevre halati icin ayri/kalin ip ALMA: ayni ip kullaniliyor.")
+ekle("F. AG VE BILYELER", "F4", "Boncuk (bilye)", N_BONCUK,
+     f"DELIKLI KURSUN boncuk — Captain 1216, O{D_BONCUK*1e3:.0f} mm, {M_BONCUK*1e3:.0f} g/ad (ELDE VAR)",
+     f"O{D_BONCUK*1e3:.0f} mm, ortasi ~O2 mm delikli; yuva basina 2 ad (6 yuva)",
+     N_BONCUK * M_BONCUK * 1000,
+     "ELDE VAR, satin alinacak degil. Delik sart: ip boncuklarin icinden gecer.")
 ekle(G, "F5", "Kirilgan on kapak (her atis icin 1)", 1, "Ince kagit / pelur", "O43 disk", 0.1,
      "Kapsul agzina yapistirici cubukla noktasal yapistirilir; bilyeleri ve ag paketini tutar, atista yirtilir.")
 

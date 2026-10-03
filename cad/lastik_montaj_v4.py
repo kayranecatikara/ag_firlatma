@@ -25,7 +25,7 @@ P = dict(
     STROK=120.0, L_hazne=10.0, H=18.0, lam=3.5, bant_OD=16.0, bant_ID=4.0,
     D_bore=43.4, t_duvar=6.0, bosluk=0.30, arka=5.0,
     ALFA=19.0, koni_acisi=21.0, D_bilye=12.7, D_yuva=12.9, R_pitch=13.5,
-    derinlik=4.2,
+    derinlik=4.2, n_boncuk=3,
     # kapsul: arka blok (capraz pim) + tutma kanali + hazne + on kapak
     y_capraz=4.5, d_capraz=6.0, capraz_uzun=78.0,
     kanal_y0=9.0, kanal_w=5.4, kanal_d=5.0, t_arka_blok=16.0, t_kapak=8.0,
@@ -214,14 +214,22 @@ def kapsul(p, y0):
 
 
 def bilyeler(p, y0):
+    """18 x O9 boncuk: yuva basina 3 tane, HEPSI AYNI IPE dizili.
+    Oncu boncuk egik yuvada; arkadaki 2 tanesi hazne icinde ayni eksende.
+    Captain 1216: O9 kursun, ortasinda ~O2 gecme deligi -> 4.0 g."""
     a = math.radians(p["ALFA"]); L = p["L_kapsul"]; s = None
+    Db = p["D_bilye"]; d_delik = 2.0
     for i in range(6):
         th = math.radians(60 * i)
         ur = V(math.cos(th), 0, math.sin(th))
         eks = V(ur.x * math.sin(a), math.cos(a), ur.z * math.sin(a))
-        c = V(ur.x * p["R_pitch"], y0 + L, ur.z * p["R_pitch"]) - eks * p["derinlik"]
-        k = Part.makeSphere(p["D_bilye"] / 2, c)
-        s = k if s is None else s.fuse(k)
+        # oncu boncugun merkezi: yuva dibinden yarim boncuk iceri
+        c0 = V(ur.x * p["R_pitch"], y0 + L, ur.z * p["R_pitch"]) - eks * (Db / 2)
+        for j in range(int(p.get("n_boncuk", 3))):   # oncu + arkadakiler
+            c = c0 - eks * (j * Db)
+            k = Part.makeSphere(Db / 2, c).cut(
+                sil(d_delik / 2, Db + 2, c - eks * (Db / 2 + 1), eks))
+            s = k if s is None else s.fuse(k)
     return s
 
 
