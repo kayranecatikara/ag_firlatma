@@ -1,0 +1,31 @@
+{
+ "_not": "ELDEKI MALZEMELERLE YAPILAN ANALIZ \u2014 bkz. out/MALZEME_REVIZE.md",
+ "ip_eldeki": {
+  "d_mm": 0.6,
+  "kopma_kg": 45.4,
+  "uzunluk_m": 90,
+  "karar": "SADECE CEVRE HALATI olarak kullan (7-8 m)"
+ },
+ "ip_mesh_gerekli": {
+  "d_mm": 0.165,
+  "neden": "0.60 mm menzili 1.8 m'ye KILITLIYOR"
+ },
+ "bilye_eldeki": {
+  "cap_mm": 8,
+  "kutle_g": 4.0,
+  "karar": "YUVA BASINA 2 ADET (8 g), toplam 12"
+ },
+ "alpha_deg": 20,
+ "R_ag": 1.1,
+ "goz_mm": 200,
+ "bant": {
+  "OD_mm": 13,
+  "ID_mm": 4,
+  "Gmod": "OLCULECEK"
+ },
+ "pencere_m": [
+  2.2,
+  5.78
+ ],
+ "R_tepe_m": 1.106
+}

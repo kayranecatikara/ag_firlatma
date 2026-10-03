@@ -35,6 +35,8 @@ P = dict(
     # tetik kartusu
     d_pim=5.0, boss_d=18.0, boss_h=16.5, d_yuva_pim=10.6, kapak_t=3.0, d_ip=2.0,
     d_M2=1.7, pad_l=36.0, pad_w=15.0, pad_t=4.0, pad_ofset=30.0,
+    # namluyu iki parcaya bolme (bkz. namlu_bol)
+    y_bol=128.0, t_spigot=14.0, spigot_derin=3.0, spigot_bosluk=0.25,
     servo_delik=14.0, servo_slot=2.0,   # +-14 mm (28 mm aralik), oval
 )
 if os.path.exists(KONFIG):
@@ -125,6 +127,42 @@ def namlu(p):
             g = g.cut(sil(p["d_M2"] / 2, 6, V(s * (Ro + p["boss_h"] - 5), y_t, dz),
                           V(s, 0, 0)))
     return g.removeSplitter()
+
+
+def namlu_bol(p):
+    """Namluyu IKI BASILABILIR PARCAYA boler.
+
+    NEDEN: agiz basligi (bilezik + bant kulaklari, O104 mm) tek parca
+    basimda ya tablada oturur (govdeyi ters cevirir) ya da HAVADA kalip
+    destek ister. Ayirinca her parca kendi dogal yonunde basilir:
+      * GOVDE : dik, dairesel kesit, sadece tetik gobekleri destek ister
+      * BASLIK: flans yuzu tablada DUZ yatar -> SIFIR destek
+
+    YUK YOLU: bantlar basligin kulaklarina baglanir ve kapsulu ILERI
+    ceker; tepkisi basligi GERIYE, yani govdeye BASTIRIR. Yani ek
+    BASMA yuku tasir -- omuz yeter, vida yalnizca bant gevsekken
+    basligin dusmesini onler.
+    """
+    g = namlu(p)
+    yb = p["y_bol"]; ts = p["t_spigot"]; rs = Ro - p["spigot_derin"]
+    # --- GOVDE: yb+ts'ye kadar; son ts mm'de cap kuculur (spigot)
+    gov = g.common(kutu(-80, 80, -2, yb + ts, -80, 80))
+    # DIKKAT: kulaklar R=52'ye uzanir; halkayi Ro+1'e kadar kesersen
+    # kulaklar GOVDEDE KALIR ve baslikla CAKISIR. 80 mm'ye kadar kes.
+    halka = sil(80.0, ts, V(0, yb, 0), V(0, 1, 0)).cut(
+            sil(rs, ts + 2, V(0, yb - 1, 0), V(0, 1, 0)))
+    gov = gov.cut(halka)
+    # --- BASLIK: yb'den uca; spigotun girecegi yuva acilir
+    bas = g.common(kutu(-80, 80, yb, p["L_namlu"] + 2, -80, 80))
+    bas = bas.cut(sil(rs + p["spigot_bosluk"], ts + 0.2, V(0, yb - 0.1, 0), V(0, 1, 0)))
+    # --- 3 x M3 radyal tutma vidasi (bant gevsekken baslik dusmesin)
+    ym = yb + ts * 0.55
+    for k in range(3):
+        a = k * 2 * math.pi / 3 + math.pi / 6      # yariklardan kacin
+        u = V(math.cos(a), 0, math.sin(a))
+        bas = bas.cut(sil(1.6, 20, V(-18 * math.cos(a), ym, -18 * math.sin(a)), u))
+        gov = gov.cut(sil(1.3, 20, V(-18 * math.cos(a), ym, -18 * math.sin(a)), u))
+    return gov, bas
 
 
 def tetik_kapaklari(p):

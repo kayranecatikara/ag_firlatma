@@ -83,8 +83,13 @@ if __name__ == "__main__":
     tp1, tp2 = M.tamponlar(P)
     PARCALAR = {
         # ad                      sekil      malzeme   adet  DIK_BAS
-        # namlu/kapsul: CAD'de eksen +Y -> X etrafinda -90 ile DIK (agiz yukari)
-        "01_namlu":            (M.namlu(P),      "PETG",    1, ((1,0,0), -90)),
+        # NAMLU IKI PARCA (bkz. cad/lastik_montaj_v4.py: namlu_bol)
+        #  IKISI DE AGIZ ASAGI (-90). Olculdu:
+        #    govde  : -90 -> 1769 mm2 destek,  +90 -> 2614 mm2
+        #    baslik : -90 ->  338 mm2 destek,  +90 -> 2121 mm2
+        #  Baslik ayrildigi icin O104 kulaklar artik HAVADA KALMIYOR.
+        "01a_namlu_govde":     (M.namlu_bol(P)[0], "PETG",  1, ((1,0,0), -90)),
+        "01b_agiz_basligi":    (M.namlu_bol(P)[1], "PETG",  1, ((1,0,0), -90)),
         "02_kapsul":           (M.kapsul(P, yk), "PETG",    1, ((1,0,0), -90)),
         # tetik kapaklari: CAD'de eksen +-X -> Y etrafinda 90 ile DUZ yatar
         "03_tetik_kapagi_sag": (k1,              "PETG",    1, ((0,1,0),  90)),
@@ -97,7 +102,8 @@ if __name__ == "__main__":
     }
     # dolgu/duvar dahil gercek filament tahmini
     YOGUNLUK = {"PETG": 1.27, "TPU 95A": 1.21}
-    DOLU_ORAN = {"01_namlu": 0.77, "02_kapsul": 0.82, "03_tetik_kapagi_sag": 1.0,
+    DOLU_ORAN = {"01a_namlu_govde": 0.77, "01b_agiz_basligi": 0.80,
+                 "02_kapsul": 0.82, "03_tetik_kapagi_sag": 1.0,
                  "04_tetik_kapagi_sol": 1.0, "05_servo_makarasi": 1.0,
                  "06_toz_kapagi": 0.55, "07_tampon_ust": 0.45,
                  "08_tampon_alt": 0.45}

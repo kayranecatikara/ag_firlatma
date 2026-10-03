@@ -1,13 +1,24 @@
 [
  {
-  "ad": "01_namlu",
+  "ad": "01a_namlu_govde",
   "malzeme": "PETG",
   "adet": 1,
-  "hacim_cm3": 154.57,
-  "filament_g": 151.2,
+  "hacim_cm3": 121.99,
+  "filament_g": 119.3,
   "x": 88.4,
+  "y": 55.4,
+  "z": 142.0,
+  "gecerli": true
+ },
+ {
+  "ad": "01b_agiz_basligi",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 32.01,
+  "filament_g": 32.5,
+  "x": 68.0,
   "y": 104.0,
-  "z": 149.8,
+  "z": 21.8,
   "gecerli": true
  },
  {

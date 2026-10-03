@@ -17,6 +17,11 @@ BILYE_MALZEME = {
     "Pirinc":    dict(rho=8500.0),
     "Kursun":    dict(rho=11340.0),
     "Tungsten":  dict(rho=18000.0),
+    # ELDEKI BILYE: O8 mm olculdu, 4 g tartildi -> 14921 kg/m3.
+    # Kursundan agir, tungstenden hafif: muhtemelen tungsten alasimi,
+    # ya da cap/kutle yaklasik olculmus. BALISTIKTE KUTLE belirleyicidir,
+    # o yuzden olculen 4 g'i esas aliyoruz.
+    "Eldeki_O8":  dict(rho=14921.0),
 }
 
 # Ag ipligi: E_eff = orgulu ipin efektif elastik modulu (ham lif degil)
