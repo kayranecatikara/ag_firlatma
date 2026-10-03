@@ -99,3 +99,68 @@ Sonucu söyle, çıkış hızını ve pencereyi ona göre yeniden hesaplayayım.
 * Ø8 bilyenin gerçek kütlesi (hassas tartım)
 * Ø13 bandın Gmod'u (çekme testi)
 * 12 bilye için kapsül yuvaları yeniden çizilecek (2 bilye derinliği)
+
+
+---
+
+# EK — "SADECE ELDEKİ İPİ KULLAN" KARARI
+
+Kullanıcı: *ince ip almayalım, elimizdeki tek ip bu. Ağı küçültelim,
+gözü açalım, iplik yoğunluğunu azaltalım.*
+
+Yapıldı. 0.60 mm iple **ağ çapı ve göz aralığı** tarandı (bilye 2×4 g,
+koni açısı da birlikte optimize edildi).
+
+## Pervane garantisi korunarak (göz ≤ 220 mm < pervane Ø230)
+
+| çap | göz | α | iplik | ağ | R_tepe | PENCERE | genişlik |
+|---|---|---|---|---|---|---|---|
+| Ø2.2 | 200 | 25° | 38.0 m | 10.43 g | 0.938 | 1.80 – 2.30 | 0.50 |
+| Ø2.0 | 220 | 25° | 29.6 m | 8.12 g | 0.971 | 1.42 – 2.24 | 0.82 |
+| **Ø1.8** | **220** | **25°** | **25.8 m** | **7.08 g** | **1.039** | **2.02 – 2.32** | **0.30** |
+| Ø1.8 | 200 | 25° | 26.4 m | 7.25 g | 1.033 | 1.68 – 2.02 | 0.34 |
+| Ø2.0 | 200 | 30° | 32.0 m | 8.77 g | 1.106 | 0.52 – 1.84 | 1.32 |
+
+### Seçim: Ø1.8 m · göz 220 mm · α 25°
+```
+iplik      : 25.8 m   (elinde 90 m -> 64 m artar)
+bağ        : 65 adet  (~1.1 saat el emeği)   [eskiden 142 bağ / 2.5 saat]
+ağ kütlesi : 7.08 g
+uçan kütle : 87 g   (ağ 7 + bilye 48 + kapsül 32)
+v_eksenel  : 26.4 m/s
+R_tepe     : 1.039 m   (gereken 0.859 — %21 pay)
+PENCERE    : 2.02 – 2.32 m
+```
+
+## ⚠️ İKİ ÖDÜN — bilerek kabul ediliyor
+
+**1. Menzil 5.78 → 2.32 m.**
+0.60 mm ipin sürüklemesi aşılamıyor. Daha önce ölçülmüştü: bilyeyi 24 g'a
+çıkarsan bile pencere 1.8 m'yi geçmiyordu. Ağı küçültüp seyreltmek
+2.32 m'ye kadar çıkardı — **bu ipin fiziksel tavanı.**
+İnce ip (0.165 mm) alınırsa 5.78 m'ye çıkar.
+
+**2. Pervane payı %22 → %4.**
+Göz 220 mm, pervane Ø230 mm. Pervane gözün tam ortasına denk gelirse
+diske giren ip uzunluğu yalnızca ~67 mm (göz 200'de 143 mm idi).
+Gazebo ölçümü ağın süpürülürken onlarca ip geçirdiğini göstermişti, ama
+bu pay artık ince.
+
+> **Göz 200 mm'de kalmak istersen:** pencere 1.68 – 2.02 m'ye düşer
+> (0.30 m daha yakın) ama pervane payı %13 olur. Menzil mi güvence mi —
+> senin kararın.
+
+## Ne değişti, ne değişmedi
+
+| | önce | şimdi |
+|---|---|---|
+| ağ çapı | Ø2.6 m | **Ø1.8 m** |
+| göz | 200 mm | **220 mm** |
+| iplik | 45 m (0.165 mm) | **25.8 m (0.60 mm)** |
+| bağ / emek | 142 / 2.5 sa | **65 / 1.1 sa** |
+| koni açısı | 13° | **25°** |
+| bilye | 6 × 12.16 g | **12 × 4 g** (yuva başına 2) |
+| pencere | 3.56 – 6.54 m | **2.02 – 2.32 m** |
+
+**Kapsül yeniden çizilecek:** yuva açısı 13° → 25°, her yuva 2 × Ø8
+bilye alacak derinlikte.
