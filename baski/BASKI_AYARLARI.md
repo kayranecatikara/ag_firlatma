@@ -9,18 +9,20 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 
 ---
 
-> **İKİ KAPSÜL VAR — BİRİNİ SEÇ (ya da ikisini de bas, karşılaştır).**
-> Namlu ve diğer parçalar ortak.
+> **KAPSÜL: `02` BAS. `02b` DENEYSEL — ÖNERİLMİYOR.**
 >
 > | | `02_kapsul` | `02b_kapsul_hazneli` |
 > |---|---|---|
-> | Ağ nerede | **namluda**, kapsülün önünde | **kapsülün içinde** |
-> | Ağ çıkışı | gerekmiyor (başlık masif) | Ø10.8 (92 mm²) |
-> | Kapsül kütlesi | 51.4 g | **44.3 g** |
-> | Mesafe (0.45 MPa) | 0.73–0.95 m | **0.78–0.97 m** |
-> | Risk | ağ namluda serbest — ön kapak şart | ipin Ø10.8'den geçmesi |
+> | Ağ nerede | **namluda**, kapsülün önünde | kapsülün içinde |
+> | Ağ çıkış kesiti | gerekmiyor (başlık masif) | **sadece 92 mm² = Ø10.8** |
+> | Ağızın açık oranı | — | **%6.5** |
+> | Kapsül kütlesi | 51.4 g | 44.3 g |
+> | Mesafe (0.45 MPa) | 0.73–0.95 m | 0.78–0.97 m |
 >
-> İkisi de **AĞIZ YUKARI** basılır. Ayrıntı: `out/V1_4_AG_YERI.md`.
+> 6 boncuk yuvası ağız çevresinde **72 mm** yer istiyor (küçültülemez) ve
+> R13.4'te çevrenin %86'sını kaplıyor. Ø43.4 namluda 92 mm²'den fazlası
+> **mümkün değil**. 39 m ipin Ø10.8'den geçmesi beklenmemeli.
+> `02b` sadece karşılaştırma için duruyor. Ayrıntı: `out/V1_4_AG_YERI.md`.
 
 ## 1. PARÇA LİSTESİ
 

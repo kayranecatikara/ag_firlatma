@@ -141,14 +141,40 @@ masif, amaçlandığı gibi.)
 | Mesafe (0.45 MPa) | 0.73–0.95 m | **0.78–0.97 m** |
 | Ön kapak | **şart** | gerekmez |
 
-**02b menzilde ve kütlede daha iyi** (başlık masif olmadığı için hafif).
-Tek belirsizlik: **39 m ipin Ø10.8 delikten sıkışmadan geçip geçmeyeceği.**
-Bunu hesapla çözemem — testin cevaplayacağı soru bu.
+## DÜZELTME: 02b ÖNERİLMİYOR
+
+Render karşılaştırması gösterdi ki 02b'nin ağzı da pratikte kapalı:
+92 mm², yani **1425 mm²'lik ağzın %6.5'i**. "Ağ çıkışı" demek yanıltıcı.
+
+**Neden daha iyisi yapılamıyor:** 6 boncuk yuvası ağız çevresinde
+**72 mm** yer istiyor (Ø9.2 bore + 2×1.4 cidar, küçültülemez).
+
+| R_pitch | çevre | yuvaların kapladığı |
+|---|---|---|
+| 12.0 | 75.4 mm | %95 |
+| **13.4** (sınır) | 84.2 mm | **%86** |
+| 17.8 | 111.8 mm | %64 |
+
+R_pitch'i büyütmek kapsülü büyütmeyi gerektiriyor. **Ø43.4 namluda
+92 mm² mutlak tavandır.**
+
+### Ağ gerçekten kapsülün içinde olacaksa namlu büyümeli
+
+Merkezde Ø20 (314 mm²) ve omuzda 250 mm² için:
+
+| | şimdi | gerekli |
+|---|---|---|
+| R_pitch | 13.4 | **17.8** |
+| Kapsül çapı | Ø42.6 | **Ø53.3** |
+| Namlu iç çapı | Ø43.4 | **Ø54.1** |
+| Namlu dış çapı | Ø55.4 | ~Ø66 |
+
+Bu, namlunun ve tüm fırlatıcının yeniden boyutlandırılması demek.
 
 ## Önerim
 
-İkisini de bas (ek 44 g filament), **aynı namluyla sırayla dene.**
-- `02b` çalışırsa onu kullan: daha hafif, daha uzak, ön kapak derdi yok.
-- İp sıkışırsa `02`'ye geç: ağ namluda bol bol yer buluyor.
+**`02` bas.** `02b` sadece karşılaştırma için dursun — ağ oradan geçmez.
+Ağı kapsül içinde isteyen bir sürüm gerçekten gerekiyorsa, doğru yol
+namluyu Ø54'e büyütmek; söyle, o varyantı kurayım.
 
-Her iki denemede de test merdivenine uy: ilk atış **1 bant + 40 mm çekiş**.
+Test merdivenine uy: ilk atış **1 bant + 40 mm çekiş**.
