@@ -26,6 +26,12 @@ P = dict(
     D_bore=43.4, t_duvar=6.0, bosluk=0.30, arka=5.0,
     ALFA=19.0, koni_acisi=21.0, D_bilye=12.7, D_yuva=12.9, R_pitch=13.5,
     derinlik=4.2, n_boncuk=3,
+    t_yuva=1.4,            # boncuk yuvasi boru cidari
+    lip_dar=0.8,           # agizdaki daralma (boncugu tutan dudak)
+    lip_boy=1.2,           # dudagin boyu
+    d_ip_delik=3.0,        # yuva tabanindan hazneye ip deligi
+    r_ag_cikis=12.0,       # baslikdaki ag gecisi yaricapi
+    h_hazne_koni=12.0,     # hazne -> baslik koni boyu
     # DURDURMA OMUZU (geri geldi): kapsulun halka kenari namlu agzindaki
     # ice cikintiya oturur. Capraz pimin yarik ucuna carpmasindan 4.6x
     # daha genis temas alani. Boncuk cemberi kuculmeden ANLAMSIZDIR.
@@ -241,24 +247,65 @@ def tamponlar(p):
 
 
 def kapsul(p, y0):
+    """KAPSUL — v1.3.
+
+    Ilk baskidan gelen uc duzeltme:
+      1. Yuva dipleri ACIKTI: ag cikis konisi yuvalarin tabanini yiyordu,
+         boncuklar hazneye dusuyordu. Artik her yuvanin etrafina BORU
+         fuzelenip tabani KAPATILIYOR; sadece O3 ip deligi kaliyor.
+      2. Boncugu tutan dudak: yuva agzinda hafif daralma (D_yuva - lip_dar).
+         Elde dururken boncuk dusmez; atista 4 g x ~50000 g atalet kuvveti
+         (~2000 N) dudagi kolayca gecer.
+      3. Hazne -> baslik gecisi KONI: basamak yok (ag takilmiyor) ve kapsul
+         AGIZ YUKARI basildiginda tavan kalmiyor (destek gerekmiyor).
+    """
     Rk = Rb - p["bosluk"] / 2; Rh = Rk - p["t_govde"]
     L = p["L_kapsul"]; a = math.radians(p["ALFA"])
+    t_k = p["t_kapak"]; y_kap = L - t_k            # baslik dibi
+    r_cap = p["r_ag_cikis"]                        # baslikdaki ag gecisi
+    h_koni = p["h_hazne_koni"]
+
     g = sil(Rk, L, V(0, 0, 0), V(0, 1, 0))
-    g = g.cut(sil(Rh, p["L_hazne"], V(0, p["t_arka_blok"], 0), V(0, 1, 0)))
+    # --- hazne: silindir + KONI (basamaksiz, agiz yukari kendini tasir) ---
+    y_sil = p["t_arka_blok"]
+    y_kon = y_kap - h_koni
+    g = g.cut(sil(Rh, y_kon - y_sil, V(0, y_sil, 0), V(0, 1, 0)))
+    g = g.cut(Part.makeCone(Rh, r_cap, h_koni, V(0, y_kon, 0), V(0, 1, 0)))
+    # --- baslikta ag gecisi (duz delik, koninin devami) ---
+    g = g.cut(sil(r_cap, t_k + 1, V(0, y_kap, 0), V(0, 1, 0)))
+    # --- tutma kanali + capraz pim deligi ---
     g = g.cut(sil(Rk + 4, p["kanal_w"], V(0, p["kanal_y0"], 0), V(0, 1, 0)).cut(
         sil(Rk - p["kanal_d"], p["kanal_w"] + 2, V(0, p["kanal_y0"] - 1, 0), V(0, 1, 0))))
     g = g.cut(sil(p["d_capraz"] / 2 + 0.05, 2 * Rk + 4, V(0, p["y_capraz"], -(Rk + 2)),
                   V(0, 0, 1)))
+
+    # --- 6 BONCUK YUVASI: once BORU fuzele, sonra ic bosalt ---
+    rp, dy, der = p["R_pitch"], p["D_yuva"], p["derinlik"]
+    r_boru = dy / 2 + p["t_yuva"]
     for i in range(6):
         th = math.radians(60 * i)
         ur = V(math.cos(th), 0, math.sin(th))
         eks = V(ur.x * math.sin(a), math.cos(a), ur.z * math.sin(a))
-        taban = V(ur.x * p["R_pitch"], L, ur.z * p["R_pitch"]) - eks * p["derinlik"]
-        g = g.cut(Part.makeSphere(p["D_yuva"] / 2, taban).fuse(
-            sil(p["D_yuva"] / 2, p["derinlik"] + 8, taban, eks)))
-    # ag cikis agzi: bilye yuvalarinin icinden, kenari pahli (ag takilmasin)
-    g = g.cut(Part.makeCone(Rh * 0.60, Rh * 0.72, p["t_kapak"] + 0.2,
-                            V(0, L - p["t_kapak"] - 0.1, 0), V(0, 1, 0)))
+        agiz = V(ur.x * rp, L, ur.z * rp)
+        taban = agiz - eks * der
+        # boru: tabandan agza; dis yuzu hazne cidarina degip birlesir
+        g = g.fuse(sil(r_boru, der + p["t_yuva"] + 2,
+                       taban - eks * p["t_yuva"], eks))
+    g = g.cut(sil(Rk, 20, V(0, L, 0), V(0, 1, 0)))      # agzi duzelt
+    for i in range(6):
+        th = math.radians(60 * i)
+        ur = V(math.cos(th), 0, math.sin(th))
+        eks = V(ur.x * math.sin(a), math.cos(a), ur.z * math.sin(a))
+        agiz = V(ur.x * rp, L, ur.z * rp)
+        taban = agiz - eks * der
+        # yuva bosluğu: DUZ tabanli silindir. Kure oturak boru cidarini
+        # delip tabani aciyordu (ilk baskida boncuklar hazneye dusuyordu).
+        lip = p["lip_boy"]
+        g = g.cut(sil(dy / 2, der - lip, taban, eks))
+        # TUTMA DUDAGI: agizda daralmis kisa delik
+        g = g.cut(sil((dy - p["lip_dar"]) / 2, lip + 2, agiz - eks * lip, eks))
+        # ip deligi: tabandan hazneye
+        g = g.cut(sil(p["d_ip_delik"] / 2, der + 14, taban, -eks))
     g = g.removeSplitter(); g.translate(V(0, y0, 0))
     return g
 

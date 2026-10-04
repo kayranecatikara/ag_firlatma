@@ -90,7 +90,11 @@ if __name__ == "__main__":
         #  Baslik ayrildigi icin O104 kulaklar artik HAVADA KALMIYOR.
         "01a_namlu_govde":     (M.namlu_bol(P)[0], "PETG",  1, ((1,0,0), -90)),
         "01b_agiz_basligi":    (M.namlu_bol(P)[1], "PETG",  1, ((1,0,0), -90)),
-        "02_kapsul":           (M.kapsul(P, yk), "PETG",    1, ((1,0,0), -90)),
+        # KAPSUL AGIZ YUKARI (+90). Agiz asagi basildiginda hazne tavani
+        # duz bir Ø36.6 kapaniyordu -> ic destek -> ag o desteklere
+        # takiliyordu. Agiz yukari basilinca tavan hic yok; hazne->baslik
+        # gecisi de koni oldugu icin basamak/cikinti kalmiyor.
+        "02_kapsul":           (M.kapsul(P, yk), "PETG",    1, ((1,0,0),  90)),
         # tetik kapaklari: CAD'de eksen +-X -> Y etrafinda 90 ile DUZ yatar
         "03_tetik_kapagi_sag": (k1,              "PETG",    1, ((0,1,0),  90)),
         "04_tetik_kapagi_sol": (k2,              "PETG",    1, ((0,1,0),  90)),

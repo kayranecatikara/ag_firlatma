@@ -12,14 +12,15 @@ ve ilgili dokümanlar.
 |---|---|---|---|---|---|---|---|---|---|
 | [v1](v1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 15.5 | çapraz pim, 96 mm² | 0.80–0.98 m | ilk test |
 | [v1.1](v1.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **12.0** | **omuz, 303 mm²** | 0.79–0.97 m | basıldı |
-| [**v1.2**](v1.2/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 270 mm² | 0.79–0.97 m | **güncel** |
+| [v1.2](v1.2/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 270 mm² | 0.79–0.97 m | basıldı |
+| [**v1.3**](v1.3/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.78–0.97 m | **güncel** |
 | [v2](v2/SURUM.md) | 255.2 mm | 170 mm | 56.7 mm | 35° | 70 mm | 15.5 | çapraz pim, 96 mm² | 1.13–1.34 m | beklemede |
 
 \* Gmod 0.45 MPa varsayımıyla, 2 bant. Bant sertliği **hâlâ ölçülmedi** —
 her versiyonun `dok/` klasöründeki tabloda 0.25–0.65 MPa aralığı var.
 
-Ortak: ağ Ø2.2 m · kare göz 220 mm · Dyneema Ø0.60 mm · 6 × Ø9 mm kurşun
-boncuk (24 g) · namlu iç çap Ø43.4 mm · bant Ø13/iç Ø4 · bant ankrajı
+Ortak: ağ Ø2.2 m · kare göz 220 mm · Dyneema Ø0.60 mm · 6 × **Ø8.80 mm**
+kurşun boncuk (24 g, kumpasla ölçüldü) · namlu iç çap Ø43.4 mm · bant **Ø13.59** · bant ankrajı
 Ø14 delik + delen pim.
 
 ## Neler değişti
@@ -37,6 +38,15 @@ boşluk 0.30 → **0.80 mm** (yan başına 0.40; FDM'de Ø43 delik için 0.15 ç
 Bant ankrajındaki ön yüz oluğu kulağı zayıflatıyordu ve pim hiçbir yere
 kenetlenmiyordu: yerine kulağın bir yan duvarından girip bandı delen ve
 **karşı duvardaki deliğe oturan Ø4 enine pim** kondu. Ayrıntı: `v1.2/dok/V1_2.md`.
+
+**v1.2 → v1.3 — ölçümler + kapsül içi.** Boncuk kumpasla **Ø8.80 mm / 4 g**,
+bant **Ø13.59 mm** ölçüldü (eski varsayımlar Ø9.0 ve Ø13.0 idi). Kapsülde
+üç sorun düzeltildi: ağ çıkış konisi **boncuk yuvalarının tabanını yiyordu**
+(boncuklar hazneye düşüyordu) → her yuvanın etrafına boru füzelenip tabanı
+kapatıldı, sadece Ø3 ip deliği kaldı; yuva ağzına **tutma dudağı** (Ø8.40 <
+boncuk Ø8.80) eklendi; hazne→başlık geçişi **koni** yapıldı ve kapsül
+**ağız yukarı** basılacak şekilde çevrildi — iç destek ve basamak kalmadı.
+Bant ölçüm yöntemi: `v1.3/dok/BANT_OLCUMU.md`.
 
 **v1 → v2 — uzun namlu + uzun bant.** λ sabit tutulunca kurma kuvveti strok'tan
 bağımsız kalıyor (ikisi de 426 N), ama depolanan enerji bant hacmiyle 2.75×

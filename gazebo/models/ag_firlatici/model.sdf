@@ -19,8 +19,8 @@
     <link name="namlu">
       <inertial>
         <pose>0.07492 0.00000 0.00000 0 0 0</pose>
-        <mass>0.21030</mass>
-        <inertia><ixx>1.302e-04</ixx><iyy>4.585e-04</iyy><izz>4.585e-04</izz>
+        <mass>0.21109</mass>
+        <inertia><ixx>1.307e-04</ixx><iyy>4.603e-04</iyy><izz>4.603e-04</izz>
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
       </inertial>
       <visual name="v_namlu">
@@ -46,8 +46,8 @@
       <pose>0.02750 0 0 0 0 0</pose>
       <inertial>
         <pose>0.00000 0.00000 0.00000 0 0 0</pose>
-        <mass>0.08568</mass>
-        <inertia><ixx>1.990e-05</ixx><iyy>2.441e-05</iyy><izz>2.441e-05</izz>
+        <mass>0.09627</mass>
+        <inertia><ixx>2.235e-05</ixx><iyy>2.742e-05</iyy><izz>2.742e-05</izz>
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
       </inertial>
       <visual name="v_kapsul">
