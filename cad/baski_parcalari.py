@@ -95,6 +95,9 @@ if __name__ == "__main__":
         # takiliyordu. Agiz yukari basilinca tavan hic yok; hazne->baslik
         # gecisi de koni oldugu icin basamak/cikinti kalmiyor.
         "02_kapsul":           (M.kapsul(P, yk), "PETG",    1, ((1,0,0),  90)),
+        # ALTERNATIF: agi KAPSUL ICINDE tasiyan varyant (ana surum degil).
+        # Ikisinden birini bas; namlu ve diger parcalar ortak.
+        "02b_kapsul_hazneli":  (M.kapsul_hazneli(P, yk), "PETG", 1, ((1,0,0), 90)),
         # tetik kapaklari: CAD'de eksen +-X -> Y etrafinda 90 ile DUZ yatar
         "03_tetik_kapagi_sag": (k1,              "PETG",    1, ((0,1,0),  90)),
         "04_tetik_kapagi_sol": (k2,              "PETG",    1, ((0,1,0),  90)),
@@ -110,7 +113,7 @@ if __name__ == "__main__":
     # dolgu/duvar dahil gercek filament tahmini
     YOGUNLUK = {"PETG": 1.27, "TPU 95A": 1.21}
     DOLU_ORAN = {"01a_namlu_govde": 0.77, "01b_agiz_basligi": 0.80,
-                 "02_kapsul": 0.82, "03_tetik_kapagi_sag": 1.0,
+                 "02_kapsul": 0.82, "02b_kapsul_hazneli": 0.82, "03_tetik_kapagi_sag": 1.0,
                  "04_tetik_kapagi_sol": 1.0, "05_servo_makarasi": 1.0,
                  "06_toz_kapagi": 0.55, "07_tampon_ust": 0.45,
                  "08_tampon_alt": 0.45, "10_omuz_halkasi": 1.0}

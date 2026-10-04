@@ -30,7 +30,7 @@ P = dict(
     lip_dar=0.8,           # agizdaki daralma (boncugu tutan dudak)
     lip_boy=1.2,           # dudagin boyu
     d_ip_delik=3.0,        # yuva tabanindan hazneye ip deligi
-    r_ag_cikis=12.0,       # baslikdaki ag gecisi yaricapi
+    R_pitch_hazneli=13.4,  # 02b varyanti: bolum dairesi en disa itildi
     h_hazne_koni=12.0,     # hazne -> baslik koni boyu
     # DURDURMA OMUZU (geri geldi): kapsulun halka kenari namlu agzindaki
     # ice cikintiya oturur. Capraz pimin yarik ucuna carpmasindan 4.6x
@@ -312,6 +312,60 @@ def kapsul(p, y0):
     return g
 
 
+def kapsul_hazneli(p, y0):
+    """KAPSUL — HAZNELI VARYANT (02b). Ag KAPSULUN ICINDE.
+
+    v1.4'teki kapsul agi NAMLUDA tasir; bu varyant agi iceride tutar.
+    Boncuk duzeltmeleri (kapali yuva dibi, tutma dudagi, ip deligi) aynen
+    burada da var — tek fark haznenin ve merkezi ag cikisinin olmasi.
+
+    TAKAS (olculdu): 6 boncuk borusu 40 derece egimli oldugu icin agiz
+    duzleminde elips kesit verir (radyal yari-eksen 7.83 mm). Bolum dairesi
+    kapsul cidarinin izin verdigi EN DISA, R13.4'e itildi; o noktada borunun
+    dis kenari 21.23 (cidar 21.30) ve merkezde aga 97 mm2 (O11.1) kaliyor.
+    v1.3'teki 55 mm2'nin 1.8 kati, ama yine de 39 m ip icin DAR.
+    Bu yuzden v1.4 (ag namluda) ana surum; bu varyant karsilastirma icin.
+    """
+    Rk = Rb - p["bosluk"] / 2; Rh = Rk - p["t_govde"]
+    L = p["L_kapsul"]; a = math.radians(p["ALFA"])
+    t_k = p["t_kapak"]; y_kap = L - t_k
+    rp = p["R_pitch_hazneli"]
+    dy, der = p["D_yuva"], p["derinlik"]
+    r_cap = rp - (dy / 2 + p["t_yuva"]) / math.cos(a)      # merkezi ag gecisi
+    h_koni = p["h_hazne_koni"]
+
+    g = sil(Rk, L, V(0, 0, 0), V(0, 1, 0))
+    y_sil = p["t_arka_blok"]; y_kon = y_kap - h_koni
+    g = g.cut(sil(Rh, y_kon - y_sil, V(0, y_sil, 0), V(0, 1, 0)))
+    g = g.cut(Part.makeCone(Rh, r_cap, h_koni, V(0, y_kon, 0), V(0, 1, 0)))
+    g = g.cut(sil(r_cap, t_k + 1, V(0, y_kap, 0), V(0, 1, 0)))
+    g = g.cut(sil(Rk + 4, p["kanal_w"], V(0, p["kanal_y0"], 0), V(0, 1, 0)).cut(
+        sil(Rk - p["kanal_d"], p["kanal_w"] + 2, V(0, p["kanal_y0"] - 1, 0), V(0, 1, 0))))
+    g = g.cut(sil(p["d_capraz"] / 2 + 0.05, 2 * Rk + 4, V(0, p["y_capraz"], -(Rk + 2)),
+                  V(0, 0, 1)))
+
+    r_boru = dy / 2 + p["t_yuva"]
+    for i in range(6):
+        th = math.radians(60 * i)
+        ur = V(math.cos(th), 0, math.sin(th))
+        eks = V(ur.x * math.sin(a), math.cos(a), ur.z * math.sin(a))
+        taban = V(ur.x * rp, L, ur.z * rp) - eks * der
+        g = g.fuse(sil(r_boru, der + p["t_yuva"] + 2, taban - eks * p["t_yuva"], eks))
+    g = g.cut(sil(Rk, 20, V(0, L, 0), V(0, 1, 0)))
+    for i in range(6):
+        th = math.radians(60 * i)
+        ur = V(math.cos(th), 0, math.sin(th))
+        eks = V(ur.x * math.sin(a), math.cos(a), ur.z * math.sin(a))
+        agiz = V(ur.x * rp, L, ur.z * rp)
+        taban = agiz - eks * der
+        lip = p["lip_boy"]
+        g = g.cut(sil(dy / 2, der - lip, taban, eks))
+        g = g.cut(sil((dy - p["lip_dar"]) / 2, lip + 2, agiz - eks * lip, eks))
+        g = g.cut(sil(p["d_ip_delik"] / 2, der + 14, taban, -eks))
+    g = g.removeSplitter(); g.translate(V(0, y0, 0))
+    return g
+
+
 def bilyeler(p, y0):
     """18 x O9 boncuk: yuva basina 3 tane, HEPSI AYNI IPE dizili.
     Oncu boncuk egik yuvada; arkadaki 2 tanesi hazne icinde ayni eksende.
@@ -382,6 +436,7 @@ if __name__ == "__main__":
     k1, k2 = tetik_kapaklari(P); t1, t2 = tetik_pimleri(P)
     tp1, tp2 = tamponlar(P); bs = bantlar(P)
     parcalar = {"V4_namlu": namlu(P), "V4_kapsul": kapsul(P, yk),
+                "V4_kapsul_hazneli": kapsul_hazneli(P, yk),
                 "V4_bilye": bilyeler(P, yk), "V4_capraz_pim": capraz_pim(P),
                 **{f"V4_bant_{i+1}": sh for i, sh in enumerate(bs)},
                 "V4_pim_sag": t1, "V4_pim_sol": t2,

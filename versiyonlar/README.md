@@ -14,7 +14,8 @@ ve ilgili dokümanlar.
 | [v1.1](v1.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **12.0** | **omuz, 303 mm²** | 0.79–0.97 m | basıldı |
 | [v1.2](v1.2/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 270 mm² | 0.79–0.97 m | basıldı |
 | [v1.3](v1.3/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.78–0.97 m | ağ çıkamıyordu |
-| [**v1.4**](v1.4/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.73–0.95 m | **güncel** |
+| [v1.4](v1.4/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.73–0.95 m | ağ namluda |
+| [**v1.5**](v1.5/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 / 13.4 | omuz, 282 mm² | 0.73–0.97 m | **güncel — iki kapsül** |
 | [v2](v2/SURUM.md) | 255.2 mm | 170 mm | 56.7 mm | 35° | 70 mm | 15.5 | çapraz pim, 96 mm² | 1.13–1.34 m | beklemede |
 
 \* Gmod 0.45 MPa varsayımıyla, 2 bant. Bant sertliği **hâlâ ölçülmedi** —
@@ -57,6 +58,14 @@ ve orada bile merkez 62 mm². **Durdurma omzu ile merkezi ağ çıkışı bir ar
 olamaz.** Çözüm: ağ kapsülün değil, namlunun içinde, kapsülün önünde duruyor;
 kapsül piston. Ağ hacmi 22.1 → **134.6 cm³**, doluluk %75 → **%8**. Başlık
 masifleşti (kapsül 43.8 → 51.4 g, mesafe −0.02 m). Ayrıntı: `v1.4/dok/V1_4_AG_YERI.md`.
+
+**v1.4 → v1.5 — iki kapsül.** Ağı içeride taşıyan varyant (`02b_kapsul_hazneli`)
+da üretildi; boncuk düzeltmeleri ikisinde de aynı. Ağ çıkışını büyütmek için
+boncuk bölüm dairesi cidarın izin verdiği en dışa itildi (R12.0 → 13.4):
+merkezi bağlı boş alan 55 → **92 mm² (Ø10.8)**, 1.7×. Namlu başlığı
+değişmiyor (boncuk dış kenarı 17.80 < koni 19.08), yani **aynı namlu ikisiyle
+de çalışır**. 02b daha hafif (44.3 vs 51.4 g) ve biraz daha uzak; tek
+belirsizlik 39 m ipin Ø10.8'den geçip geçmeyeceği — test edilecek.
 
 **v1 → v2 — uzun namlu + uzun bant.** λ sabit tutulunca kurma kuvveti strok'tan
 bağımsız kalıyor (ikisi de 426 N), ama depolanan enerji bant hacmiyle 2.75×
