@@ -37,3 +37,6 @@ Thumbs.db
 
 # web/: ara STL dosyalari regenere edilebilir (cad/web_geometri.py)
 web/geo/*.stl
+
+# Claude Code yerel ayarlari
+.claude/
