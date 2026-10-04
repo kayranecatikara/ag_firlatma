@@ -28,6 +28,8 @@ P = dict(
     derinlik=4.2, n_boncuk=3,
     t_yuva=1.4,            # boncuk yuvasi boru cidari
     t_ara=0.8,             # merkezi gecis ile boru arasi cidar
+    d_kurma=4.5,           # elle kurma pimi deligi (O4 pim)
+    y_kurma=12.3,          # kapsul yerel y; capraz pim ile hazne arasinin ortasi
     h_takoz=12.0,          # durdurma takozunun radyal yuksekligi
     w_takoz=5.0,           # takozun yarik disina tasmasi (her yan)
     L_takoz=16.0,          # takozun eksenel boyu
@@ -381,6 +383,15 @@ def kapsul_hazneli(p, y0):
         sil(Rk - p["kanal_d"], p["kanal_w"] + 2, V(0, p["kanal_y0"] - 1, 0), V(0, 1, 0))))
     g = g.cut(sil(p["d_capraz"] / 2 + 0.05, 2 * Rk + 4, V(0, p["y_capraz"], -(Rk + 2)),
                   V(0, 0, 1)))
+    # ELLE KURMA DELIGI: ilk testlerde kapsulu geri cekmek icin buraya pim
+    # sokulur. Capraz pim deligi Z ekseninde, tetik pimleri X ekseninde —
+    # bu yuzden delik ARALARINA, 45 derece azimuta konuldu; boylece hicbiriyle
+    # cakismiyor. Yerel y: capraz pim deligi 8.55'te biter, hazne 16'da
+    # baslar; delik bu 7.45 mm'lik bandin ortasina oturur.
+    dk = p["d_kurma"]; yk2 = p["y_kurma"]
+    u45 = V(math.cos(math.radians(45)), 0, math.sin(math.radians(45)))
+    g = g.cut(sil(dk / 2, 2 * Rk + 6,
+                  V(-u45.x * (Rk + 3), yk2, -u45.z * (Rk + 3)), u45))
 
     for i in range(6):
         th = math.radians(60 * i)

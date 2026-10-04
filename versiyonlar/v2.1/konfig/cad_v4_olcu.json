@@ -1,6 +1,6 @@
 {
  "STROK": 91.0,
- "L_hazne": 20.0,
+ "L_hazne": 16.0,
  "H": 14.0,
  "lam": 4.0,
  "bant_OD": 13.59,
@@ -18,10 +18,13 @@
  "n_boncuk": 1,
  "t_yuva": 1.4,
  "t_ara": 1.0,
+ "d_kurma": 4.5,
+ "y_kurma": 12.3,
  "h_takoz": 12.0,
  "w_takoz": 5.0,
  "L_takoz": 16.0,
- "t_pad": 3.0,
+ "t_pad": 5.0,
+ "t_pim_tavan": 2.0,
  "lip_dar": 1.0,
  "lip_boy": 1.2,
  "d_ip_delik": 3.0,
@@ -74,10 +77,10 @@
  "r_ag_cikis": 7.0,
  "L0": 30.333333333333332,
  "D_son": 44.33333333333333,
- "L_kapsul": 45.0,
+ "L_kapsul": 41.0,
  "y_capraz0": 9.5,
  "y_capraz1": 100.5,
  "y_ankraj": 144.83333333333331,
  "L_namlu": 149.83333333333331,
- "y_yuz_dur": 141.0
+ "y_yuz_dur": 137.0
 }

@@ -34,7 +34,7 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 |---|---|---|---|---|---|
 | `01a_namlu_govde` | Namlu gövdesi (arka parça) | 1 | **PETG** | 100 × 91 × **140.7** | ~153.5 g |
 | `01b_agiz_basligi` | Ağız başlığı (ıraksak koni) | 1 | **PETG** | 80 × 116 × **16.8** | ~40.4 g |
-| `02_kapsul` | Kapsül | 1 | **PETG** | 54 × 54 × **41.0** | ~43.6 g |
+| `02_kapsul` | Kapsül | 1 | **PETG** | 54 × 54 × **41.0** | ~43.5 g |
 | `03_tetik_kapagi_sag` | Tetik kartuş kapağı (sağ) | 1 | **PETG** | 18 × 18 × **3.0** | ~0.9 g |
 | `04_tetik_kapagi_sol` | Tetik kartuş kapağı (sol) | 1 | **PETG** | 18 × 18 × **3.0** | ~0.9 g |
 | `05_servo_makarasi` | Servo ip makarası | **2** | **PETG** | 10 × 10 × **6.4** | ~0.8 g |

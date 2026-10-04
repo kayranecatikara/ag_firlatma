@@ -1,14 +1,14 @@
 # Ag Firlatici Namlu — Malzeme Listesi (v2, lastik bant)
 
-Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O2.2 m altigen
+Namlu 149.8 mm · strok 91 mm · kapsul 41 mm · bant 2x O16/4 lateks x4 · ag O2.2 m altigen
 
 
 ## A. 3D BASKI
 
 | No | Parca | Adet | Malzeme / Ozellik | Olcu | Kutle [g] | Not |
 |---|---|---|---|---|---|---|
-| A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm | 202.5 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
-| A2 | Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi) | 1 | PETG | O43.1 x 45 mm, hazne O37.1 x 20 mm, yuva acisi 40 derece | 82.1 | Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu. |
+| A1 | Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil) | 1 | PETG (tercih ASA - UV'ye dayanikli) | O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm | 197.4 | Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez. |
+| A2 | Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi) | 1 | PETG | O43.1 x 41 mm, hazne O37.1 x 16 mm, yuva acisi 40 derece | 75.3 | Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu. |
 | A3 | Tetik kartus kapagi | 2 | PETG | O18 x 3 mm, ortada O2 ip deligi, 2x O2.2 vida deligi | 1.9 | %100 dolgu. |
 | A4 | Servo ip makarasi | 2 | PETG | O8 mm (r=4 mm) tambur, servo dislisine oturur, O1.5 ip deligi | 0.8 | Servonun kendi kol vidasiyla sabitlenir. |
 | A5 | Yarik sonu durdurma tamponu | 2 | TPU 95A | 6.2 x 3 x 7 mm | 0.5 | Yarik on ucuna CA ile yapistir. Kapsulun carpma yukunu yumusatir (~450 N). |
@@ -80,4 +80,4 @@ Namlu 149.8 mm · strok 91 mm · kapsul 45 mm · bant 2x O16/4 lateks x4 · ag O
 | H3 | Yedek bant seti | 1 | D1-D3 |  | 0.0 | Lateks yaslanir; testlerde surekli yedek bulundur. |
 | H4 | Yuksek hizli kamera (telefon 240 fps) | 1 |  |  | 0.0 | Yer atisinda acilma suresi/cap olcumu. |
 
-**Toplam (A-F, test ekipmani haric): ~523 g**
+**Toplam (A-F, test ekipmani haric): ~511 g**

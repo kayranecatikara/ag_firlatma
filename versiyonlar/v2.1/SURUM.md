@@ -1,6 +1,6 @@
-# V2.1 — boncuklar kapsülün kenarında · merkez Ø26.6 açık · durdurma takozu
+# V2.1 — boncuklar kenarda · merkez Ø26.6 · elle kurma deliği · ölçülen bant
 
-Dondurulma: 2026-10-04 · commit `9f177db`
+Dondurulma: 2026-10-04 · commit `0e240d6`
 
 ## Namlu / tahrik
 | | |
@@ -17,7 +17,7 @@ Dondurulma: 2026-10-04 · commit `9f177db`
 ## Kapsül / boncuk
 | | |
 |---|---|
-| Kapsül boyu | 45.0 mm |
+| Kapsül boyu | 41.0 mm |
 | Yuva eğimi | **40°** |
 | Yuva | Ø9.6 mm, derinlik 7.0, R_pitch 22.0 |
 | Namlu boşluğu | 0.80 mm (yan başına 0.40) |
