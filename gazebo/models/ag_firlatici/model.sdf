@@ -18,9 +18,9 @@
     <!-- ===== TASIYICI GOVDE (namlu + bantlar + tetik donanimi) ===== -->
     <link name="namlu">
       <inertial>
-        <pose>0.07492 0.00000 0.00000 0 0 0</pose>
-        <mass>0.21227</mass>
-        <inertia><ixx>1.314e-04</ixx><iyy>4.628e-04</iyy><izz>4.628e-04</izz>
+        <pose>0.12758 0.00000 0.00000 0 0 0</pose>
+        <mass>0.33241</mass>
+        <inertia><ixx>2.058e-04</ixx><iyy>1.906e-03</iyy><izz>1.906e-03</izz>
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
       </inertial>
       <visual name="v_namlu">
@@ -33,9 +33,9 @@
       <!-- Carpisma: STL yerine SILINDIR. Ucus simulasyonunda namlunun
            ic detayi gereksiz; silindir hem hizli hem kararli. -->
       <collision name="c_namlu">
-        <pose>0.07492 0 0 0 1.5708 0</pose>
+        <pose>0.12758 0 0 0 1.5708 0</pose>
         <geometry><cylinder><radius>0.02770</radius>
-          <length>0.14983</length></cylinder></geometry>
+          <length>0.25517</length></cylinder></geometry>
       </collision>
     </link>
 
@@ -43,15 +43,15 @@
          Dinlenmede strok sonunda; atista ileri kayip tamponlara carpar.
          Prizmatik eklem NAMLU EKSENINDE (+X). -->
     <link name="kapsul">
-      <pose>0.02750 0 0 0 0 0</pose>
+      <pose>0.04000 0 0 0 0 0</pose>
       <inertial>
         <pose>0.00000 0.00000 0.00000 0 0 0</pose>
-        <mass>0.08469</mass>
-        <inertia><ixx>1.967e-05</ixx><iyy>2.412e-05</iyy><izz>2.412e-05</izz>
+        <mass>0.09591</mass>
+        <inertia><ixx>2.227e-05</ixx><iyy>5.030e-05</iyy><izz>5.030e-05</izz>
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
       </inertial>
       <visual name="v_kapsul">
-        <pose>-0.02250 0 0 0 1.5708 0</pose>
+        <pose>-0.03500 0 0 0 1.5708 0</pose>
         <geometry><mesh><uri>model://ag_firlatici/meshes/kapsul.stl</uri>
           <scale>0.001 0.001 0.001</scale></mesh></geometry>
         <material><ambient>0.65 0.30 0.12 1</ambient>
@@ -61,13 +61,13 @@
     <joint name="kapsul_kayit" type="prismatic">
       <parent>namlu</parent><child>kapsul</child>
       <axis><xyz>1 0 0</xyz>
-        <limit><lower>0</lower><upper>0.0910</upper></limit>
+        <limit><lower>0</lower><upper>0.1700</upper></limit>
         <dynamics><damping>0.5</damping></dynamics></axis>
     </joint>
 
     <!-- ===== SERVOLAR (mikro, metal disli, ~14 g) ===== -->
     <link name="servo_sag">
-      <pose>0.07492 0.03570 0 0 0 0</pose>
+      <pose>0.12758 0.03570 0 0 0 0</pose>
       <inertial>
         <pose>0.00000 0.00000 0.00000 0 0 0</pose>
         <mass>0.01430</mass>
@@ -83,7 +83,7 @@
       <parent>namlu</parent><child>servo_sag</child>
     </joint>
     <link name="servo_sol">
-      <pose>0.07492 -0.03570 0 0 0 0</pose>
+      <pose>0.12758 -0.03570 0 0 0 0</pose>
       <inertial>
         <pose>0.00000 0.00000 0.00000 0 0 0</pose>
         <mass>0.01430</mass>
@@ -103,11 +103,11 @@
          Kendi govdene baglarken BU cerceveyi referans al.
          Namlu ortasi, ust yuzey. -->
     <frame name="montaj" attached_to="namlu">
-      <pose>0.07492 0 0.02770 0 0 0</pose>
+      <pose>0.12758 0 0.02770 0 0 0</pose>
     </frame>
     <!-- Agiz ucu: ag buradan cikar; tetikleme mesafesi buradan olculur -->
     <frame name="agiz" attached_to="namlu">
-      <pose>0.14983 0 0 0 0 0</pose>
+      <pose>0.25517 0 0 0 0 0</pose>
     </frame>
 
   </model>

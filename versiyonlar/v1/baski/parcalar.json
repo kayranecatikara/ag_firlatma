@@ -1,0 +1,101 @@
+[
+ {
+  "ad": "01a_namlu_govde",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 122.59,
+  "filament_g": 119.9,
+  "x": 88.4,
+  "y": 55.4,
+  "z": 142.0,
+  "gecerli": true
+ },
+ {
+  "ad": "01b_agiz_basligi",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 36.29,
+  "filament_g": 36.9,
+  "x": 68.0,
+  "y": 104.0,
+  "z": 20.6,
+  "gecerli": true
+ },
+ {
+  "ad": "02_kapsul",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 32.48,
+  "filament_g": 33.8,
+  "x": 43.1,
+  "y": 43.1,
+  "z": 45.0,
+  "gecerli": true
+ },
+ {
+  "ad": "03_tetik_kapagi_sag",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 0.73,
+  "filament_g": 0.9,
+  "x": 18.0,
+  "y": 18.0,
+  "z": 3.0,
+  "gecerli": true
+ },
+ {
+  "ad": "04_tetik_kapagi_sol",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 0.73,
+  "filament_g": 0.9,
+  "x": 18.0,
+  "y": 18.0,
+  "z": 3.0,
+  "gecerli": true
+ },
+ {
+  "ad": "05_servo_makarasi",
+  "malzeme": "PETG",
+  "adet": 2,
+  "hacim_cm3": 0.17,
+  "filament_g": 0.4,
+  "x": 10.0,
+  "y": 10.0,
+  "z": 6.4,
+  "gecerli": true
+ },
+ {
+  "ad": "06_toz_kapagi",
+  "malzeme": "PETG",
+  "adet": 1,
+  "hacim_cm3": 9.15,
+  "filament_g": 6.4,
+  "x": 49.1,
+  "y": 49.1,
+  "z": 6.0,
+  "gecerli": true
+ },
+ {
+  "ad": "07_tampon_ust",
+  "malzeme": "TPU 95A",
+  "adet": 1,
+  "hacim_cm3": 0.19,
+  "filament_g": 0.1,
+  "x": 9.2,
+  "y": 7.0,
+  "z": 3.0,
+  "gecerli": true
+ },
+ {
+  "ad": "08_tampon_alt",
+  "malzeme": "TPU 95A",
+  "adet": 1,
+  "hacim_cm3": 0.19,
+  "filament_g": 0.1,
+  "x": 9.2,
+  "y": 7.0,
+  "z": 3.0,
+  "gecerli": true
+ }
+]

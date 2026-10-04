@@ -1,12 +1,12 @@
 {
- "STROK": 91.0,
- "L_hazne": 20.0,
+ "STROK": 170.0,
+ "L_hazne": 45.0,
  "H": 14.0,
  "lam": 4.0,
  "bant_OD": 13.0,
  "bant_ID": 4.0,
- "ALFA": 40.0,
- "koni_acisi": 40.0,
+ "ALFA": 35.0,
+ "koni_acisi": 35.0,
  "D_bilye": 9.0,
  "bilezik_R": 34.0,
  "kulak_R": 52.0,
@@ -22,5 +22,6 @@
  "t_kapak": 9.0,
  "D_bore": 43.4,
  "n_boncuk": 1,
- "n_ankraj_yan": 1
+ "n_ankraj_yan": 1,
+ "y_bol": 192.0
 }
