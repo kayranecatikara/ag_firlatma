@@ -26,6 +26,11 @@ P = dict(
     D_bore=43.4, t_duvar=6.0, bosluk=0.30, arka=5.0,
     ALFA=19.0, koni_acisi=21.0, D_bilye=12.7, D_yuva=12.9, R_pitch=13.5,
     derinlik=4.2, n_boncuk=3,
+    # DURDURMA OMUZU (geri geldi): kapsulun halka kenari namlu agzindaki
+    # ice cikintiya oturur. Capraz pimin yarik ucuna carpmasindan 4.6x
+    # daha genis temas alani. Boncuk cemberi kuculmeden ANLAMSIZDIR.
+    omuz_bosluk=1.0,   # boncuk ile koni arasinda istenen NET aciklik
+    t_omuz=2.5,        # omuza yapistirilan TPU halkanin kalinligi
     # kapsul: arka blok (capraz pim) + tutma kanali + hazne + on kapak
     y_capraz=4.5, d_capraz=6.0, capraz_uzun=78.0,
     kanal_y0=9.0, kanal_w=5.4, kanal_d=5.0, t_arka_blok=16.0, t_kapak=8.0,
@@ -75,7 +80,15 @@ def sil(r, h, p, d):
 
 def namlu(p):
     L = p["L_namlu"]
-    g = sil(Ro, L, V(0, 0, 0), V(0, 1, 0)).cut(sil(Rb, L + 4, V(0, -2, 0), V(0, 1, 0)))
+    # DURDURMA OMUZU: delik sadece omuz duzlemine kadar acilir; otesini
+    # iraksak koni acar. Aradaki basamak kapsulu durduran yuzeydir.
+    # Koni, TPU kalinligi kadar GERIDEN basliyor; bu kayma aciklikan
+    # erir. O yuzden kalinlik x tan(ALFA) kadar fazladan eklenir.
+    R_omuz = (p["R_pitch"] + p["D_bilye"] / 2 + p["omuz_bosluk"]
+              + p["t_omuz"] * math.tan(math.radians(p["ALFA"])))
+    y_om = p["y_yuz_dur"] + p["t_omuz"]        # TPU halka yk..y_om arasinda
+    g = sil(Ro, L, V(0, 0, 0), V(0, 1, 0)).cut(
+        sil(Rb, y_om + 2, V(0, -2, 0), V(0, 1, 0)))
     # iraksak koni: durmus kapsul agzindan namlu agzina (bilye yolundan genis)
     yk = p["y_yuz_dur"]; Lk = L - yk
     R2 = Rb + Lk * math.tan(math.radians(p["koni_acisi"]))
@@ -102,8 +115,10 @@ def namlu(p):
             bil = bil.cut(kutu(-(kw + 2), kw + 2, y1 - p["oluk_pim_d"], y1 + 2,
                                zc - wp / 2, zc + wp / 2))
     g = g.fuse(bil)
-    # iraksak koni en son: bilezik dahil her seyi keser
-    g = g.cut(Part.makeCone(Rb, R2, Lk + 0.5, V(0, yk, 0), V(0, 1, 0)))
+    # iraksak koni: OMUZ YARICAPINDAN baslar, bilezik dahil her seyi keser
+    Lk2 = L - y_om
+    R2b = R_omuz + Lk2 * math.tan(math.radians(p["koni_acisi"]))
+    g = g.cut(Part.makeCone(R_omuz, R2b, Lk2 + 0.5, V(0, y_om, 0), V(0, 1, 0)))
     # capraz pim yariklari: arka ucu kurulu pimin arkasi, ON UCU = DURDURMA
     w = p["yarik_w"] / 2
     ya = p["y_capraz0"] - p["d_capraz"] / 2 - 1.0
@@ -195,6 +210,19 @@ def tetik_kapaklari(p):
             k = k.cut(sil(1.1, p["kapak_t"] + 2, V(s * (r0 - 1), y_t, dz), u))
         out.append(k)
     return out
+
+
+def omuz_halkasi(p):
+    """Omuza yapistirilan TPU halka. Kapsul once buna carpar; PETG omuz
+    yedektir. Gorevi enerjiyi 'yutmak' degil, DURMAYI UZATIP kuvvet
+    tepesini dusurmektir (F = E / d)."""
+    # Koni, TPU kalinligi kadar GERIDEN basliyor; bu kayma aciklikan
+    # erir. O yuzden kalinlik x tan(ALFA) kadar fazladan eklenir.
+    R_omuz = (p["R_pitch"] + p["D_bilye"] / 2 + p["omuz_bosluk"]
+              + p["t_omuz"] * math.tan(math.radians(p["ALFA"])))
+    yk = p["y_yuz_dur"]
+    return sil(Rb - 0.2, p["t_omuz"], V(0, yk, 0), V(0, 1, 0)).cut(
+        sil(R_omuz + 0.2, p["t_omuz"] + 2, V(0, yk - 1, 0), V(0, 1, 0)))
 
 
 def tamponlar(p):
@@ -302,7 +330,8 @@ if __name__ == "__main__":
                 "V4_bant_3": bs[2], "V4_bant_4": bs[3],
                 "V4_pim_sag": t1, "V4_pim_sol": t2,
                 "V4_kapak_sag": k1, "V4_kapak_sol": k2,
-                "V4_tampon_ust": tp1, "V4_tampon_alt": tp2}
+                "V4_tampon_ust": tp1, "V4_tampon_alt": tp2,
+                "V4_omuz_halkasi": omuz_halkasi(P)}
     tum = None
     hacim = {}
     for ad, sh in parcalar.items():

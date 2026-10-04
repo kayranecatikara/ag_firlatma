@@ -28,9 +28,13 @@ def main(ad, aciklama):
         sys.exit(f"HATA: {hedef} zaten var. Once sil ya da baska ad ver.")
     os.makedirs(os.path.join(hedef, "baski"))
 
+    # DIKKAT: cad/ ve out/ altinda AYNI ADLI v4_konfig.json var; duz
+    # kopyalarsan biri otekini eziyordu. Kaynak klasoru ada eklenir.
     for f in ("cad/v4_konfig.json", "out/v4_konfig.json",
               "cad/v4_olcu.json", "cad/v4_hacim.json"):
-        kopyala(f, os.path.join(hedef, "konfig"))
+        kaynak_kl, dosya_ad = f.split("/")
+        kopyala(f, os.path.join(hedef, "konfig"),
+                f"{kaynak_kl}_{dosya_ad}")
 
     bd = os.path.join(KOK, "baski")
     for f in sorted(os.listdir(bd)):
