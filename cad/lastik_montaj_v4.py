@@ -31,7 +31,8 @@ P = dict(
     h_takoz=12.0,          # durdurma takozunun radyal yuksekligi
     w_takoz=5.0,           # takozun yarik disina tasmasi (her yan)
     L_takoz=16.0,          # takozun eksenel boyu
-    t_pad=3.0,             # takoz arkasindaki TPU pad cebi
+    t_pad=5.0,             # takoz arkasindaki TPU pad cebi
+    t_pim_tavan=2.0,       # capraz pim deliginin ustunde birakilan malzeme
     lip_dar=0.8,           # agizdaki daralma (boncugu tutan dudak)
     lip_boy=1.2,           # dudagin boyu
     d_ip_delik=3.0,        # yuva tabanindan hazneye ip deligi
@@ -362,6 +363,14 @@ def kapsul_hazneli(p, y0):
 
     g = sil(Rk, L, V(0, 0, 0), V(0, 1, 0))
     y_sil = p["t_arka_blok"]; y_kon = L - h_koni
+    # ARKA BLOK HAFIFLETME: ic bosluk capraz pimin hemen ustunden baslar.
+    # Masif 16 mm disk kapsulun 38/54 g'ini olusturuyordu. Koni biciminde
+    # (agiz yukari basimda tavan yok) ve capraz pim deliginin ustunde
+    # t_pim_tavan kadar malzeme birakir.
+    y_bos = p["y_capraz"] + p["d_capraz"] / 2 + p["t_pim_tavan"]
+    r_bos = Rh - (y_sil - y_bos) * math.tan(math.radians(45.0))
+    if y_bos < y_sil and r_bos > 2.0:
+        g = g.cut(Part.makeCone(r_bos, Rh, y_sil - y_bos, V(0, y_bos, 0), V(0, 1, 0)))
     g = g.cut(sil(Rh, y_kon - y_sil, V(0, y_sil, 0), V(0, 1, 0)))
     # hazne -> agiz: basamaksiz koni, agizda r_cap'e acilir (ag buradan cikar)
     g = g.cut(Part.makeCone(Rh, r_cap, h_koni, V(0, y_kon, 0), V(0, 1, 0))

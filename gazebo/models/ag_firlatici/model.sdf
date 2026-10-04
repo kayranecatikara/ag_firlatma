@@ -19,8 +19,8 @@
     <link name="namlu">
       <inertial>
         <pose>0.07492 0.00000 0.00000 0 0 0</pose>
-        <mass>0.25705</mass>
-        <inertia><ixx>1.958e-04</ixx><iyy>5.788e-04</iyy><izz>5.788e-04</izz>
+        <mass>0.25080</mass>
+        <inertia><ixx>1.911e-04</ixx><iyy>5.647e-04</iyy><izz>5.647e-04</izz>
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
       </inertial>
       <visual name="v_namlu">
@@ -43,15 +43,15 @@
          Dinlenmede strok sonunda; atista ileri kayip tamponlara carpar.
          Prizmatik eklem NAMLU EKSENINDE (+X). -->
     <link name="kapsul">
-      <pose>0.02750 0 0 0 0 0</pose>
+      <pose>0.02550 0 0 0 0 0</pose>
       <inertial>
         <pose>0.00000 0.00000 0.00000 0 0 0</pose>
-        <mass>0.14614</mass>
-        <inertia><ixx>3.393e-05</ixx><iyy>4.163e-05</iyy><izz>4.163e-05</izz>
+        <mass>0.13800</mass>
+        <inertia><ixx>3.204e-05</ixx><iyy>3.535e-05</iyy><izz>3.535e-05</izz>
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
       </inertial>
       <visual name="v_kapsul">
-        <pose>-0.02250 0 0 0 1.5708 0</pose>
+        <pose>-0.02050 0 0 0 1.5708 0</pose>
         <geometry><mesh><uri>model://ag_firlatici/meshes/kapsul.stl</uri>
           <scale>0.001 0.001 0.001</scale></mesh></geometry>
         <material><ambient>0.65 0.30 0.12 1</ambient>
