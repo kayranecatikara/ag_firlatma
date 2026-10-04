@@ -76,6 +76,8 @@ Dondurulma: {datetime.date.today()} · commit `{sha}`
 | Kapsül boyu | {P['L_kapsul']:.1f} mm |
 | Yuva eğimi | **{P['ALFA']:.0f}°** |
 | Yuva | Ø{P['D_yuva']:.1f} mm, derinlik {P['derinlik']:.1f}, R_pitch {P['R_pitch']:.1f} |
+| Namlu boşluğu | {P['bosluk']:.2f} mm (yan başına {P['bosluk']/2:.2f}) |
+| Durdurma omuzu | iç R {P['R_pitch']+P['D_bilye']/2+P['omuz_bosluk']+P['t_omuz']*__import__('math').tan(__import__('math').radians(P['ALFA'])):.2f} mm |
 | Boncuk | **{K['n_boncuk_top']} × Ø{K['D_boncuk']*1e3:.0f} mm**, yuva başına {K['n_boncuk']}, toplam {K['n_boncuk_top']*K['m_boncuk']*1e3:.0f} g |
 
 ## Ağ
@@ -86,8 +88,10 @@ Dondurulma: {datetime.date.today()} · commit `{sha}`
 | İp | Dyneema Ø{K['d_ip']*1e3:.2f} mm |
 
 ## Bant ankrajı
-Ø{P['d_bant_delik']:.0f} mm geçiş deliği + Ø{P['d_pim_bant']:.0f} mm delen pim,
-ankraj yarıçapı {P['r_bant']:.0f} mm, kenar başına {P['n_ankraj_yan']:.0f} bant.
+Ø{P['d_bant_delik']:.0f} mm geçiş deliği + Ø{P.get('d_pim_ankraj', 0):.0f} mm
+enine tutma pimi (bandı deler, karşı duvara oturur; ön yüzden
+{P.get('pim_geri', 0):.0f} mm geride). Ankraj yarıçapı {P['r_bant']:.0f} mm,
+kenar başına {P['n_ankraj_yan']:.0f} bant.
 
 ## İçerik
 - `konfig/` — bu versiyonu birebir yeniden üretecek dosyalar

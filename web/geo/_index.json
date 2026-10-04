@@ -15,8 +15,8 @@
    ]
   },
   "agiz_basligi": {
-   "ucgen": 5656,
-   "kb": 276.3,
+   "ucgen": 7442,
+   "kb": 363.5,
    "merkez": [
     0.0,
     138.92,
@@ -29,17 +29,17 @@
    ]
   },
   "kapsul": {
-   "ucgen": 5096,
-   "kb": 248.9,
+   "ucgen": 5090,
+   "kb": 248.6,
    "merkez": [
     -0.0,
     27.5,
     0.0
    ],
    "boyut": [
-    43.09,
+    42.59,
     45.0,
-    43.1
+    42.6
    ]
   },
   "capraz_pim": {
@@ -221,7 +221,7 @@
   "omuz_bosluk": 1.0,
   "arka": 5.0,
   "d_pim": 5.0,
-  "bosluk": 0.3
+  "bosluk": 0.8
  },
  "boncuk": {
   "merkez": [

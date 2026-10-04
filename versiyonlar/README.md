@@ -11,7 +11,8 @@ ve ilgili dokümanlar.
 | Versiyon | Namlu | Strok | Bant L0 | Koni | Kapsül | R_pitch | Kapsülü durduran | Mesafe\* | Durum |
 |---|---|---|---|---|---|---|---|---|---|
 | [v1](v1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 15.5 | çapraz pim, 96 mm² | 0.80–0.98 m | ilk test |
-| [**v1.1**](v1.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **12.0** | **omuz, 303 mm²** | 0.79–0.97 m | **güncel** |
+| [v1.1](v1.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **12.0** | **omuz, 303 mm²** | 0.79–0.97 m | basıldı |
+| [**v1.2**](v1.2/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 270 mm² | 0.79–0.97 m | **güncel** |
 | [v2](v2/SURUM.md) | 255.2 mm | 170 mm | 56.7 mm | 35° | 70 mm | 15.5 | çapraz pim, 96 mm² | 1.13–1.34 m | beklemede |
 
 \* Gmod 0.45 MPa varsayımıyla, 2 bant. Bant sertliği **hâlâ ölçülmedi** —
@@ -30,6 +31,12 @@ gerdirilirse yarık ucu kırılırdı. Namlu ağzına içe doğru omuz kondu; am
 ancak **boncuk çemberi 15.5 → 12.0 mm'ye çekilince** anlamlı oluyor (omuza yer
 açılıyor): 303 mm², 15.174 N, eskisinin 3.2 katı. Menzile etkisi yok (1–2 cm).
 Ayrıntı: `v1.1/dok/V1_1_OMUZ.md`.
+
+**v1.1 → v1.2 — ilk baskıdan gelen iki düzeltme.** Kapsül namluda takılıyordu:
+boşluk 0.30 → **0.80 mm** (yan başına 0.40; FDM'de Ø43 delik için 0.15 çok sıktı).
+Bant ankrajındaki ön yüz oluğu kulağı zayıflatıyordu ve pim hiçbir yere
+kenetlenmiyordu: yerine kulağın bir yan duvarından girip bandı delen ve
+**karşı duvardaki deliğe oturan Ø4 enine pim** kondu. Ayrıntı: `v1.2/dok/V1_2.md`.
 
 **v1 → v2 — uzun namlu + uzun bant.** λ sabit tutulunca kurma kuvveti strok'tan
 bağımsız kalıyor (ikisi de 426 N), ama depolanan enerji bant hacmiyle 2.75×

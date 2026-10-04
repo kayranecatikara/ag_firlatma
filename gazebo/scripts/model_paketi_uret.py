@@ -36,7 +36,8 @@ M_AG   = 0.0096                                               # 39.2 m x 0.274 g
 M_BONCUK = _K2["n_boncuk_top"] * _K2["m_boncuk"]              # 12 x 4 g
 # namlu link: basilan iki namlu parcasi + 4 bant + tetik kapaklari + tamponlar
 M_NAMLU = (_v("V4_namlu") * RHO_PETG
-           + sum(_v(f"V4_bant_{i}") for i in (1, 2, 3, 4)) * RHO_LATEKS
+           + sum(v["V"] for k, v in _H.items()
+                 if k.startswith("V4_bant_")) * RHO_LATEKS
            + (_v("V4_kapak_sag") + _v("V4_kapak_sol")) * RHO_PETG
            + (_v("V4_pim_sag") + _v("V4_pim_sol")) * RHO_AL) / 1000.0
 # kapsul link: kapsul + capraz pim + AG + BONCUKLAR (hepsi birlikte hareket eder)

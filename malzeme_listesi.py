@@ -91,10 +91,13 @@ ekle(G, "D1", "Lateks tup (zipkin lastigi)", N_BANT, "SAF DOGAL KAUCUK LATEKS (s
      f"KENAR BASINA {N_BANT//2} ADET. Kurulu uzama x{P['lam']:.0f}. SERTLIK OLCULMEDI — "
      f"tek kol 50->135 mm cekip Gmod[MPa]=F[N]/308. 0.45 MPa'da {F_BANT:.0f} N/bant "
      f"({F_BANT/9.81:.0f} kg), toplam kurma {F_TOP:.0f} N.")
-ekle(G, "D2", "On tasiyici pim (BANTI DELER)", N_BANT, "Celik mil veya M5 civata govdesi",
-     "O5.0 x 30 mm", N_BANT * 4.6,
-     "Bant O14 delikten gecer, disari cikan tail'i bu pim DELER; pim agiz "
-     "bileziginin on yuzundeki 5.4 mm oluga oturur. Dyneema halka YOK.")
+ekle(G, "D2", "Enine tutma pimi (BANTI DELER)", N_BANT, "Celik mil / cubuk",
+     f"O{P.get('d_pim_ankraj', 4.0):.0f}.0 x 26 mm (ucu hafif sivri)", N_BANT * 2.6,
+     "Bant O14 delikten gecer; pim kulagin BIR yan duvarindan girer, bandi "
+     "deler, KARSI duvardaki delige oturur. Delik O"
+     f"{P.get('d_pim_ankraj',4.0)+P.get('pim_bosluk',0.2):.1f}, on yuzden "
+     f"{P.get('pim_geri',6.0):.0f} mm geride. O3 de sigar ama sert bantta "
+     "egilme emniyeti 1.0'a dusuyor — O4 kullan.")
 ekle(G, "D3", "Arka kilit pimi (BANTI DELER)", N_BANT, "Celik mil", "O4.0 x 25 mm",
      N_BANT * 2.5,
      "Bant capraz pimin 14 mm oluguna sarilir, tail 30 mm geri katlanir; bu pim "

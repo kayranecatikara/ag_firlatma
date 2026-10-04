@@ -22,15 +22,24 @@ print(f"namlu {P['L_namlu']:.1f} · strok {P['STROK']:.0f} · L0 {P['L0']:.1f} �
       f"kapsul {P['L_kapsul']:.1f} · ALFA {P['ALFA']:.0f}d")
 print(f"ankraj y={ya:.2f}, bilezik {y0:.2f}..{ya:.2f}, r_bant={rb}, delik O{db}\n")
 
-T = [("bant deligi ekseni (orta)",      0, (y0 + ya) / 2, rb,       False),
-     ("bant deligi (arka agiz)",        0, y0 + 1.0,      rb,       False),
-     ("delik ic kenari r=6",            0, (y0 + ya) / 2, rb - 6.0, False),
-     ("delik DISI r=7.6 -> malzeme",    0, (y0 + ya) / 2, rb - 7.6, True),
-     ("kulak cidari x=9",               9, (y0 + ya) / 2, rb,       True),
-     ("kulak disi x=12",               12, (y0 + ya) / 2, rb,       False),
-     ("pim olugu (on yuz)",             0, ya - 1.0,      rb,       False),
-     ("oluk ALTI malzeme",             10, ya - 4.0,      rb,       True),
-     ("karsi kenar deligi",             0, (y0 + ya) / 2, -rb,      False)]
+# DIKKAT: sondalar enine pim deliginin DISINDA bir y'de olmali, yoksa
+# dogru geometride bile "bosluk" okur. Pim deligi y_pim +/- (dp/2).
+dp = P["d_pim_ankraj"] + P["pim_bosluk"]
+y_pim = ya - P["pim_geri"]
+y_s = y0 + 3.0                                  # pim deliginden uzak kesit
+T = [("bant deligi ekseni",            0, y_s,  rb,       False),
+     ("bant deligi (arka agiz)",       0, y0 + 1.0, rb,   False),
+     ("delik ic kenari r=6",           0, y_s,  rb - 6.0, False),
+     ("delik DISI r=7.6 -> malzeme",   0, y_s,  rb - 7.6, True),
+     ("kulak yan cidari x=9",          9, y_s,  rb,       True),
+     ("kulak disi x=12",              12, y_s,  rb,       False),
+     ("karsi kenar deligi",            0, y_s, -rb,       False),
+     ("pim deligi, sag yan duvar",   kw - 2.0, y_pim,  rb, False),
+     ("pim deligi, sol yan duvar", -(kw - 2.0), y_pim,  rb, False),
+     ("pim ARKASINDA malzeme",       kw - 2.0, y_pim - 4.0, rb, True),
+     ("pim ONUNDE malzeme",          kw - 2.0, y_pim + 4.0, rb, True),
+     ("pim hizasi, kulak disinda",   kw - 2.0, y_pim, rb + 9.0, True)]
+
 ok = True
 for ad, x, y, z, bek in T:
     g = ic(x, y, z); ok &= (g == bek)
@@ -43,6 +52,9 @@ bos = ya - P["y_yuz_dur"]                       # kapsul agzindan ankraja
 r_bon = P["R_pitch"] + bos * math.tan(a)        # boncuk yaricapi ankraj duzleminde
 r_koni = Rb + bos * math.tan(a)                 # koni yaricapi ayni duzlemde
 pay = (rb - db / 2) - r_koni
+print(f"\n  enine pim: O{P['d_pim_ankraj']:.0f} celik, delik O{dp:.1f}, "
+      f"y={y_pim:.2f} (on yuzden {P['pim_geri']:.0f} mm geride)")
+print(f"  pim arkasinda malzeme: {y_pim - y0:.1f} mm (bant bu yonde ceker)")
 print(f"\n  kapsul agzi -> ankraj bosluk  {bos:6.2f} mm")
 print(f"  boncuk yaricapi (ankrajda)    {r_bon:6.2f} mm")
 print(f"  koni  yaricapi (ankrajda)     {r_koni:6.2f} mm")

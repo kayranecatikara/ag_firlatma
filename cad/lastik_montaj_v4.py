@@ -42,8 +42,9 @@ P = dict(
     # noktasina oturur, boylece L0/H/lam degismez.
     kulak_w=11.0,          # kulak yari kalinligi (X) — O14 delige 4 mm cidar
     d_bant_delik=14.0,     # banttan 1 mm buyuk gecis deligi
-    d_pim_bant=5.0,        # banti delen tasiyici pim
-    oluk_pim_d=2.8,        # pimin oturdugu on yuz olugu derinligi
+    d_pim_ankraj=4.0,      # banti DELEN enine tutma pimi (celik)
+    pim_bosluk=0.2,        # pim deligi = pim + bu
+    pim_geri=6.0,          # pim ekseni, bilezik on yuzunden bu kadar geride
     bilezik_geri=16.0,     # bilezigin y_ankraj'dan geriye uzanimi
     n_ankraj_yan=1,        # kenar basina bant (O13 ile 1 tane sigar)
     # tetik kartusu
@@ -102,7 +103,9 @@ def namlu(p):
         z0, z1 = (Ro - 1, p["kulak_R"]) if s > 0 else (-p["kulak_R"], -(Ro - 1))
         bil = bil.fuse(kutu(-kw, kw, y0, y1, z0, z1))
     bil = bil.cut(sil(Rb, y1 - y0 + 2, V(0, y0 - 1, 0), V(0, 1, 0)))
-    db = p["d_bant_delik"]; wp = p["d_pim_bant"] + 0.4
+    db = p["d_bant_delik"]
+    dp = p["d_pim_ankraj"] + p["pim_bosluk"]      # enine tutma pimi deligi
+    y_pim = y1 - p["pim_geri"]                    # on yuzden geride
     for s in (+1, -1):
         for i in range(int(p["n_ankraj_yan"])):
             zc = s * (p["r_bant"] + i * p["dz_bant"])
@@ -111,9 +114,10 @@ def namlu(p):
             # arka agizda pah: gergin bant kenarda kesilmesin
             bil = bil.cut(Part.makeCone(db / 2 + 2.5, db / 2, 2.5,
                                         V(0, y0 - 0.1, zc), V(0, 1, 0)))
-            # on yuzde tasiyici pim olugu (X boyunca)
-            bil = bil.cut(kutu(-(kw + 2), kw + 2, y1 - p["oluk_pim_d"], y1 + 2,
-                               zc - wp / 2, zc + wp / 2))
+            # ENINE TUTMA PIMI: kulagin bir yan duvarindan girer, bandi
+            # deler, karsi duvardaki delige oturur. Pim X ekseninde.
+            bil = bil.cut(sil(dp / 2, 2 * kw + 6, V(-(kw + 3), y_pim, zc),
+                              V(1, 0, 0)))
     g = g.fuse(bil)
     # iraksak koni: OMUZ YARICAPINDAN baslar, bilezik dahil her seyi keser
     Lk2 = L - y_om
