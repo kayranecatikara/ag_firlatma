@@ -30,6 +30,7 @@ P = dict(
     t_ara=0.8,             # merkezi gecis ile boru arasi cidar
     d_kurma=4.5,           # elle kurma pimi deligi (O4 pim)
     y_kurma=12.3,          # kapsul yerel y; capraz pim ile hazne arasinin ortasi
+    azimut_kurma=0.0,      # 0 = X ekseni (capraz pime 90 derece)
     h_takoz=12.0,          # durdurma takozunun radyal yuksekligi
     w_takoz=5.0,           # takozun yarik disina tasmasi (her yan)
     L_takoz=16.0,          # takozun eksenel boyu
@@ -384,14 +385,16 @@ def kapsul_hazneli(p, y0):
     g = g.cut(sil(p["d_capraz"] / 2 + 0.05, 2 * Rk + 4, V(0, p["y_capraz"], -(Rk + 2)),
                   V(0, 0, 1)))
     # ELLE KURMA DELIGI: ilk testlerde kapsulu geri cekmek icin buraya pim
-    # sokulur. Capraz pim deligi Z ekseninde, tetik pimleri X ekseninde —
-    # bu yuzden delik ARALARINA, 45 derece azimuta konuldu; boylece hicbiriyle
-    # cakismiyor. Yerel y: capraz pim deligi 8.55'te biter, hazne 16'da
-    # baslar; delik bu 7.45 mm'lik bandin ortasina oturur.
+    # sokulur. Capraz pim deligi Z ekseninde; bu delik ona DIK, X ekseninde
+    # (azimut 0). Yerel y: capraz pim deligi 8.55'te biter, hazne 16'da
+    # baslar; delik bu 7.45 mm'lik bandin ortasinda, iki yana 1.47 mm cidar.
+    # NOT: tetik pimleri de X ekseninden gelir; tetik mekanizmasina
+    # gecildiginde bu delik ya kapatilir ya da pim konumu kaydirilir.
     dk = p["d_kurma"]; yk2 = p["y_kurma"]
-    u45 = V(math.cos(math.radians(45)), 0, math.sin(math.radians(45)))
+    az = math.radians(p["azimut_kurma"])
+    u = V(math.cos(az), 0, math.sin(az))
     g = g.cut(sil(dk / 2, 2 * Rk + 6,
-                  V(-u45.x * (Rk + 3), yk2, -u45.z * (Rk + 3)), u45))
+                  V(-u.x * (Rk + 3), yk2, -u.z * (Rk + 3)), u))
 
     for i in range(6):
         th = math.radians(60 * i)

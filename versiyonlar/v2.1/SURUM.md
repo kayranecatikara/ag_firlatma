@@ -1,6 +1,6 @@
-# V2.1 — boncuklar kenarda · merkez Ø26.6 · elle kurma deliği · ölçülen bant
+# V2.1 — boncuklar kenarda · merkez Ø26.6 · elle kurma deliği 90°
 
-Dondurulma: 2026-10-04 · commit `0e240d6`
+Dondurulma: 2026-10-04 · commit `14f8ecc`
 
 ## Namlu / tahrik
 | | |
