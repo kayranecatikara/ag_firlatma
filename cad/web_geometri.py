@@ -30,7 +30,7 @@ gov, bas = M.namlu_bol(P)
 PARCALAR = {
     "namlu_govde":   gov,
     "agiz_basligi":  bas,
-    "kapsul":        M.kapsul(P, yk),
+    "kapsul":        M.kapsul_hazneli(P, yk),
     "capraz_pim":    M.capraz_pim(P),
     "tetik_pim_sag": t1,
     "tetik_pim_sol": t2,

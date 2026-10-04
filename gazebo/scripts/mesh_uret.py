@@ -16,7 +16,7 @@ HEDEF = kyol("gazebo", "models", "ag_firlatici", "meshes")
 os.makedirs(HEDEF, exist_ok=True)
 
 for kaynak, cikti in (("V4_namlu.step", "namlu.stl"),
-                      ("V4_kapsul.step", "kapsul.stl")):
+                      ("V4_kapsul_hazneli.step", "kapsul.stl")):
     yol = kyol("cad", kaynak)
     sek = Part.Shape(); sek.read(yol)
     m = Mesh.Mesh(); m.addFacets(sek.tessellate(0.25))

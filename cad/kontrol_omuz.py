@@ -32,11 +32,14 @@ print(f"R_pitch {P['R_pitch']:.1f} · TPU {t_om:.1f} mm · omuz ic R {R_om:.2f} 
       f"kapsul dis R {Rk:.2f}")
 print(f"omuz duzlemi y={yk:.1f}  (TPU halka {yk:.1f}..{y_om:.1f})\n")
 
-T = [("omuz ONUNDE r=20.5 -> malzeme",  0, y_om + 1.0, 20.5, True),
-     ("omuz ONUNDE r=18.0 -> bos",      0, y_om + 1.0, 18.0, False),
-     ("TPU cebi r=20.5 -> bos",         0, yk + 1.0,   20.5, False),
-     ("omuz ARKASI (delik) r=20.5",     0, yk - 5.0,   20.5, False),
-     ("agizda r=26 -> malzeme",         0, L - 0.5,    26.0, True)]
+# sondalar GEOMETRIDEN turetilir (sabit yaricap yazma — cap degisince bozulur)
+r_om_ic = R_om - 1.5          # omuz icinde, bos olmali
+r_om_dis = (R_om + Rb) / 2    # omuz bandi ortasi, dolu olmali
+T = [("omuz ONUNDE omuz bandi -> malzeme", 0, y_om + 1.0, r_om_dis, True),
+     ("omuz ONUNDE koni ici -> bos",       0, y_om + 1.0, r_om_ic,  False),
+     ("TPU cebi -> bos",                   0, yk + 1.0,   r_om_dis, False),
+     ("omuz ARKASI (namlu deligi) -> bos", 0, yk - 5.0,   r_om_dis, False),
+     ("agizda koni disi -> malzeme",       0, L - 0.5,    Rb + 3.0, True)]
 ok = True
 for ad, x, y, z, bek in T:
     g = ic(x, y, z); ok &= (g == bek)

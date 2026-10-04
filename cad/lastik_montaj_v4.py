@@ -27,6 +27,7 @@ P = dict(
     ALFA=19.0, koni_acisi=21.0, D_bilye=12.7, D_yuva=12.9, R_pitch=13.5,
     derinlik=4.2, n_boncuk=3,
     t_yuva=1.4,            # boncuk yuvasi boru cidari
+    t_ara=0.8,             # merkezi gecis ile boru arasi cidar
     lip_dar=0.8,           # agizdaki daralma (boncugu tutan dudak)
     lip_boy=1.2,           # dudagin boyu
     d_ip_delik=3.0,        # yuva tabanindan hazneye ip deligi
@@ -331,7 +332,10 @@ def kapsul_hazneli(p, y0):
     t_k = p["t_kapak"]; y_kap = L - t_k
     rp = p["R_pitch_hazneli"]
     dy, der = p["D_yuva"], p["derinlik"]
-    r_cap = rp - (dy / 2 + p["t_yuva"]) / math.cos(a)      # merkezi ag gecisi
+    # merkezi ag gecisi. DIKKAT: borularin ic kenarina TAM TEGET yapma —
+    # sifir kalinlikta temas booleani bozuyor (kati gecersiz cikiyor).
+    # En az t_ara kadar gercek cidar birak.
+    r_cap = rp - (dy / 2 + p["t_yuva"]) / math.cos(a) - p["t_ara"]
     h_koni = p["h_hazne_koni"]
 
     g = sil(Rk, L, V(0, 0, 0), V(0, 1, 0))
