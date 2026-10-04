@@ -28,6 +28,10 @@ P = dict(
     derinlik=4.2, n_boncuk=3,
     t_yuva=1.4,            # boncuk yuvasi boru cidari
     t_ara=0.8,             # merkezi gecis ile boru arasi cidar
+    h_takoz=12.0,          # durdurma takozunun radyal yuksekligi
+    w_takoz=5.0,           # takozun yarik disina tasmasi (her yan)
+    L_takoz=16.0,          # takozun eksenel boyu
+    t_pad=3.0,             # takoz arkasindaki TPU pad cebi
     lip_dar=0.8,           # agizdaki daralma (boncugu tutan dudak)
     lip_boy=1.2,           # dudagin boyu
     d_ip_delik=3.0,        # yuva tabanindan hazneye ip deligi
@@ -92,11 +96,13 @@ def namlu(p):
     # iraksak koni acar. Aradaki basamak kapsulu durduran yuzeydir.
     # Koni, TPU kalinligi kadar GERIDEN basliyor; bu kayma aciklikan
     # erir. O yuzden kalinlik x tan(ALFA) kadar fazladan eklenir.
-    R_omuz = (p["R_pitch"] + p["D_bilye"] / 2 + p["omuz_bosluk"]
-              + p["t_omuz"] * math.tan(math.radians(p["ALFA"])))
-    y_om = p["y_yuz_dur"] + p["t_omuz"]        # TPU halka yk..y_om arasinda
+    # OMUZ YOK: boncuklar kapsulun en kenarinda (R22) oldugu icin koni
+    # R29.1'den baslamak zorunda; kapsul yaricapi 27.1 -> omuza yer kalmiyor.
+    # Kapsulu CAPRAZ PIM + namlu disindaki DURDURMA TAKOZU durdurur.
+    R_omuz = Rb
+    y_om = p["y_yuz_dur"]
     g = sil(Ro, L, V(0, 0, 0), V(0, 1, 0)).cut(
-        sil(Rb, y_om + 2, V(0, -2, 0), V(0, 1, 0)))
+        sil(Rb, L + 4, V(0, -2, 0), V(0, 1, 0)))
     # iraksak koni: durmus kapsul agzindan namlu agzina (bilye yolundan genis)
     yk = p["y_yuz_dur"]; Lk = L - yk
     R2 = Rb + Lk * math.tan(math.radians(p["koni_acisi"]))
@@ -130,6 +136,21 @@ def namlu(p):
     Lk2 = L - y_om
     R2b = R_omuz + Lk2 * math.tan(math.radians(p["koni_acisi"]))
     g = g.cut(Part.makeCone(R_omuz, R2b, Lk2 + 0.5, V(0, y_om, 0), V(0, 1, 0)))
+    # DURDURMA TAKOZU: omuz olmadigi icin kapsulu CAPRAZ PIM durdurur.
+    # Yarik sonundaki yatak alanini radyal olarak derinlestirir:
+    # pim O8 x (R_takoz - Rb+1) x 2 kenar.
+    y_dur = p["y_capraz1"] + p["d_capraz"] / 2          # pimin on yuzu
+    R_tak = Ro + p["h_takoz"]
+    wt = p["yarik_w"] / 2 + p["w_takoz"]
+    for s2 in (+1, -1):
+        z0, z1 = (Ro - 1, R_tak) if s2 > 0 else (-R_tak, -(Ro - 1))
+        g = g.fuse(kutu(-wt, wt, y_dur, y_dur + p["L_takoz"], z0, z1))
+    # takozun arka yuzunde TPU pad cebi
+    for s2 in (+1, -1):
+        z0, z1 = (Ro - 1, R_tak + 1) if s2 > 0 else (-(R_tak + 1), -(Ro - 1))
+        g = g.cut(kutu(-p["yarik_w"] / 2, p["yarik_w"] / 2,
+                       y_dur, y_dur + p["t_pad"], z0, z1))
+
     # capraz pim yariklari: arka ucu kurulu pimin arkasi, ON UCU = DURDURMA
     w = p["yarik_w"] / 2
     ya = p["y_capraz0"] - p["d_capraz"] / 2 - 1.0
@@ -223,17 +244,18 @@ def tetik_kapaklari(p):
     return out
 
 
-def omuz_halkasi(p):
-    """Omuza yapistirilan TPU halka. Kapsul once buna carpar; PETG omuz
-    yedektir. Gorevi enerjiyi 'yutmak' degil, DURMAYI UZATIP kuvvet
-    tepesini dusurmektir (F = E / d)."""
-    # Koni, TPU kalinligi kadar GERIDEN basliyor; bu kayma aciklikan
-    # erir. O yuzden kalinlik x tan(ALFA) kadar fazladan eklenir.
-    R_omuz = (p["R_pitch"] + p["D_bilye"] / 2 + p["omuz_bosluk"]
-              + p["t_omuz"] * math.tan(math.radians(p["ALFA"])))
-    yk = p["y_yuz_dur"]
-    return sil(Rb - 0.2, p["t_omuz"], V(0, yk, 0), V(0, 1, 0)).cut(
-        sil(R_omuz + 0.2, p["t_omuz"] + 2, V(0, yk - 1, 0), V(0, 1, 0)))
+def takoz_padi(p):
+    """Durdurma takozunun arka yuzundeki TPU ped. Kapsulu durduran capraz
+    pim once buna carpar; PETG takoz yedektir. Gorevi enerjiyi yutmak
+    degil, DURMAYI UZATIP kuvvet tepesini dusurmektir (F = E/d)."""
+    y = p["y_capraz1"] + p["d_capraz"] / 2
+    R_tak = Ro + p["h_takoz"]
+    w = p["yarik_w"] / 2 - 0.15
+    out = []
+    for s2 in (+1, -1):
+        z0, z1 = (Ro - 0.9, R_tak + 0.9) if s2 > 0 else (-(R_tak + 0.9), -(Ro - 0.9))
+        out.append(kutu(-w, w, y + 0.1, y + p["t_pad"], z0, z1))
+    return out
 
 
 def tamponlar(p):
@@ -314,58 +336,54 @@ def kapsul(p, y0):
 
 
 def kapsul_hazneli(p, y0):
-    """KAPSUL — HAZNELI VARYANT (02b). Ag KAPSULUN ICINDE.
+    """KAPSUL v2.1 — boncuklar KENARDA, merkez TAMAMEN ACIK.
 
-    v1.4'teki kapsul agi NAMLUDA tasir; bu varyant agi iceride tutar.
-    Boncuk duzeltmeleri (kapali yuva dibi, tutma dudagi, ip deligi) aynen
-    burada da var — tek fark haznenin ve merkezi ag cikisinin olmasi.
+    v2.0'da yuvalar R18.2'deydi ve 40 derece egimden oturu agiz duzleminde
+    elips kesit verip ustu kapatiyordu; merkezde aga 271 mm2 kaliyordu.
+    Burada yuvalar kapsulun EN KENARINA (R22.0) alindi:
 
-    TAKAS (olculdu): 6 boncuk borusu 40 derece egimli oldugu icin agiz
-    duzleminde elips kesit verir (radyal yari-eksen 7.83 mm). Bolum dairesi
-    kapsul cidarinin izin verdigi EN DISA, R13.4'e itildi; o noktada borunun
-    dis kenari 21.23 (cidar 21.30) ve merkezde aga 97 mm2 (O11.1) kaliyor.
-    v1.3'teki 55 mm2'nin 1.8 kati, ama yine de 39 m ip icin DAR.
-    Bu yuzden v1.4 (ag namluda) ana surum; bu varyant karsilastirma icin.
+      * yuva dis kenari 30.1 > kapsul 27.1 -> yuva cidari delip disa
+        **6.0 mm genisliginde radyal yarik** aciyor. Boncuk O8.8 oldugu
+        icin o yariktan CIKAMAZ: plastik boncugu sariyor, namlu deligi de
+        disaridan kapatiyor. Ayri bir tutma dudagina gerek yok.
+      * merkezde aga **523 mm2 (O25.8)** kaliyor — v2.0'in 1.9 kati.
+
+    Kapsulu artik omuz degil CAPRAZ PIM durdurur (koni R29.1'den baslamak
+    zorunda, kapsul yaricapi 27.1 — omuza yer yok). Namluda dis durdurma
+    takozu var.
     """
     Rk = Rb - p["bosluk"] / 2; Rh = Rk - p["t_govde"]
     L = p["L_kapsul"]; a = math.radians(p["ALFA"])
-    t_k = p["t_kapak"]; y_kap = L - t_k
     rp = p["R_pitch_hazneli"]
     dy, der = p["D_yuva"], p["derinlik"]
-    # merkezi ag gecisi. DIKKAT: borularin ic kenarina TAM TEGET yapma —
-    # sifir kalinlikta temas booleani bozuyor (kati gecersiz cikiyor).
-    # En az t_ara kadar gercek cidar birak.
-    r_cap = rp - (dy / 2 + p["t_yuva"]) / math.cos(a) - p["t_ara"]
+    yari = (dy / 2 + p["t_yuva"]) / math.cos(a)
+    r_cap = rp - yari - p["t_ara"]                  # merkezi ag gecisi
     h_koni = p["h_hazne_koni"]
 
     g = sil(Rk, L, V(0, 0, 0), V(0, 1, 0))
-    y_sil = p["t_arka_blok"]; y_kon = y_kap - h_koni
+    y_sil = p["t_arka_blok"]; y_kon = L - h_koni
     g = g.cut(sil(Rh, y_kon - y_sil, V(0, y_sil, 0), V(0, 1, 0)))
-    g = g.cut(Part.makeCone(Rh, r_cap, h_koni, V(0, y_kon, 0), V(0, 1, 0)))
-    g = g.cut(sil(r_cap, t_k + 1, V(0, y_kap, 0), V(0, 1, 0)))
+    # hazne -> agiz: basamaksiz koni, agizda r_cap'e acilir (ag buradan cikar)
+    g = g.cut(Part.makeCone(Rh, r_cap, h_koni, V(0, y_kon, 0), V(0, 1, 0))
+              if Rh > r_cap else
+              Part.makeCone(r_cap, Rh, h_koni, V(0, y_kon, 0), V(0, 1, 0)))
+    g = g.cut(sil(r_cap, 3.0, V(0, L - 1.5, 0), V(0, 1, 0)))
     g = g.cut(sil(Rk + 4, p["kanal_w"], V(0, p["kanal_y0"], 0), V(0, 1, 0)).cut(
         sil(Rk - p["kanal_d"], p["kanal_w"] + 2, V(0, p["kanal_y0"] - 1, 0), V(0, 1, 0))))
     g = g.cut(sil(p["d_capraz"] / 2 + 0.05, 2 * Rk + 4, V(0, p["y_capraz"], -(Rk + 2)),
                   V(0, 0, 1)))
 
-    r_boru = dy / 2 + p["t_yuva"]
-    for i in range(6):
-        th = math.radians(60 * i)
-        ur = V(math.cos(th), 0, math.sin(th))
-        eks = V(ur.x * math.sin(a), math.cos(a), ur.z * math.sin(a))
-        taban = V(ur.x * rp, L, ur.z * rp) - eks * der
-        g = g.fuse(sil(r_boru, der + p["t_yuva"] + 2, taban - eks * p["t_yuva"], eks))
-    g = g.cut(sil(Rk, 20, V(0, L, 0), V(0, 1, 0)))
     for i in range(6):
         th = math.radians(60 * i)
         ur = V(math.cos(th), 0, math.sin(th))
         eks = V(ur.x * math.sin(a), math.cos(a), ur.z * math.sin(a))
         agiz = V(ur.x * rp, L, ur.z * rp)
         taban = agiz - eks * der
-        lip = p["lip_boy"]
-        g = g.cut(sil(dy / 2, der - lip, taban, eks))
-        g = g.cut(sil((dy - p["lip_dar"]) / 2, lip + 2, agiz - eks * lip, eks))
+        # yuva: duz tabanli silindir; disa tasan kismi cidari delip yarik acar
+        g = g.cut(sil(dy / 2, der + 6, taban, eks))
+        # ip deligi (tabandan hazneye)
         g = g.cut(sil(p["d_ip_delik"] / 2, der + 14, taban, -eks))
+    g = g.cut(sil(Rk, 20, V(0, L, 0), V(0, 1, 0)))     # agzi duzelt
     g = g.removeSplitter(); g.translate(V(0, y0, 0))
     return g
 
@@ -446,7 +464,7 @@ if __name__ == "__main__":
                 "V4_pim_sag": t1, "V4_pim_sol": t2,
                 "V4_kapak_sag": k1, "V4_kapak_sol": k2,
                 "V4_tampon_ust": tp1, "V4_tampon_alt": tp2,
-                "V4_omuz_halkasi": omuz_halkasi(P)}
+                **{f"V4_takoz_pad_{i+1}": sh for i, sh in enumerate(takoz_padi(P))}}
     tum = None
     hacim = {}
     for ad, sh in parcalar.items():

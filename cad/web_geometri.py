@@ -38,7 +38,8 @@ PARCALAR = {
     "tetik_kapak_sol": k2,
     "tampon_ust":    tp1,
     "tampon_alt":    tp2,
-    "omuz_halkasi":  M.omuz_halkasi(P),
+    "takoz_pad_sag": M.takoz_padi(P)[0],
+    "takoz_pad_sol": M.takoz_padi(P)[1],
     "toz_kapagi":    None,          # asagida ayri
     "bant_sag":      bs[0],
     "bant_sol":      bs[1],
