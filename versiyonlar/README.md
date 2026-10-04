@@ -13,7 +13,8 @@ ve ilgili dokümanlar.
 | [v1](v1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 15.5 | çapraz pim, 96 mm² | 0.80–0.98 m | ilk test |
 | [v1.1](v1.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **12.0** | **omuz, 303 mm²** | 0.79–0.97 m | basıldı |
 | [v1.2](v1.2/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 270 mm² | 0.79–0.97 m | basıldı |
-| [**v1.3**](v1.3/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.78–0.97 m | **güncel** |
+| [v1.3](v1.3/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.78–0.97 m | ağ çıkamıyordu |
+| [**v1.4**](v1.4/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.73–0.95 m | **güncel** |
 | [v2](v2/SURUM.md) | 255.2 mm | 170 mm | 56.7 mm | 35° | 70 mm | 15.5 | çapraz pim, 96 mm² | 1.13–1.34 m | beklemede |
 
 \* Gmod 0.45 MPa varsayımıyla, 2 bant. Bant sertliği **hâlâ ölçülmedi** —
@@ -47,6 +48,15 @@ kapatıldı, sadece Ø3 ip deliği kaldı; yuva ağzına **tutma dudağı** (Ø8
 boncuk Ø8.80) eklendi; hazne→başlık geçişi **koni** yapıldı ve kapsül
 **ağız yukarı** basılacak şekilde çevrildi — iç destek ve basamak kalmadı.
 Bant ölçüm yöntemi: `v1.3/dok/BANT_OLCUMU.md`.
+
+**v1.3 → v1.4 — ağ namluya taşındı.** 6 boncuk borusu 40° eğimli olduğu için
+ağız düzleminde elips kesit veriyor ve R12 bölüm dairesinde çevrenin 72/75.4
+mm'sini kaplıyordu: merkezde ağa **55 mm² (Ø8.3)** kalıyordu, 39 m ip oradan
+geçmez. Ayar hatası değil, mimari çıkmaz — omuz ≥250 mm² için R_pitch ≤ 12.26
+ve orada bile merkez 62 mm². **Durdurma omzu ile merkezi ağ çıkışı bir arada
+olamaz.** Çözüm: ağ kapsülün değil, namlunun içinde, kapsülün önünde duruyor;
+kapsül piston. Ağ hacmi 22.1 → **134.6 cm³**, doluluk %75 → **%8**. Başlık
+masifleşti (kapsül 43.8 → 51.4 g, mesafe −0.02 m). Ayrıntı: `v1.4/dok/V1_4_AG_YERI.md`.
 
 **v1 → v2 — uzun namlu + uzun bant.** λ sabit tutulunca kurma kuvveti strok'tan
 bağımsız kalıyor (ikisi de 426 N), ama depolanan enerji bant hacmiyle 2.75×

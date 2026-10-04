@@ -256,23 +256,25 @@ def kapsul(p, y0):
       2. Boncugu tutan dudak: yuva agzinda hafif daralma (D_yuva - lip_dar).
          Elde dururken boncuk dusmez; atista 4 g x ~50000 g atalet kuvveti
          (~2000 N) dudagi kolayca gecer.
-      3. Hazne -> baslik gecisi KONI: basamak yok (ag takilmiyor) ve kapsul
-         AGIZ YUKARI basildiginda tavan kalmiyor (destek gerekmiyor).
+      3. Ag KAPSULDEN CIKMIYOR: namluda, kapsulun onunde duruyor.
+         Baslik masif; ic bosluk sadece agirlik icin ve KONI
+         (agiz yukari basimda tavan yok, destek gerekmiyor).
     """
     Rk = Rb - p["bosluk"] / 2; Rh = Rk - p["t_govde"]
     L = p["L_kapsul"]; a = math.radians(p["ALFA"])
     t_k = p["t_kapak"]; y_kap = L - t_k            # baslik dibi
-    r_cap = p["r_ag_cikis"]                        # baslikdaki ag gecisi
-    h_koni = p["h_hazne_koni"]
 
     g = sil(Rk, L, V(0, 0, 0), V(0, 1, 0))
-    # --- hazne: silindir + KONI (basamaksiz, agiz yukari kendini tasir) ---
+    # --- IC BOSLUK (agirlik azaltma) ---
+    # AG ARTIK KAPSULUN ICINDE DEGIL. 6 boncuk borusu agzi neredeyse tamamen
+    # kapatiyordu: merkezde sadece 55 mm2 (O8.3) kaliyordu ve 39 m ip oradan
+    # gecemez. Omuz >=250 mm2 isterken R_pitch <= 12.26 olmak zorunda, o
+    # durumda bile merkez 62 mm2 -- yani DURDURMA OMZU ile MERKEZI AG CIKISI
+    # ayni anda mumkun degil. Ag namluya, kapsulun ONUNE yerlestiriliyor;
+    # kapsul pistondur. Boylece baslik MASIF kalabiliyor.
+    # Bosluk KONI: agiz yukari basimda tavan yok, kendini tasir.
     y_sil = p["t_arka_blok"]
-    y_kon = y_kap - h_koni
-    g = g.cut(sil(Rh, y_kon - y_sil, V(0, y_sil, 0), V(0, 1, 0)))
-    g = g.cut(Part.makeCone(Rh, r_cap, h_koni, V(0, y_kon, 0), V(0, 1, 0)))
-    # --- baslikta ag gecisi (duz delik, koninin devami) ---
-    g = g.cut(sil(r_cap, t_k + 1, V(0, y_kap, 0), V(0, 1, 0)))
+    g = g.cut(Part.makeCone(Rh, 0.0, y_kap - y_sil, V(0, y_sil, 0), V(0, 1, 0)))
     # --- tutma kanali + capraz pim deligi ---
     g = g.cut(sil(Rk + 4, p["kanal_w"], V(0, p["kanal_y0"], 0), V(0, 1, 0)).cut(
         sil(Rk - p["kanal_d"], p["kanal_w"] + 2, V(0, p["kanal_y0"] - 1, 0), V(0, 1, 0))))

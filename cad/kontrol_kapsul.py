@@ -47,8 +47,9 @@ T = [("yuva ortasi BOS",        agiz - eks * (der / 2),               False),
                                 + V(0, 0, dy / 2 + P["t_yuva"] / 2),  True),
      ("dudak hizasi DAR",       agiz - eks * 0.3
                                 + V(0, 0, (dy - P["lip_dar"]) / 2 + 0.25), True),
-     ("ag gecisi (eksen) acik", V(0, y0 + L - 2, 0),                  False),
-     ("hazne ortasi acik",      V(0, y0 + L - 25, 0),                 False),
+     # AG ARTIK KAPSULDE DEGIL -> baslik merkezi MASIF olmali
+     ("baslik merkezi MASIF",   V(0, y0 + L - 2, 0),                  True),
+     ("ic bosluk (agirlik) acik", V(0, y0 + L - 25, 0),               False),
      ("arka blok dolu",         V(0, y0 + 12, 0),                     True)]
 
 ok = True
@@ -66,15 +67,25 @@ print(f"\n  dudak capi {d_lip:.2f} < boncuk {P['D_bilye']:.2f} -> "
 print(f"  boncugun yuvaya girme derinligi {der - P['lip_boy']:.1f} mm "
       f"(boncuk capi {P['D_bilye']:.2f})")
 
-# --- hazne hacmi: kapsulun ic bosluğu ---
-# ic bosluk = kapsulun dis zarfi - gercek kati
+# --- kutle ve durdurma enerjisi ---
 zarf = Part.makeCylinder(Rk, L, V(0, y0, 0), V(0, 1, 0))
 ic_hacim = (zarf.Volume - sek.common(zarf).Volume) / 1000.0
-L_ip = 39.2; A_ip = math.pi / 4 * 0.60 ** 2
-V_ip = L_ip * 1000 * A_ip / 1000.0
-print(f"\n  KAPSUL IC BOSLUGU   {ic_hacim:6.2f} cm3")
-print(f"  ag ipi (39.2 m x O0.60) kati hacmi {V_ip:.2f} cm3")
-print(f"  gereken doluluk      %{V_ip / ic_hacim * 100:.0f}  "
-      f"({'rahat' if V_ip / ic_hacim < 0.55 else 'sikisik' if V_ip / ic_hacim < 0.75 else 'YETMEZ'})")
+m_kap = sek.Volume / 1000.0 * 1.27 * 0.82          # PETG, baski dolulugu
+m_pim = 4.41 * 2.70                                 # capraz pim, aluminyum
+print(f"\n  kapsul kati {sek.Volume/1000:5.2f} cm3 -> ~{m_kap:.1f} g "
+      f"(ic bosluk {ic_hacim:.1f} cm3, agirlik azaltma)")
+print(f"  DURACAK KUTLE {m_kap + m_pim:.1f} g (kapsul + capraz pim)")
+for v in (17.1, 23.1, 27.7):
+    print(f"    v={v:4.1f} m/s -> {0.5*(m_kap+m_pim)/1000*v**2:5.1f} J durdurulacak")
+
+# --- AG ARTIK NAMLUDA: kapsulun onundeki hacim ---
+Rb_i = P["D_bore"] / 2
+strok = P["STROK"]
+V_namlu = math.pi * Rb_i ** 2 * strok / 1000.0
+L_ip = 39.2; V_ip = L_ip * 1000 * math.pi / 4 * 0.60 ** 2 / 1000.0
+print(f"\n  AG NAMLUDA, KAPSULUN ONUNDE:")
+print(f"    kullanilabilir hacim {V_namlu:6.1f} cm3 (O{2*Rb_i:.1f} x {strok:.0f} mm strok)")
+print(f"    ag ipi kati hacmi    {V_ip:6.1f} cm3")
+print(f"    doluluk              %{V_ip/V_namlu*100:.0f}  (kapsul icindeyken %75 sikisikti)")
 
 print("\nSONUC:", "KAPSUL GEOMETRISI DOGRU" if ok else "!!! HATALI !!!")
