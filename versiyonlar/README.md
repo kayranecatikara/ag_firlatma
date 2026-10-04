@@ -17,8 +17,7 @@ ve ilgili dokümanlar.
 | [v1.4](v1.4/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.73–0.95 m | ağ namluda |
 | [v1.5](v1.5/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 / 13.4 | omuz, 282 mm² | 0.73–0.97 m | ağ geçişi Ø10.8 — yetersiz |
 | [v2.0](v2.0/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 18.2 | omuz, 300 mm² | 0.62–0.90 m | merkez hâlâ dar |
-| [v2.1](v2.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **22.0** | takoz, 304 mm² | 0.72–0.94 m | kapsül ağırdı |
-| [**v2.2**](v2.2/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | **41 mm** | 22.0 | takoz, 304 mm² | **0.78–0.97 m** | **güncel** |
+| [**v2.1**](v2.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **22.0** | takoz, 304 mm² | 0.72–0.94 m | **güncel** |
 | [v2](v2/SURUM.md) | 255.2 mm | 170 mm | 56.7 mm | 35° | 70 mm | 15.5 | çapraz pim, 96 mm² | 1.13–1.34 m | beklemede |
 
 \* Gmod 0.45 MPa varsayımıyla, 2 bant. Bant sertliği **hâlâ ölçülmedi** —
@@ -89,17 +88,6 @@ onu sarıyor, namlu deliği dışarıdan kapatıyor. Merkez **556 mm² (Ø26.6)*
 v2.0'ın 2.1 katı; hazne doluluğu %21. Koni R29.1'den başlamak zorunda olduğu
 için omuz kalmadı; kapsülü **çapraz pim + namlu dışındaki durdurma takozu**
 durduruyor (304 mm² / 15.200 N, TPU ped 10.9 J).
-
-**v2.1 → v2.2 — kapsül hafifletildi.** Kapsülün 54 g'ının **38 g'ı** 16 mm'lik
-masif arka bloktaydı; kesilmek istenen üst kısım değil. Üstü yalnızca 5.1 mm
-kısaltılabiliyor (ıraksak koni bant ankrajını yemeden), o da 2.5 g.
-Asıl kazanç arka bloğu boşaltmaktan geldi — ama orası durdurmada çapraz pimin
-yaslandığı yer ve yatak emniyeti zaten 1.4×'ti. Önce **TPU ped 3 → 5 mm**
-yapıldı: tepe kuvvet 15.200 → **6.080 N**, yatak emniyeti **3.6×**. Sonra arka
-blok 45° koniyle boşaltıldı (pim deliğinin üstünde 2 mm malzeme kalacak
-şekilde) ve kapsül 45 → 41 mm kısaltıldı.
-Sonuç: kapsül **53.9 → 43.6 g**, menzil 0.72–0.94 → **0.78–0.97 m**.
-Ankraj payı 4.28 → 0.93 mm'ye indi (sınırda ama pozitif).
 
 **v1 → v2 — uzun namlu + uzun bant.** λ sabit tutulunca kurma kuvveti strok'tan
 bağımsız kalıyor (ikisi de 426 N), ama depolanan enerji bant hacmiyle 2.75×
