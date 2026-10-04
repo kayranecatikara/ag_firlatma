@@ -34,3 +34,6 @@ cad/eski_tasarimlar/**/*.npz
 # ---- Isletim sistemi ----
 .DS_Store
 Thumbs.db
+
+# web/: ara STL dosyalari regenere edilebilir (cad/web_geometri.py)
+web/geo/*.stl

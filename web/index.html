@@ -1,0 +1,651 @@
+<title>Ağ Fırlatıcı v1.1</title>
+<meta name="description" content="v1.1 ağ fırlatıcının montaj görünümü ve gerçek fırlatma simülasyonu">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Teknik gorsellestirici: solda 3B tuval, sagda parca rayi, altta zaman cizgisi.
+   Renkler projenin kendi cizim paletinden: mesh mavisi, halat yesili, olcu turuncusu. */
+:root{
+  --ground:#f3f2f0; --panel:#ffffff; --panel-2:#e9e7e4; --line:#d2cfca;
+  --ink:#16181c; --ink-2:#5c6069; --ink-3:#8b9099;
+  --accent:#d1561f;      /* olcu turuncusu */
+  --mesh:#2a6fd6;        /* goz ipi */
+  --rope:#128a62;        /* cevre halati */
+  --warn:#b4452a; --ok:#128a62;
+  --scene:#e4e2de; --scene-grid:#cbc7c1;
+  --metal:#8a8f96; --petg:#c2772f; --tpu:#4d5157; --rubber:#4a4e55;
+  --font-ui:"Barlow Semi Condensed",ui-sans-serif,system-ui,sans-serif;
+  --font-num:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#121417; --panel:#1a1d21; --panel-2:#23262b; --line:#32363c;
+  --ink:#e8eaed; --ink-2:#a2a8b2; --ink-3:#6e747e;
+  --accent:#f0813f; --mesh:#56a0ff; --rope:#2fc694;
+  --warn:#ff7a5c; --ok:#2fc694;
+  --scene:#0e1013; --scene-grid:#22262c;
+  --metal:#9aa0a8; --petg:#d98a3d; --tpu:#6d737b; --rubber:#5b616a;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --ground:#121417; --panel:#1a1d21; --panel-2:#23262b; --line:#32363c;
+  --ink:#e8eaed; --ink-2:#a2a8b2; --ink-3:#6e747e;
+  --accent:#f0813f; --mesh:#56a0ff; --rope:#2fc694;
+  --warn:#ff7a5c; --ok:#2fc694;
+  --scene:#0e1013; --scene-grid:#22262c;
+  --metal:#9aa0a8; --petg:#d98a3d; --tpu:#6d737b; --rubber:#5b616a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--font-ui);font-size:15px;line-height:1.45;overflow:hidden}
+.num{font-family:var(--font-num);font-variant-numeric:tabular-nums}
+
+#app{display:grid;height:100%;
+  grid-template-columns:1fr 282px;grid-template-rows:auto 1fr auto;
+  grid-template-areas:"head head" "view rail" "foot foot"}
+
+header{grid-area:head;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));
+  background:var(--panel);border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:19px;font-weight:600;letter-spacing:.01em}
+header .tag{font-family:var(--font-num);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);
+  border-radius:3px;padding:1px 6px}
+header .sub{color:var(--ink-2);font-size:13.5px;margin-left:auto;
+  font-family:var(--font-num)}
+
+#view{grid-area:view;position:relative;background:var(--scene);min-width:0}
+#cv{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+#cv.drag{cursor:grabbing}
+#hud{position:absolute;left:12px;top:12px;pointer-events:none;
+  font-family:var(--font-num);font-size:12px;color:var(--ink-2);
+  background:color-mix(in srgb,var(--panel) 86%,transparent);
+  border:1px solid var(--line);border-radius:5px;padding:7px 10px;
+  display:grid;gap:3px;min-width:154px}
+#hud b{color:var(--ink);font-weight:600}
+#hud .hl{color:var(--accent)}
+#tip{position:absolute;right:12px;bottom:12px;pointer-events:none;
+  font-size:12px;color:var(--ink-3);font-family:var(--font-num);text-align:right}
+
+#rail{grid-area:rail;background:var(--panel);border-left:1px solid var(--line);
+  overflow-y:auto;min-width:0}
+.grp{border-bottom:1px solid var(--line);padding:11px 13px}
+.grp h2{margin:0 0 8px;font-size:11.5px;font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3)}
+.pl{display:grid;gap:1px}
+.p{display:grid;grid-template-columns:11px 1fr auto;align-items:center;gap:8px;
+  padding:4px 6px;border-radius:4px;border:0;background:none;width:100%;
+  text-align:left;color:var(--ink);font:inherit;font-size:13.5px;cursor:pointer}
+.p:hover{background:var(--panel-2)}
+.p[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.p .sw{width:11px;height:11px;border-radius:2px;border:1px solid rgba(128,128,128,.4)}
+.p .qty{font-family:var(--font-num);font-size:11.5px;color:var(--ink-3)}
+.p.off{opacity:.38}
+.p.off .nm{text-decoration:line-through}
+
+.row{display:flex;align-items:center;gap:9px;margin:7px 0}
+.row label{font-size:13px;color:var(--ink-2);min-width:62px}
+input[type=range]{flex:1;min-width:0;accent-color:var(--accent);height:18px}
+.btn{font:inherit;font-size:13px;padding:5px 11px;border-radius:5px;
+  border:1px solid var(--line);background:var(--panel-2);color:var(--ink);
+  cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btns{display:flex;gap:6px;flex-wrap:wrap}
+
+dl.sp{display:grid;grid-template-columns:1fr auto;gap:3px 10px;margin:0;
+  font-size:13px}
+dl.sp dt{color:var(--ink-2);min-width:0}
+dl.sp dd{margin:0;font-family:var(--font-num);font-size:12.5px;text-align:right;
+  font-variant-numeric:tabular-nums}
+dl.sp dd.good{color:var(--ok)}
+dl.sp dd.hot{color:var(--warn)}
+
+footer{grid-area:foot;background:var(--panel);border-top:1px solid var(--line);
+  padding:9px 16px;padding-bottom:calc(9px + env(safe-area-inset-bottom,0px));
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+footer .play{width:38px;height:32px;display:grid;place-items:center;font-size:14px}
+#tl{flex:1;min-width:150px}
+#tlab{font-family:var(--font-num);font-size:12.5px;color:var(--ink-2);
+  min-width:96px;text-align:right}
+.phase{font-family:var(--font-num);font-size:11.5px;letter-spacing:.05em;
+  text-transform:uppercase;padding:2px 8px;border-radius:3px;
+  background:var(--panel-2);color:var(--ink-2);border:1px solid var(--line)}
+.phase.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.note{font-size:12.5px;color:var(--ink-3);line-height:1.4}
+.note b{color:var(--ink-2);font-weight:500}
+
+#load{position:absolute;inset:0;display:grid;place-items:center;
+  background:var(--scene);color:var(--ink-2);font-family:var(--font-num);
+  font-size:13px;z-index:5}
+
+@media (max-width:860px){
+  #app{grid-template-columns:1fr;grid-template-rows:auto 1fr auto auto;
+    grid-template-areas:"head" "view" "foot" "rail"}
+  #rail{border-left:0;border-top:1px solid var(--line);max-height:46vh}
+  #view{min-height:46vh}
+  header .sub{width:100%;margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<div id="app">
+  <header>
+    <h1>Ağ Fırlatıcı</h1>
+    <span class="tag">v1.1</span>
+    <span class="sub">namlu 149.8 mm · strok 91 · Ø2.2 m ağ · 6 × Ø9 boncuk · 2 bant</span>
+  </header>
+
+  <div id="view">
+    <canvas id="cv"></canvas>
+    <div id="hud">
+      <div>t <b class="num" id="h_t">—</b></div>
+      <div>ağ çapı <b class="num" id="h_d">—</b></div>
+      <div>menzil <b class="num" id="h_z">—</b></div>
+      <div>tepe gerilim <b class="num" id="h_T">—</b></div>
+    </div>
+    <div id="tip">sürükle: döndür · tekerlek: yakınlaş · sağ tık / iki parmak: kaydır</div>
+    <div id="load">geometri yükleniyor…</div>
+  </div>
+
+  <div id="rail">
+    <div class="grp">
+      <h2>Görünüm</h2>
+      <div class="btns">
+        <button class="btn" id="v_montaj" aria-pressed="true">Montaj</button>
+        <button class="btn" id="v_kesit">Kesit</button>
+        <button class="btn" id="v_atis">Atış</button>
+      </div>
+      <div class="row"><label for="exp">Patlat</label>
+        <input type="range" id="exp" min="0" max="100" value="0"></div>
+      <div class="row"><label for="sec">Kesme</label>
+        <input type="range" id="sec" min="0" max="100" value="100"></div>
+    </div>
+
+    <div class="grp">
+      <h2>Parçalar</h2>
+      <div class="pl" id="pl"></div>
+      <div class="note" style="margin-top:9px">
+        Parçaya tıkla: yalnız onu göster. Tekrar tıkla: hepsi geri.
+        Kutucuğa tıkla: gizle/göster.
+      </div>
+    </div>
+
+    <div class="grp">
+      <h2>Bu an</h2>
+      <dl class="sp" id="sp"></dl>
+    </div>
+
+    <div class="grp">
+      <h2>Tasarım</h2>
+      <dl class="sp">
+        <dt>Namlu</dt><dd>149.8 mm</dd>
+        <dt>İç çap</dt><dd>Ø43.4</dd>
+        <dt>Strok</dt><dd>91 mm</dd>
+        <dt>Bant serbest boy</dt><dd>30.3 mm</dd>
+        <dt>Kurulu uzama</dt><dd>×4.0</dd>
+        <dt>Yuva eğimi</dt><dd>40°</dd>
+        <dt>Boncuk çemberi</dt><dd>R12.0</dd>
+        <dt>Durdurma omuzu</dt><dd>303 mm²</dd>
+        <dt>Ağ</dt><dd>Ø2.2 m · göz 220</dd>
+        <dt>İp</dt><dd>Dyneema Ø0.60</dd>
+      </dl>
+      <div class="note" style="margin-top:9px">
+        Hareket <b>gerçek simülasyon verisi</b> — <code>agsim/netfull.py</code>
+        çözümü, 95 düğüm / 182 eleman. Bant sertliği <b>ölçülmedi</b>;
+        0.45 MPa varsayıldı.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <button class="btn play" id="play" aria-label="Oynat">▶</button>
+    <input type="range" id="tl" min="0" max="1000" value="0">
+    <span id="tlab" class="num">0.0 ms</span>
+    <span class="phase" id="ph1">kurulu</span>
+    <span class="phase" id="ph2">namluda</span>
+    <span class="phase" id="ph3">açılma</span>
+    <span class="phase" id="ph4">çöküş</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- parca tanimlari: dosya, renk rolu, patlatma yonu ---------- */
+const PARTS=[
+ {f:"namlu_govde",    n:"Namlu gövdesi",     mat:"petg",  q:"01a", ex:[0,0,0]},
+ {f:"agiz_basligi",   n:"Ağız başlığı",      mat:"petg",  q:"01b", ex:[0,1,0]},
+ {f:"omuz_halkasi",   n:"Omuz halkası",      mat:"tpu",   q:"10",  ex:[0,.72,0]},
+ {f:"kapsul",         n:"Kapsül",            mat:"petg",  q:"02",  ex:[0,-.85,0]},
+ {f:"capraz_pim",     n:"Çapraz pim",        mat:"metal", q:"09",  ex:[0,-1.25,0]},
+ {f:"tetik_pim_sag",  n:"Tetik pimi (sağ)",  mat:"metal", q:"—",   ex:[1,0,0]},
+ {f:"tetik_pim_sol",  n:"Tetik pimi (sol)",  mat:"metal", q:"—",   ex:[-1,0,0]},
+ {f:"tetik_kapak_sag",n:"Tetik kapağı (sağ)",mat:"petg",  q:"03",  ex:[1.5,0,0]},
+ {f:"tetik_kapak_sol",n:"Tetik kapağı (sol)",mat:"petg",  q:"04",  ex:[-1.5,0,0]},
+ {f:"bant_sag",       n:"Lastik bant (sağ)", mat:"rubber",q:"D1",  ex:[0,0,1]},
+ {f:"bant_sol",       n:"Lastik bant (sol)", mat:"rubber",q:"D1",  ex:[0,0,-1]},
+ {f:"tampon_ust",     n:"Tampon (üst)",      mat:"tpu",   q:"07",  ex:[0,0,1.3]},
+ {f:"tampon_alt",     n:"Tampon (alt)",      mat:"tpu",   q:"08",  ex:[0,0,-1.3]},
+ {f:"toz_kapagi",     n:"Toz kapağı",        mat:"petg",  q:"06",  ex:[0,-1.6,0]}
+];
+const EX_MM=120;
+
+let scene,cam,ren,root,clip,raf=null;
+let meshes={},boncukGrp=null,servoGrp=null,netLine=null,netPts=null;
+let SIM=null,IDX=null,maxR=1;
+let yaw=-0.72,pitch=0.30,dist=560,tgt=new THREE.Vector3(0,80,0);
+let explodeV=0,secV=1,solo=null,hidden=new Set();
+let playing=false,tNorm=0,lastMs=0;
+
+/* animasyon zaman cizgisi: namlu ici yol + ucus */
+const T_PRE=10, T_TRAVEL=9;      /* ms: kurulu bekleme + namluda ilerleme */
+let T_FLIGHT=320, T_TOTAL=339;
+
+/* ---------- nicemlenmis mesh cozucu (web_geo_paketle.py cikti formati) ---------- */
+function unpackMesh(m){
+  const bin=atob(m.b64), n=bin.length>>1;
+  const u=new Uint8Array(n*2);
+  for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
+  const q=new Int16Array(u.buffer);
+  const pos=new Float32Array(n);
+  const c=m.merkez, h=m.yari;
+  for(let i=0;i<n;i+=3){
+    pos[i]  =c[0]+q[i]  /32767*h[0];
+    pos[i+1]=c[1]+q[i+1]/32767*h[1];
+    pos[i+2]=c[2]+q[i+2]/32767*h[2];
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute("position",new THREE.BufferAttribute(pos,3));
+  g.computeVertexNormals();
+  return g;
+}
+
+function matFor(role,clipPlanes){
+  const c={petg:css("--petg"),metal:css("--metal"),tpu:css("--tpu"),
+           rubber:css("--rubber")}[role]||css("--metal");
+  return new THREE.MeshStandardMaterial({
+    color:new THREE.Color(c),
+    metalness:role==="metal"?.72:.08,
+    roughness:role==="metal"?.34:(role==="rubber"?.95:.62),
+    side:THREE.DoubleSide, clippingPlanes:clipPlanes, clipShadows:false,
+    transparent:true, opacity:1
+  });
+}
+
+/* ---------- sahne ---------- */
+function initScene(){
+  const cv=$("#cv");
+  ren=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+  ren.setPixelRatio(Math.min(devicePixelRatio,2));
+  ren.localClippingEnabled=true;
+  scene=new THREE.Scene();
+  cam=new THREE.PerspectiveCamera(38,1,1,20000);
+  root=new THREE.Group(); scene.add(root);
+  clip=new THREE.Plane(new THREE.Vector3(0,0,-1),1e5);
+
+  scene.add(new THREE.AmbientLight(0xffffff,.52));
+  const d1=new THREE.DirectionalLight(0xffffff,.85); d1.position.set(220,420,320);
+  const d2=new THREE.DirectionalLight(0xffffff,.34); d2.position.set(-320,-120,-240);
+  scene.add(d1,d2);
+
+  const grid=new THREE.GridHelper(2400,24,
+    new THREE.Color(css("--scene-grid")),new THREE.Color(css("--scene-grid")));
+  grid.position.y=-80; grid.material.opacity=.5; grid.material.transparent=true;
+  root.add(grid);
+  applyTheme();
+}
+function applyTheme(){ scene.background=new THREE.Color(css("--scene")); }
+
+/* ---------- yukleme ---------- */
+async function load(){
+  const [geo,sim]=await Promise.all([
+    fetch("geo.json").then(r=>r.json()),
+    fetch("sim.json").then(r=>r.json())
+  ]);
+  IDX=geo; SIM=sim;
+  T_FLIGHT=sim.t_ms[sim.t_ms.length-1];
+  T_TOTAL=T_PRE+T_TRAVEL+T_FLIGHT;
+
+  PARTS.forEach(p=>{
+    const src=geo.mesh[p.f];
+    if(!src){ console.warn("mesh yok:",p.f); return; }
+    const m=new THREE.Mesh(unpackMesh(src),matFor(p.mat,[clip]));
+    m.userData=p; root.add(m); meshes[p.f]=m;
+  });
+
+  buildBoncuk(); buildServo(); buildNet();
+  buildList(); fitCamera();
+  $("#load").remove();
+  setMode("montaj");
+  draw();
+}
+
+function buildBoncuk(){
+  boncukGrp=new THREE.Group();
+  const g=new THREE.SphereGeometry(IDX.boncuk.cap/2,22,16);
+  const m=new THREE.MeshStandardMaterial({color:new THREE.Color(css("--ink")),
+    metalness:.78,roughness:.3,clippingPlanes:[clip],transparent:true});
+  IDX.boncuk.merkez.forEach(c=>{
+    const s=new THREE.Mesh(g,m); s.position.set(c[0],c[1],c[2]); boncukGrp.add(s);
+  });
+  root.add(boncukGrp);
+}
+
+function buildServo(){
+  servoGrp=new THREE.Group();
+  const g=new THREE.BoxGeometry(40,20,37);
+  const m=new THREE.MeshStandardMaterial({color:new THREE.Color(css("--tpu")),
+    metalness:.2,roughness:.7,clippingPlanes:[clip],transparent:true});
+  [1,-1].forEach(s=>{
+    const b=new THREE.Mesh(g,m);
+    b.position.set(s*(IDX.olcu.D_bore/2+IDX.olcu.t_duvar+IDX.olcu.boss_h+22),
+                   IDX.olcu.y_tetik,0);
+    servoGrp.add(b);
+  });
+  root.add(servoGrp);
+}
+
+function buildNet(){
+  const N=SIM.dugum, E=SIM.eleman;
+  const pos=new Float32Array(E.length*6), col=new Float32Array(E.length*6);
+  const g=new THREE.BufferGeometry();
+  g.setAttribute("position",new THREE.BufferAttribute(pos,3));
+  g.setAttribute("color",new THREE.BufferAttribute(col,3));
+  netLine=new THREE.LineSegments(g,new THREE.LineBasicMaterial({
+    vertexColors:true,transparent:true}));
+  root.add(netLine);
+
+  const pg=new THREE.BufferGeometry();
+  pg.setAttribute("position",new THREE.BufferAttribute(new Float32Array(N*3),3));
+  netPts=new THREE.Points(pg,new THREE.PointsMaterial({
+    size:7,sizeAttenuation:false,color:new THREE.Color(css("--ink")),
+    transparent:true}));
+  root.add(netPts);
+}
+
+/* ---------- animasyon durumu ---------- */
+function frameAt(ms){
+  const t=SIM.t_ms, lo=Math.max(0,ms);
+  let i=0; while(i<t.length-1 && t[i+1]<lo) i++;
+  const j=Math.min(i+1,t.length-1);
+  const s=(t[j]-t[i])>1e-9?(lo-t[i])/(t[j]-t[i]):0;
+  return {i,j,s:Math.max(0,Math.min(1,s))};
+}
+
+function updateAnim(){
+  const ms=tNorm*T_TOTAL;
+  const inBarrel = ms < T_PRE+T_TRAVEL;
+  const flightMs = Math.max(0, ms-(T_PRE+T_TRAVEL));
+
+  /* kapsul + boncuk namludaki yolu */
+  let adv;
+  if(ms<=T_PRE) adv=0;
+  else if(inBarrel) adv=(ms-T_PRE)/T_TRAVEL;
+  else adv=1;
+  const dy=(adv-1)*IDX.olcu.STROK;     /* kurulu: -91, durmus: 0 */
+  meshes.kapsul.position.y=dy;
+  meshes.capraz_pim.position.y=dy;
+  boncukGrp.position.y=dy;
+  meshes.tampon_ust.visible=meshes.tampon_alt.visible=!hidden.has("tampon_ust");
+
+  /* bant: kurulu iken uzun ve ince, bosalinca kisa */
+  const strain=1-adv;
+  ["bant_sag","bant_sol"].forEach(k=>{
+    const m=meshes[k]; if(!m) return;
+    m.scale.set(1,1,1);
+    m.position.y=dy*0.5*strain;
+    const sc=Math.max(.35,1-adv*0.62);
+    m.scale.y=sc;
+  });
+
+  /* ag dugumleri */
+  const f=frameAt(flightMs);
+  const A=SIM.kareler[f.i], B=SIM.kareler[f.j], s=f.s;
+  const E=SIM.eleman, pos=netLine.geometry.attributes.position.array;
+  const col=netLine.geometry.attributes.color.array;
+  const pp=netPts.geometry.attributes.position.array;
+  const packed=inBarrel;
+  const meshC=new THREE.Color(css("--mesh")), ropeC=new THREE.Color(css("--rope"));
+  const hotC=new THREE.Color(css("--warn"));
+  const nd=SIM.dugum;
+  const X=new Float32Array(nd*3);
+  for(let k=0;k<nd*3;k++){
+    let v=A[k]+(B[k]-A[k])*s;
+    if(packed && k%3===1) v+=dy;            /* namludayken kapsulle beraber */
+    X[k]=v;
+  }
+  for(let k=0;k<nd;k++){ pp[k*3]=X[k*3]; pp[k*3+1]=X[k*3+1]; pp[k*3+2]=X[k*3+2]; }
+  netPts.geometry.attributes.position.needsUpdate=true;
+
+  for(let e=0;e<E.length;e++){
+    const a=E[e][0]*3,b=E[e][1]*3;
+    pos[e*6]=X[a];   pos[e*6+1]=X[a+1]; pos[e*6+2]=X[a+2];
+    pos[e*6+3]=X[b]; pos[e*6+4]=X[b+1]; pos[e*6+5]=X[b+2];
+    const dx=X[b]-X[a],dyy=X[b+1]-X[a+1],dz=X[b+2]-X[a+2];
+    const L=Math.sqrt(dx*dx+dyy*dyy+dz*dz);
+    const eps=Math.max(0,Math.min(1,(L/SIM.eleman_boy0[e]-1)/0.03));
+    const base = e<SIM.n_ic_eleman ? meshC : ropeC;   /* kafes mavi, halat yesil */
+    const c=base.clone().lerp(hotC,eps);              /* gerildikce kizarir */
+    for(let v=0;v<2;v++){ col[e*6+v*3]=c.r; col[e*6+v*3+1]=c.g; col[e*6+v*3+2]=c.b; }
+  }
+  netLine.geometry.attributes.position.needsUpdate=true;
+  netLine.geometry.attributes.color.needsUpdate=true;
+
+  updateReadouts(ms,flightMs,f,inBarrel);
+}
+
+function updateReadouts(ms,flightMs,f,inBarrel){
+  const R=SIM.R_m[f.i]+(SIM.R_m[f.j]-SIM.R_m[f.i])*f.s;
+  const T=SIM.T_max_N[f.i]+(SIM.T_max_N[f.j]-SIM.T_max_N[f.i])*f.s;
+  const A=SIM.kareler[f.i];
+  let zs=0; for(let k=1;k<A.length;k+=3) zs+=A[k];
+  const z=(zs/(A.length/3)-SIM.agiz_y)/1000;
+  const pre=ms<=T_PRE;
+  $("#h_t").textContent=pre?"kurulu":(inBarrel?"namluda":flightMs.toFixed(0)+" ms");
+  $("#h_d").textContent=inBarrel?"paket":(2*R).toFixed(2)+" m";
+  $("#h_z").textContent=inBarrel?"0.00 m":Math.max(0,z).toFixed(2)+" m";
+  $("#h_T").textContent=inBarrel?"—":T.toFixed(1)+" N";
+  const pay=R/SIM.gerek_R;
+  $("#sp").innerHTML=
+    `<dt>Çıkış hızı</dt><dd>${SIM.v_cikis} m/s</dd>`+
+    `<dt>Kurma kuvveti</dt><dd>${SIM.F_kurma} N</dd>`+
+    `<dt>Depolanan</dt><dd>${SIM.E_depo} J</dd>`+
+    `<dt>Ağ yarıçapı</dt><dd>${R.toFixed(3)} m</dd>`+
+    `<dt>Gerekli (yarı kanat)</dt><dd>${SIM.gerek_R} m</dd>`+
+    `<dt>Pay</dt><dd class="${pay>=1?'good':'hot'}">${pay.toFixed(2)}×</dd>`+
+    `<dt>Tepe ip gerilimi</dt><dd>${T.toFixed(1)} N</dd>`;
+  $("#tlab").textContent=(pre?0:ms-T_PRE).toFixed(1)+" ms";
+  const i_tepe_ms=SIM.t_ms[SIM.i_tepe];
+  const on=[pre, inBarrel&&!pre, !inBarrel&&flightMs<=i_tepe_ms,
+            !inBarrel&&flightMs>i_tepe_ms];
+  ["#ph1","#ph2","#ph3","#ph4"].forEach((s,i)=>
+    $(s).classList.toggle("on",on[i]));
+}
+
+/* ---------- patlatma / kesit / gorunurluk ---------- */
+function applyExplode(){
+  PARTS.forEach(p=>{
+    const m=meshes[p.f]; if(!m) return;
+    m.position.x=p.ex[0]*explodeV*EX_MM;
+    m.position.z=p.ex[2]*explodeV*EX_MM;
+    if(p.f!=="kapsul"&&p.f!=="capraz_pim")
+      m.position.y=p.ex[1]*explodeV*EX_MM;
+    else m.position.y+=p.ex[1]*explodeV*EX_MM;
+  });
+  boncukGrp.position.x=0;
+  servoGrp.position.x=0;
+}
+function applyClip(){
+  clip.constant = secV>=1 ? 1e5 : (-120 + secV*240);
+}
+function applyVis(){
+  PARTS.forEach(p=>{
+    const m=meshes[p.f]; if(!m) return;
+    const shown = !hidden.has(p.f) && (!solo || solo===p.f);
+    m.visible=shown;
+    m.material.opacity = (solo && solo!==p.f) ? 0 : 1;
+  });
+  const netOn = !hidden.has("__ag") && (!solo || solo==="__ag");
+  netLine.visible=netPts.visible=netOn;
+  const bOn = !hidden.has("__boncuk") && (!solo || solo==="__boncuk");
+  boncukGrp.visible=bOn;
+  const sOn = !hidden.has("__servo") && (!solo || solo==="__servo");
+  servoGrp.visible=sOn;
+}
+
+/* ---------- parca listesi ---------- */
+function buildList(){
+  const extra=[{f:"__ag",n:"Ağ (95 düğüm)",mat:"mesh",q:"F1"},
+               {f:"__boncuk",n:"Boncuklar (6)",mat:"ink",q:"F4"},
+               {f:"__servo",n:"Servo (2)",mat:"tpu",q:"E1"}];
+  const all=PARTS.concat(extra);
+  const html=all.map(p=>{
+    const c={petg:"--petg",metal:"--metal",tpu:"--tpu",rubber:"--rubber",
+             mesh:"--mesh",ink:"--ink"}[p.mat]||"--metal";
+    return `<button class="p" data-f="${p.f}" aria-pressed="false">
+      <span class="sw" style="background:var(${c})"></span>
+      <span class="nm">${p.n}</span><span class="qty">${p.q}</span></button>`;
+  }).join("");
+  $("#pl").innerHTML=html;
+  $("#pl").addEventListener("click",ev=>{
+    const b=ev.target.closest(".p"); if(!b) return;
+    const f=b.dataset.f;
+    if(ev.target.classList.contains("sw")){
+      hidden.has(f)?hidden.delete(f):hidden.add(f);
+      b.classList.toggle("off",hidden.has(f));
+    }else{
+      solo = (solo===f)?null:f;
+      document.querySelectorAll(".p").forEach(x=>
+        x.setAttribute("aria-pressed",String(x.dataset.f===solo)));
+    }
+    applyVis(); draw();
+  });
+}
+
+/* ---------- kamera ---------- */
+function fitCamera(){
+  const box=new THREE.Box3();
+  Object.values(meshes).forEach(m=>box.expandByObject(m));
+  const c=box.getCenter(new THREE.Vector3());
+  tgt.copy(c); dist=box.getSize(new THREE.Vector3()).length()*1.15;
+  maxR=dist;
+}
+function updateCam(){
+  const cp=Math.cos(pitch);
+  cam.position.set(tgt.x+dist*cp*Math.sin(yaw), tgt.y+dist*Math.sin(pitch),
+                   tgt.z+dist*cp*Math.cos(yaw));
+  cam.lookAt(tgt);
+}
+function resize(){
+  const v=$("#view"), w=v.clientWidth, h=v.clientHeight;
+  if(!w||!h) return;
+  ren.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix();
+}
+
+/* ---------- mod dugmeleri ---------- */
+function setMode(m){
+  ["montaj","kesit","atis"].forEach(k=>
+    $("#v_"+k).setAttribute("aria-pressed",String(k===m)));
+  if(m==="montaj"){
+    secV=1; $("#sec").value=100; explodeV=0; $("#exp").value=0;
+    tNorm=0; playing=false; $("#play").textContent="▶";
+    yaw=-0.72; pitch=0.30; dist=maxR;
+  }else if(m==="kesit"){
+    secV=0.5; $("#sec").value=50; explodeV=0; $("#exp").value=0;
+    tNorm=0; playing=false; $("#play").textContent="▶";
+    yaw=0; pitch=0.06; dist=maxR*0.72;
+  }else{
+    secV=1; $("#sec").value=100; explodeV=0; $("#exp").value=0;
+    solo=null; document.querySelectorAll(".p").forEach(x=>
+      x.setAttribute("aria-pressed","false"));
+    tNorm=0; playing=true; lastMs=performance.now();
+    $("#play").textContent="❚❚";
+    yaw=-1.0; pitch=0.26; dist=maxR*3.4;
+    if(!raf) raf=requestAnimationFrame(tick);
+  }
+  applyClip(); applyExplode(); applyVis(); draw();
+}
+
+/* ---------- cizim dongusu ---------- */
+function draw(){ updateAnim(); updateCam(); resize(); ren.render(scene,cam); }
+function tick(now){
+  raf=null;
+  if(playing){
+    const dt=Math.min(64,now-lastMs); lastMs=now;
+    tNorm+=dt/(T_TOTAL*4.2);          /* ~4x yavas oynatim */
+    if(tNorm>=1){ tNorm=1; playing=false; $("#play").textContent="▶"; }
+    $("#tl").value=String(Math.round(tNorm*1000));
+  }
+  draw();
+  if(playing) raf=requestAnimationFrame(tick);
+}
+
+/* ---------- girdiler ---------- */
+function bind(){
+  const cv=$("#cv");
+  let drag=null;
+  cv.addEventListener("pointerdown",e=>{
+    cv.setPointerCapture(e.pointerId); cv.classList.add("drag");
+    drag={x:e.clientX,y:e.clientY,pan:e.button===2||e.shiftKey};
+  });
+  cv.addEventListener("pointermove",e=>{
+    if(!drag) return;
+    const dx=e.clientX-drag.x, dy=e.clientY-drag.y;
+    drag.x=e.clientX; drag.y=e.clientY;
+    if(drag.pan){
+      const k=dist*0.0016;
+      const right=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));
+      tgt.addScaledVector(right,-dx*k); tgt.y+=dy*k;
+    }else{
+      yaw-=dx*0.007;
+      pitch=Math.max(-1.45,Math.min(1.45,pitch+dy*0.007));
+    }
+    draw();
+  });
+  const end=e=>{ drag=null; cv.classList.remove("drag");
+    try{cv.releasePointerCapture(e.pointerId);}catch(_){} };
+  cv.addEventListener("pointerup",end);
+  cv.addEventListener("pointercancel",end);
+  cv.addEventListener("contextmenu",e=>e.preventDefault());
+  cv.addEventListener("wheel",e=>{
+    e.preventDefault();
+    dist=Math.max(60,Math.min(maxR*9,dist*(1+Math.sign(e.deltaY)*0.12)));
+    draw();
+  },{passive:false});
+
+  $("#exp").addEventListener("input",e=>{
+    explodeV=e.target.value/100; applyExplode(); draw(); });
+  $("#sec").addEventListener("input",e=>{
+    secV=e.target.value/100; applyClip(); draw(); });
+  $("#tl").addEventListener("input",e=>{
+    tNorm=e.target.value/1000; playing=false; $("#play").textContent="▶"; draw(); });
+  $("#play").addEventListener("click",()=>{
+    playing=!playing;
+    if(playing && tNorm>=1) tNorm=0;
+    lastMs=performance.now();
+    $("#play").textContent=playing?"❚❚":"▶";
+    if(playing && !raf) raf=requestAnimationFrame(tick);
+  });
+  $("#v_montaj").addEventListener("click",()=>setMode("montaj"));
+  $("#v_kesit").addEventListener("click",()=>setMode("kesit"));
+  $("#v_atis").addEventListener("click",()=>setMode("atis"));
+  addEventListener("resize",()=>draw());
+  matchMedia("(prefers-color-scheme:dark)").addEventListener("change",()=>{
+    applyTheme(); draw(); });
+}
+
+initScene(); bind();
+load().catch(err=>{
+  const el=$("#load");
+  if(el) el.textContent="Yükleme hatası: "+err.message;
+  console.error(err);
+});
+})();
+</script>

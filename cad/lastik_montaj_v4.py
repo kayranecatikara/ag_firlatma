@@ -293,12 +293,16 @@ def capraz_pim(p):
 
 
 def bantlar(p):
-    """4 bant: her kenarda 2 adet (z = +/-r_bant ve +/-(r_bant+dz))."""
+    """Bant gorselleri. ADET konfigdeki n_ankraj_yan'a UYAR: O13 bant ve
+    O14 ankraj deligiyle kenar basina 1 bant siginca liste 2 elemanlidir.
+    (Eski surum her zaman 4 uretiyordu; biri ankraji olmayan z=+47'ye
+    dusuyordu.) Gergin bant kesiti incelir: d = OD/sqrt(lam)."""
     d = p["bant_OD"] / math.sqrt(p["lam"])
     y0 = p["y_capraz0"] + 10.0; y1 = p["y_ankraj"] - 10.0
     out = []
     for s in (+1, -1):
-        for zc in (s * p["r_bant"], s * (p["r_bant"] + p["dz_bant"])):
+        for i in range(int(p["n_ankraj_yan"])):
+            zc = s * (p["r_bant"] + i * p["dz_bant"])
             out.append(sil(d / 2, y1 - y0, V(0, y0, zc), V(0, 1, 0)))
     return out
 
@@ -326,8 +330,7 @@ if __name__ == "__main__":
     tp1, tp2 = tamponlar(P); bs = bantlar(P)
     parcalar = {"V4_namlu": namlu(P), "V4_kapsul": kapsul(P, yk),
                 "V4_bilye": bilyeler(P, yk), "V4_capraz_pim": capraz_pim(P),
-                "V4_bant_1": bs[0], "V4_bant_2": bs[1],
-                "V4_bant_3": bs[2], "V4_bant_4": bs[3],
+                **{f"V4_bant_{i+1}": sh for i, sh in enumerate(bs)},
                 "V4_pim_sag": t1, "V4_pim_sol": t2,
                 "V4_kapak_sag": k1, "V4_kapak_sol": k2,
                 "V4_tampon_ust": tp1, "V4_tampon_alt": tp2,
