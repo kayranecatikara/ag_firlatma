@@ -178,3 +178,61 @@ Ağı kapsül içinde isteyen bir sürüm gerçekten gerekiyorsa, doğru yol
 namluyu Ø54'e büyütmek; söyle, o varyantı kurayım.
 
 Test merdivenine uy: ilk atış **1 bant + 40 mm çekiş**.
+
+
+---
+
+# DÜZELTME 2 — ÖNERİ TERSİNE ÇEVRİLDİ: `02b` KULLAN
+
+Kullanıcı sordu: *"ağ bilyelerin önünde olursa, bilyeler ağın etrafına değil
+içinden geçip ağı birbirine geçirmez mi?"* — **Haklı. `02` önermem hataydı.**
+
+## Ölçülen risk
+
+`02`'de kapsül namlu ağzında durduğu anda boncuklar çıkıyor; yani
+**boncukların başlangıç noktası ağın arka yüzüyle aynı düzlem.**
+
+| | |
+|---|---|
+| Boncuk radyal hızı | 18.5 m/s |
+| R12'den namlu cidarına | 9.7 mm |
+| Ağ demetinden çıkma süresi | **0.53 ms** |
+| O sürede eksende ilerleme | **11.6 mm** |
+| O dilimdeki iplik | **~5.0 m** |
+| Dilimin hacimce doluluğu | %8 |
+| Boncuk Ø8.8 vs göz 220 mm | gözden rahat geçer |
+
+Her boncuk ~5 m iplik içeren bir dilimi radyal olarak yarıyor. Seyrek olsa
+bile 6 boncuğun hiçbirinin takılmaması şans işi.
+
+## Doğru sıralama
+
+Gerçek ağ tabancaları **ağırlığı önde** fırlatır; ağ arkadan, köşelerinden
+**çekilerek** açılır. `02b` bu düzende: boncuklar önce çıkar, önlerinde
+hiçbir şey yoktur.
+
+## Kalan sorun ve açı takası
+
+`02b`'nin boğazı Ø10.8. Yuva açısını düşürmek boğazı büyütüyor ama açılma
+payını düşürüyor:
+
+| yuva açısı | R_pitch sınırı | boğaz | pay 0.25 MPa | pay 0.45 | pay 0.65 |
+|---|---|---|---|---|---|
+| 25° | 14.61 | Ø16.0 (201 mm²) | 0.82× ✗ | 0.89× ✗ | 0.93× ✗ |
+| 30° | 14.30 | Ø14.7 (171 mm²) | 0.91× ✗ | 0.99× ✗ | 1.03× |
+| **35°** | 13.91 | **Ø13.2 (136 mm²)** | 1.00× ✗ | **1.07×** | **1.10×** |
+| **40° (şimdiki)** | 13.40 | Ø11.1 (97 mm²) | **1.07×** | **1.14×** | **1.17×** |
+
+**Karar bant ölçümüne bağlı:**
+- Bant **0.35 MPa'nın altı** çıkarsa → 40°'de kal (boğaz dar ama ağ açılır)
+- Bant **0.35 MPa ve üstü** çıkarsa → **35°'ye in**, boğaz Ø11.1 → **Ø13.2**
+  (%40 daha geniş kesit), pay 1.07× ile hâlâ güvenli
+
+Ölçümü yap, söyle — 35°'lik kapsülü çıkarırım.
+
+## Ağı nasıl paketle
+
+Boğaz dar olduğu için paketleme yöntemi kritik:
+- **Katlı** paketle, rastgele tıkma (paraşüt torbası mantığı)
+- Köşeler (boncuklu uçlar) **en dışta/en önde** olsun — ilk onlar çekilecek
+- İpler birbirinin üstünden geçmesin; akordeon gibi katla

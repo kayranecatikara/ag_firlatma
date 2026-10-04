@@ -9,20 +9,23 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 
 ---
 
-> **KAPSÜL: `02` BAS. `02b` DENEYSEL — ÖNERİLMİYOR.**
+> **KAPSÜL: `02b_kapsul_hazneli` BAS.** (Önceki öneri düzeltildi.)
 >
-> | | `02_kapsul` | `02b_kapsul_hazneli` |
+> | | `02b` ağ İÇERİDE | `02` ağ NAMLUDA |
 > |---|---|---|
-> | Ağ nerede | **namluda**, kapsülün önünde | kapsülün içinde |
-> | Ağ çıkış kesiti | gerekmiyor (başlık masif) | **sadece 92 mm² = Ø10.8** |
-> | Ağızın açık oranı | — | **%6.5** |
-> | Kapsül kütlesi | 51.4 g | 44.3 g |
-> | Mesafe (0.45 MPa) | 0.73–0.95 m | 0.78–0.97 m |
+> | Sıralama | **ağırlık önde, ağ arkada** ✓ | ağ önde, ağırlık arkada ✗ |
+> | Boncuk ağı yarıyor mu | hayır | **evet — her biri ~5 m ipliği** |
+> | Ağ boğazı | Ø10.8 (97 mm²) | gerekmiyor |
+> | Kapsül kütlesi | 44.3 g | 51.4 g |
+> | Mesafe (0.45 MPa) | 0.78–0.97 m | 0.73–0.95 m |
 >
-> 6 boncuk yuvası ağız çevresinde **72 mm** yer istiyor (küçültülemez) ve
-> R13.4'te çevrenin %86'sını kaplıyor. Ø43.4 namluda 92 mm²'den fazlası
-> **mümkün değil**. 39 m ipin Ø10.8'den geçmesi beklenmemeli.
-> `02b` sadece karşılaştırma için duruyor. Ayrıntı: `out/V1_4_AG_YERI.md`.
+> Gerçek ağ tabancaları **ağırlığı önde** taşır; ağ arkadan köşeden
+> çekilerek açılır. `02`'de boncuklar ağın arka yüzünden çıkıyor ve
+> dışa giderken ~11.6 mm'lik bir ağ dilimini (içinde ~5 m iplik) radyal
+> olarak yarıyor — ağı kendi içinden geçirme riski gerçek.
+>
+> `02b`'nin tek sorunu Ø10.8 boğaz. Ağı **katlı** paketle (rastgele tıkma),
+> köşeler en dışta olsun. Ayrıntı: `out/V1_4_AG_YERI.md`.
 
 ## 1. PARÇA LİSTESİ
 
