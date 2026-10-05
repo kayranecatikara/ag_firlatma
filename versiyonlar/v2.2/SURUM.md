@@ -1,12 +1,12 @@
-# V2.2 — kapsül hafifletildi: arka blok boşaltıldı, 41 mm, 43.6 g
+# V2.2 — namlu Ø64 · durdurma omuzu geri (389 mm²) · merkez 491 mm²
 
-Dondurulma: 2026-10-04 · commit `ba79ea6`
+Dondurulma: 2026-10-05 · commit `55acdd2`
 
 ## Namlu / tahrik
 | | |
 |---|---|
 | Namlu boyu | **149.8 mm** |
-| İç çap | Ø55.0 mm |
+| İç çap | Ø64.0 mm |
 | Strok | **91 mm** |
 | Bant serbest boy L0 | **30.3 mm** |
 | Kurulu uzama λ | **×4.0** |
@@ -19,9 +19,9 @@ Dondurulma: 2026-10-04 · commit `ba79ea6`
 |---|---|
 | Kapsül boyu | 41.0 mm |
 | Yuva eğimi | **40°** |
-| Yuva | Ø9.6 mm, derinlik 7.0, R_pitch 22.0 |
+| Yuva | Ø9.6 mm, derinlik 6.5, R_pitch 22.5 |
 | Namlu boşluğu | 0.80 mm (yan başına 0.40) |
-| Durdurma omuzu | iç R 29.08 mm |
+| Durdurma omuzu | iç R 29.58 mm |
 | Boncuk | **6 × Ø9 mm**, yuva başına 1, toplam 24 g |
 
 ## Ağ
@@ -34,7 +34,7 @@ Dondurulma: 2026-10-04 · commit `ba79ea6`
 ## Bant ankrajı
 Ø14 mm geçiş deliği + Ø4 mm
 enine tutma pimi (bandı deler, karşı duvara oturur; ön yüzden
-6 mm geride). Ankraj yarıçapı 42 mm,
+6 mm geride). Ankraj yarıçapı 46 mm,
 kenar başına 1 bant.
 
 ## İçerik

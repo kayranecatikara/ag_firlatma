@@ -32,24 +32,24 @@ burada **yok** — onlar `malzeme_listesi.md`'de.
 
 | Dosya | Parça | Adet | Filament | Ölçü (X×Y×Z mm) | Filament |
 |---|---|---|---|---|---|
-| `01a_namlu_govde` | Namlu gövdesi (arka parça) | 1 | **PETG** | 100 × 91 × **140.7** | ~153.5 g |
-| `01b_agiz_basligi` | Ağız başlığı (ıraksak koni) | 1 | **PETG** | 80 × 116 × **16.8** | ~40.4 g |
-| `02_kapsul` | Kapsül | 1 | **PETG** | 54 × 54 × **41.0** | ~43.6 g |
+| `01a_namlu_govde` | Namlu gövdesi (arka parça) | 1 | **PETG** | 109 × 100 × **142.0** | ~178.2 g |
+| `01b_agiz_basligi` | Ağız başlığı (ıraksak koni) | 1 | **PETG** | 92 × 128 × **21.5** | ~56.1 g |
+| `02_kapsul` | Kapsül | 1 | **PETG** | 63 × 63 × **41.0** | ~74.4 g |
 | `03_tetik_kapagi_sag` | Tetik kartuş kapağı (sağ) | 1 | **PETG** | 18 × 18 × **3.0** | ~0.9 g |
 | `04_tetik_kapagi_sol` | Tetik kartuş kapağı (sol) | 1 | **PETG** | 18 × 18 × **3.0** | ~0.9 g |
 | `05_servo_makarasi` | Servo ip makarası | **2** | **PETG** | 10 × 10 × **6.4** | ~0.8 g |
-| `06_toz_kapagi` | Arka toz kapağı (opsiyonel) | 1 | **PETG** | 60 × 60 × **6.0** | ~10.1 g |
+| `06_toz_kapagi` | Arka toz kapağı (opsiyonel) | 1 | **PETG** | 69 × 69 × **6.0** | ~13.7 g |
 | `07_tampon_ust` | Yarık sonu tamponu (üst) | 1 | **TPU 95A** | 9 × 7 × **3.0** | ~0.1 g |
 | `08_tampon_alt` | Yarık sonu tamponu (alt) | 1 | **TPU 95A** | 9 × 7 × **3.0** | ~0.1 g |
 | `10_takoz_pad` | 10_takoz_pad | **2** | **TPU 95A** | 9 × 14 × **4.9** | ~3.0 g |
 
-**TOPLAM: PETG ~250 g · TPU ~3.2 g**
+**TOPLAM: PETG ~325 g · TPU ~3.2 g**
 
 Her parça hem `.stl` (baskı) hem `.step` (CAD, ölçü almak/değiştirmek için)
 olarak var. Ölçüler `parcalar.json`'da.
 
 ### Yazıcı şartı
-**Z yüksekliği ≥ 146 mm** gerekli (en uzun parça 140.7 mm).
+**Z yüksekliği ≥ 147 mm** gerekli (en uzun parça 142.0 mm).
 Tabla ≥ 110 × 110 mm. Ender 3 / Prusa MK3 / Bambu P1 sınıfı yeterli.
 
 ---
