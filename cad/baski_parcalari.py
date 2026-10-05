@@ -109,7 +109,7 @@ if __name__ == "__main__":
         "08_tampon_alt":       (tp2,             "TPU 95A", 1, ((1,0,0), -90)),
         # DURDURMA OMUZU halkasi: kapsulun carptigi uyumlu katman.
         # Duz halka, CAD'de ekseni +Y -> X etrafinda -90 ile yatar.
-        "10_takoz_pad":        (M.takoz_padi(P)[0], "TPU 95A", 2, ((1,0,0), -90)),
+        "10_omuz_halkasi":     (M.omuz_halkasi(P)[0], "TPU 95A", 1, ((1,0,0), -90)),
     }
     # dolgu/duvar dahil gercek filament tahmini
     YOGUNLUK = {"PETG": 1.27, "TPU 95A": 1.21}
@@ -117,7 +117,7 @@ if __name__ == "__main__":
                  "02_kapsul": 0.82, "03_tetik_kapagi_sag": 1.0,
                  "04_tetik_kapagi_sol": 1.0, "05_servo_makarasi": 1.0,
                  "06_toz_kapagi": 0.55, "07_tampon_ust": 0.45,
-                 "08_tampon_alt": 0.45, "10_takoz_pad": 1.0}
+                 "08_tampon_alt": 0.45, "10_omuz_halkasi": 1.0}
     ozet = []
     for ad, (sh0, mlz, adet, donus) in PARCALAR.items():
         sh = baski_yonu(sh0, donus)

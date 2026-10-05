@@ -142,20 +142,11 @@ def namlu(p):
     Lk2 = L - y_om
     R2b = R_omuz + Lk2 * math.tan(math.radians(p["koni_acisi"]))
     g = g.cut(Part.makeCone(R_omuz, R2b, Lk2 + 0.5, V(0, y_om, 0), V(0, 1, 0)))
-    # DURDURMA TAKOZU: omuz olmadigi icin kapsulu CAPRAZ PIM durdurur.
-    # Yarik sonundaki yatak alanini radyal olarak derinlestirir:
-    # pim O8 x (R_takoz - Rb+1) x 2 kenar.
-    y_dur = p["y_capraz1"] + p["d_capraz"] / 2          # pimin on yuzu
-    R_tak = Ro + p["h_takoz"]
-    wt = p["yarik_w"] / 2 + p["w_takoz"]
-    for s2 in (+1, -1):
-        z0, z1 = (Ro - 1, R_tak) if s2 > 0 else (-R_tak, -(Ro - 1))
-        g = g.fuse(kutu(-wt, wt, y_dur, y_dur + p["L_takoz"], z0, z1))
-    # takozun arka yuzunde TPU pad cebi
-    for s2 in (+1, -1):
-        z0, z1 = (Ro - 1, R_tak + 1) if s2 > 0 else (-(R_tak + 1), -(Ro - 1))
-        g = g.cut(kutu(-p["yarik_w"] / 2, p["yarik_w"] / 2,
-                       y_dur, y_dur + p["t_pad"], z0, z1))
+    # DURDURMA TAKOZU KALDIRILDI (v2.3): takoz Ro..Ro+12 araligini
+    # kapliyordu ama ESNEK BANT tam orada (z = r_bant, cap ~6.8 mm) eksene
+    # paralel geciyordu -> bandi engelliyordu. v2.2'de omuz geri geldigi
+    # icin takoz zaten gereksiz: omuz 389 mm2 / 19.429 N, en kotu durumda
+    # (22 m/s, 21.7 J) elastik cokme 0.64 mm.
 
     # capraz pim yariklari: arka ucu kurulu pimin arkasi, ON UCU = DURDURMA
     w = p["yarik_w"] / 2
@@ -253,18 +244,15 @@ def tetik_kapaklari(p):
     return out
 
 
-def takoz_padi(p):
-    """Durdurma takozunun arka yuzundeki TPU ped. Kapsulu durduran capraz
-    pim once buna carpar; PETG takoz yedektir. Gorevi enerjiyi yutmak
-    degil, DURMAYI UZATIP kuvvet tepesini dusurmektir (F = E/d)."""
-    y = p["y_capraz1"] + p["d_capraz"] / 2
-    R_tak = Ro + p["h_takoz"]
-    w = p["yarik_w"] / 2 - 0.15
-    out = []
-    for s2 in (+1, -1):
-        z0, z1 = (Ro - 0.9, R_tak + 0.9) if s2 > 0 else (-(R_tak + 0.9), -(Ro - 0.9))
-        out.append(kutu(-w, w, y + 0.1, y + p["t_pad"], z0, z1))
-    return out
+def omuz_halkasi(p):
+    """Durdurma omzunun arkasindaki cebe yapistirilan TPU halka. Kapsulun
+    halka kenari once buna carpar; PETG omuz yedektir. Gorevi enerjiyi
+    'yutmak' degil, DURMAYI UZATIP kuvvet tepesini dusurmektir (F = E/d)."""
+    R_omuz = (p["R_pitch_hazneli"] + p["D_bilye"] / 2 + p["omuz_bosluk"]
+              + p["t_omuz"] * math.tan(math.radians(p["ALFA"])))
+    yk = p["y_yuz_dur"]
+    return [sil(Rb - 0.2, p["t_omuz"], V(0, yk, 0), V(0, 1, 0)).cut(
+            sil(R_omuz + 0.2, p["t_omuz"] + 2, V(0, yk - 1, 0), V(0, 1, 0)))]
 
 
 def tamponlar(p):
@@ -502,7 +490,7 @@ if __name__ == "__main__":
                 "V4_pim_sag": t1, "V4_pim_sol": t2,
                 "V4_kapak_sag": k1, "V4_kapak_sol": k2,
                 "V4_tampon_ust": tp1, "V4_tampon_alt": tp2,
-                **{f"V4_takoz_pad_{i+1}": sh for i, sh in enumerate(takoz_padi(P))}}
+                "V4_omuz_halkasi": omuz_halkasi(P)[0]}
     tum = None
     hacim = {}
     for ad, sh in parcalar.items():
