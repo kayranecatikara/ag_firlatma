@@ -48,9 +48,14 @@ for ad, x, y, z, bek in T:
 
 # --- boncuk konisi ankraji vuruyor mu ---
 a = math.radians(P["ALFA"])
+# DIKKAT: omuz geri geldi -> koni artik namlu deliginden degil OMUZ
+# yaricapindan ve TPU kalinligi kadar ileriden basliyor.
+R_om = (P["R_pitch"] + P["D_bilye"] / 2 + P["omuz_bosluk"]
+        + P["t_omuz"] * math.tan(a))
+y_om = P["y_yuz_dur"] + P["t_omuz"]
 bos = ya - P["y_yuz_dur"]                       # kapsul agzindan ankraja
 r_bon = P["R_pitch"] + bos * math.tan(a)        # boncuk yaricapi ankraj duzleminde
-r_koni = Rb + bos * math.tan(a)                 # koni yaricapi ayni duzlemde
+r_koni = R_om + max(ya - y_om, 0) * math.tan(a) # koni yaricapi ayni duzlemde
 pay = (rb - db / 2) - r_koni
 print(f"\n  enine pim: O{P['d_pim_ankraj']:.0f} celik, delik O{dp:.1f}, "
       f"y={y_pim:.2f} (on yuzden {P['pim_geri']:.0f} mm geride)")

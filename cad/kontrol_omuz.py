@@ -39,7 +39,10 @@ T = [("omuz ONUNDE omuz bandi -> malzeme", 0, y_om + 1.0, r_om_dis, True),
      ("omuz ONUNDE koni ici -> bos",       0, y_om + 1.0, r_om_ic,  False),
      ("TPU cebi -> bos",                   0, yk + 1.0,   r_om_dis, False),
      ("omuz ARKASI (namlu deligi) -> bos", 0, yk - 5.0,   r_om_dis, False),
-     ("agizda koni disi -> malzeme",       0, L - 0.5,    Rb + 3.0, True)]
+     # NOT: agizda koni cogu zaman namlu cidarini tamamen yer (R2b > Ro),
+     # o yuzden "agizda malzeme" sondasi anlamsiz. Yerine omuz basamaginin
+     # ONUNDE koni icinin bos oldugunu dogrula.
+     ("omuzun 3 mm onu, koni ici bos",     0, y_om + 3.0, R_om - 1.0, False)]
 ok = True
 for ad, x, y, z, bek in T:
     g = ic(x, y, z); ok &= (g == bek)

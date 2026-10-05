@@ -1,11 +1,11 @@
 Grup,No,Parca,Adet,Malzeme / Ozellik,Olcu,Toplam kutle [g],Not
-A. 3D BASKI,A1,Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil),1,PETG (tercih ASA - UV'ye dayanikli),"O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm",197.4,"Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez."
-A. 3D BASKI,A2,Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi),1,PETG,"O43.1 x 41 mm, hazne O37.1 x 16 mm, yuva acisi 40 derece",75.3,Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu.
+A. 3D BASKI,A1,Namlu govdesi (bilezik + bant kulaklari + 2 tetik gobegi + 2 servo yatagi dahil),1,PETG (tercih ASA - UV'ye dayanikli),"O55.4 dis / O43.4 ic x 149.8 mm, 2 duz yarik 6.4 mm",238.3,"Dik bas (eksen Z), 4 cevre + %50 gyroid. Yariklar ve delikler destek istemez."
+A. 3D BASKI,A2,Kapsul (arka blok + tutma kanali + ag haznesi + 6 bilye yuvasi),1,PETG,"O43.1 x 41 mm, hazne O37.1 x 16 mm, yuva acisi 40 derece",104.5,Agiz yukari bas. Arka blok 16 mm yuk tasir: 5 cevre + %60 dolgu.
 A. 3D BASKI,A3,Tetik kartus kapagi,2,PETG,"O18 x 3 mm, ortada O2 ip deligi, 2x O2.2 vida deligi",1.9,%100 dolgu.
 A. 3D BASKI,A4,Servo ip makarasi,2,PETG,"O8 mm (r=4 mm) tambur, servo dislisine oturur, O1.5 ip deligi",0.8,Servonun kendi kol vidasiyla sabitlenir.
 A. 3D BASKI,A5,Yarik sonu durdurma tamponu,2,TPU 95A,6.2 x 3 x 7 mm,0.5,Yarik on ucuna CA ile yapistir. Kapsulun carpma yukunu yumusatir (~450 N).
 A. 3D BASKI,A6,Arka toz kapagi (opsiyonel),1,PETG,"O43 tapa, ortada O10 havalandirma",2.0,Arka agiz yukleme agzidir; ucusta toz/kir girmesin diye.
-B. METAL / ISLEME PARCALAR,B1,Capraz pim,1,Aluminyum 7075-T6 cubuk (alternatif: gumus celigi),"O8 x 112 mm; her ucta IKI oluk: r=42 ve r=53 mm, 2.4 mm genislik x 1 mm derinlik",14.1,4 bant icin 4 oluk. Egilme SF 4.1 @ 1080 N. O6 YETERSIZ (SF 1.7).
+B. METAL / ISLEME PARCALAR,B1,Capraz pim,1,Aluminyum 7075-T6 cubuk (alternatif: gumus celigi),"O8 x 124 mm; her ucta IKI oluk: r=46 ve r=57 mm, 2.4 mm genislik x 1 mm derinlik",15.8,4 bant icin 4 oluk. Egilme SF 4.1 @ 1080 N. O6 YETERSIZ (SF 1.7).
 B. METAL / ISLEME PARCALAR,B2,Tetik pimi,2,Gumus celigi / paslanmaz cubuk,"O5 x 20.7 mm, ust uctan 1 mm'de O1.5 enine ip deligi, uc hafif pahli",6.6,Uc kapsul kanalina girer; yuzey puruzsuz olmali.
 B. METAL / ISLEME PARCALAR,B3,Mil bilezigi (pim yakasi / yay tablasi),2,"Celik, set vidali (DIN 705)","O5 ic / O10 dis / 5 mm genislik, M3 set vida",4.4,Pim ucundan 12.2 mm'ye sabitlenir (dinlenmede uc kanal dibine 0.3 mm pay).
 B. METAL / ISLEME PARCALAR,B4,Geri getirme yayi (basma),2,Yay celigi,"ic O>=5.3, dis O<=10.2, tel ~0.5-0.6 mm, serbest boy ~13 mm, blok boy <=4 mm",0.6,"Dinlenmede 10 mm (on yuk), cekilince 4 mm. Hazir yay setlerinden secilebilir."

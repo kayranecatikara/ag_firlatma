@@ -18,7 +18,7 @@ from FreeCAD import Vector as V                               # noqa: E402
 from agsim.yollar import kyol                                 # noqa: E402
 
 P = json.load(open(kyol("cad", "v4_olcu.json")))
-sek = Part.Shape(); sek.read(kyol("cad", "V4_kapsul.step"))
+sek = Part.Shape(); sek.read(kyol("cad", "V4_kapsul_hazneli.step"))   # BASILAN kapsul
 ic = lambda v: sek.isInside(v, 0.01, True)
 
 y0 = P["arka"]                      # kapsul montajda bu y'den basliyor
@@ -39,8 +39,9 @@ print(f"boncuk O{P['D_bilye']:.2f} · dudak daralmasi {P['lip_dar']:.1f} mm · "
 T = [("yuva ortasi BOS",        agiz - eks * (der / 2),               False),
      # DIKKAT: taban EKSENINDE O3 ip deligi var; taban malzemesini
      # eksenden kacirarak sonda.
+     # yuva tabaninin ALTI dolu olmali (ip deligi eksende, ondan kacin)
      ("yuva TABANI dolu (eksen disi)",
-      taban - eks * (P["t_yuva"] / 2) + V(0, 0, 3.0),                 True),
+      taban - eks * 1.5 + V(0, 0, 3.0),                               True),
      ("ip deligi acik (eksende)",
       taban - eks * (P["t_yuva"] + 1.5),                              False),
      ("yuva yan cidari dolu",   agiz - eks * (der / 2)
@@ -48,9 +49,10 @@ T = [("yuva ortasi BOS",        agiz - eks * (der / 2),               False),
      ("dudak hizasi DAR",       agiz - eks * 0.3
                                 + V(0, 0, (dy - P["lip_dar"]) / 2 + 0.25), True),
      # AG ARTIK KAPSULDE DEGIL -> baslik merkezi MASIF olmali
-     ("baslik merkezi MASIF",   V(0, y0 + L - 2, 0),                  True),
-     ("ic bosluk (agirlik) acik", V(0, y0 + L - 25, 0),               False),
-     ("arka blok dolu",         V(0, y0 + 12, 0),                     True)]
+     ("merkezi ag gecisi ACIK", V(0, y0 + L - 2, 0),                  False),
+     ("hazne acik",             V(0, y0 + L - 12, 0),                 False),
+     # arka blok a542940'ta hafifletildi -> eksen BOS. Cidari sonda.
+     ("kapsul cidari dolu",     V(Rk - 1.5, y0 + 20, 0),              True)]
 
 ok = True
 for ad, v, bek in T:

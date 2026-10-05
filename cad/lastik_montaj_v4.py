@@ -100,13 +100,15 @@ def namlu(p):
     # iraksak koni acar. Aradaki basamak kapsulu durduran yuzeydir.
     # Koni, TPU kalinligi kadar GERIDEN basliyor; bu kayma aciklikan
     # erir. O yuzden kalinlik x tan(ALFA) kadar fazladan eklenir.
-    # OMUZ YOK: boncuklar kapsulun en kenarinda (R22) oldugu icin koni
-    # R29.1'den baslamak zorunda; kapsul yaricapi 27.1 -> omuza yer kalmiyor.
-    # Kapsulu CAPRAZ PIM + namlu disindaki DURDURMA TAKOZU durdurur.
-    R_omuz = Rb
-    y_om = p["y_yuz_dur"]
+    # DURDURMA OMUZU (v2.2): namlu deligi omuz duzlemine kadar acilir,
+    # otesini iraksak koni acar. Aradaki basamak, kapsulun halka kenarinin
+    # oturdugu yuzeydir. Koni TPU halka kalinligi kadar GERIDEN basladigi
+    # icin yaricapa t_omuz*tan(ALFA) fazladan eklenir.
+    R_omuz = (p["R_pitch_hazneli"] + p["D_bilye"] / 2 + p["omuz_bosluk"]
+              + p["t_omuz"] * math.tan(math.radians(p["ALFA"])))
+    y_om = p["y_yuz_dur"] + p["t_omuz"]
     g = sil(Ro, L, V(0, 0, 0), V(0, 1, 0)).cut(
-        sil(Rb, L + 4, V(0, -2, 0), V(0, 1, 0)))
+        sil(Rb, y_om + 2, V(0, -2, 0), V(0, 1, 0)))
     # iraksak koni: durmus kapsul agzindan namlu agzina (bilye yolundan genis)
     yk = p["y_yuz_dur"]; Lk = L - yk
     R2 = Rb + Lk * math.tan(math.radians(p["koni_acisi"]))
@@ -164,7 +166,10 @@ def namlu(p):
         g = g.cut(kutu(-w, w, ya, yb, z0, z1))
     # tetik kartusu gobekleri (+/-X)
     y_t = p["y_tetik"]
-    r_yuva0 = 29.0             # yaka oturma yuzeyi (pim ucu kanal dibine 0.3 mm pay)
+    # yaka oturma yuzeyi: namlu dis cidarinin hemen disi. SABIT YAZMA —
+    # eski 29.0 degeri O43.4 namlu icindi, O64 e gecince negatif yukseklikte
+    # silindir uretip boolean i bozuyordu.
+    r_yuva0 = Ro + 1.3
     for s in (+1, -1):
         u = V(s, 0, 0)
         g = g.fuse(sil(p["boss_d"] / 2, p["boss_h"] + 2, V(s * (Ro - 2), y_t, 0), u))
@@ -360,12 +365,16 @@ def kapsul_hazneli(p, y0):
     L = p["L_kapsul"]; a = math.radians(p["ALFA"])
     rp = p["R_pitch_hazneli"]
     dy, der = p["D_yuva"], p["derinlik"]
-    yari = (dy / 2 + p["t_yuva"]) / math.cos(a)
-    r_cap = rp - yari - p["t_ara"]                  # merkezi ag gecisi
+    # MERKEZI AG GECISI, yuva AGZINDAN degil yuva TABANINDAN turetilir.
+    # Yuva egimli oldugu icin tabani agizdan daha ICERIDE kalir; agizdan
+    # turetirsen hazne konisi yuva tabanini yiyor ve boncuklar hazneye duser.
+    r_taban = rp - der * math.sin(a)        # yuva ekseni, taban hizasinda
+    y_taban = L - der * math.cos(a)         # yuva tabaninin y'si
+    r_cap = r_taban - dy / 2 - p["t_ara"]   # merkezi ag gecisi
     h_koni = p["h_hazne_koni"]
 
     g = sil(Rk, L, V(0, 0, 0), V(0, 1, 0))
-    y_sil = p["t_arka_blok"]; y_kon = L - h_koni
+    y_sil = p["t_arka_blok"]; y_kon = y_taban - 1.0 - h_koni
     # ARKA BLOK HAFIFLETME: ic bosluk capraz pimin hemen ustunden baslar.
     # Masif 16 mm disk kapsulun 38/54 g'ini olusturuyordu. Koni biciminde
     # (agiz yukari basimda tavan yok) ve capraz pim deliginin ustunde
@@ -374,12 +383,13 @@ def kapsul_hazneli(p, y0):
     r_bos = Rh - (y_sil - y_bos) * math.tan(math.radians(45.0))
     if y_bos < y_sil and r_bos > 2.0:
         g = g.cut(Part.makeCone(r_bos, Rh, y_sil - y_bos, V(0, y_bos, 0), V(0, 1, 0)))
-    g = g.cut(sil(Rh, y_kon - y_sil, V(0, y_sil, 0), V(0, 1, 0)))
+    g = g.cut(sil(Rh, max(y_kon - y_sil, 0.1), V(0, y_sil, 0), V(0, 1, 0)))
     # hazne -> agiz: basamaksiz koni, agizda r_cap'e acilir (ag buradan cikar)
     g = g.cut(Part.makeCone(Rh, r_cap, h_koni, V(0, y_kon, 0), V(0, 1, 0))
               if Rh > r_cap else
               Part.makeCone(r_cap, Rh, h_koni, V(0, y_kon, 0), V(0, 1, 0)))
-    g = g.cut(sil(r_cap, 3.0, V(0, L - 1.5, 0), V(0, 1, 0)))
+    g = g.cut(sil(r_cap, L - (y_kon + h_koni) + 1.0,
+                  V(0, y_kon + h_koni, 0), V(0, 1, 0)))
     g = g.cut(sil(Rk + 4, p["kanal_w"], V(0, p["kanal_y0"], 0), V(0, 1, 0)).cut(
         sil(Rk - p["kanal_d"], p["kanal_w"] + 2, V(0, p["kanal_y0"] - 1, 0), V(0, 1, 0))))
     g = g.cut(sil(p["d_capraz"] / 2 + 0.05, 2 * Rk + 4, V(0, p["y_capraz"], -(Rk + 2)),
@@ -402,8 +412,11 @@ def kapsul_hazneli(p, y0):
         eks = V(ur.x * math.sin(a), math.cos(a), ur.z * math.sin(a))
         agiz = V(ur.x * rp, L, ur.z * rp)
         taban = agiz - eks * der
-        # yuva: duz tabanli silindir; disa tasan kismi cidari delip yarik acar
-        g = g.cut(sil(dy / 2, der + 6, taban, eks))
+        # yuva KAPALI (omuz icin kapsul kenari lazim) -> boncugu agizdaki
+        # TUTMA DUDAGI tutar: dudak capi dy - lip_dar < boncuk capi.
+        lip = p["lip_boy"]
+        g = g.cut(sil(dy / 2, der - lip, taban, eks))
+        g = g.cut(sil((dy - p["lip_dar"]) / 2, lip + 8, agiz - eks * lip, eks))
         # ip deligi (tabandan hazneye)
         g = g.cut(sil(p["d_ip_delik"] / 2, der + 14, taban, -eks))
     g = g.cut(sil(Rk, 20, V(0, L, 0), V(0, 1, 0)))     # agzi duzelt
@@ -461,11 +474,13 @@ def bantlar(p):
 
 def tetik_pimleri(p):
     """O5 celik pim + O5 mil bilezigi (O10x5). Ust ucta O1.5 ip deligi.
-    Dinlenmede: uc r=16.85, bilezik r=29-34, pim tepesi r=37.5.
-    6 mm cekildiginde tepe r=43.5 < kapak ic yuzu 44.2 -> kapaga CARPMAZ;
-    arada yay (blok boyu ~3.5 mm) icin 44.2-40 = 4.2 mm kalir."""
+
+    YARICAPLAR NAMLU CAPINDAN TURETILIR — sabit yazma. Eski 29.0/37.5
+    degerleri O43.4 namlu icindi ve cap buyuyunce pim gobegin icinde
+    kaliyordu."""
     y = p["y_tetik"]; r_uc = Rb - p["kanal_d"] + 0.15
-    r_yaka, r_tepe = 29.0, 37.5
+    r_yaka = Ro + 1.3                      # yaka, namlu cidarinin disinda
+    r_tepe = Ro + p["boss_h"] - 6.7        # kapak ic yuzune 6.7 mm pay
     out = []
     for s in (+1, -1):
         u = V(s, 0, 0)
