@@ -17,14 +17,19 @@ ve ilgili dokümanlar.
 | [v1.4](v1.4/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 | omuz, 282 mm² | 0.73–0.95 m | ağ namluda |
 | [v1.5](v1.5/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 12.0 / 13.4 | omuz, 282 mm² | 0.73–0.97 m | ağ geçişi Ø10.8 — yetersiz |
 | [v2.0](v2.0/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | 18.2 | omuz, 300 mm² | 0.62–0.90 m | merkez hâlâ dar |
-| [**v2.1**](v2.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **22.0** | takoz, 304 mm² | 0.72–0.94 m | **güncel** |
+| [v2.1](v2.1/SURUM.md) | 149.8 mm | 91 mm | 30.3 mm | 40° | 45 mm | **22.0** | takoz, 304 mm² | 0.72–0.94 m | merkez ok, takoz bandı engelledi |
+| [v2.2](v2.2/SURUM.md) | 149.8 mm | 91 mm | **34.3 mm** | 40° | 45 mm | **23.0** | omuz, 295 mm² | 0.50–0.84 m | namlu Ø55→**Ø64** |
+| [v2.3](v2.3/SURUM.md) | 149.8 mm | 91 mm | 34.3 mm | 40° | 45 mm | 23.0 | omuz, 295 mm² | 0.50–0.84 m | takoz kaldırıldı |
+| [v2.4](v2.4/SURUM.md) | 149.8 mm | 91 mm | 34.3 mm | 40° | 45 mm | 23.0 | omuz, 295 mm² | 0.50–0.84 m | yuva derinliği 9.0, başlık 11.0 |
+| [**v2.5**](v2.5/SURUM.md) | 149.8 mm | 91 mm | 34.3 mm | 40° | 45 mm | 23.0 | **alt: tampon 7.6 J<br>üst: omuz 12.3 J** | 0.50–0.84 m | **güncel — kapsül 2 blok** |
 | [v2](v2/SURUM.md) | 255.2 mm | 170 mm | 56.7 mm | 35° | 70 mm | 15.5 | çapraz pim, 96 mm² | 1.13–1.34 m | beklemede |
 
-\* Gmod 0.45 MPa varsayımıyla, 2 bant. Bant sertliği **hâlâ ölçülmedi** —
-her versiyonun `dok/` klasöründeki tabloda 0.25–0.65 MPa aralığı var.
+\* v2.2'den itibaren **ölçülmüş** bant ile (G·A0 = 54.7 N, dijital kantar,
+50 mm numune +20/+40/+60 mm → 5.685/8.350/11.070 kg). Öncesi Gmod 0.45 MPa
+varsayımı. 2 bant, L0 34.3 mm, λ 3.65 → **391 N (40 kg) kurma**, 17.4 m/s.
 
 Ortak: ağ Ø2.2 m · kare göz 220 mm · Dyneema Ø0.60 mm · 6 × **Ø8.80 mm**
-kurşun boncuk (24 g, kumpasla ölçüldü) · namlu iç çap **Ø55.0** (v2.0'dan önce Ø43.4) · bant **Ø13.59** · bant ankrajı
+kurşun boncuk (24 g, kumpasla ölçüldü) · namlu iç çap **Ø64.0** (v2.2'den önce Ø55.0, v2.0'dan önce Ø43.4) · bant **Ø13.59** · bant ankrajı
 Ø14 delik + delen pim.
 
 ## Neler değişti
@@ -88,6 +93,31 @@ onu sarıyor, namlu deliği dışarıdan kapatıyor. Merkez **556 mm² (Ø26.6)*
 v2.0'ın 2.1 katı; hazne doluluğu %21. Koni R29.1'den başlamak zorunda olduğu
 için omuz kalmadı; kapsülü **çapraz pim + namlu dışındaki durdurma takozu**
 durduruyor (304 mm² / 15.200 N, TPU ped 10.9 J).
+
+**v2.1 → v2.2 — namlu Ø64, omuz geri geldi.** v2.1'de kapsülü namlu
+*dışındaki* takoz durduruyordu; takoz z 37–50 arasında, esnek bant ise
+z 42.6–49.4'te — **takoz bandı engelliyordu**. Omza dönmek için koniye yer
+gerekti: namlu **Ø55 → Ø64**. Boncuk çemberi R22 → R23, omuz 295 mm²
+(14.744 N) geri geldi. Bant da **ölçüldü** (G·A0 = 54.7 N): kurma 391 N,
+çıkış 17.4 m/s, marj 1.08×.
+
+**v2.2 → v2.3 — takoz komple kaldırıldı.** Artık durdurmayı omuz yapıyor,
+takozun işi kalmadı ve bandın yolunda duruyordu. `kontrol_bant_yolu.py`
+eklendi: bant yolunu 121 nokta × 9 kesit köşesinde tarayıp namluyla
+çakışma arıyor.
+
+**v2.3 → v2.4 — boncuklar daha derine.** Yuva derinliği 9.0 mm, başlık
+kalınlığı 11.0 mm: boncuk eğimli yuvada **7.5 mm** yol alıyor (önce 5.5),
+yani 40° çıkış açısını tam kazanarak ayrılıyor.
+
+**v2.4 → v2.5 — kapsül iki bloğa ayrıldı.** Çapraz pim arka bloktan
+geçiyor ve yarık sonunda duruyor; kapsülün ağzı ise namlu omzuna çarpmak
+zorunda. Tek parçada bu ikisi çelişiyordu. Kapsül yerel y=16'dan bölündü:
+**alt blok** (pim + kanal + kurma deliği, 35.1 g) **üst bloğu**
+(hazne + boncuk başlığı, 47.6 g) 594 mm² halka yüzünden itiyor; alt blok
+yarık sonunda durunca üst blok serbest kalıp omza çarpıyor. Durdurma
+enerjisi tek stop yerine ikiye bölündü (7.6 J + 12.3 J), omzun TPU ezilmesi
+1.19 → **0.35 mm**. Ayrıntı: `dok/V2_5_IKI_BLOK.md`.
 
 **v1 → v2 — uzun namlu + uzun bant.** λ sabit tutulunca kurma kuvveti strok'tan
 bağımsız kalıyor (ikisi de 426 N), ama depolanan enerji bant hacmiyle 2.75×

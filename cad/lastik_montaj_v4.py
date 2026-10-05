@@ -28,6 +28,11 @@ P = dict(
     derinlik=4.2, n_boncuk=3,
     t_yuva=1.4,            # boncuk yuvasi boru cidari
     t_ara=0.8,             # merkezi gecis ile boru arasi cidar
+    # KAPSUL IKI PARCA (v2.5)
+    y_bol_kap=16.0,        # bolme duzlemi (arka blogun ust siniri)
+    h_spigot_kap=6.0,      # hizalama spigotu boyu
+    t_spigot_kap=2.5,      # spigot cidari
+    spigot_bosluk_kap=0.4, # spigot ile hazne arasi bosluk
     d_kurma=4.5,           # elle kurma pimi deligi (O4 pim)
     y_kurma=12.3,          # kapsul yerel y; capraz pim ile hazne arasinin ortasi
     azimut_kurma=0.0,      # 0 = X ekseni (capraz pime 90 derece)
@@ -412,6 +417,35 @@ def kapsul_hazneli(p, y0):
     return g
 
 
+def kapsul_bol(p, y0):
+    """KAPSULU IKI BLOGA AYIRIR (v2.5).
+
+    ALT BLOK  : arka blok (capraz pim + tutma kanali + kurma deligi) +
+                hizalama spigotu. Bantlar bunu iter.
+    UST BLOK  : hazne + boncuk basligi. Alt blok tarafindan ITILIR;
+                alt blok durduktan sonra KENDI BASINA devam edip namlu
+                agzindaki omza carpar.
+
+    Itme yuzeyi spigot degil, alt blogun y=y_bol_kap'taki TAM HALKA yuzu:
+    Rh..Rk arasi, ~567 mm2. Spigot sadece hizalama icin (ince cidarli boru,
+    hazneye 6 mm girer; agin yeri o kadar kisalir).
+    """
+    g = kapsul_hazneli(p, y0)
+    Rk = Rb - p["bosluk"] / 2; Rh = Rk - p["t_govde"]
+    yb = y0 + p["y_bol_kap"]
+    L = p["L_kapsul"]
+    kut = lambda a, b: kutu(-2 * Rk, 2 * Rk, a, b, -2 * Rk, 2 * Rk)
+    alt = g.common(kut(y0 - 5.0, yb))
+    ust = g.common(kut(yb, y0 + L + 5.0))
+    # hizalama spigotu: ince cidarli boru, UST blogun haznesine girer
+    rs = Rh - p["spigot_bosluk_kap"]
+    h = p["h_spigot_kap"]
+    spg = sil(rs, h, V(0, yb, 0), V(0, 1, 0)).cut(
+          sil(rs - p["t_spigot_kap"], h + 2, V(0, yb - 1, 0), V(0, 1, 0)))
+    alt = alt.fuse(spg).removeSplitter()
+    return alt, ust.removeSplitter()
+
+
 def bilyeler(p, y0):
     """18 x O9 boncuk: yuva basina 3 tane, HEPSI AYNI IPE dizili.
     Oncu boncuk egik yuvada; arkadaki 2 tanesi hazne icinde ayni eksende.
@@ -485,6 +519,8 @@ if __name__ == "__main__":
     tp1, tp2 = tamponlar(P); bs = bantlar(P)
     parcalar = {"V4_namlu": namlu(P), "V4_kapsul": kapsul(P, yk),
                 "V4_kapsul_hazneli": kapsul_hazneli(P, yk),
+                "V4_kapsul_alt": kapsul_bol(P, yk)[0],
+                "V4_kapsul_ust": kapsul_bol(P, yk)[1],
                 "V4_bilye": bilyeler(P, yk), "V4_capraz_pim": capraz_pim(P),
                 **{f"V4_bant_{i+1}": sh for i, sh in enumerate(bs)},
                 "V4_pim_sag": t1, "V4_pim_sol": t2,

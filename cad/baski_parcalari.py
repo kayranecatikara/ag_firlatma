@@ -98,7 +98,10 @@ if __name__ == "__main__":
         # carpinca once boncuklar firlar, agi arkalarindan cekerler.
         # (Agi namluda tasiyan eski varyant kaldirildi: boncuklar agin
         #  arka yuzunden cikip ~5 m iplik iceren dilimi yariyordu.)
-        "02_kapsul":           (M.kapsul_hazneli(P, yk), "PETG", 1, ((1,0,0), 90)),
+        # KAPSUL IKI PARCA (v2.5): alt blok ust blogu iter, alt durunca
+        # ust kendi basina gidip namlu agzindaki omza carpar.
+        "02a_kapsul_alt":      (M.kapsul_bol(P, yk)[0], "PETG", 1, ((1,0,0), 90)),
+        "02b_kapsul_ust":      (M.kapsul_bol(P, yk)[1], "PETG", 1, ((1,0,0), 90)),
         # tetik kapaklari: CAD'de eksen +-X -> Y etrafinda 90 ile DUZ yatar
         "03_tetik_kapagi_sag": (k1,              "PETG",    1, ((0,1,0),  90)),
         "04_tetik_kapagi_sol": (k2,              "PETG",    1, ((0,1,0),  90)),
@@ -114,7 +117,7 @@ if __name__ == "__main__":
     # dolgu/duvar dahil gercek filament tahmini
     YOGUNLUK = {"PETG": 1.27, "TPU 95A": 1.21}
     DOLU_ORAN = {"01a_namlu_govde": 0.77, "01b_agiz_basligi": 0.80,
-                 "02_kapsul": 0.82, "03_tetik_kapagi_sag": 1.0,
+                 "02a_kapsul_alt": 0.82, "02b_kapsul_ust": 0.82, "03_tetik_kapagi_sag": 1.0,
                  "04_tetik_kapagi_sol": 1.0, "05_servo_makarasi": 1.0,
                  "06_toz_kapagi": 0.55, "07_tampon_ust": 0.45,
                  "08_tampon_alt": 0.45, "10_omuz_halkasi": 1.0}
